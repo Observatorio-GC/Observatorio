@@ -136,7 +136,7 @@
     	centrosdesalud = L.geoJson(centrosdesalud, { pointToLayer: crearIconoVerde, onEachFeature: agregarPopup }),
     	godoycruz = L.geoJson(godoycruz),
 	cicloviasproy = L.geoJson(CicloviasProyectadas).setStyle({color:"yellow"}),
-        cicloviasexist = L.geoJson(CicloviasExistentes),
+        cicloviasexist = L.geoJson(CicloviasExistentes).setStyle({color:"red")},
         clinicaspriv = L. geoJson(ClinicasPrivadas, asignarIconoNegro),
          hospital = L.geoJson(Hospital, asignarIconoRojo),
          escuelas = L.geoJson(Escuelas, asignarIconoDorado), 
