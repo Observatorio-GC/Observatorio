@@ -150,7 +150,7 @@
 	var plazagc = L.marker([-32.92524, -68.84439]).bindPopup('Plaza GC.').openPopup(),
     	centrosdesalud = L.geoJson(centrosdesalud, { pointToLayer: crearIconoVerde, onEachFeature: agregarPopup }),
     	godoycruz = L.geoJson(godoycruz),
-	cicloviasproy = L.geoJson(CicloviasProyectadas).setStyle({color:"yellow"}),
+	cicloviasproy = L.geoJson(CicloviasProyectadas,{ onEachFeature: agregarPopupciclovias}).setStyle({color:"yellow"}),
         cicloviasexist =L.geoJson(CicloviasExistentes,{ onEachFeature: agregarPopupciclovias}).setStyle({color:"red"})
         clinicaspriv = L. geoJson(ClinicasPrivadas, asignarIconoNegro),
          hospital = L.geoJson(Hospital, { pointToLayer: crearIconoRojo, onEachFeature: agregarPopup }),
