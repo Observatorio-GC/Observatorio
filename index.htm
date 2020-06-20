@@ -127,6 +127,12 @@
 				layer.bindPopup( "<strong>" + feature.properties.Nombre + "</strong>"); 
 		} 
 	}
+		function agregarPopupjardinesmuni(feature, layer) { 
+		if (feature.properties && feature.properties.nombre) { 
+				layer.bindPopup( "<strong>" + feature.properties.nombre + "</strong>"); 
+		} 
+	}
+	
 /* BASE LAYERS */
 	var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 		osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -146,7 +152,7 @@
          escuelas = L.geoJson(Escuelas, asignarIconoDorado), 
           farmacias = L.geoJson(Farmacias, { pointToLayer: crearIconoGris, onEachFeature: agregarPopupfarmacias }),
          jardines = L.geoJson(Jardines, asignarIconoAmarillo),
-         jardinesmuni = L.geoJson(JardinesMunicipales, asignarIconoVioleta),
+         jardinesmuni = L.geoJson(JardinesMunicipales,{ pointToLayer: crearIconoVioleta, onEachFeature: agregarPopupjardinesmuni }),
          refuerzosani=L.geoJson(RefuerzoSanitario, asignarIconoNaranja);
 
 /* CREACIÓN DEL MAPA CON BASE LAYERS Y OVERLAYS */
