@@ -28,6 +28,7 @@
 <script type="text/javascript" src="scripts/Jardines.js"></script>
 <script type="text/javascript" src="scripts/JardinesMunicipales.js"></script>
 <script type="text/javascript" src="scripts/RefuerzoSanitario.js"></script>
+<script type="text/javascript" src="scripts/Polideportivos.js"></script>
 <script>
 /* ICONOS */
 	var iconoComun = L.Icon.extend({
@@ -156,7 +157,7 @@
          hospital = L.geoJson(Hospital, { pointToLayer: crearIconoRojo, onEachFeature: agregarPopup }),
          escuelas = L.geoJson(Escuelas, { pointToLayer: crearIconoDorado, onEachFeature: agregarPopup }),
           farmacias = L.geoJson(Farmacias, { pointToLayer: crearIconoGris, onEachFeature: agregarPopupfarmacias }),
-         jardines = L.geoJson(Jardines, asignarIconoAmarillo),
+         polideportivos = L.geoJson(Polideportivos,  { pointToLayer: crearIconoAmarillo, onEachFeature: agregarPopup }),
          jardinesmuni = L.geoJson(JardinesMunicipales,{ pointToLayer: crearIconoVioleta, onEachFeature: agregarPopupjardinesmuni }),
          refuerzosani=L.geoJson(RefuerzoSanitario, asignarIconoNaranja);
 
@@ -180,7 +181,7 @@
                            "Hospitales":hospital,
                            "Establecimientos Educativos":escuelas,
                             "Farmacias":farmacias,
-                            "Jardines": jardines,
+                           "Polideportivos":polideportivos,
                              "Jardines Municipales":jardinesmuni,
                               "Refuerzos Sanitarios":refuerzosani
 	};
