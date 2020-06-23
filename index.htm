@@ -29,7 +29,18 @@
 <script type="text/javascript" src="scripts/JardinesMunicipales.js"></script>
 <script type="text/javascript" src="scripts/RefuerzoSanitario.js"></script>
 <script type="text/javascript" src="scripts/Polideportivos.js"></script>
+<script src="scripts/leaflet-tilelayer-wmts.js"></script>
 <script>
+/*Argenmap*/
+var mapabase_argenmap = new L.TileLayer.WMTS( 'https://wms.ign.gob.ar/geoserver/capabaseargenmap/gwc/service/wmts?' ,
+                               {
+                                   layer: 'capabaseargenmap',
+                                   style: "normal",
+                                   tilematrixSet: "EPSG:3857",
+                                   format: "image/png",
+                                   attribution: "<a href='https://github.com/mylen/leaflet.TileLayer.WMTS'>GitHub</a>&copy; <a href='http://www.ign.fr'>IGN</a>"
+                               }
+                              );
 /* ICONOS */
 	var iconoComun = L.Icon.extend({
 		options: {
@@ -163,13 +174,14 @@
 
 /* CREACIÓN DEL MAPA CON BASE LAYERS Y OVERLAYS */
 	var map = L.map('map', {
-		layers: [mapabase_osm,godoycruz]
-	}).setView([-32.9314, -68.8497], 13);
+			layers: [mapabase_argenmap,godoycruz]
+		}).setView([-32.9314, -68.8497], 13);
 
 /* CREACIÓN DEL LAYERS CONTROL */
 	var baseMaps = {
 		"OpenStreetMap": mapabase_osm,
 		"OpenTopoMap": mapabase_ot,
+		 "Argenmap": mapabase_argenmap,
 
 	};
 	
