@@ -154,7 +154,7 @@
         cicloviasexist =L.geoJson(CicloviasExistentes,{ onEachFeature: agregarPopupciclovias}).setStyle({color:"red"})
         clinicaspriv = L. geoJson(ClinicasPrivadas, asignarIconoNegro),
          hospital = L.geoJson(Hospital, { pointToLayer: crearIconoRojo, onEachFeature: agregarPopup }),
-         escuelas = L.geoJson(Escuelas, asignarIconoDorado), 
+         escuelas = L.geoJson(Escuelas, { pointToLayer: crearIconoDorado, onEachFeature: agregarPopup }),
           farmacias = L.geoJson(Farmacias, { pointToLayer: crearIconoGris, onEachFeature: agregarPopupfarmacias }),
          jardines = L.geoJson(Jardines, asignarIconoAmarillo),
          jardinesmuni = L.geoJson(JardinesMunicipales,{ pointToLayer: crearIconoVioleta, onEachFeature: agregarPopupjardinesmuni }),
