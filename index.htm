@@ -26,7 +26,7 @@
 <script type="text/javascript" src="scripts/Hospital.js"></script>
 <script type="text/javascript" src="scripts/Escuelas.js"></script>
 <script type="text/javascript" src="scripts/Farmacias.js"></script>
-<script type="text/javascript" src="scripts/Jardines.js"></script>
+<script type="text/javascript" src="scripts/ResidenciasAdultosMayores.js"></script>
 <script type="text/javascript" src="scripts/JardinesMunicipales.js"></script>
 <script type="text/javascript" src="scripts/Polideportivos.js"></script>
 <script type="text/javascript" src="scripts/Seguridad.js"></script>
@@ -171,7 +171,8 @@ var mapabase_argenmap = new L.TileLayer.WMTS( 'https://wms.ign.gob.ar/geoserver/
           farmacias = L.geoJson(Farmacias, { pointToLayer: crearIconoGris, onEachFeature: agregarPopupfarmacias }),
          polideportivos = L.geoJson(Polideportivos,  { pointToLayer: crearIconoAmarillo, onEachFeature: agregarPopup }),
          jardinesmuni = L.geoJson(JardinesMunicipales,{ pointToLayer: crearIconoVioleta, onEachFeature: agregarPopupjardinesmuni }),
-         seguridad =L.geoJson(Seguridad,{ pointToLayer: crearIconoNaranja, onEachFeature: agregarPopup });
+         seguridad =L.geoJson(Seguridad,{ pointToLayer: crearIconoAzul, onEachFeature: agregarPopup }),
+	 residenciasad =L.geoJson(ResidenciasAdultosMayores,{ pointToLayer: crearIconoNaranja, onEachFeature: agregarPopup });
 /* CREACIÓN DEL MAPA CON BASE LAYERS Y OVERLAYS */
 	var map = L.map('map', {
 			layers: [mapabase_argenmap,godoycruz]
@@ -194,7 +195,8 @@ var mapabase_argenmap = new L.TileLayer.WMTS( 'https://wms.ign.gob.ar/geoserver/
                             "Farmacias":farmacias,
                            "Polideportivos":polideportivos,
                              "Jardines Municipales":jardinesmuni,
-                              "Instituciones de Seguridad":seguridad
+                              "Instituciones de Seguridad":seguridad,
+		              "Residencias de Adultos Mayores":residenciasad
 	};
 L.control.layers(baseMaps, overlayMaps).addTo(map);
 </script>
