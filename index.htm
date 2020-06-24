@@ -171,7 +171,7 @@ var mapabase_argenmap = new L.TileLayer.WMTS( 'https://wms.ign.gob.ar/geoserver/
           farmacias = L.geoJson(Farmacias, { pointToLayer: crearIconoGris, onEachFeature: agregarPopupfarmacias }),
          polideportivos = L.geoJson(Polideportivos,  { pointToLayer: crearIconoAmarillo, onEachFeature: agregarPopup }),
          jardinesmuni = L.geoJson(JardinesMunicipales,{ pointToLayer: crearIconoVioleta, onEachFeature: agregarPopupjardinesmuni }),
-         seguridad =L.geoJson(Seguridad,{ pointToLayer: crearIconoNaranja, onEachFeature: agregarPopup }),
+         seguridad =L.geoJson(Seguridad,{ pointToLayer: crearIconoNaranja, onEachFeature: agregarPopup });
 /* CREACIÓN DEL MAPA CON BASE LAYERS Y OVERLAYS */
 	var map = L.map('map', {
 			layers: [mapabase_argenmap,godoycruz]
