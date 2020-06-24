@@ -28,8 +28,8 @@
 <script type="text/javascript" src="scripts/Farmacias.js"></script>
 <script type="text/javascript" src="scripts/Jardines.js"></script>
 <script type="text/javascript" src="scripts/JardinesMunicipales.js"></script>
-<script type="text/javascript" src="scripts/RefuerzoSanitario.js"></script>
 <script type="text/javascript" src="scripts/Polideportivos.js"></script>
+<script type="text/javascript" src="scripts/Seguridad.js"></script>
 <script src="scripts/leaflet-tilelayer-wmts.js"></script>
 <script>
 /*Argenmap*/
@@ -171,8 +171,7 @@ var mapabase_argenmap = new L.TileLayer.WMTS( 'https://wms.ign.gob.ar/geoserver/
           farmacias = L.geoJson(Farmacias, { pointToLayer: crearIconoGris, onEachFeature: agregarPopupfarmacias }),
          polideportivos = L.geoJson(Polideportivos,  { pointToLayer: crearIconoAmarillo, onEachFeature: agregarPopup }),
          jardinesmuni = L.geoJson(JardinesMunicipales,{ pointToLayer: crearIconoVioleta, onEachFeature: agregarPopupjardinesmuni }),
-         refuerzosani=L.geoJson(RefuerzoSanitario, asignarIconoNaranja);
-
+        Seguridad =L.geoJson(Seguridad,{ pointToLayer: crearIconoNaranja, onEachFeature: agregarPopupjardinesm }),
 /* CREACIÓN DEL MAPA CON BASE LAYERS Y OVERLAYS */
 	var map = L.map('map', {
 			layers: [mapabase_argenmap,godoycruz]
@@ -195,7 +194,7 @@ var mapabase_argenmap = new L.TileLayer.WMTS( 'https://wms.ign.gob.ar/geoserver/
                             "Farmacias":farmacias,
                            "Polideportivos":polideportivos,
                              "Jardines Municipales":jardinesmuni,
-                              "Refuerzos Sanitarios":refuerzosani
+                              "Instituciones de Seguridad":Seguridad
 	};
 L.control.layers(baseMaps, overlayMaps).addTo(map);
 </script>
