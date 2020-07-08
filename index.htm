@@ -6,22 +6,27 @@
 <title>ObservatorioTerritorialGC</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css">
 <link rel="shortcut icon" type="image/x-icon" href="favicon.png">
-<style type="text/css">
-<script type="text/javascript" src="http://www.ign.gob.ar/argenmap2/argenmap.jquery/argenmap.jquery.min.js"></script>	
-    .leaflet-control-attribution.leaflet-control {
+<script type="text/javascript" src="http://www.ign.gob.ar/argenmap2/argenmap.jquery/argenmap.jquery.min.js"></script>
+<style type="text/css">	
+  html, body {
+			height: 100%;
+			margin: 0;
+		}
+	.leaflet-control-attribution.leaflet-control {
 			font-size: 20px;
 		}
 		.leaflet-control-attribution.leaflet-control a:hover {color:#800080}
+	.logogc{position:absolute}
 </style>
 <style>
     h1 { color: #800080; }
 </style>	
 </head>
-<body>
-<h1>Observatorio Territorial de Godoy Cruz</h1>  
+<body> 
+<h1 style="position: absolute; margin-top: 30px; margin-left: 100px; z-index: 2">Observatorio Territorial de Godoy Cruz</h1>
 <img src="favicon.png" height= "45px" width="45px" align=right class="logogc">
+<div id="map" class="smallmap" style="height: 100%; z-index: 1"></div> 
 <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
-<div id="map" class="map map-home" style="margin:8px 0 8px 0;height:800px;"></div> 
 <script type="text/javascript" src="scripts/Centrosdesalud.js"></script>
 <script type="text/javascript" src="scripts/godoycruz.js"></script>
 <script type="text/javascript" src="scripts/CicloviasProyectadas.js"></script>
