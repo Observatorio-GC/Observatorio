@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset=utf-8 /> 
@@ -39,7 +39,6 @@
 <script type="text/javascript" src="scripts/JardinesMunicipales.js"></script>
 <script type="text/javascript" src="scripts/Polideportivos.js"></script>
 <script type="text/javascript" src="scripts/Seguridad.js"></script>
-<script type="text/javascript" src="scripts/distritos.js"></script>
 <script src="scripts/leaflet-tilelayer-wmts.js"></script>
 <script>
 /*Argenmap*/
@@ -160,32 +159,7 @@ var mapabase_argenmap = new L.TileLayer.WMTS( 'https://wms.ign.gob.ar/geoserver/
 				layer.bindPopup( "<strong>" + feature.properties.Distancia + "</strong>"); 
 		} 
 	}
-	function agregarPopupDistritos(feature, layer) { 
-			if (feature.properties && feature.properties.nombre) { 
-					layer.bindPopup( "<strong>" + feature.properties.nombre + "</strong>"); 
-			} 
-		}
-	function estilodistritos() {
-			distritosg.eachLayer(function(featureInstanceLayer) {
-				var id_feature = featureInstanceLayer.feature.properties['qc_id'];
-				if (id_feature == 0) {
-					color_actual = '#d4b08b';
-				} else if (id_feature == 1) {
-					color_actual = '#e3f1df';
-				} else if (id_feature == 2) {
-					color_actual = '#f1dfed';
-				} else if (id_feature == 3) {
-					color_actual = '#adddf7';
-				} else if (id_feature == 4) {
-					color_actual = '#fcfacf';
-				} else if (id_feature == 5) {
-					color_actual = '#feedd7';
-				}
-				featureInstanceLayer.setStyle({
-					color: color_actual,fillOpacity: 0.75
-				});
-			});
-		}
+	
 /* BASE LAYERS */
 	var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 		osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -198,7 +172,7 @@ var mapabase_argenmap = new L.TileLayer.WMTS( 'https://wms.ign.gob.ar/geoserver/
 	var plazagc = L.marker([-32.92524, -68.84439]).bindPopup('Plaza GC.').openPopup(),
     	centrosdesalud = L.geoJson(centrosdesalud, { pointToLayer: crearIconoVerde, onEachFeature: agregarPopup }),
     	godoycruz = L.geoJson(godoycruz),
-	 cicloviasproy = L.geoJson(CicloviasProyectadas,{ onEachFeature: agregarPopupciclovias}).setStyle({color:"yellow"}),
+	cicloviasproy = L.geoJson(CicloviasProyectadas,{ onEachFeature: agregarPopupciclovias}).setStyle({color:"yellow"}),
         cicloviasexist =L.geoJson(CicloviasExistentes,{ onEachFeature: agregarPopupciclovias}).setStyle({color:"red"})
         clinicaspriv = L. geoJson(ClinicasPrivadas,{ pointToLayer: crearIconoNegro, onEachFeature: agregarPopupjardinesmuni }),
          hospital = L.geoJson(Hospital, { pointToLayer: crearIconoRojo, onEachFeature: agregarPopup }),
@@ -207,9 +181,7 @@ var mapabase_argenmap = new L.TileLayer.WMTS( 'https://wms.ign.gob.ar/geoserver/
          polideportivos = L.geoJson(Polideportivos,  { pointToLayer: crearIconoAmarillo, onEachFeature: agregarPopup }),
          jardinesmuni = L.geoJson(JardinesMunicipales,{ pointToLayer: crearIconoVioleta, onEachFeature: agregarPopupjardinesmuni }),
          seguridad =L.geoJson(Seguridad,{ pointToLayer: crearIconoAzul, onEachFeature: agregarPopup }),
-	 residenciasad =L.geoJson(ResidenciasAdultosMayores,{ pointToLayer: crearIconoNaranja, onEachFeature: agregarPopup }),
-	 distritosg = L.geoJson(distritos, { onEachFeature: agregarPopupDistritos }),
-		estilodistritos();
+	 residenciasad =L.geoJson(ResidenciasAdultosMayores,{ pointToLayer: crearIconoNaranja, onEachFeature: agregarPopup });
 /* CREACIÓN DEL MAPA CON BASE LAYERS Y OVERLAYS */
 	var map = L.map('map', {
 			layers: [mapabase_argenmap,godoycruz]
@@ -227,20 +199,17 @@ var mapabase_argenmap = new L.TileLayer.WMTS( 'https://wms.ign.gob.ar/geoserver/
                            "Ciclovias Proyectadas":cicloviasproy,
                            "Ciclovias Existentes":cicloviasexist,
                            "Clinicas Privadas":clinicaspriv,
-						   "Distritos Geográficos":distritosg,
-						   "Establecimientos Educativos":escuelas,
-                            "Farmacias":farmacias,
                            "Hospitales":hospital,
-						    "Instituciones de Seguridad":seguridad,
+                           "Establecimientos Educativos":escuelas,
+                            "Farmacias":farmacias,
+                           "Polideportivos":polideportivos,
                              "Jardines Municipales":jardinesmuni,
-							 "Polideportivos":polideportivos,
-                             "Residencias de Adultos Mayores":residenciasad
+                              "Instituciones de Seguridad":seguridad,
+		              "Residencias de Adultos Mayores":residenciasad
 	};
 L.control.layers(baseMaps, overlayMaps).addTo(map);
 L.control.scale().addTo(map);
 </script>
   </body>
 </html>
-       
-
       
