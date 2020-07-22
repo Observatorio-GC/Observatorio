@@ -169,7 +169,7 @@ var mapabase_argenmap = new L.TileLayer.WMTS( 'https://wms.ign.gob.ar/geoserver/
 			distritosg.eachLayer(function(featureInstanceLayer) {
 				var id_feature = featureInstanceLayer.feature.properties['qc_id'];
 				if (id_feature == 0) {
-					color_actual = '#d4b08b';
+					color_actual = '#d48871';
 				} else if (id_feature == 1) {
 					color_actual = '#e3f1df';
 				} else if (id_feature == 2) {
@@ -179,7 +179,7 @@ var mapabase_argenmap = new L.TileLayer.WMTS( 'https://wms.ign.gob.ar/geoserver/
 				} else if (id_feature == 4) {
 					color_actual = '#fcfacf';
 				} else if (id_feature == 5) {
-					color_actual = '#feedd7';
+					color_actual = '#d4bd8b';
 				}
 				featureInstanceLayer.setStyle({
 					color: color_actual,fillOpacity: 0.75
