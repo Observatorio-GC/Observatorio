@@ -224,17 +224,18 @@ var mapabase_argenmap = new L.TileLayer.WMTS( 'https://wms.ign.gob.ar/geoserver/
 	
 	var overlayMaps = {
 		            "Distritos Geográficos":distritosg,
-                           "Centros de Salud":centrosdesalud,
-		           "Hospitales":hospital,
+                            "Hospitales":hospital,
+		            "Centros de Salud":centrosdesalud,
+		           "Clinicas Privadas":clinicaspriv,                 
+			     "Farmacias":farmacias,
+		           "Residencias de Adultos Mayores":residenciasad,
 		           "Establecimientos Educativos":escuelas,
 		            "Jardines Municipales":jardinesmuni,
 			    "Polideportivos":polideportivos,
                            "Ciclovias Proyectadas":cicloviasproy,
                            "Ciclovias Existentes":cicloviasexist,
-                           "Clinicas Privadas":clinicaspriv,                 
-			     "Farmacias":farmacias,
-                             "Instituciones de Seguridad":seguridad,                  
-                             "Residencias de Adultos Mayores":residenciasad
+                             "Instituciones de Seguridad":seguridad                
+                 
 	};
 L.control.layers(baseMaps, overlayMaps).addTo(map);
 L.control.scale().addTo(map);
