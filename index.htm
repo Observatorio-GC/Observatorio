@@ -253,6 +253,7 @@ var mapabase_argenmap = new L.TileLayer.WMTS( 'https://wms.ign.gob.ar/geoserver/
 	
 	var overlayMaps = {
 		            "Distritos Geográficos":distritosg,
+		           "Barrios Populares":barriospopulares,
                             "Hospitales":hospital,
 		            "Centros de Salud":centrosdesalud,
 		           "Clinicas Privadas":clinicaspriv,                 
@@ -263,8 +264,8 @@ var mapabase_argenmap = new L.TileLayer.WMTS( 'https://wms.ign.gob.ar/geoserver/
 			    "Polideportivos":polideportivos,
                            "Ciclovias Proyectadas":cicloviasproy,
                            "Ciclovias Existentes":cicloviasexist,
-                             "Instituciones de Seguridad":seguridad,
-                             "Barrios Populares":barriospopulares							 
+                             "Instituciones de Seguridad":seguridad
+                             							 
                  };
 L.control.layers(baseMaps, overlayMaps).addTo(map);
 L.control.scale().addTo(map);
