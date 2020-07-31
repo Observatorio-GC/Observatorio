@@ -1,0 +1,292 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 /> 
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui' />
+<title>ObservatorioTerritorialGC</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css">
+<link rel="shortcut icon" type="image/x-icon" href="favicon.png">
+<script type="text/javascript" src="http://www.ign.gob.ar/argenmap2/argenmap.jquery/argenmap.jquery.min.js"></script>
+<style type="text/css">	
+ <!-- html, body {
+			height: 100%;
+			margin: 0;
+		}
+	.leaflet-control-attribution.leaflet-control {
+			font-size: 20px;
+		}-->
+		.leaflet-control-attribution.leaflet-control a:hover {color:#800080}
+	<!--.logogc{position:absolute;z-index:2;top:5px;right:350px}-->
+</style>
+<style>
+    h1 { color: #800080;}
+</style>	
+</head>
+<body> 
+<h1 style="position: relative; margin-top: 10px; margin-left: 100px; z-index: 2">Observatorio Territorial de Godoy Cruz</h1>
+<img src="favicon.png" height= "45px" width="45px" align=right class="logogc">
+<div id="map" class="map map-home" style="margin:8px 0 8px 0;height:800px;"></div> 
+<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+<script type="text/javascript" src="scripts/Centrosdesalud.js"></script>
+<script type="text/javascript" src="scripts/godoycruz.js"></script>
+<script type="text/javascript" src="scripts/CicloviasProyectadas.js"></script>
+<script type="text/javascript" src="scripts/CicloviasExistentes.js"></script>
+<script type="text/javascript" src="scripts/ClinicasPrivadas.js"></script>
+<script type="text/javascript" src="scripts/Hospital.js"></script>
+<script type="text/javascript" src="scripts/Escuelas.js"></script>
+<script type="text/javascript" src="scripts/Farmacias.js"></script>
+<script type="text/javascript" src="scripts/ResidenciasAdultosMayores.js"></script>
+<script type="text/javascript" src="scripts/JardinesMunicipales.js"></script>
+<script type="text/javascript" src="scripts/Polideportivos.js"></script>
+<script type="text/javascript" src="scripts/Seguridad.js"></script>
+<script type="text/javascript" src="scripts/Distritos.js"></script>
+<script type="text/javascript" src="scripts/BarriosPopulares.js"></script>
+<script type="text/javascript" src="scripts/Zonificacion.js"></script>
+<script src="scripts/leaflet-tilelayer-wmts.js"></script>
+<script>
+/*Argenmap*/
+var mapabase_argenmap = new L.TileLayer.WMTS( 'https://wms.ign.gob.ar/geoserver/capabaseargenmap/gwc/service/wmts?' ,
+                               {
+                                   layer: 'capabaseargenmap',
+                                   style: "normal",
+                                   tilematrixSet: "EPSG:3857",
+                                   format: "image/png",
+                                   attribution: " <a href='https://www.ign.gob.ar/AreaServicios/Argenmap/IntroduccionV2'> IGN - Argenmap v2 </a> | <a href='https://www.godoycruz.gob.ar/'>Secretaria de Ambiente y Desarrollo Sustentable - Godoy Cruz</a> | <a href='https://github.com/mylen/leaflet.TileLayer.WMTS'>GitHub</a>&copy "
+                               }
+                              );
+/* ICONOS */
+	var iconoComun = L.Icon.extend({
+		options: {
+			shadowUrl: 'img/marker-shadow.png',
+			iconSize:     [25, 41],
+			shadowSize:   [41, 41],
+			iconAnchor:   [12, 41],
+			popupAnchor:  [1, -34]
+		}
+	});
+
+	var iconoVerde = new iconoComun({iconUrl: 'img/marker-icon-2x-green.png'}),
+		iconoRojo = new iconoComun({iconUrl: 'img/marker-icon-2x-red.png'}),
+		iconoNegro = new iconoComun({iconUrl: 'img/marker-icon-2x-black.png'}),
+		iconoAzul = new iconoComun({iconUrl: 'img/marker-icon-2x-blue.png'}),
+		iconoDorado = new iconoComun({iconUrl: 'img/marker-icon-2x-gold.png'}),
+		iconoNaranja= new iconoComun({iconUrl: 'img/marker-icon-2x-orange.png'}),
+		iconoGris = new iconoComun({iconUrl: 'img/marker-icon-2x-grey.png'}),
+		iconoVioleta = new iconoComun({iconUrl: 'img/marker-icon-2x-violet.png'}),
+		iconoAmarillo = new iconoComun({iconUrl: 'img/marker-icon-2x-yellow.png'});
+
+	function crearIconoVerde (feature, latlng) {
+		return L.marker(latlng, { icon: iconoVerde })
+	}
+
+        var asignarIconoVerde = {
+	  pointToLayer: crearIconoVerde
+	}
+
+
+	function crearIconoRojo (feature, latlng) {
+		return L.marker(latlng, { icon: iconoRojo })
+	}
+
+	var asignarIconoRojo = {
+	  pointToLayer: crearIconoRojo
+	}
+
+        function crearIconoNegro (feature, latlng) {
+		return L.marker(latlng, { icon: iconoNegro })
+	}
+	var asignarIconoNegro = {
+	  pointToLayer: crearIconoNegro
+	}
+
+        function crearIconoAzul (feature, latlng) {
+		return L.marker(latlng, { icon: iconoAzul })
+	}
+	var asignarIconoAzul= {
+	  pointToLayer: crearIconoAzul
+	}
+
+        function crearIconoDorado (feature, latlng) {
+		return L.marker(latlng, { icon: iconoDorado })
+	}
+	var asignarIconoDorado = {
+	  pointToLayer: crearIconoDorado
+	}
+
+        function crearIconoNaranja (feature, latlng) {
+		return L.marker(latlng, { icon: iconoNaranja})
+	}
+	var asignarIconoNaranja = {
+	  pointToLayer: crearIconoNaranja
+	}
+
+        function crearIconoGris (feature, latlng) {
+		return L.marker(latlng, { icon: iconoGris  })
+	}
+	var asignarIconoGris  = {
+	  pointToLayer: crearIconoGris 
+	}
+
+        function crearIconoVioleta (feature, latlng) {
+		return L.marker(latlng, { icon: iconoVioleta })
+	}
+	var asignarIconoVioleta = {
+	  pointToLayer: crearIconoVioleta
+	}
+
+        function crearIconoAmarillo (feature, latlng) {
+		return L.marker(latlng, { icon: iconoAmarillo })
+	}
+	var asignarIconoAmarillo = {
+	  pointToLayer: crearIconoAmarillo
+	}
+	
+        /* POPUPS */
+	function agregarPopup(feature, layer) { 
+		if (feature.properties && feature.properties.Nombre_1) { 
+				layer.bindPopup( "<strong>" + feature.properties.Nombre_1 + "</strong>"); 
+		} 
+	}
+         function agregarPopupfarmacias(feature, layer) { 
+		if (feature.properties && feature.properties.Nombre) { 
+				layer.bindPopup( "<strong>" + feature.properties.Nombre + "</strong>"); 
+		} 
+	}
+		function agregarPopupjardinesmuni(feature, layer) { 
+		if (feature.properties && feature.properties.nombre) { 
+				layer.bindPopup( "<strong>" + feature.properties.nombre + "</strong>"); 
+		} 
+	}
+		function agregarPopupciclovias(feature, layer) { 
+		if (feature.properties && feature.properties.Distancia) { 
+				layer.bindPopup( "<strong>" + feature.properties.Distancia + "</strong>"); 
+		} 
+	}
+	function agregarPopupDistritos(feature, layer) { 
+			if (feature.properties && feature.properties.nombre) { 
+					layer.bindPopup( "<strong>" + feature.properties.nombre + "</strong>"); 
+			} 
+		}
+		function agregarPopupzoni(feature, layer) { 
+			if (feature.properties && feature.properties.Layer) { 
+					layer.bindPopup( "<strong>" + feature.properties.Layer + "</strong>"); 
+			} 
+		}
+	function estilodistritos() {
+			distritosg.eachLayer(function(featureInstanceLayer) {
+				var id_feature = featureInstanceLayer.feature.properties['qc_id'];
+				if (id_feature == 0) {
+					color_actual = '#d48871';
+				} else if (id_feature == 1) {
+					color_actual = '#e3f1df';
+				} else if (id_feature == 2) {
+					color_actual = '#f1dfed';
+				} else if (id_feature == 3) {
+					color_actual = '#adddf7';
+				} else if (id_feature == 4) {
+					color_actual = '#fcfacf';
+				} else if (id_feature == 5) {
+					color_actual = '#d4bd8b';
+				}
+				featureInstanceLayer.setStyle({
+					color: color_actual,fillOpacity: 0.75
+				});
+			});
+		}
+		function estilozoni() {
+			zonificacion.eachLayer(function(featureInstanceLayer) {
+				var id_feature = featureInstanceLayer.feature.properties['qc_id'];
+				if (id_feature == 0) {
+					color_actual = 'grey';
+				} else if (id_feature == 1) {
+					color_actual = '#FF0000';
+				} else if (id_feature == 2) {
+					color_actual = '#ff7f00';
+				} else if (id_feature == 3) {
+					color_actual = '#fff600';
+				} else if (id_feature == 4) {
+					color_actual = '#800080';
+				} else if (id_feature == 5) {
+					color_actual = '#5d3064';
+				}else if (id_feature == 6) {
+					color_actual = '#1feeb4';
+				}else if (id_feature == 7) {
+					color_actual = '#199f2d';
+				}else if (id_feature == 8) {
+					color_actual = '#74d1af';
+				}else if (id_feature == 9) {
+					color_actual = '#2f6e9e';
+				}else if (id_feature == 10) {
+					color_actual = '#b31417';
+				}else if (id_feature == 11) {
+					color_actual = '#E1E1E1';
+				}
+				featureInstanceLayer.setStyle({
+					color: color_actual,fillOpacity: 0.75
+				});
+			});
+		}
+/* BASE LAYERS */
+	var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+		osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+		mapabase_osm = L.tileLayer(osmUrl, {maxZoom: 20, attribution: osmAttrib});
+	var otUrl = 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+		otAttrib = 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
+		mapabase_ot = L.tileLayer(otUrl, {maxZoom: 20, attribution: otAttrib});
+	
+/* OVERLAYS Y GRUPOS */
+	var plazagc = L.marker([-32.92524, -68.84439]).bindPopup('Plaza GC.').openPopup(),
+    	centrosdesalud = L.geoJson(centrosdesalud, { pointToLayer: crearIconoVerde, onEachFeature: agregarPopup }),
+    	godoycruz = L.geoJson(godoycruz),
+	 cicloviasproy = L.geoJson(CicloviasProyectadas,{ onEachFeature: agregarPopupciclovias}).setStyle({color:"yellow"}),
+        cicloviasexist =L.geoJson(CicloviasExistentes,{ onEachFeature: agregarPopupciclovias}).setStyle({color:"red"})
+        clinicaspriv = L. geoJson(ClinicasPrivadas,{ pointToLayer: crearIconoNegro, onEachFeature: agregarPopupjardinesmuni }),
+         hospital = L.geoJson(Hospital, { pointToLayer: crearIconoRojo, onEachFeature: agregarPopup }),
+         escuelas = L.geoJson(Escuelas, { pointToLayer: crearIconoDorado, onEachFeature: agregarPopup }),
+          farmacias = L.geoJson(Farmacias, { pointToLayer: crearIconoGris, onEachFeature: agregarPopupfarmacias }),
+         polideportivos = L.geoJson(Polideportivos,  { pointToLayer: crearIconoAmarillo, onEachFeature: agregarPopup }),
+         jardinesmuni = L.geoJson(JardinesMunicipales,{ pointToLayer: crearIconoVioleta, onEachFeature: agregarPopupjardinesmuni }),
+         seguridad =L.geoJson(Seguridad,{ pointToLayer: crearIconoAzul, onEachFeature: agregarPopup }),
+	 residenciasad =L.geoJson(ResidenciasAdultosMayores,{ pointToLayer: crearIconoNaranja, onEachFeature: agregarPopup }),
+	 barriospopulares=L.geoJson(BarriosPopulares, {onEachFeature: agregarPopup}).setStyle({color:"#e31a1c",fillOpacity: 0.75})
+	 distritosg = L.geoJson(Distritos, { onEachFeature: agregarPopupDistritos }),
+		estilodistritos(),
+		zonificacion=  L.geoJson(Zonificacion,{ onEachFeature: agregarPopupzoni }),
+		estilozoni();
+/* CREACIÓN DEL MAPA CON BASE LAYERS Y OVERLAYS */
+	var map = L.map('map', {
+			layers: [mapabase_argenmap,godoycruz]
+		}).setView([-32.9314, -68.8497], 13);
+
+/* CREACIÓN DEL LAYERS CONTROL */
+	var baseMaps = {
+		"OpenTopoMap": mapabase_ot,
+		 "Argenmap": mapabase_argenmap,
+
+	};
+	
+	var overlayMaps = {
+		            "Distritos Geográficos":distritosg,
+					"Barrios Populares":barriospopulares,
+                     "Zonificacion":zonificacion,
+                     "Hospitales":hospital,
+		            "Centros de Salud":centrosdesalud,
+		           "Clinicas Privadas":clinicaspriv,                 
+			     "Farmacias":farmacias,
+		           "Residencias de Adultos Mayores":residenciasad,
+		           "Establecimientos Educativos":escuelas,
+		            "Jardines Municipales":jardinesmuni,
+			    "Polideportivos":polideportivos,
+                           "Ciclovias Proyectadas":cicloviasproy,
+                           "Ciclovias Existentes":cicloviasexist,
+                             "Instituciones de Seguridad":seguridad
+                             							 
+                 };
+L.control.layers(baseMaps, overlayMaps).addTo(map);
+L.control.scale().addTo(map);
+</script>
+  </body>
+</html>
+       
+
+      
