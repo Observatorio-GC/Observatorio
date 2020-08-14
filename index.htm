@@ -5,7 +5,6 @@
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui' />
 <title>ObservatorioTerritorialGC</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css">
-<link rel="stylesheet" href="css/Leaflet.PolylineMeasure.css">
 <link rel="shortcut icon" type="image/x-icon" href="favicon.png">
 <script type="text/javascript" src="http://www.ign.gob.ar/argenmap2/argenmap.jquery/argenmap.jquery.min.js"></script>
 <style type="text/css">	
@@ -28,7 +27,6 @@
 <img src="favicon.png" height= "45px" width="45px" align=right class="logogc">
 <div id="map" class="map map-home" style="margin:8px 0 8px 0;height:800px;"></div> 
 <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
-<script src="scripts/Leaflet.PolylineMeasure.js"></script>
 <script type="text/javascript" src="scripts/Centrosdesalud.js"></script>
 <script type="text/javascript" src="scripts/godoycruz.js"></script>
 <script type="text/javascript" src="scripts/CicloviasProyectadas.js"></script>
@@ -44,6 +42,8 @@
 <script type="text/javascript" src="scripts/Distritos.js"></script>
 <script type="text/javascript" src="scripts/BarriosPopulares.js"></script>
 <script type="text/javascript" src="scripts/Zonificacion.js"></script>
+<script type="text/javascript" src="scripts/RedesdeAguas.js"></script>
+<script type="text/javascript" src="scripts/SistemaCloacal.js"></script>
 <script src="scripts/leaflet-tilelayer-wmts.js"></script>
 <script>
 /*Argenmap*/
@@ -174,6 +174,16 @@ var mapabase_argenmap = new L.TileLayer.WMTS( 'https://wms.ign.gob.ar/geoserver/
 					layer.bindPopup( "<strong>" + feature.properties.Layer + "</strong>"); 
 			} 
 		}
+	function agregarPopupredes(feature, layer) { 
+	        if (feature.properties && feature.properties.Estado) {
+			         layer.bindPopup( "<strong>" + feature.properties.Estado + "</strong>");
+     	    }
+		}
+	 function agregarPopupcloacas(feature, layer) {
+            if (feature.properties && feature.properties.Estado) {	 
+			         layer.bindPopup( "<strong>" + feature.properties.Estado + "</strong>");
+			}
+		}		
 	function estilodistritos() {
 			distritosg.eachLayer(function(featureInstanceLayer) {
 				var id_feature = featureInstanceLayer.feature.properties['qc_id'];
@@ -228,6 +238,40 @@ var mapabase_argenmap = new L.TileLayer.WMTS( 'https://wms.ign.gob.ar/geoserver/
 				});
 			});
 		}
+		function estilored() {
+			redesagua.eachLayer(function(featureInstanceLayer) {
+				var id_feature = featureInstanceLayer.feature.properties['id'];
+				if (id_feature == 1) {
+					color_actual = '#62b8e5';
+				} else if (id_feature == 1) {
+					color_actual = '#62b8e5';
+				} else if (id_feature == 2) {
+					color_actual = '#fbb75b';
+				} else if (id_feature == 3) {
+					color_actual = '#f05d51';
+				}
+				featureInstanceLayer.setStyle({
+					color: color_actual,fillOpacity: 0.75
+				});
+			});
+		}	
+		function estilocloacas() {
+			sistcloacal.eachLayer(function(featureInstanceLayer) {
+				var id_feature = featureInstanceLayer.feature.properties['id'];
+				if (id_feature == 1) {
+					color_actual = '#62b8e5';
+				} else if (id_feature == 1) {
+					color_actual = '#62b8e5';
+				} else if (id_feature == 2) {
+					color_actual = '#fbb75b';
+				} else if (id_feature == 3) {
+					color_actual = '#f05d51';
+				}
+				featureInstanceLayer.setStyle({
+					color: color_actual,fillOpacity: 0.75
+				});
+			});
+		}	
 /* BASE LAYERS */
 	var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 		osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -241,7 +285,7 @@ var mapabase_argenmap = new L.TileLayer.WMTS( 'https://wms.ign.gob.ar/geoserver/
     	centrosdesalud = L.geoJson(centrosdesalud, { pointToLayer: crearIconoVerde, onEachFeature: agregarPopup }),
     	godoycruz = L.geoJson(godoycruz),
 	 cicloviasproy = L.geoJson(CicloviasProyectadas,{ onEachFeature: agregarPopupciclovias}).setStyle({color:"yellow"}),
-        cicloviasexist =L.geoJson(CicloviasExistentes,{ onEachFeature: agregarPopupciclovias}).setStyle({color:"red"})
+        cicloviasexist =L.geoJson(CicloviasExistentes,{ onEachFeature: agregarPopupciclovias}).setStyle({color:"red"}),
         clinicaspriv = L. geoJson(ClinicasPrivadas,{ pointToLayer: crearIconoNegro, onEachFeature: agregarPopupjardinesmuni }),
          hospital = L.geoJson(Hospital, { pointToLayer: crearIconoRojo, onEachFeature: agregarPopup }),
          escuelas = L.geoJson(Escuelas, { pointToLayer: crearIconoDorado, onEachFeature: agregarPopup }),
@@ -255,6 +299,10 @@ var mapabase_argenmap = new L.TileLayer.WMTS( 'https://wms.ign.gob.ar/geoserver/
 		estilodistritos(),
 		zonificacion=  L.geoJson(Zonificacion,{ onEachFeature: agregarPopupzoni }),
 		estilozoni();
+		redesagua= L.geoJson(RedesdeAguas,{ onEachFeature: agregarPopupredes}),
+		estilored();
+		sistcloacal= L.geoJson(SistemaCloacal, { onEachFeature: agregarPopupcloacas}),
+		estilocloacas();
 /* CREACIÓN DEL MAPA CON BASE LAYERS Y OVERLAYS */
 	var map = L.map('map', {
 			layers: [mapabase_argenmap,godoycruz]
@@ -281,12 +329,14 @@ var mapabase_argenmap = new L.TileLayer.WMTS( 'https://wms.ign.gob.ar/geoserver/
 			    "Polideportivos":polideportivos,
                            "Ciclovias Proyectadas":cicloviasproy,
                            "Ciclovias Existentes":cicloviasexist,
-                             "Instituciones de Seguridad":seguridad
+                             "Instituciones de Seguridad":seguridad,
+							 "Redes de Aguas":redesagua,
+							 "Sistema Cloacal":sistcloacal,
+					
                              							 
                  };
 L.control.layers(baseMaps, overlayMaps).addTo(map);
 L.control.scale().addTo(map);
-L.control.polylineMeasure().addTo(map);
 </script>
   </body>
 </html>
