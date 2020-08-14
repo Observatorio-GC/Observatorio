@@ -5,6 +5,7 @@
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui' />
 <title>ObservatorioTerritorialGC</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css">
+<link rel="stylesheet" href="css/Leaflet.PolylineMeasure.css">
 <link rel="shortcut icon" type="image/x-icon" href="favicon.png">
 <script type="text/javascript" src="http://www.ign.gob.ar/argenmap2/argenmap.jquery/argenmap.jquery.min.js"></script>
 <style type="text/css">	
@@ -27,6 +28,7 @@
 <img src="favicon.png" height= "45px" width="45px" align=right class="logogc">
 <div id="map" class="map map-home" style="margin:8px 0 8px 0;height:800px;"></div> 
 <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+<script src="scripts/Leaflet.PolylineMeasure.js"></script>
 <script type="text/javascript" src="scripts/Centrosdesalud.js"></script>
 <script type="text/javascript" src="scripts/godoycruz.js"></script>
 <script type="text/javascript" src="scripts/CicloviasProyectadas.js"></script>
@@ -337,6 +339,7 @@ var mapabase_argenmap = new L.TileLayer.WMTS( 'https://wms.ign.gob.ar/geoserver/
                  };
 L.control.layers(baseMaps, overlayMaps).addTo(map);
 L.control.scale().addTo(map);
+L.control.polylineMeasure().addTo(map);
 </script>
   </body>
 </html>
