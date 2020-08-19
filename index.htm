@@ -46,6 +46,8 @@
 <script type="text/javascript" src="scripts/Zonificacion.js"></script>
 <script type="text/javascript" src="scripts/RedesdeAguas.js"></script>
 <script type="text/javascript" src="scripts/SistemaCloacal.js"></script>
+<script type="text/javascript" src="scripts/LineasD.js"></script>
+<script type="text/javascript" src="scripts/LineasT.js"></script>
 <script src="scripts/leaflet-tilelayer-wmts.js"></script>
 <script>
 /*Argenmap*/
@@ -186,6 +188,11 @@ var mapabase_argenmap = new L.TileLayer.WMTS( 'https://wms.ign.gob.ar/geoserver/
 			         layer.bindPopup( "<strong>" + feature.properties.Estado + "</strong>");
 			}
 		}		
+	function agregarPopuplineas(feature, layer) {
+            if (feature.properties && feature.properties.TENSION) {	 
+			         layer.bindPopup( "<strong>" + feature.properties.TENSION + "</strong>");
+			}
+		}	
 	function estilodistritos() {
 			distritosg.eachLayer(function(featureInstanceLayer) {
 				var id_feature = featureInstanceLayer.feature.properties['qc_id'];
@@ -288,6 +295,8 @@ var mapabase_argenmap = new L.TileLayer.WMTS( 'https://wms.ign.gob.ar/geoserver/
     	godoycruz = L.geoJson(godoycruz),
 	 cicloviasproy = L.geoJson(CicloviasProyectadas,{ onEachFeature: agregarPopupciclovias}).setStyle({color:"yellow"}),
         cicloviasexist =L.geoJson(CicloviasExistentes,{ onEachFeature: agregarPopupciclovias}).setStyle({color:"red"}),
+		lineasd=L.geoJson(LineasD,{ onEachFeature: agregarPopuplineas}).setStyle({color:"orange"}),
+		lineast=L.geoJson(LineasT,{ onEachFeature: agregarPopuplineas}).setStyle({color:"#51aff0"}),
         clinicaspriv = L. geoJson(ClinicasPrivadas,{ pointToLayer: crearIconoNegro, onEachFeature: agregarPopupjardinesmuni }),
          hospital = L.geoJson(Hospital, { pointToLayer: crearIconoRojo, onEachFeature: agregarPopup }),
          escuelas = L.geoJson(Escuelas, { pointToLayer: crearIconoDorado, onEachFeature: agregarPopup }),
@@ -334,6 +343,8 @@ var mapabase_argenmap = new L.TileLayer.WMTS( 'https://wms.ign.gob.ar/geoserver/
                              "Instituciones de Seguridad":seguridad,
 							 "Redes de Aguas":redesagua,
 							 "Sistema Cloacal":sistcloacal,
+							 "Lineas de Distribucion de Energia":lineasd,
+							 "Lineas de Transporte de Energia":lineast,
 					
                              							 
                  };
