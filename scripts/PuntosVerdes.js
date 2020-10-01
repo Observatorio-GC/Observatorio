@@ -121,6 +121,9 @@ var PuntosVerdes ={
 { "type": "Feature", "properties": { "id": 117, "Nombre_1": "CAUT - Transito" }, "geometry": { "type": "Point", "coordinates": [ -68.856615098190289, -32.928579880890432 ] } },
 { "type": "Feature", "properties": { "id": 97, "Nombre_1": "Plaza La Perla" }, "geometry": { "type": "Point", "coordinates": [ -68.823479916708735, -32.940496837914061 ] } },
 { "type": "Feature", "properties": { "id": 118, "Nombre_1": "Unión vecinal SOEVA" }, "geometry": { "type": "Point", "coordinates": [ -68.832857101449136, -32.938656927602139 ] } },
-{ "type": "Feature", "properties": { "id": 119, "Nombre_1": "Plaza 13 de Julio - Puerto Deseado" }, "geometry": { "type": "Point", "coordinates": [ -68.835314197998571, -32.956443702578099 ] } }
+{ "type": "Feature", "properties": { "id": 119, "Nombre_1": "Plaza 13 de Julio - Puerto Deseado" }, "geometry": { "type": "Point", "coordinates": [ -68.835314197998571, -32.956443702578099 ] } },
+{ "type": "Feature", "properties": { "id": 120, "Nombre_1": "Rulero - Paso de los Andes y Pellegrini" }, "geometry": { "type": "Point", "coordinates": [ -68.860572237522149, -32.908580395515237 ] } },
+{ "type": "Feature", "properties": { "id": 121, "Nombre_1": "Rulero - Primitivo de la Reta y Alsina" }, "geometry": { "type": "Point", "coordinates": [ -68.83018738227193, -32.931487133940223 ] } },
+{ "type": "Feature", "properties": { "id": 122, "Nombre_1": "Rulero - Colegio Bohorquez" }, "geometry": { "type": "Point", "coordinates": [ -68.851718471758247, -32.95387259084707 ] } }
 ]
 }
