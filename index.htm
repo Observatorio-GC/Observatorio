@@ -59,6 +59,7 @@
 		<script type="text/javascript" src="scripts/SistemaCloacal.js"></script>
 		<script type="text/javascript" src="scripts/LineasD.js"></script>
 		<script type="text/javascript" src="scripts/LineasT.js"></script>
+		<script type="text/javascript" src="scripts/PuntosVerdes.js"></script>
 	</head>
 	<body> 
 		<h1 style="position: relative; margin-top: 10px; margin-left: 100px; z-index: 2">Observatorio Territorial de Godoy Cruz</h1>
@@ -425,12 +426,13 @@
 				jardinesmuni = L.geoJson(JardinesMunicipales,{ pointToLayer: crearIconoJardmatern, onEachFeature: agregarPopupjardinesmuni }),
 				seguridad =L.geoJson(Seguridad,{ pointToLayer: crearIconoSeguridad, onEachFeature: agregarPopup }),
 				residenciasad =L.geoJson(ResidenciasAdultosMayores,{ pointToLayer: crearIconoNaranja, onEachFeature: agregarPopup }),
-				barriospopulares=L.geoJson(BarriosPopulares, {onEachFeature: agregarPopup}).setStyle({color:"#e31a1c",fillOpacity: 0.75})
+				barriospopulares=L.geoJson(BarriosPopulares, {onEachFeature: agregarPopup}).setStyle({color:"#e31a1c",fillOpacity: 0.75}),
 				reservorios=L.geoJson(Reservorios,{onEachFeature: agregarPopupres}).setStyle({color:"#729b6f",fillOpacity: 0.75}),
 				distritosg = L.geoJson(Distritos, { onEachFeature: agregarPopupDistritos }),
 				zonificacion=  L.geoJson(Zonificacion,{ onEachFeature: agregarPopupzoni }),
 				redesagua= L.geoJson(RedesdeAguas,{ onEachFeature: agregarPopupredes}),
-				sistcloacal= L.geoJson(SistemaCloacal, { onEachFeature: agregarPopupcloacas});
+				sistcloacal= L.geoJson(SistemaCloacal, { onEachFeature: agregarPopupcloacas}),
+				punt= L.geoJson(PuntosVerdes, { pointToLayer: crearIconoVerde, onEachFeature: agregarPopup });
 
 			/* CREACIÓN DEL MAPA CON BASE LAYERS Y OVERLAYS */
 			var map = L.map('map', {
@@ -468,7 +470,8 @@
 				"Sistema Cloacal":sistcloacal,
 				"Reservorios urbanos":reservorios,
 				"Lineas de Distribucion de Energia":lineasd,
-				"Lineas de Transporte de Energia":lineast
+				"Lineas de Transporte de Energia":lineast,
+				"Puntos Verdes":punt,
 			};
 			L.control.layers(baseMaps, overlayMaps).addTo(map);
 			L.control.scale().addTo(map);
