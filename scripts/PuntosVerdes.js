@@ -51,7 +51,7 @@ var PuntosVerdes ={
 { "type": "Feature", "properties": { "id": 46, "Nombre_1": "Hiper Libertad" }, "geometry": { "type": "Point", "coordinates": [ -68.8559234514709, -32.929982461979897 ] } },
 { "type": "Feature", "properties": { "id": 47, "Nombre_1": "Mercado Cooperativo - Playa" }, "geometry": { "type": "Point", "coordinates": [ -68.826437798549023, -32.935621320485872 ] } },
 { "type": "Feature", "properties": { "id": 48, "Nombre_1": "Palmares Open Mall - Centro Comercial 1" }, "geometry": { "type": "Point", "coordinates": [ -68.858871267588484, -32.955277963714153 ] } },
-{ "type": "Feature", "properties": { "id": 49, "Nombre_1": "Paseo Stare" }, "geometry": { "type": "Point", "coordinates": [ -68.84067347242474, -32.938897298753282 ] } },
+{ "type": "Feature", "properties": { "id": 49, "Nombre_1": "Paseo Stare" }, "geometry": { "type": "Point", "coordinates": [ -68.840392925872479, -32.938840185879371 ] } },
 { "type": "Feature", "properties": { "id": 50, "Nombre_1": "Playon Deportivo" }, "geometry": { "type": "Point", "coordinates": [ -68.835205261024768, -32.945471253856809 ] } },
 { "type": "Feature", "properties": { "id": 51, "Nombre_1": "Plaza Fray Mamerto Esquiu" }, "geometry": { "type": "Point", "coordinates": [ -68.879217907989684, -32.913587970041306 ] } },
 { "type": "Feature", "properties": { "id": 52, "Nombre_1": "Polideportivo Chuquisaca" }, "geometry": { "type": "Point", "coordinates": [ -68.872968243062758, -32.919614989107195 ] } },
@@ -124,6 +124,7 @@ var PuntosVerdes ={
 { "type": "Feature", "properties": { "id": 119, "Nombre_1": "Plaza 13 de Julio - Puerto Deseado" }, "geometry": { "type": "Point", "coordinates": [ -68.835314197998571, -32.956443702578099 ] } },
 { "type": "Feature", "properties": { "id": 120, "Nombre_1": "Rulero - Paso de los Andes y Pellegrini" }, "geometry": { "type": "Point", "coordinates": [ -68.860572237522149, -32.908580395515237 ] } },
 { "type": "Feature", "properties": { "id": 121, "Nombre_1": "Rulero - Primitivo de la Reta y Alsina" }, "geometry": { "type": "Point", "coordinates": [ -68.83018738227193, -32.931487133940223 ] } },
-{ "type": "Feature", "properties": { "id": 122, "Nombre_1": "Rulero - Colegio Bohorquez" }, "geometry": { "type": "Point", "coordinates": [ -68.851718471758247, -32.95387259084707 ] } }
+{ "type": "Feature", "properties": { "id": 122, "Nombre_1": "Rulero - Colegio Bohorquez" }, "geometry": { "type": "Point", "coordinates": [ -68.851718471758247, -32.95387259084707 ] } },
+{ "type": "Feature", "properties": { "id": 123, "Nombre_1": "Rulero - Puente Olive" }, "geometry": { "type": "Point", "coordinates": [ -68.840750390548251, -32.938938654024504 ] } }
 ]
 }
