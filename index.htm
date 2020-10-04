@@ -1,0 +1,504 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset=utf-8 /> 
+		<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui' />
+		<title>ObservatorioTerritorialGC</title>
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.png">
+
+		<!-- CSS -->
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css">
+		<link rel="stylesheet" href="css/Leaflet.PolylineMeasure.css">
+		<style type="text/css">	
+			.leaflet-control-attribution.leaflet-control a:hover {color:#800080}
+			.logogc{position:absolute;z-index:2;top:5px;right:350px}
+			h1 { color: #800080;}
+			.leaflet-control-attribution.leaflet-control { font-size: 16px;	}
+			
+			@font-face {
+				font-family: Gotham;
+				src: url(fonts/Gotham-Book.otf);
+				font-weight: normal;
+			}
+
+			@font-face {
+				font-family: Gotham;
+				src: url(fonts/Gotham-Bold.otf);
+				font-weight: bold;
+			}
+			
+			.leaflet-container {
+				font: 13px/1.5 Gotham;
+			}
+		</style>
+		
+		<!-- SCRIPTS -->
+		<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+		<script src="scripts/Leaflet.PolylineMeasure.js"></script>
+		<script src="scripts/leaflet.pattern.js"></script>
+		<script src="scripts/leaflet-tilelayer-wmts.js"></script>
+		
+		<!-- GEOJSON -->
+		<script type="text/javascript" src="scripts/Centrosdesalud.js"></script>
+		<script type="text/javascript" src="scripts/godoycruz.js"></script>
+		<script type="text/javascript" src="scripts/CicloviasProyectadas.js"></script>
+		<script type="text/javascript" src="scripts/CicloviasExistentes.js"></script>
+		<script type="text/javascript" src="scripts/ClinicasPrivadas.js"></script>
+		<script type="text/javascript" src="scripts/Hospital.js"></script>
+		<script type="text/javascript" src="scripts/Escuelas.js"></script>
+		<script type="text/javascript" src="scripts/Farmacias.js"></script>
+		<script type="text/javascript" src="scripts/ResidenciasAdultosMayores.js"></script>
+		<script type="text/javascript" src="scripts/JardinesMunicipales.js"></script>
+		<script type="text/javascript" src="scripts/Polideportivos.js"></script>
+		<script type="text/javascript" src="scripts/Seguridad.js"></script>
+		<script type="text/javascript" src="scripts/Distritos.js"></script>
+		<script type="text/javascript" src="scripts/Reservorios.js"></script>
+		<script type="text/javascript" src="scripts/BarriosPopulares.js"></script>
+		<script type="text/javascript" src="scripts/Zonificacion.js"></script>
+		<script type="text/javascript" src="scripts/RedesdeAguas.js"></script>
+		<script type="text/javascript" src="scripts/SistemaCloacal.js"></script>
+		<script type="text/javascript" src="scripts/LineasD.js"></script>
+		<script type="text/javascript" src="scripts/Cuencashidrograficas.js"></script>
+		<script type="text/javascript" src="scripts/LineasT.js"></script>
+		<script type="text/javascript" src="scripts/PuntosVerdes.js"></script>
+	</head>
+	<body> 
+		<h1 style="position: relative; margin-top: 10px; margin-left: 100px; z-index: 2">Observatorio Territorial de Godoy Cruz</h1>
+		<img src="favicon.png" height= "45px" width="45px" align=right class="logogc">
+		<div id="map" class="map map-home" style="margin:8px 0 8px 0;height:800px;"></div> 
+
+		<!-- FUNCIONES LEAFLET -->
+		<script>
+			/* ARGENMAP */
+			var mapabase_argenmap = new L.TileLayer.WMTS( 'https://wms.ign.gob.ar/geoserver/capabaseargenmap/gwc/service/wmts?' , {
+				layer: 'capabaseargenmap',
+				style: "normal",
+				tilematrixSet: "EPSG:3857",
+				format: "image/png",
+				attribution: " <a href='https://www.ign.gob.ar/AreaServicios/Argenmap/IntroduccionV2'> IGN - Argenmap v2 </a> | <a href='https://www.godoycruz.gob.ar/'>Secretaria de Ambiente y Desarrollo Sustentable - Godoy Cruz</a> | <a href='https://github.com/mylen/leaflet.TileLayer.WMTS'>GitHub</a>&copy "
+			});
+			
+			/* ICONOS */
+			var iconoComun = L.Icon.extend({
+				options: {
+					shadowUrl: 'img/marker-shadow.png',
+					iconSize:     [25, 41],
+					shadowSize:   [41, 41],
+					iconAnchor:   [12, 41],
+					popupAnchor:  [1, -34]
+				}
+			});
+
+			var iconoVerde = new iconoComun({iconUrl: 'img/marker-icon-2x-green.png'}),
+				iconoRojo = new iconoComun({iconUrl: 'img/marker-icon-2x-red.png'}),
+				iconoNegro = new iconoComun({iconUrl: 'img/marker-icon-2x-black.png'}),
+				iconoAzul = new iconoComun({iconUrl: 'img/marker-icon-2x-blue.png'}),
+				iconoDorado = new iconoComun({iconUrl: 'img/marker-icon-2x-gold.png'}),
+				iconoNaranja= new iconoComun({iconUrl: 'img/marker-icon-2x-orange.png'}),
+				iconoGris = new iconoComun({iconUrl: 'img/marker-icon-2x-grey.png'}),
+				iconoVioleta = new iconoComun({iconUrl: 'img/marker-icon-2x-violet.png'}),
+				iconoAmarillo = new iconoComun({iconUrl: 'img/marker-icon-2x-yellow.png'}),
+				iconoAntena = new iconoComun({iconUrl: 'img/ante_r2.png'}),
+				iconoBiblio = new iconoComun({iconUrl: 'img/biblio_r2.png'}),
+				iconoCentrosalud = new iconoComun({iconUrl: 'img/centrosalud_r2.png'}),
+				iconoClinicaprivada = new iconoComun({iconUrl: 'img/clinicaprivada_r2.png'}),
+				iconoDependmuni= new iconoComun({iconUrl: 'img/dependmuni_r2.png'}),
+				iconoEstabeducat= new iconoComun({iconUrl: 'img/estabeducat_r2.png'}),
+				iconoFarmacias = new iconoComun({iconUrl: 'img/farmacias_r2.png'}),
+				iconoHospitales= new iconoComun({iconUrl: 'img/hospitales2.png'}),
+				iconoSeguridad= new iconoComun({iconUrl: 'img/institucseguridad_r2.png'}),
+				iconoJardmatern= new iconoComun({iconUrl: 'img/jardmatern_r2.png'}),
+				iconoPoli= new iconoComun({iconUrl: 'img/poli_r2.png'}),
+				iconoSema_r2= new iconoComun({iconUrl: 'img/sema_r2.png'}),
+				iconoUnivec = new iconoComun({iconUrl: 'img/univec_r2.png'});
+
+			
+			function crearIconoVerde (feature, latlng) {
+				return L.marker(latlng, { icon: iconoVerde })
+			}
+			var asignarIconoVerde = {
+			  pointToLayer: crearIconoVerde
+			}
+
+			function crearIconoRojo (feature, latlng) {
+				return L.marker(latlng, { icon: iconoRojo })
+			}
+			var asignarIconoRojo = {
+			  pointToLayer: crearIconoRojo
+			}
+
+			function crearIconoNegro (feature, latlng) {
+				return L.marker(latlng, { icon: iconoNegro })
+			}
+			var asignarIconoNegro = {
+			  pointToLayer: crearIconoNegro
+			}
+
+			function crearIconoAzul (feature, latlng) {
+				return L.marker(latlng, { icon: iconoAzul })
+			}
+			var asignarIconoAzul= {
+			  pointToLayer: crearIconoAzul
+			}
+
+			function crearIconoDorado (feature, latlng) {
+				return L.marker(latlng, { icon: iconoDorado })
+			}
+			var asignarIconoDorado = {
+			  pointToLayer: crearIconoDorado
+			}
+
+			function crearIconoNaranja (feature, latlng) {
+				return L.marker(latlng, { icon: iconoNaranja})
+			}
+			var asignarIconoNaranja = {
+			  pointToLayer: crearIconoNaranja
+			}
+
+			function crearIconoGris (feature, latlng) {
+				return L.marker(latlng, { icon: iconoGris  })
+			}
+			var asignarIconoGris  = {
+			  pointToLayer: crearIconoGris 
+			}
+
+			function crearIconoVioleta (feature, latlng) {
+				return L.marker(latlng, { icon: iconoVioleta })
+			}
+			var asignarIconoVioleta = {
+			  pointToLayer: crearIconoVioleta
+			}
+
+			function crearIconoAmarillo (feature, latlng) {
+				return L.marker(latlng, { icon: iconoAmarillo })
+			}
+			var asignarIconoAmarillo = {
+			  pointToLayer: crearIconoAmarillo
+			}
+			
+			function crearIconoAntena (feature, latlng) {
+				return L.marker(latlng, { icon: iconoAntena })
+			}
+			var asignarIconoAntena = {
+			  pointToLayer: crearIconoAntena
+			}
+			
+			function crearIconoBiblio (feature, latlng) {
+				return L.marker(latlng, { icon: iconoBiblio })
+			}
+			var asignarIconoBiblio = {
+			  pointToLayer: crearIconoBiblio
+			}
+			
+			function crearIconoCentrosalud (feature, latlng) {
+				return L.marker(latlng, { icon: iconoCentrosalud})
+			}
+			var asignarIconoCentrosalud = {
+			  pointToLayer: crearIconoCentrosalud
+			}
+			
+			function crearIconoClinicaprivada (feature, latlng) {
+				return L.marker(latlng, { icon: iconoClinicaprivada})
+			}
+			var asignarIconoClinicaprivada = {
+			  pointToLayer: crearIconoClinicaprivada
+			}
+			
+			function crearIconoDependmuni (feature, latlng) {
+				return L.marker(latlng, { icon: iconoDependmuni})
+			}
+			var asignarIconoDependmuni = {
+			  pointToLayer: crearIconoDependmuni
+			}
+			
+			function crearIconoEstabeducat (feature, latlng) {
+				return L.marker(latlng, { icon: iconoEstabeducat})
+			}
+			var asignarIconoEstabeducat = {
+			  pointToLayer: crearIconoEstabeducat
+			}
+			
+			function crearIconoFarmacias (feature, latlng) {
+				return L.marker(latlng, { icon: iconoFarmacias})
+			}
+			var asignarIconoFarmacias = {
+			  pointToLayer: crearIconoFarmacias
+			}
+			
+			function crearIconoHospitales (feature, latlng) {
+				return L.marker(latlng, { icon: iconoHospitales})
+			}
+			var asignarIconoHospitales = {
+			  pointToLayer: crearIconoHospitales
+			}
+			
+			function crearIconoSeguridad (feature, latlng) {
+				return L.marker(latlng, { icon: iconoSeguridad})
+			}
+			var asignarIconoSeguridad = {
+			  pointToLayer: crearIconoSeguridad
+			}
+			
+			function crearIconoJardmatern(feature, latlng) {
+				return L.marker(latlng, { icon: iconoJardmatern})
+			}
+			var asignarIconoJardmatern = {
+			  pointToLayer: crearIconoJardmatern
+			}
+			
+			function crearIconoPoli(feature, latlng) {
+				return L.marker(latlng, { icon: iconoPoli})
+			}
+			var asignarIconoPoli = {
+			  pointToLayer: crearIconoPoli
+			}
+			
+			function crearIconoUnivec(feature, latlng) {
+				return L.marker(latlng, { icon: iconoUnivec})
+			}
+			var asignarIconoUnivec = {
+			  pointToLayer: crearIconoUnivec
+			}
+				
+			/* POPUPS */
+			function agregarPopup(feature, layer) { 
+				if (feature.properties && feature.properties.Nombre_1) { 
+						layer.bindPopup( "<strong>" + feature.properties.Nombre_1 + "</strong>"); 
+				} 
+			}
+			function agregarPopupfarmacias(feature, layer) { 
+				if (feature.properties && feature.properties.Nombre) { 
+						layer.bindPopup( "<strong>" + feature.properties.Nombre + "</strong>"); 
+				} 
+			}
+			function agregarPopupres(feature, layer) { 
+				if (feature.properties && feature.properties.UBICACION) { 
+						layer.bindPopup( "<strong>" + feature.properties.UBICACION + "</strong>"); 
+				} 
+			}
+			function agregarPopupjardinesmuni(feature, layer) { 
+				if (feature.properties && feature.properties.nombre) { 
+						layer.bindPopup( "<strong>" + feature.properties.nombre + "</strong>"); 
+				} 
+			}
+			function agregarPopupciclovias(feature, layer) { 
+				if (feature.properties && feature.properties.Distancia) { 
+						layer.bindPopup( "<strong>" + feature.properties.Distancia + "</strong>"); 
+				} 
+			}
+			function agregarPopupDistritos(feature, layer) { 
+				if (feature.properties && feature.properties.nombre) { 
+					layer.bindPopup( "<strong>" + feature.properties.nombre + "</strong>"); 
+				} 
+			}
+			function agregarPopupzoni(feature, layer) { 
+				if (feature.properties && feature.properties.Layer) { 
+					layer.bindPopup( "<strong>" + feature.properties.Layer + "</strong>"); 
+				} 
+			}
+			function agregarPopupredes(feature, layer) { 
+				if (feature.properties && feature.properties.Estado) {
+					layer.bindPopup( "<strong>" + feature.properties.Estado + "</strong>");
+				}
+			}
+			function agregarPopupcloacas(feature, layer) {
+				if (feature.properties && feature.properties.Estado) {	 
+					 layer.bindPopup( "<strong>" + feature.properties.Estado + "</strong>");
+				}
+			}		
+			function agregarPopuplineas(feature, layer) {
+				if (feature.properties && feature.properties.TENSION) {	 
+					layer.bindPopup( "<strong>" + feature.properties.TENSION + "</strong>");
+				}
+			}	
+			function estilodistritos() {
+				distritosg.eachLayer(function(featureInstanceLayer) {
+					var id_feature = featureInstanceLayer.feature.properties['qc_id'];
+					if (id_feature == 0) {
+						color_actual = '#d48871';
+					} else if (id_feature == 1) {
+						color_actual = '#e3f1df';
+					} else if (id_feature == 2) {
+						color_actual = '#f1dfed';
+					} else if (id_feature == 3) {
+						color_actual = '#adddf7';
+					} else if (id_feature == 4) {
+						color_actual = '#fcfacf';
+					} else if (id_feature == 5) {
+						color_actual = '#d4bd8b';
+					}
+					featureInstanceLayer.setStyle({
+						color: color_actual,fillOpacity: 0.75
+					});
+				});
+			}	
+					
+			function estilozoni() {
+				zonificacion.eachLayer(function(featureInstanceLayer) {
+					var id_feature = featureInstanceLayer.feature.properties['qc_id'];
+					if (id_feature == 0) {
+						color_actual = 'grey';
+					} else if (id_feature == 1) {
+						color_actual = '#FF0000';
+					} else if (id_feature == 2) {
+						color_actual = '#ff7f00';
+					} else if (id_feature == 3) {
+						color_actual = '#fff600';
+					} else if (id_feature == 4) {
+						color_actual = '#800080';
+					} else if (id_feature == 5) {
+						color_actual = '#5d3064';
+					}else if (id_feature == 6) {
+						color_actual = '#1feeb4';
+					}else if (id_feature == 7) {
+						color_actual = '#199f2d';
+					}else if (id_feature == 8) {
+						color_actual = '#74d1af';
+					}else if (id_feature == 9) {
+						color_actual = '#2f6e9e';
+					}else if (id_feature == 10) {
+						color_actual = '#b31417';
+					}else if (id_feature == 11) {
+						color_actual = '#E1E1E1';
+					}
+					featureInstanceLayer.setStyle({
+						color: color_actual,fillOpacity: 0.75
+					});
+				});
+			}	
+			function estilored() {
+				redesagua.eachLayer(function(featureInstanceLayer) {
+					var id_feature = featureInstanceLayer.feature.properties['id'];
+					if (id_feature == 1) {
+						color_actual = '#62b8e5';
+					} else if (id_feature == 1) {
+						color_actual = '#62b8e5';
+					} else if (id_feature == 2) {
+						color_actual = '#fbb75b';
+					} else if (id_feature == 3) {
+						color_actual = '#f05d51';
+					}
+					featureInstanceLayer.setStyle({
+						color: color_actual,fillOpacity: 0.75
+					});
+				});
+			}	
+			function estilocloacas() {
+				sistcloacal.eachLayer(function(featureInstanceLayer) {
+					var id_feature = featureInstanceLayer.feature.properties['id'];
+					if (id_feature == 1) {
+						color_actual = '#62b8e5';
+					} else if (id_feature == 1) {
+						color_actual = '#62b8e5';
+					} else if (id_feature == 2) {
+						color_actual = '#fbb75b';
+					} else if (id_feature == 3) {
+						color_actual = '#f05d51';
+					}
+					featureInstanceLayer.setStyle({
+						color: color_actual,fillOpacity: 0.75
+					});
+				});
+			}
+			function estilocuencas() {
+				cuencas.eachLayer(function(featureInstanceLayer) {
+					var id_feature = featureInstanceLayer.feature.properties['qc_id'];
+					if (id_feature == 1) {
+						color_actual = '#62b8e5';
+					} else if (id_feature == 2) {
+						color_actual = '#fbb75b';
+					} else if (id_feature == 3) {
+						color_actual = '#f05d51';
+					}	
+			var optiones_textura = {height: 8, weight: 4, spaceWeight: 4, color: color_actual, spaceColor: color_actual, spaceOpacity: 0.3, angle: -45};
+					var textura_cuencas = new L.StripePattern(optiones_textura); textura_cuencas.addTo(map);
+					
+					featureInstanceLayer.setStyle({
+						color: color_actual,fillOpacity: 0.75, fillPattern: textura_cuencas
+					});
+				});
+			}
+			
+			/* BASE LAYERS */
+			var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+				osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+				mapabase_osm = L.tileLayer(osmUrl, {maxZoom: 20, attribution: osmAttrib});
+			var otUrl = 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+				otAttrib = 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
+				mapabase_ot = L.tileLayer(otUrl, {maxZoom: 20, attribution: otAttrib});
+				
+			/* OVERLAYS Y GRUPOS */
+			var plazagc = L.marker([-32.92524, -68.84439]).bindPopup('Plaza GC.').openPopup(),
+				centrosdesalud = L.geoJson(centrosdesalud, { pointToLayer: crearIconoCentrosalud, onEachFeature: agregarPopup }),
+				godoycruz = L.geoJson(godoycruz),
+				cicloviasproy = L.geoJson(CicloviasProyectadas,{ onEachFeature: agregarPopupciclovias}).setStyle({color:"yellow"}),
+				cicloviasexist =L.geoJson(CicloviasExistentes,{ onEachFeature: agregarPopupciclovias}).setStyle({color:"red"}),
+				lineasd=L.geoJson(LineasD,{ onEachFeature: agregarPopuplineas}).setStyle({color:"orange"}),
+				lineast=L.geoJson(LineasT,{ onEachFeature: agregarPopuplineas}).setStyle({color:"#51aff0"}),
+				clinicaspriv = L. geoJson(ClinicasPrivadas,{ pointToLayer: crearIconoClinicaprivada, onEachFeature: agregarPopupjardinesmuni }),
+				hospital = L.geoJson(Hospital, { pointToLayer: crearIconoHospitales, onEachFeature: agregarPopup }),
+				escuelas = L.geoJson(Escuelas, { pointToLayer: crearIconoEstabeducat, onEachFeature: agregarPopup }),
+				farmacias = L.geoJson(Farmacias, { pointToLayer: crearIconoFarmacias, onEachFeature: agregarPopupfarmacias }),
+				polideportivos = L.geoJson(Polideportivos,  { pointToLayer: crearIconoPoli, onEachFeature: agregarPopup }),
+				jardinesmuni = L.geoJson(JardinesMunicipales,{ pointToLayer: crearIconoJardmatern, onEachFeature: agregarPopupjardinesmuni }),
+				seguridad =L.geoJson(Seguridad,{ pointToLayer: crearIconoSeguridad, onEachFeature: agregarPopup }),
+				residenciasad =L.geoJson(ResidenciasAdultosMayores,{ pointToLayer: crearIconoNaranja, onEachFeature: agregarPopup }),
+				barriospopulares=L.geoJson(BarriosPopulares, {onEachFeature: agregarPopup}).setStyle({color:"#e31a1c",fillOpacity: 0.75})
+				reservorios=L.geoJson(Reservorios,{onEachFeature: agregarPopupres}).setStyle({color:"#729b6f",fillOpacity: 0.75}),
+				distritosg = L.geoJson(Distritos, { onEachFeature: agregarPopupDistritos }),
+				zonificacion=  L.geoJson(Zonificacion,{ onEachFeature: agregarPopupzoni }),
+				redesagua= L.geoJson(RedesdeAguas,{ onEachFeature: agregarPopupredes}),
+				cuencas= L.geoJson(Cuencashidrograficas,{ onEachFeature: agregarPopup}),
+				punt= L.geoJson(PuntosVerdes, { pointToLayer: crearIconoVerde, onEachFeature: agregarPopup });
+				sistcloacal= L.geoJson(SistemaCloacal, { onEachFeature: agregarPopupcloacas});
+
+			/* CREACIÓN DEL MAPA CON BASE LAYERS Y OVERLAYS */
+			var map = L.map('map', {
+				layers: [mapabase_argenmap,godoycruz]
+			}).setView([-32.9314, -68.8497], 13);
+
+			/* FUNCIONES DE ESTILO DE OVERLAYS */
+			estilodistritos();
+			estilozoni();
+			estilored();
+			estilocloacas();
+			estilocuencas();
+
+			/* CREACIÓN DEL LAYERS CONTROL */
+			var baseMaps = {
+				"OpenTopoMap": mapabase_ot,
+				 "Argenmap": mapabase_argenmap,
+			};
+				
+			var overlayMaps = {
+				"Distritos Geográficos":distritosg,
+				"Barrios Populares":barriospopulares,
+				"Zonificación":zonificacion,
+				"Hospitales":hospital,
+				"Centros de Salud":centrosdesalud,
+				"Clinicas Privadas":clinicaspriv,                 
+				"Farmacias":farmacias,
+				"Residencias de Adultos Mayores":residenciasad,
+				"Establecimientos Educativos":escuelas,
+				"Jardines Municipales":jardinesmuni,
+				"Polideportivos":polideportivos,
+				"Ciclovias Proyectadas":cicloviasproy,
+				"Ciclovias Existentes":cicloviasexist,
+				"Instituciones de Seguridad":seguridad,
+				"Redes de Aguas":redesagua,
+				"Sistema Cloacal":sistcloacal,
+				"Reservorios urbanos":reservorios,
+				"Lineas de Distribucion de Energia":lineasd,
+				"Lineas de Transporte de Energia":lineast,
+				"Puntos Verdes":punt,
+				"Cuencas Hidrograficas":cuencas,
+			};
+			L.control.layers(baseMaps, overlayMaps).addTo(map);
+			L.control.scale().addTo(map);
+			L.control.polylineMeasure().addTo(map);
+		</script>
+	</body>
+</html>
+       
+
+      
