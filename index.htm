@@ -62,6 +62,7 @@
 		<script type="text/javascript" src="scripts/LineasT.js"></script>
 		<script type="text/javascript" src="scripts/PuntosVerdes.js"></script>
 		<script type="text/javascript" src="scripts/EspaciosVerdes.js"></script>
+		<script type="text/javascript" src="scripts/DependenciasMunicipales.js"></script>
 	</head>
 	<body> 
 		<h1 style="position: relative; margin-top: 10px; margin-left: 100px; z-index: 2">Observatorio Territorial de Godoy Cruz</h1>
@@ -456,6 +457,7 @@
 				redesagua= L.geoJson(RedesdeAguas,{ onEachFeature: agregarPopupredes}),
 				espverdes= L.geoJson(EspaciosVerdes, { pointToLayer: crearIconoVioleta, onEachFeature: agregarPopupespaciosverdes }),
 				cuencas= L.geoJson(Cuencashidrograficas,{ onEachFeature: agregarPopup}),
+				depen= L.geoJson(DependenciasMunicipales, { pointToLayer: crearIconoNegro, onEachFeature: agregarPopup }),
 				punt= L.geoJson(PuntosVerdes, { pointToLayer: crearIconoVerde, onEachFeature: agregarPopup }),
 				sistcloacal= L.geoJson(SistemaCloacal, { onEachFeature: agregarPopupcloacas});
 
@@ -500,6 +502,7 @@
 				"Puntos Verdes":punt,
 				"Cuencas Hidrograficas":cuencas,
 				"Espacios Verdes":espverdes,
+				"Dependencias Municipales":depen,
 			};
 			L.control.layers(baseMaps, overlayMaps).addTo(map);
 			L.control.scale().addTo(map);
