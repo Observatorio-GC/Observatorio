@@ -112,7 +112,9 @@
 				iconoJardmatern= new iconoComun({iconUrl: 'img/jardmatern_r2.png'}),
 				iconoPoli= new iconoComun({iconUrl: 'img/poli_r2.png'}),
 				iconoSema_r2= new iconoComun({iconUrl: 'img/sema_r2.png'}),
-				iconoUnivec = new iconoComun({iconUrl: 'img/univec_r2.png'});
+				iconoUnivec = new iconoComun({iconUrl: 'img/univec_r2.png'})
+			        iconoVerde2 = new iconoComun({iconUrl: 'img/verde2_r2'});
+			        
 
 			
 			function crearIconoVerde (feature, latlng) {
@@ -261,11 +263,11 @@
 			var asignarIconoUnivec = {
 			  pointToLayer: crearIconoUnivec
 			}
-			function crearIconoverde2_r2(feature, latlng) {
-				return L.marker(latlng, { icon: iconoverde2_r2})
+			function crearIconoVerde2(feature, latlng) {
+				return L.marker(latlng, { icon: IconoVerde2})
 			}
 			var asignarIconoverde2_r2 = {
-			  pointToLayer: crearIconoverde2_r2
+			  pointToLayer: crearIconoVerde2
 			}
 				
 			/* POPUPS */
