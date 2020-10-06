@@ -261,6 +261,12 @@
 			var asignarIconoUnivec = {
 			  pointToLayer: crearIconoUnivec
 			}
+			function crearIconoverde2_r2(feature, latlng) {
+				return L.marker(latlng, { icon: iconoUnivec})
+			}
+			var asignarIconoverde2_r2 = {
+			  pointToLayer: crearIconoUnivec
+			}
 				
 			/* POPUPS */
 			function agregarPopupespaciosverdes(feature, layer) { 
@@ -455,7 +461,7 @@
 				distritosg = L.geoJson(Distritos, { onEachFeature: agregarPopupDistritos }),
 				zonificacion=  L.geoJson(Zonificacion,{ onEachFeature: agregarPopupzoni }),
 				redesagua= L.geoJson(RedesdeAguas,{ onEachFeature: agregarPopupredes}),
-				espverdes= L.geoJson(EspaciosVerdes, { pointToLayer: crearIconoVioleta, onEachFeature: agregarPopupespaciosverdes }),
+				espverdes= L.geoJson(EspaciosVerdes, { pointToLayer: crearIconoverde2_r2, onEachFeature: agregarPopupespaciosverdes }),
 				cuencas= L.geoJson(Cuencashidrograficas,{ onEachFeature: agregarPopup}),
 				depen= L.geoJson(DependenciasMunicipales, { pointToLayer: crearIconoNegro, onEachFeature: agregarPopup }),
 				punt= L.geoJson(PuntosVerdes, { pointToLayer: crearIconoVerde, onEachFeature: agregarPopup }),
