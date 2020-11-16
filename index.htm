@@ -65,6 +65,7 @@
 		<script type="text/javascript" src="scripts/EspaciosVerdes.js"></script>
 		<script type="text/javascript" src="scripts/DependenciasMunicipales.js"></script>
 		<script type="text/javascript" src="scripts/Solmaforos.js"></script>
+		<script type="text/javascript" src="scripts/EstacionesdeServicio.js"></script>
 	</head>
 	<body> 
 		<h1 style="position: relative; margin-top: 10px; margin-left: 100px; z-index: 2">Observatorio Territorial de Godoy Cruz</h1>
@@ -482,6 +483,7 @@
 				depen= L.geoJson(DependenciasMunicipales, { pointToLayer: crearIconoDependmuni, onEachFeature: agregarPopup }),
 				punt= L.geoJson(PuntosVerdes, { pointToLayer: crearIconoVerde, onEachFeature: agregarPopup }),
 				solma= L.geoJson(Solmaforos, { pointToLayer: crearIconoAmarillo, onEachFeature: agregarPopupfarmacias }),
+				estacion= L.geoJson(EstacionesdeServicio, { pointToLayer: crearIconoAzul, onEachFeature: agregarPopupfarmacias }),
 				sistcloacal= L.geoJson(SistemaCloacal, { onEachFeature: agregarPopupcloacas});
 
 			/* CREACIÓN DEL MAPA CON BASE LAYERS Y OVERLAYS */
@@ -528,6 +530,7 @@
 				"Dependencias Municipales":depen,
 				"Puntos de Recepción de Pilas":puntospilas,	
 				"Solmáforos":solma,
+				"Estaciones de Servicio":estacion,
 			};
 			L.control.layers(baseMaps, overlayMaps).addTo(map);
 			L.control.scale().addTo(map);
