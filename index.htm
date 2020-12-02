@@ -69,6 +69,7 @@
 		<script type="text/javascript" src="scripts/Solmaforos.js"></script>
 		<script type="text/javascript" src="scripts/EstacionesdeServicio.js"></script>
 		<script type="text/javascript" src="scripts/Estaciones.js"></script>
+		<script type="text/javascript" src="scripts/Ripieras.js"></script>
 	</head>
 	<body> 
 		<h1 style="position: relative; margin-top: 10px; margin-left: 100px; z-index: 2">Observatorio Territorial de Godoy Cruz</h1>
@@ -493,6 +494,7 @@
 				solma= L.geoJson(Solmaforos, { pointToLayer: crearIconoAmarillo, onEachFeature: agregarPopupfarmacias }),
 				estacion= L.geoJson(EstacionesdeServicio, { pointToLayer: crearIconoAzul, onEachFeature: agregarPopupfarmacias }),
 				meteo= L.geoJson(Estaciones, { pointToLayer: crearIconoNegro, onEachFeature: agregarPopupfarmacias }),
+				ripieras=L.geoJson(Ripieras, {onEachFeature: agregarPopupfarmacias}).setStyle({color:"#e31a1c",fillOpacity: 0.75}),
 				sistcloacal= L.geoJson(SistemaCloacal, { onEachFeature: agregarPopupcloacas});
 
 			/* CREACIÓN DEL MAPA CON BASE LAYERS Y OVERLAYS */
@@ -514,7 +516,7 @@
 			};
 				
 			/*var overlayMaps = {
-				" Infraestructura urbana":{
+				"Infraestructura urbana":{
 				"Barrios Populares":barriospopulares,
 				"Cuencas Hidrográficas":cuencas,
 				"Distritos Geográficos":distritosg,
@@ -562,6 +564,7 @@
 				"Polideportivos":polideportivos,
 				"Reservorios urbanos":reservorios,
 				"Residencias de Adultos Mayores":residenciasad,
+				"Ripieras":ripieras,
 				"Zonificación":zonificacion,
 				},
 			   
