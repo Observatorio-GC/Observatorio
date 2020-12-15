@@ -39,6 +39,8 @@
 		<script src="scripts/leaflet.pattern.js"></script>
 		<script src="scripts/leaflet-tilelayer-wmts.js"></script>
 		<script src="scripts/leaflet.groupedlayercontrol.min.js"></script>
+		<script src="scripts/Bing.js"></script>
+		
 		
 		<!-- GEOJSON -->
 		<script type="text/javascript" src="scripts/Centrosdesalud.js"></script>
@@ -464,7 +466,8 @@
 			var otUrl = 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
 				otAttrib = 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
 				mapabase_ot = L.tileLayer(otUrl, {maxZoom: 20, attribution: otAttrib});
-				
+			var mapa_bing = L.bingLayer('AggHCsJIZIwHrL4Bm6Bt7O1JMXRVk6ca6IoFkILGNWFSl3RAWg-RuYq2jG5VzpIK');
+							
 			/* OVERLAYS Y GRUPOS */
 			var plazagc = L.marker([-32.92524, -68.84439]).bindPopup('Plaza GC.').openPopup(),
 				centrosdesalud = L.geoJson(centrosdesalud, { pointToLayer: crearIconoCentrosalud, onEachFeature: agregarPopup }),
@@ -513,6 +516,7 @@
 			var baseMaps = {
 				"OpenTopoMap": mapabase_ot,
 				 "Argenmap": mapabase_argenmap,
+				 "Satelite Bing": mapa_bing,
 			};
 				
 			/*var overlayMaps = {
