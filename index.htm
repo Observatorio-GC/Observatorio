@@ -72,6 +72,8 @@
 		<script type="text/javascript" src="scripts/EstacionesdeServicio.js"></script>
 		<script type="text/javascript" src="scripts/Estaciones.js"></script>
 		<script type="text/javascript" src="scripts/Ripieras.js"></script>
+		<script type="text/javascript" src="scripts/ZonaNatural.js"></script>
+		<script type="text/javascript" src="scripts/ZonaUrbana.js"></script>
 	</head>
 	<body> 
 		<h1 style="position: relative; margin-top: 10px; margin-left: 100px; z-index: 2">Observatorio Territorial de Godoy Cruz</h1>
@@ -498,6 +500,8 @@
 				estacion= L.geoJson(EstacionesdeServicio, { pointToLayer: crearIconoAzul, onEachFeature: agregarPopupfarmacias }),
 				meteo= L.geoJson(Estaciones, { pointToLayer: crearIconoNegro, onEachFeature: agregarPopupfarmacias }),
 				ripieras=L.geoJson(Ripieras, {onEachFeature: agregarPopupfarmacias}).setStyle({color:"#e31a1c",fillOpacity: 0.75}),
+				zonatu=L.geoJson(ZonaNatural, {onEachFeature: agregarPopupfarmacias}).setStyle({color:"#e31a1c",fillOpacity: 0.75}),
+				zonaurb=L.geoJson(ZonaUrbana, {onEachFeature: agregarPopupfarmacias}).setStyle({color:"#e2e21a",fillOpacity: 0.75}),
 				sistcloacal= L.geoJson(SistemaCloacal, { onEachFeature: agregarPopupcloacas});
 
 			/* CREACIÓN DEL MAPA CON BASE LAYERS Y OVERLAYS */
@@ -569,6 +573,8 @@
 				"Reservorios urbanos":reservorios,
 				"Residencias de Adultos Mayores":residenciasad,
 				"Ripieras":ripieras,
+				"Zona con Características Especiales de Urbanización":zonaurb,
+				"Zona Especial de Conservacion Natural":zonatu,
 				"Zonificación":zonificacion,
 				},
 			   
