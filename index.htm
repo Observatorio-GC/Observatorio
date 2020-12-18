@@ -74,6 +74,7 @@
 		<script type="text/javascript" src="scripts/Ripieras.js"></script>
 		<script type="text/javascript" src="scripts/ZonaNatural.js"></script>
 		<script type="text/javascript" src="scripts/ZonaUrbana.js"></script>
+		<script type="text/javascript" src="scripts/LimiteUrbano.js"></script>
 	</head>
 	<body> 
 		<h1 style="position: relative; margin-top: 10px; margin-left: 100px; z-index: 2">Observatorio Territorial de Godoy Cruz</h1>
@@ -502,6 +503,7 @@
 				ripieras=L.geoJson(Ripieras, {onEachFeature: agregarPopupfarmacias}).setStyle({color:"#e31a1c",fillOpacity: 0.75}),
 				zonatu=L.geoJson(ZonaNatural, {onEachFeature: agregarPopupfarmacias}).setStyle({color:"#e31a1c",fillOpacity: 0.75}),
 				zonaurb=L.geoJson(ZonaUrbana, {onEachFeature: agregarPopupfarmacias}).setStyle({color:"#e2e21a",fillOpacity: 0.75}),
+				limiurb=L.geoJson(LimiteUrbano, {onEachFeature: agregarPopupfarmacias}).setStyle({color:"red"}),
 				sistcloacal= L.geoJson(SistemaCloacal, { onEachFeature: agregarPopupcloacas});
 
 			/* CREACIÓN DEL MAPA CON BASE LAYERS Y OVERLAYS */
@@ -569,6 +571,7 @@
 				"Establecimientos Educativos":escuelas,
 				"Estaciones Meteorológicas":meteo,
 				"Instituciones de Seguridad":seguridad,
+				"Limite Urbano":limiurb,
 				"Polideportivos":polideportivos,
 				"Reservorios urbanos":reservorios,
 				"Residencias de Adultos Mayores":residenciasad,
