@@ -31,6 +31,29 @@
 			.leaflet-container {
 				font: 13px/1.5 Gotham;
 			}
+			
+		    #referencias {
+				position: absolute;
+				width: 150px;
+				height: 50%;
+				top: 40%;
+				left: 20px;
+				z-index: 400;
+		    }
+
+		    .icono_referencia {
+				display: none;
+				font: 18px/1.5 Gotham;
+				color: #222222;
+				margin-bottom: 15px;
+				text-align: left;
+				background-color: rgba(255, 255, 255, 0.4);
+				border-color: #444444;
+				border-width: 3px;
+				border-style: solid;
+				padding: 10px;
+		    }
+		
 		</style>
 		
 		<!-- SCRIPTS -->
@@ -80,6 +103,11 @@
 		<h1 style="position: relative; margin-top: 10px; margin-left: 100px; z-index: 2">Observatorio Territorial de Godoy Cruz</h1>
 		<img src="favicon.png" height= "45px" width="45px" align=right class="logogc">
 		<div id="map" class="map map-home" style="margin:8px 0 8px 0;height:680px;"></div> 
+		<div id="referencias">
+			<div class="icono_referencia" id="ref_cicloviasproy">Total de km:</br>17.05</div>
+			<div class="icono_referencia" id="ref_cicloviasexist">Total de km:</br>21.08</div>
+		</div>
+	
 
 		<!-- FUNCIONES LEAFLET -->
 		<script>
@@ -510,20 +538,21 @@
 			var map = L.map('map', {
 				layers: [mapabase_argenmap,godoycruz]
 			}).setView([-32.9314, -68.8497], 13);
-
+			
 			/* FUNCIONES DE ESTILO DE OVERLAYS */
 			estilodistritos();
 			estilozoni();
 			estilored();
 			estilocloacas();
 			estilocuencas();
-
+          
 			/* CREACIÓN DEL LAYERS CONTROL */
 			var baseMaps = {
 				"OpenTopoMap": mapabase_ot,
 				 "Argenmap": mapabase_argenmap,
 				 "Satelite Bing": mapa_bing,
 			};
+			
 				
 			/*var overlayMaps = {
 				"Infraestructura urbana":{
@@ -589,9 +618,31 @@
 				groupCheckboxes: false
 			};
 		    //L.control.layers(baseMaps, overlayMaps).addTo(map);
+			
 		    L.control.groupedLayers(baseMaps, groupedOverlays, opciones_groupedlayers).addTo(map);
+			map.on('overlayadd', onOverlayAdd);
+		    map.on('overlayremove', onOverlayRemove);
 			L.control.scale().addTo(map);
 			L.control.polylineMeasure().addTo(map);
+			
+			function onOverlayAdd(e){
+				if (e.name == "Ciclovías Proyectadas") {
+					idlayer = "cicloviasproy";
+				} else if (e.name == "Ciclovías Existentes") {
+				idlayer = "cicloviasexist";
+			}
+				document.getElementById("ref_" + idlayer).style.display = 'block';
+			}
+
+			function onOverlayRemove(e){
+				if (e.name == "Ciclovías Proyectadas") {
+					idlayer = "cicloviasproy";
+				
+				} else if (e.name == "Ciclovías Existentes") {
+				idlayer = "cicloviasexist";
+			}
+				document.getElementById("ref_" + idlayer).style.display = 'none';
+			}
 		</script>
 	</body>
 </html>
