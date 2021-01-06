@@ -626,6 +626,7 @@
 			L.control.polylineMeasure().addTo(map);
 			
 			function onOverlayAdd(e){
+				idlayer = "";
 				if (e.name == "Ciclovías Proyectadas") {
 					idlayer = "cicloviasproy";
 				} else if (e.name == "Ciclovías Existentes") {
@@ -635,6 +636,7 @@
 			}
 
 			function onOverlayRemove(e){
+				idlayer = "";
 				if (e.name == "Ciclovías Proyectadas") {
 					idlayer = "cicloviasproy";
 				
