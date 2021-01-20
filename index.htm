@@ -329,7 +329,7 @@
 			}
 			function agregarPopupespaciosverdes(feature, layer) { 
 				if (feature.properties && feature.properties.NOMBRE) { 
-						layer.bindPopup( "<strong>" + feature.properties.NOMBRE + "</strong>"); 
+						layer.bindPopup( "<strong>" + feature.properties.NOMBRE + "</strong><br/>" + feature.properties.Descriptio); 
 				} 
 			}
 			function agregarPopup(feature, layer) { 
@@ -520,7 +520,7 @@
 				distritosg = L.geoJson(Distritos, { onEachFeature: agregarPopupDistritos }),
 				zonificacion=  L.geoJson(Zonificacion,{ onEachFeature: agregarPopupzoni }),
 				redesagua= L.geoJson(RedesdeAguas,{ onEachFeature: agregarPopupredes}),
-				espverdes= L.geoJson(EspaciosVerdes, { pointToLayer: crearIconoVerde2, onEachFeature: agregarPopupespaciosverdes }),
+				espverdes= L.geoJson(EspaciosVerdes, { onEachFeature: agregarPopupespaciosverdes }).setStyle({color:"#4daf4a",fillOpacity: 0.75}),
 				cuencas= L.geoJson(Cuencashidrograficas,{ onEachFeature: agregarPopup}),
 				puntospilas= L.geoJson(PuntosRecepcionPilas, { pointToLayer: crearIconoPilas, onEachFeature: agregarPopuppuntorecepcionpilas  }),
 				depen= L.geoJson(DependenciasMunicipales, { pointToLayer: crearIconoDependmuni, onEachFeature: agregarPopup }),
@@ -597,6 +597,7 @@
 				"Barrios Populares":barriospopulares,
 				"Cuencas Hidrográficas":cuencas,
 				"Distritos Geográficos":distritosg,
+				"Espacios Verdes":espverdes,
 				"Establecimientos Educativos":escuelas,
 				"Estaciones Meteorológicas":meteo,
 				"Instituciones de Seguridad":seguridad,
