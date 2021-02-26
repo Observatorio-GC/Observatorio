@@ -78,7 +78,6 @@
 		<script type="text/javascript" src="scripts/JardinesMunicipales.js"></script>
 		<script type="text/javascript" src="scripts/Polideportivos.js"></script>
 		<script type="text/javascript" src="scripts/Seguridad.js"></script>
-		<script type="text/javascript" src="scripts/Distritos.js"></script>
 		<script type="text/javascript" src="scripts/Reservorios.js"></script>
 		<script type="text/javascript" src="scripts/BarriosPopulares.js"></script>
 		<script type="text/javascript" src="scripts/Zonificacion.js"></script>
@@ -98,6 +97,7 @@
 		<script type="text/javascript" src="scripts/ZonaNatural.js"></script>
 		<script type="text/javascript" src="scripts/ZonaUrbana.js"></script>
 		<script type="text/javascript" src="scripts/LimiteUrbano.js"></script>
+        <script type="text/javascript" src="scripts/DistritosDepartamentales.js"></script>
 	</head>
 	<body> 
 		<h1 style="position: relative; margin-top: 10px; margin-left: 100px; z-index: 2">Observatorio Territorial de Godoy Cruz</h1>
@@ -357,11 +357,6 @@
 						layer.bindPopup( "<strong>" + feature.properties.Distancia + "</strong>"); 
 				} 
 			}
-			function agregarPopupDistritos(feature, layer) { 
-				if (feature.properties && feature.properties.nombre) { 
-					layer.bindPopup( "<strong>" + feature.properties.nombre + "</strong>"); 
-				} 
-			}
 			function agregarPopupzoni(feature, layer) { 
 				if (feature.properties && feature.properties.Layer) { 
 					layer.bindPopup( "<strong>" + feature.properties.Layer + "</strong>"); 
@@ -381,9 +376,15 @@
 				if (feature.properties && feature.properties.TENSION) {	 
 					layer.bindPopup( "<strong>" + feature.properties.TENSION + "</strong>");
 				}
-			}	
-			function estilodistritos() {
-				distritosg.eachLayer(function(featureInstanceLayer) {
+			}
+            function agregarPopupDistritosDepartamentales(feature, layer) { 
+				if (feature.properties && feature.properties.Nombre_1) { 
+					layer.bindPopup( "<strong>" + feature.properties.Nombre_1 + "</strong>"); 
+				} 
+			}			
+			
+            function estiloDistritosDepartamentales() {
+				Depa.eachLayer(function(featureInstanceLayer) {
 					var id_feature = featureInstanceLayer.feature.properties['qc_id'];
 					if (id_feature == 0) {
 						color_actual = '#d48871';
@@ -397,12 +398,19 @@
 						color_actual = '#fcfacf';
 					} else if (id_feature == 5) {
 						color_actual = '#d4bd8b';
-					}
+					} else if (id_feature == 6) {
+						color_actual = '#427710';
+					} else if (id_feature == 7) {
+						color_actual = '#ffa400';
+					} else if (id_feature == 8) {
+						color_actual = '#a028ad';
+					}	
+					
 					featureInstanceLayer.setStyle({
-						color: color_actual,fillOpacity: 0.75
+						color: color_actual,fillOpacity: 0.65
 					});
 				});
-			}	
+			}			
 					
 			function estilozoni() {
 				zonificacion.eachLayer(function(featureInstanceLayer) {
@@ -517,7 +525,6 @@
 				residenciasad =L.geoJson(ResidenciasAdultosMayores,{ pointToLayer: crearIconoNaranja, onEachFeature: agregarPopup }),
 				barriospopulares=L.geoJson(BarriosPopulares, {onEachFeature: agregarPopupbarrios}).setStyle({color:"#e31a1c",fillOpacity: 0.75})
 				reservorios=L.geoJson(Reservorios,{onEachFeature: agregarPopupres}).setStyle({color:"#729b6f",fillOpacity: 0.75}),
-				distritosg = L.geoJson(Distritos, { onEachFeature: agregarPopupDistritos }),
 				zonificacion=  L.geoJson(Zonificacion,{ onEachFeature: agregarPopupzoni }),
 				redesagua= L.geoJson(RedesdeAguas,{ onEachFeature: agregarPopupredes}),
 				espverdes= L.geoJson(EspaciosVerdes, { onEachFeature: agregarPopupespaciosverdes }).setStyle({color:"#4daf4a",fillOpacity: 0.75}),
@@ -532,7 +539,9 @@
 				zonatu=L.geoJson(ZonaNatural, {onEachFeature: agregarPopupfarmacias}).setStyle({color:"#e31a1c",fillOpacity: 0.75}),
 				zonaurb=L.geoJson(ZonaUrbana, {onEachFeature: agregarPopupfarmacias}).setStyle({color:"#e2e21a",fillOpacity: 0.75}),
 				limiurb=L.geoJson(LimiteUrbano, {onEachFeature: agregarPopupfarmacias}).setStyle({color:"red"}),
+				Depa= L.geoJson(DistritosDepartamentales, { onEachFeature: agregarPopupDistritosDepartamentales}),
 				sistcloacal= L.geoJson(SistemaCloacal, { onEachFeature: agregarPopupcloacas});
+				
 
 			/* CREACIÓN DEL MAPA CON BASE LAYERS Y OVERLAYS */
 			var map = L.map('map', {
@@ -540,7 +549,7 @@
 			}).setView([-32.9314, -68.8497], 13);
 			
 			/* FUNCIONES DE ESTILO DE OVERLAYS */
-			estilodistritos();
+			estiloDistritosDepartamentales();
 			estilozoni();
 			estilored();
 			estilocloacas();
@@ -558,7 +567,7 @@
 				"Infraestructura urbana":{
 				"Barrios Populares":barriospopulares,
 				"Cuencas Hidrográficas":cuencas,
-				"Distritos Geográficos":distritosg,
+				"Distritos Departamentales":Depa,
 				"Establecimientos Educativos":escuelas,
 				"Estaciones Meteorológicas":meteo,
 				"Instituciones de Seguridad":seguridad,
@@ -596,7 +605,7 @@
 				"Infraestructura urbana":{
 				"Barrios Populares":barriospopulares,
 				"Cuencas Hidrográficas":cuencas,
-				"Distritos Geográficos":distritosg,
+				"Distritos Departamentales":Depa,
 				"Espacios Verdes":espverdes,
 				"Establecimientos Educativos":escuelas,
 				"Estaciones Meteorológicas":meteo,
