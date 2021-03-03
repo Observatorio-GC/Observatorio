@@ -379,7 +379,7 @@
 			}
             function agregarPopupDistritosDepartamentales(feature, layer) { 
 				if (feature.properties && feature.properties.Nombre_1) { 
-					layer.bindPopup( "<strong>" + feature.properties.Nombre_1 + "</strong>"); 
+					layer.bindPopup( "<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + feature.properties.Area_km2);
 				} 
 			}			
 			
