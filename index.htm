@@ -382,7 +382,11 @@
 					layer.bindPopup( "<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + feature.properties.Area_km2);
 				} 
 			}			
-			
+			function agregarPopupcuencas(feature, layer) { 
+				if (feature.properties && feature.properties.Nombre_1) { 
+						layer.bindPopup( "<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + feature.properties.Superficie);
+				} 
+			}
             function estiloDistritosDepartamentales() {
 				Depa.eachLayer(function(featureInstanceLayer) {
 					var id_feature = featureInstanceLayer.feature.properties['qc_id'];
@@ -528,7 +532,7 @@
 				zonificacion=  L.geoJson(Zonificacion,{ onEachFeature: agregarPopupzoni }),
 				redesagua= L.geoJson(RedesdeAguas,{ onEachFeature: agregarPopupredes}),
 				espverdes= L.geoJson(EspaciosVerdes, { onEachFeature: agregarPopupespaciosverdes }).setStyle({color:"#4daf4a",fillOpacity: 0.75}),
-				cuencas= L.geoJson(Cuencashidrograficas,{ onEachFeature: agregarPopup}),
+				cuencas= L.geoJson(Cuencashidrograficas,{ onEachFeature: agregarPopupcuencas}),
 				puntospilas= L.geoJson(PuntosRecepcionPilas, { pointToLayer: crearIconoPilas, onEachFeature: agregarPopuppuntorecepcionpilas  }),
 				depen= L.geoJson(DependenciasMunicipales, { pointToLayer: crearIconoDependmuni, onEachFeature: agregarPopup }),
 				punt= L.geoJson(PuntosVerdes, { pointToLayer: crearIconoVerde2, onEachFeature: agregarPopup }),
