@@ -98,6 +98,7 @@
 		<script type="text/javascript" src="scripts/ZonaUrbana.js"></script>
 		<script type="text/javascript" src="scripts/LimiteUrbano.js"></script>
         <script type="text/javascript" src="scripts/DistritosDepartamentales.js"></script>
+		<script type="text/javascript" src="scripts/ColectoresAluvionales.js"></script>
 	</head>
 	<body> 
 		<h1 style="position: relative; margin-top: 10px; margin-left: 100px; z-index: 2">Observatorio Territorial de Godoy Cruz</h1>
@@ -387,6 +388,11 @@
 						layer.bindPopup( "<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + feature.properties.Superficie);
 				} 
 			}
+			function agregarPopupcolectores(feature, layer) { 
+				if (feature.properties && feature.properties.Nombre_1) { 
+						layer.bindPopup( "<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + feature.properties.TIPO);
+				} 
+			}
             function estiloDistritosDepartamentales() {
 				Depa.eachLayer(function(featureInstanceLayer) {
 					var id_feature = featureInstanceLayer.feature.properties['qc_id'];
@@ -544,6 +550,7 @@
 				zonaurb=L.geoJson(ZonaUrbana, {onEachFeature: agregarPopupfarmacias}).setStyle({color:"#e2e21a",fillOpacity: 0.75}),
 				limiurb=L.geoJson(LimiteUrbano, {onEachFeature: agregarPopupfarmacias}).setStyle({color:"red"}),
 				Depa= L.geoJson(DistritosDepartamentales, { onEachFeature: agregarPopupDistritosDepartamentales}),
+				colec= L.geoJson(ColectoresAluvionales, {onEachFeature: agregarPopupcolectores}).setStyle({color:"#115e96"}),
 				sistcloacal= L.geoJson(SistemaCloacal, { onEachFeature: agregarPopupcloacas});
 				
 
@@ -570,6 +577,7 @@
 			/*var overlayMaps = {
 				"Infraestructura urbana":{
 				"Barrios Populares":barriospopulares,
+				"Colectores Aluvionales":colec,
 				"Cuencas Hidrográficas":cuencas,
 				"Distritos Departamentales":Depa,
 				"Establecimientos Educativos":escuelas,
@@ -607,6 +615,7 @@
 				
 				"Infraestructura Urbana":{
 				"Barrios Populares":barriospopulares,
+				"Colectores Aluvionales":colec,
 				"Cuencas Hidrográficas":cuencas,
 				"Dependencias Municipales":depen,
 				"Distritos Departamentales":Depa,
