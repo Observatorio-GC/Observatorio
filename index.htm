@@ -99,6 +99,7 @@
 		<script type="text/javascript" src="scripts/LimiteUrbano.js"></script>
         <script type="text/javascript" src="scripts/DistritosDepartamentales.js"></script>
 		<script type="text/javascript" src="scripts/ColectoresAluvionales.js"></script>
+		<script type="text/javascript" src="scripts/PlantaRecicladora.js"></script>
 	</head>
 	<body> 
 		<h1 style="position: relative; margin-top: 10px; margin-left: 100px; z-index: 2">Observatorio Territorial de Godoy Cruz</h1>
@@ -551,6 +552,7 @@
 				limiurb=L.geoJson(LimiteUrbano, {onEachFeature: agregarPopupfarmacias}).setStyle({color:"red"}),
 				Depa= L.geoJson(DistritosDepartamentales, { onEachFeature: agregarPopupDistritosDepartamentales}),
 				colec= L.geoJson(ColectoresAluvionales, {onEachFeature: agregarPopupcolectores}).setStyle({color:"#115e96"}),
+				recic= L.geoJson(PlantaRecicladora, { pointToLayer: crearIconoVerde}),
 				sistcloacal= L.geoJson(SistemaCloacal, { onEachFeature: agregarPopupcloacas});
 				
 
@@ -596,6 +598,7 @@
 					"Hospitales":hospital,
 				},
 				"Infraestructura Ambiental": {
+				    "Planta Recicladora":recic,
 					"Puntos de Recepción de Pilas":puntospilas,	
 					"Puntos Verdes":punt,
 					"Solmáforos":solma,
