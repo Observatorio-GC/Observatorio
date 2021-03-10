@@ -157,6 +157,7 @@
 				iconoPilas = new iconoComun({iconUrl: 'img/pilas_r2.png'}),
 				iconoUnivec = new iconoComun({iconUrl: 'img/univec_r2.png'}),
 				iconoVerde2 = new iconoComun({iconUrl: 'img/verde2_r2.png'});
+				
 
 			
 			function crearIconoVerde (feature, latlng) {
@@ -316,6 +317,13 @@
 			}
 			var asignarIconoVerde2 = {
 			  pointToLayer: crearIconoVerde2
+			}
+			
+			function crearIconoSema_r2(feature, latlng) {
+				return L.marker(latlng, { icon: iconoSema_r2})
+			}
+			var asignarIconoSema_r2 = {
+			  pointToLayer: crearIconoSema_r2
 			}
 				
 			/* POPUPS */
@@ -543,7 +551,7 @@
 				puntospilas= L.geoJson(PuntosRecepcionPilas, { pointToLayer: crearIconoPilas, onEachFeature: agregarPopuppuntorecepcionpilas  }),
 				depen= L.geoJson(DependenciasMunicipales, { pointToLayer: crearIconoDependmuni, onEachFeature: agregarPopup }),
 				punt= L.geoJson(PuntosVerdes, { pointToLayer: crearIconoVerde2, onEachFeature: agregarPopup }),
-				solma= L.geoJson(Solmaforos, { pointToLayer: crearIconoAmarillo, onEachFeature: agregarPopupfarmacias }),
+				solma= L.geoJson(Solmaforos, { pointToLayer: crearIconoSema_r2, onEachFeature: agregarPopupfarmacias }),
 				estacion= L.geoJson(EstacionesdeServicio, { pointToLayer: crearIconoAzul, onEachFeature: agregarPopupfarmacias }),
 				meteo= L.geoJson(Estaciones, { pointToLayer: crearIconoNegro, onEachFeature: agregarPopupfarmacias }),
 				ripieras=L.geoJson(Ripieras, {onEachFeature: agregarPopupfarmacias}).setStyle({color:"#e31a1c",fillOpacity: 0.75}),
