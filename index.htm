@@ -87,6 +87,7 @@
 		<script type="text/javascript" src="scripts/LineasD.js"></script>
 		<script type="text/javascript" src="scripts/Cuencashidrograficas.js"></script>
 		<script type="text/javascript" src="scripts/LineasT.js"></script>
+		<script type="text/javascript" src="scripts/CanalesColectoresHijuelas.js"></script>
 		<script type="text/javascript" src="scripts/PuntosRecepcionPilas.js"></script>
 		<script type="text/javascript" src="scripts/PuntosVerdes.js"></script>
 		<script type="text/javascript" src="scripts/EspaciosVerdes.js"></script>
@@ -393,6 +394,11 @@
 					layer.bindPopup( "<strong>" + feature.properties.TENSION + "</strong>");
 				}
 			}
+			function agregarPopupCanalesColectoresHijuelas(feature, layer) {
+				if (feature.properties && feature.properties.Name) {	 
+					layer.bindPopup( "<strong>" + feature.properties.Name + "</strong>");
+				}
+			}
             function agregarPopupDistritosDepartamentales(feature, layer) { 
 				if (feature.properties && feature.properties.Nombre_1) { 
 					layer.bindPopup( "<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + feature.properties.Area_km2);
@@ -539,7 +545,8 @@
 				cicloviasproy = L.geoJson(CicloviasProyectadas,{ onEachFeature: agregarPopupciclovias}).setStyle({color:"yellow"}),
 				cicloviasexist =L.geoJson(CicloviasExistentes,{ onEachFeature: agregarPopupciclovias}).setStyle({color:"red"}),
 				lineasd=L.geoJson(LineasD,{ onEachFeature: agregarPopuplineas}).setStyle({color:"orange"}),
-				lineast=L.geoJson(LineasT,{ onEachFeature: agregarPopuplineas}).setStyle({color:"#51aff0"}),
+				lineast=L.geoJson(LineasT,{ onEachFeature: agregarPopuplineas}).setStyle({color:"red"}),
+				CanalesColectoresHijuelas=L.geoJson(CanalesColectoresHijuelas,{ onEachFeature: agregarPopupCanalesColectoresHijuelas}).setStyle({color:"#1fc5ee"}),
 				clinicaspriv = L. geoJson(ClinicasPrivadas,{ pointToLayer: crearIconoClinicaprivada, onEachFeature: agregarPopupjardinesmuni }),
 				hospital = L.geoJson(Hospital, { pointToLayer: crearIconoHospitales, onEachFeature: agregarPopup }),
 				escuelas = L.geoJson(Escuelas, { pointToLayer: crearIconoEstabeducat, onEachFeature: agregarPopup }),
@@ -631,6 +638,7 @@
 				"Movilidad": {
 					"Ciclovías Existentes":cicloviasexist,
 					"Ciclovías Proyectadas":cicloviasproy,
+					
 				},
 				
 				"Infraestructura Urbana":{
@@ -652,7 +660,8 @@
 				"Ripieras":ripieras,
 				"Zona con Características Especiales de Urbanización":zonaurb,
 				"Zona Especial de Conservacion Natural":zonatu,
-				"Zonificación":zonificacion, 
+				"Zonificación":zonificacion,
+				"Canales Colectores Hijuelas":CanalesColectoresHijuelas,
 				
 				},
 			   
