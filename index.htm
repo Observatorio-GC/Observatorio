@@ -101,6 +101,9 @@
 		<script type="text/javascript" src="scripts/LimiteUrbano.js"></script>
         <script type="text/javascript" src="scripts/DistritosDepartamentales.js"></script>
 		<script type="text/javascript" src="scripts/PlantaRecicladora.js"></script>
+		<script type="text/javascript" src="scripts/Bancos.js"></script>
+		<script type="text/javascript" src="scripts/Cajeros.js"></script>
+		<script type="text/javascript" src="scripts/Pagofacil.js"></script>
 	</head>
 	<body> 
 		<h1 style="position: relative; margin-top: 10px; margin-left: 100px; z-index: 2">Observatorio Territorial de Godoy Cruz</h1>
@@ -569,6 +572,9 @@
 				limiurb=L.geoJson(LimiteUrbano, {onEachFeature: agregarPopupfarmacias}).setStyle({color:"red"}),
 				Depa= L.geoJson(DistritosDepartamentales, { onEachFeature: agregarPopupDistritosDepartamentales}),
 				recic= L.geoJson(PlantaRecicladora, { pointToLayer: crearIconoVerde}),
+				bank= L.geoJson(Bancos, { pointToLayer: crearIconoAzul,  onEachFeature: agregarPopup}),
+				caja= L.geoJson(Cajeros, { pointToLayer: crearIconoAmarillo,  onEachFeature: agregarPopup}),
+				cobro= L.geoJson(Pagofacil, { pointToLayer: crearIconoNaranja,  onEachFeature: agregarPopupbarrios}),
 				sistcloacal= L.geoJson(SistemaCloacal, { onEachFeature: agregarPopupcloacas});
 				
 
@@ -637,8 +643,10 @@
 				},
 				
 				"Infraestructura Urbana":{
+				"Bancos":bank,
 				"Barrios y Loteos":BarriosyLoteos,
 				"Barrios Populares":barriospopulares,
+				"Cajeros":caja,
 				"Canales Colectores Hijuelas":CanalesColectoresHijuelas,
 				"Cuencas Hidrográficas":cuencas,
 				"Dependencias Municipales":depen,
@@ -649,6 +657,7 @@
 				"Instituciones de Seguridad":seguridad,
 				"Jardines Municipales":jardinesmuni,
 				"Limite Urbano":limiurb,
+				"Pago Facil - Rapipago":cobro,
 				"Polideportivos":polideportivos,
 				"Reservorios urbanos":reservorios,
 				"Residencias de Adultos Mayores":residenciasad,
