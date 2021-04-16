@@ -573,7 +573,7 @@
 				Depa= L.geoJson(DistritosDepartamentales, { onEachFeature: agregarPopupDistritosDepartamentales}),
 				recic= L.geoJson(PlantaRecicladora, { pointToLayer: crearIconoVerde}),
 				bank= L.geoJson(Bancos, { pointToLayer: crearIconoAzul,  onEachFeature: agregarPopup}),
-				caja= L.geoJson(Cajeros, { pointToLayer: crearIconoAmarillo,  onEachFeature: agregarPopup}),
+				caja= L.geoJson(Cajeros, { pointToLayer: crearIconoAmarillo,  onEachFeature: agregarPopupbarrios}),
 				cobro= L.geoJson(Pagofacil, { pointToLayer: crearIconoNaranja,  onEachFeature: agregarPopupbarrios}),
 				sistcloacal= L.geoJson(SistemaCloacal, { onEachFeature: agregarPopupcloacas});
 				
