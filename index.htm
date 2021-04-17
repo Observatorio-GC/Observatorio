@@ -110,7 +110,7 @@
 		<img src="favicon.png" height= "45px" width="45px" align=right class="logogc">
 		<div id="map" class="map map-home" style="margin:8px 0 8px 0;height:680px;"></div> 
 		<div id="referencias">
-			<div class="icono_referencia" id="ref_cicloviasproy">Total de km:</br>29,35</div>
+			<div class="icono_referencia" id="ref_cicloviasproy">Total de km:</br>29,35</div> <b>
 			<div class="icono_referencia" id="ref_cicloviasexist">Total de km:</br>21,48</div>
 			
 		</div>
@@ -344,7 +344,7 @@
 			}
 			function agregarPopupespaciosverdes(feature, layer) { 
 				if (feature.properties && feature.properties.NOMBRE) { 
-						layer.bindPopup( "<strong>" + feature.properties.NOMBRE + "</strong><br/>" + feature.properties.Descriptio); 
+						layer.bindPopup( "<strong>" + feature.properties.Descriptio + "</strong><br/>" + feature.properties.NOMBRE ); 
 				} 
 			}
 			function agregarPopup(feature, layer) { 
