@@ -113,8 +113,8 @@
 		<img src="favicon.png" height= "45px" width="45px" align=right class="logogc">
 		<div id="map" class="map map-home" style="margin:8px 0 8px 0;height:680px;"></div> 
 		<div id="referencias">
-			<div class="icono_referencia" id="ref_cicloviasproy">Total de km:</br>29,35</div> <b>
-			<div class="icono_referencia" id="ref_cicloviasexist">Total de km:</br>21,48</div>
+			<div class="icono_referencia" id="ref_cicloviasproy">Ciclovias Proyectadas:</br>30,13 Km.</div> <b>
+			<div class="icono_referencia" id="ref_cicloviasexist">Ciclovias Existentes:</br>20,81 Km.</div>
 			
 		</div>
 	
@@ -395,7 +395,7 @@
 			}
 			function agregarPopupciclovias(feature, layer) { 
 				if (feature.properties && feature.properties.Distancia) { 
-						layer.bindPopup( "<strong>" + feature.properties.Distancia + "</strong>"); 
+						layer.bindPopup( "<strong>" + feature.properties.TIPO_2 + "</strong><br/>" + feature.properties.Distancia ); 
 				} 
 			}
 			function agregarPopupzoni(feature, layer) { 
