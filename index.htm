@@ -66,6 +66,7 @@
 		
 		
 		<!-- GEOJSON -->
+		<script type="text/javascript" src="scripts/Esculturas.js"></script>
 		<script type="text/javascript" src="scripts/Centrosdesalud.js"></script>
 		<script type="text/javascript" src="scripts/godoycruz.js"></script>
 		<script type="text/javascript" src="scripts/CicloviasProyectadas.js"></script>
@@ -149,6 +150,7 @@
 				iconoAmarillo = new iconoComun({iconUrl: 'img/marker-icon-2x-yellow.png'}),
 				iconoAntena = new iconoComun({iconUrl: 'img/ante_r2.png'}),
 				iconoBiblio = new iconoComun({iconUrl: 'img/biblio_r2.png'}),
+			    iconoEscul = new iconoComun({iconUrl: 'img/escultura_3.png'}),	
 				iconoCentrosalud = new iconoComun({iconUrl: 'img/centrosalud_r2.png'}),
 				iconoClinicaprivada = new iconoComun({iconUrl: 'img/clinicaprivada_r2.png'}),
 				iconoDependmuni= new iconoComun({iconUrl: 'img/dependmuni_r2.png'}),
@@ -249,6 +251,13 @@
 			  pointToLayer: crearIconoCentrosalud
 			}
 			
+			function crearIconoEscul (feature, latlng) {
+				return L.marker(latlng, { icon: iconoEscul})
+			}
+			var asignarIconoescul = {
+			  pointToLayer: crearIconoEscul
+			}
+						
 			function crearIconoClinicaprivada (feature, latlng) {
 				return L.marker(latlng, { icon: iconoClinicaprivada})
 			}
@@ -341,6 +350,13 @@
 				if (feature.properties && feature.properties.Name) { 
 						layer.bindPopup( "<strong>" + feature.properties.Name + "</strong>"); 
 				} 
+				
+			}
+			function agregarPopupesculturas(feature, layer) { 
+				if (feature.properties && feature.properties.Referencia) { 
+						layer.bindPopup( "<strong>" + feature.properties.Referencia + "</strong><br/>" + feature.properties.Escultura); 
+				} 	
+										
 			}
 			function agregarPopupespaciosverdes(feature, layer) { 
 				if (feature.properties && feature.properties.NOMBRE) { 
@@ -539,6 +555,7 @@
 			/* OVERLAYS Y GRUPOS */
 			var plazagc = L.marker([-32.92524, -68.84439]).bindPopup('Plaza GC.').openPopup(),
 				centrosdesalud = L.geoJson(centrosdesalud, { pointToLayer: crearIconoCentrosalud, onEachFeature: agregarPopup }),
+				escultura= L.geoJson(Esculturas , { pointToLayer: crearIconoEscul, onEachFeature: agregarPopupesculturas}),
 				godoycruz = L.geoJson(godoycruz),
 				cicloviasproy = L.geoJson(CicloviasProyectadas,{ onEachFeature: agregarPopupciclovias}).setStyle({color:"yellow"}),
 				cicloviasexist =L.geoJson(CicloviasExistentes,{ onEachFeature: agregarPopupciclovias}).setStyle({color:"red"}),
@@ -651,6 +668,7 @@
 				"Cuencas Hidrográficas":cuencas,
 				"Dependencias Municipales":depen,
 				"Distritos Departamentales":Depa,
+				"Esculturas":escultura,
 				"Espacios Verdes":espverdes,
 				"Establecimientos Educativos":escuelas,
 				"Estaciones Meteorológicas":meteo,
