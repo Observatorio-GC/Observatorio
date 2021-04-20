@@ -9,6 +9,7 @@
 		<!-- CSS -->
 		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css">
 		<link rel="stylesheet" href="css/Leaflet.PolylineMeasure.css">
+		<link rel="stylesheet" href="css/Leaflet.StreetViewButtons.css">
 		<link rel="stylesheet" href="css/leaflet.groupedlayercontrol.min.css">
 		<style type="text/css">	
 			.leaflet-control-attribution.leaflet-control a:hover {color:#800080}
@@ -59,6 +60,7 @@
 		<!-- SCRIPTS -->
 		<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
 		<script src="scripts/Leaflet.PolylineMeasure.js"></script>
+		<script src="scripts/StreetViewButtons.js"></script>
 		<script src="scripts/leaflet.pattern.js"></script>
 		<script src="scripts/leaflet-tilelayer-wmts.js"></script>
 		<script src="scripts/leaflet.groupedlayercontrol.min.js"></script>
@@ -163,6 +165,7 @@
 				iconoSema_r2= new iconoComun({iconUrl: 'img/sema_r2.png'}),
 				iconoPilas = new iconoComun({iconUrl: 'img/pilas_r2.png'}),
 				iconoUnivec = new iconoComun({iconUrl: 'img/univec_r2.png'}),
+				iconoSTV = new iconoComun({iconUrl: 'img/pegman_3.png'}),
 				iconoVerde2 = new iconoComun({iconUrl: 'img/verde2_r2.png'});
 				
 
@@ -324,6 +327,13 @@
 			}
 			var asignarIconoUnivec = {
 			  pointToLayer: crearIconoUnivec
+			}
+			
+			function crearIconoSTV(feature, latlng) {
+				return L.marker(latlng, { icon: iconoSTV})
+			}
+			var asignarIconoUnivec = {
+			  pointToLayer: crearIconoSTV
 			}
 			
 			function crearIconoVerde2(feature, latlng) {
@@ -599,6 +609,12 @@
 			var map = L.map('map', {
 				layers: [mapabase_argenmap,godoycruz]
 			}).setView([-32.9314, -68.8497], 13);
+			var marker = L.marker(map.getCenter(),{icon:iconoSTV}).bindPopup('Marcador de Street View').addTo(map);
+            map.on('move', function() { marker.setLatLng(map.getCenter()); });
+			
+			
+			/* Make sure the marker stays in the centre when the map is moved
+             map.on('move', function() { marker.setLatLng(map.getCenter()); });*/
 			
 			/* FUNCIONES DE ESTILO DE OVERLAYS */
 			estiloDistritosDepartamentales();
@@ -632,6 +648,10 @@
 				
 			};*/
 			var groupedOverlays = {
+			     "Street View": {
+				"Marcador":marker,
+				},
+				
 				"Infraestructura de Salud": {
 					"Centros de Salud":centrosdesalud,
 					"Clínicas Privadas":clinicaspriv,
@@ -703,6 +723,7 @@
 		    map.on('overlayremove', onOverlayRemove);
 			L.control.scale().addTo(map);
 			L.control.polylineMeasure().addTo(map);
+			L.streetView({ position: 'topleft'}).addTo(map);
 			
 			function onOverlayAdd(e){
 				idlayer = "";
