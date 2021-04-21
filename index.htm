@@ -607,7 +607,7 @@
 
 			/* CREACIÓN DEL MAPA CON BASE LAYERS Y OVERLAYS */
 			var map = L.map('map', {
-				layers: [mapabase_argenmap,godoycruz]
+				layers: [mapa_bing ,godoycruz]
 			}).setView([-32.9314, -68.8497], 13);
 			var marker = L.marker(map.getCenter(),{icon:iconoSTV}).bindPopup('Marcador de Street View').addTo(map);
             map.on('move', function() { marker.setLatLng(map.getCenter()); });
