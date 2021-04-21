@@ -106,6 +106,7 @@
 		<script type="text/javascript" src="scripts/PlantaRecicladora.js"></script>
 		<script type="text/javascript" src="scripts/Bancos.js"></script>
 		<script type="text/javascript" src="scripts/Cajeros.js"></script>
+		<script type="text/javascript" src="scripts/PoligonoClaro.js"></script>
 		<script type="text/javascript" src="scripts/Pagofacil.js"></script>
 	</head>
 	<body> 
@@ -601,13 +602,14 @@
 				recic= L.geoJson(PlantaRecicladora, { pointToLayer: crearIconoVerde}),
 				bank= L.geoJson(Bancos, { pointToLayer: crearIconoAzul,  onEachFeature: agregarPopup}),
 				caja= L.geoJson(Cajeros, { pointToLayer: crearIconoAmarillo,  onEachFeature: agregarPopupbarrios}),
+				claro = L.geoJson(PoligonoClaro, { pointToLayer: crearIconoAmarillo,  onEachFeature: agregarPopupbarrios}),
 				cobro= L.geoJson(Pagofacil, { pointToLayer: crearIconoNaranja,  onEachFeature: agregarPopupbarrios}),
 				sistcloacal= L.geoJson(SistemaCloacal, { onEachFeature: agregarPopupcloacas});
 				
 
 			/* CREACIÓN DEL MAPA CON BASE LAYERS Y OVERLAYS */
 			var map = L.map('map', {
-				layers: [mapa_bing ,godoycruz]
+				layers: [mapa_bing,godoycruz]
 			}).setView([-32.9314, -68.8497], 13);
 			var marker = L.marker(map.getCenter(),{icon:iconoSTV}).bindPopup('Marcador de Street View').addTo(map);
             map.on('move', function() { marker.setLatLng(map.getCenter()); });
@@ -651,33 +653,44 @@
 			     "Street View": {
 				"Marcador":marker,
 				},
+				"Infraestructura Zona Claro": {
+					
+					"Delimitacion de Área":claro,
+					"Cajeros":caja,
+					"Ciclovías Existentes":cicloviasexist,
+					"Ciclovías Proyectadas":cicloviasproy,
+					"Hospitales":hospital,
+					"Zonificación":zonificacion,
+					"Red Distribuidora de Agua Potable":redesagua,
+					"Polideportivos":polideportivos,
+					"Puntos Verdes":punt,
+					"Lineas de Distribución de Energía":lineasd,
+					"Lineas de Transporte de Energía":lineast,
+					"Instituciones de Seguridad":seguridad,
+					"Red Colectora Cloacal":sistcloacal,
+					"Jardines Municipales":jardinesmuni,
+					
+				},
 				
-				"Infraestructura de Salud": {
+				/*"Infraestructura de Salud": {
 					"Centros de Salud":centrosdesalud,
 					"Clínicas Privadas":clinicaspriv,
 					"Farmacias":farmacias,
-					"Hospitales":hospital,
+					
 				},
 				"Infraestructura Ambiental": {
 				    "Planta Recicladora":recic,
 					"Puntos de Recepción de Pilas":puntospilas,	
-					"Puntos Verdes":punt,
 					"Solmáforos":solma,
 					
 				},
 				"Infraestructura de Servicio": {                 
 					"Estaciones de Servicio":estacion,
-					"Lineas de Distribución de Energía":lineasd,
-					"Lineas de Transporte de Energía":lineast,
-					"Red Colectora Cloacal":sistcloacal,
-					"Red Distribuidora de Agua Potable":redesagua,
+					
+					
 					
 				},
-				"Movilidad": {
-					"Ciclovías Existentes":cicloviasexist,
-					"Ciclovías Proyectadas":cicloviasproy,
 				
-                },
 				"Patrimonio": {
 				"Esculturas":escultura,
 
@@ -694,20 +707,17 @@
 				"Espacios Verdes":espverdes,
 				"Establecimientos Educativos":escuelas,
 				"Estaciones Meteorológicas":meteo,
-				"Instituciones de Seguridad":seguridad,
-				"Jardines Municipales":jardinesmuni,
 				"Limite Urbano":limiurb,
 				"Pago Facil - Rapipago":cobro,
-				"Polideportivos":polideportivos,
 				"Reservorios urbanos":reservorios,
 				"Residencias de Adultos Mayores":residenciasad,
 				"Ripieras":ripieras,
 				"Zona con Características Especiales de Urbanización":zonaurb,
 				"Zona Especial de Conservacion Natural":zonatu,
-				"Zonificación":zonificacion,
 				
 				
-				},
+				
+				},*/
 			   
 				
 				
