@@ -109,6 +109,7 @@
 		<script type="text/javascript" src="scripts/Bancos.js"></script>
 		<script type="text/javascript" src="scripts/Cajeros.js"></script>
 		<script type="text/javascript" src="scripts/Pagofacil.js"></script>
+		<script type="text/javascript" src="scripts/Turismo.js"></script>
 	</head>
 	<body> 
 		<h1 style="position: relative; margin-top: 10px; margin-left: 100px; z-index: 2">Observatorio Territorial de Godoy Cruz</h1>
@@ -353,6 +354,12 @@
 			}
 				
 			/* POPUPS */
+			function agregarPopupturismo(feature, layer) { 
+				if (feature.properties && feature.properties.Nombre) { 
+						layer.bindPopup( "<strong>" + feature.properties.Nombre + "</strong><br/>" + feature.properties.Ubicacion); 
+				} 
+			}
+			
 			function agregarPopupbarrios(feature, layer) { 
 				if (feature.properties && feature.properties.Nombre_1) { 
 						layer.bindPopup( "<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + feature.properties.Descrip); 
@@ -362,14 +369,15 @@
 				if (feature.properties && feature.properties.Name) { 
 						layer.bindPopup( "<strong>" + feature.properties.Name + "</strong>"); 
 				} 
-				
+	
 			}
 			function agregarPopupesculturas(feature, layer) { 
 				if (feature.properties && feature.properties.Referencia) { 
-						layer.bindPopup( "<strong>" + feature.properties.Referencia + "</strong><br/>" + feature.properties.Escultura); 
+						layer.bindPopup( "<strong>" + feature.properties.Referencia + "</strong><br/>" + feature.properties.Escultura+"</strong><br><img src='img/esculturas/"+ feature.properties.Fotos + "' height='160px' width='200px' style='display:block; margin: auto; margin-top:7px;' />");
 				} 	
 										
 			}
+			
 			function agregarPopupespaciosverdes(feature, layer) { 
 				if (feature.properties && feature.properties.NOMBRE) { 
 						layer.bindPopup( "<strong>" + feature.properties.Descriptio + "</strong><br/>" + feature.properties.NOMBRE ); 
@@ -604,6 +612,7 @@
 				bank= L.geoJson(Bancos, { pointToLayer: crearIconoAzul,  onEachFeature: agregarPopup}),
 				caja= L.geoJson(Cajeros, { pointToLayer: crearIconoAmarillo,  onEachFeature: agregarPopupbarrios}),
 				cobro= L.geoJson(Pagofacil, { pointToLayer: crearIconoNaranja,  onEachFeature: agregarPopupbarrios}),
+				turis= L.geoJson(Turismo, { pointToLayer: crearIconoAzul,  onEachFeature: agregarPopupturismo}),
 				sistcloacal= L.geoJson(SistemaCloacal, { onEachFeature: agregarPopupcloacas});
 				
 
@@ -683,8 +692,12 @@
                 },
 				"Patrimonio": {
 				"Esculturas":escultura,
-
+                
 				},
+                "Turismo": {
+				"Puntos de Interes Turistico": turis,
+				},
+				
 				"Infraestructura Urbana":{
 				"Bancos":bank,
 				"Barrios y Loteos":BarriosyLoteos,
