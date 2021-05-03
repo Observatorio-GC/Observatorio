@@ -10,6 +10,7 @@
 		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css">
 		<link rel="stylesheet" href="css/Leaflet.PolylineMeasure.css">
 		<link rel="stylesheet" href="css/Leaflet.StreetViewButtons.css">
+		<link rel="stylesheet" href="css/Leaflet.StreetView1Buttons.css">
 		<link rel="stylesheet" href="css/bundle .css">
 		<link rel="stylesheet" href="css/leaflet.groupedlayercontrol.min.css">
 		<style type="text/css">	
@@ -62,6 +63,7 @@
 		<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
 		<script src="scripts/Leaflet.PolylineMeasure.js"></script>
 		<script src="scripts/StreetViewButtons.js"></script>
+		<script src="scripts/StreetView1Buttons.js"></script>
 		<script src="scripts/bundle.js"></script>
 		<script src="scripts/leaflet.pattern.js"></script>
 		<script src="scripts/leaflet-tilelayer-wmts.js"></script>
@@ -737,6 +739,7 @@
 			L.control.scale().addTo(map);
 			L.control.polylineMeasure().addTo(map);
 			L.streetView({ position: 'topleft'}).addTo(map);
+			L.streetView1({ position: 'topleft'}).addTo(map);
 			L.easyPrint({filename: 'myMap',exportOnly: true,hideControlContainer: true, sizeModes: ['Current', 'A4Landscape', 'A4Portrait']}).addTo(map);
             function manualPrint () { printer.printMap('CurrentSize', 'MyManualPrint');
 		}
