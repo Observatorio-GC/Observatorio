@@ -354,11 +354,6 @@
 			}
 				
 			/* POPUPS */
-			function agregarPopupturismo(feature, layer) { 
-				if (feature.properties && feature.properties.Nombre) { 
-						layer.bindPopup( "<strong>" + feature.properties.Nombre + "</strong><br/>" + feature.properties.Ubicacion); 
-				} 
-			}
 			
 			function agregarPopupbarrios(feature, layer) { 
 				if (feature.properties && feature.properties.Nombre_1) { 
@@ -369,15 +364,17 @@
 				if (feature.properties && feature.properties.Name) { 
 						layer.bindPopup( "<strong>" + feature.properties.Name + "</strong>"); 
 				} 
-	
-			}
+            }
 			function agregarPopupesculturas(feature, layer) { 
 				if (feature.properties && feature.properties.Referencia) { 
 						layer.bindPopup( "<strong>" + feature.properties.Referencia + "</strong><br/>" + feature.properties.Escultura+"</strong><br><img src='img/esculturas/"+ feature.properties.Fotos + "' height='160px' width='200px' style='display:block; margin: auto; margin-top:7px;' />");
 				} 	
-										
 			}
-			
+			function agregarPopupturismo(feature, layer) { 
+				if (feature.properties && feature.properties.Nombre) { 
+						layer.bindPopup( "<strong>" + feature.properties.Nombre + "</strong><br/>" + feature.properties.Ubicacion + "</strong><br><img src='img/turismo/"+ feature.properties.Fotos + "' height='160px' width='200px' style='display:block; margin: auto; margin-top:7px;' />");
+			    } 	
+			}
 			function agregarPopupespaciosverdes(feature, layer) { 
 				if (feature.properties && feature.properties.NOMBRE) { 
 						layer.bindPopup( "<strong>" + feature.properties.Descriptio + "</strong><br/>" + feature.properties.NOMBRE ); 
