@@ -383,7 +383,7 @@
 			}
 			function agregarPopuppatrimoniales(feature, layer) { 
 				if (feature.properties && feature.properties.Nombre) { 
-						layer.bindPopup( "<strong>" + feature.properties.Nombre + "</strong><br/>" + feature.properties.UBICACION + "</strong><br/>" +  feature.properties.AÑO + "</strong><br/>" + feature.properties.DISTRITO + "</strong><br><img src='img/Barrios/"+ feature.properties.Fotos + "' height='160px' width='200px' style='display:block; margin: auto; margin-top:7px;' />"); 
+						layer.bindPopup( "<strong>" + feature.properties.Nombre + "</strong><br/>" + feature.properties.UBICACION + "</strong><br/>" +  feature.properties.AÑO + "</strong><br/>" + feature.properties.DISTRITO); 
 				} 
 			
 			
