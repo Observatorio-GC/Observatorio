@@ -10,7 +10,6 @@
 		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css">
 		<link rel="stylesheet" href="css/Leaflet.PolylineMeasure.css">
 		<link rel="stylesheet" href="css/Leaflet.StreetViewButtons.css">
-		<link rel="stylesheet" href="css/Leaflet.StreetView1Buttons.css">
 		<link rel="stylesheet" href="css/bundle .css">
 		<link rel="stylesheet" href="css/leaflet.groupedlayercontrol.min.css">
 		<style type="text/css">	
@@ -63,7 +62,6 @@
 		<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
 		<script src="scripts/Leaflet.PolylineMeasure.js"></script>
 		<script src="scripts/StreetViewButtons.js"></script>
-		<script src="scripts/StreetView1Buttons.js"></script>
 		<script src="scripts/bundle.js"></script>
 		<script src="scripts/leaflet.pattern.js"></script>
 		<script src="scripts/leaflet-tilelayer-wmts.js"></script>
@@ -72,6 +70,11 @@
 		
 		
 		<!-- GEOJSON -->
+		
+		<script type="text/javascript" src="scripts/Edificios.js"></script>
+		<script type="text/javascript" src="scripts/Barrios.js"></script>
+		<script type="text/javascript" src="scripts/SitiosyConjuntosEdilicios.js"></script>
+		<script type="text/javascript" src="scripts/TramosyCarriles.js"></script>
 		<script type="text/javascript" src="scripts/Esculturas.js"></script>
 		<script type="text/javascript" src="scripts/Centrosdesalud.js"></script>
 		<script type="text/javascript" src="scripts/godoycruz.js"></script>
@@ -157,7 +160,8 @@
 				iconoAmarillo = new iconoComun({iconUrl: 'img/marker-icon-2x-yellow.png'}),
 				iconoAntena = new iconoComun({iconUrl: 'img/ante_r2.png'}),
 				iconoBiblio = new iconoComun({iconUrl: 'img/biblio_r2.png'}),
-			    iconoEscul = new iconoComun({iconUrl: 'img/escultura_3.png'}),	
+			    iconoEdif = new iconoComun({iconUrl: 'img/dependmuni_r2.png'}),
+				iconoEscul = new iconoComun({iconUrl: 'img/escultura_3.png'}),	
 				iconoCentrosalud = new iconoComun({iconUrl: 'img/centrosalud_r2.png'}),
 				iconoClinicaprivada = new iconoComun({iconUrl: 'img/clinicaprivada_r2.png'}),
 				iconoDependmuni= new iconoComun({iconUrl: 'img/dependmuni_r2.png'}),
@@ -259,6 +263,13 @@
 			  pointToLayer: crearIconoCentrosalud
 			}
 			
+			function crearIconoEdif (feature, latlng) {
+				return L.marker(latlng, { icon: iconoEdif})
+			}
+			var asignarIconoPatri = {
+			  pointToLayer: crearIconoEdif
+			}
+								
 			function crearIconoEscul (feature, latlng) {
 				return L.marker(latlng, { icon: iconoEscul})
 			}
@@ -356,6 +367,11 @@
 			}
 				
 			/* POPUPS */
+			function agregarPopupturismo(feature, layer) { 
+				if (feature.properties && feature.properties.Nombre) { 
+						layer.bindPopup( "<strong>" + feature.properties.Nombre + "</strong><br/>" + feature.properties.Ubicacion); 
+				} 
+			}
 			
 			function agregarPopupbarrios(feature, layer) { 
 				if (feature.properties && feature.properties.Nombre_1) { 
@@ -366,17 +382,21 @@
 				if (feature.properties && feature.properties.Name) { 
 						layer.bindPopup( "<strong>" + feature.properties.Name + "</strong>"); 
 				} 
-            }
+	
+			}
 			function agregarPopupesculturas(feature, layer) { 
 				if (feature.properties && feature.properties.Referencia) { 
 						layer.bindPopup( "<strong>" + feature.properties.Referencia + "</strong><br/>" + feature.properties.Escultura+"</strong><br><img src='img/esculturas/"+ feature.properties.Fotos + "' height='160px' width='200px' style='display:block; margin: auto; margin-top:7px;' />");
 				} 	
+								
 			}
-			function agregarPopupturismo(feature, layer) { 
+			function agregarPopuppatrimoniales(feature, layer) { 
 				if (feature.properties && feature.properties.Nombre) { 
-						layer.bindPopup( "<strong>" + feature.properties.Nombre + "</strong><br/>" + feature.properties.Ubicacion + "</strong><br><img src='img/turismo/"+ feature.properties.Fotos + "' height='160px' width='200px' style='display:block; margin: auto; margin-top:7px;' />");
-			    } 	
-			}
+						layer.bindPopup( "<strong>" + feature.properties.Nombre + "</strong><br/>" + feature.properties.UBICACION + "</strong><br/>" +  feature.properties.AÑO + "</strong><br/>" + feature.properties.DISTRITO); 
+				} 
+			
+			
+			}			
 			function agregarPopupespaciosverdes(feature, layer) { 
 				if (feature.properties && feature.properties.NOMBRE) { 
 						layer.bindPopup( "<strong>" + feature.properties.Descriptio + "</strong><br/>" + feature.properties.NOMBRE ); 
@@ -574,6 +594,10 @@
 			/* OVERLAYS Y GRUPOS */
 			var plazagc = L.marker([-32.92524, -68.84439]).bindPopup('Plaza GC.').openPopup(),
 				centrosdesalud = L.geoJson(centrosdesalud, { pointToLayer: crearIconoCentrosalud, onEachFeature: agregarPopup }),
+				edificios= L.geoJson( Edificios, { pointToLayer: crearIconoNaranja, onEachFeature: agregarPopuppatrimoniales}),
+				SyCE= L.geoJson( SitiosyConjuntosEdilicios, { pointToLayer: crearIconoDorado, onEachFeature: agregarPopuppatrimoniales}),
+				TyC= L.geoJson( TramosyCarriles, { onEachFeature: agregarPopuppatrimoniales}).setStyle({color:"#C35918"}),
+				barrios= L.geoJson( Barrios, {onEachFeature: agregarPopuppatrimoniales}).setStyle({color:"#E86211",fillOpacity: 0.75})
 				escultura= L.geoJson(Esculturas , { pointToLayer: crearIconoEscul, onEachFeature: agregarPopupesculturas}),
 				godoycruz = L.geoJson(godoycruz),
 				cicloviasproy = L.geoJson(CicloviasProyectadas,{ onEachFeature: agregarPopupciclovias}).setStyle({color:"yellow"}),
@@ -691,6 +715,13 @@
                 },
 				"Patrimonio": {
 				"Esculturas":escultura,
+				
+				},
+				"Muvi GC": {
+				"Edificios ":edificios,
+				"Sitios y Conjuntos Edilicios":SyCE,
+				"Barrios":barrios,
+				"Tramos y Carriles":TyC,
                 
 				},
                 "Turismo": {
@@ -739,7 +770,6 @@
 			L.control.scale().addTo(map);
 			L.control.polylineMeasure().addTo(map);
 			L.streetView({ position: 'topleft'}).addTo(map);
-			L.streetView1({ position: 'topleft'}).addTo(map);
 			L.easyPrint({filename: 'myMap',exportOnly: true,hideControlContainer: true, sizeModes: ['Current', 'A4Landscape', 'A4Portrait']}).addTo(map);
             function manualPrint () { printer.printMap('CurrentSize', 'MyManualPrint');
 		}
