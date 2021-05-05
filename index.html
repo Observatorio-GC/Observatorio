@@ -115,7 +115,9 @@
 		<script type="text/javascript" src="scripts/Bancos.js"></script>
 		<script type="text/javascript" src="scripts/Cajeros.js"></script>
 		<script type="text/javascript" src="scripts/Pagofacil.js"></script>
-		<script type="text/javascript" src="scripts/Turismo.js"></script>
+	<script type="text/javascript" src="scripts/Bodegas.js"></script>
+		<script type="text/javascript" src="scripts/Informador.js"></script>
+		<script type="text/javascript" src="scripts/PuestosBici.js"></script>
 	</head>
 	<body> 
 		<h1 style="position: relative; margin-top: 10px; margin-left: 100px; z-index: 2">Observatorio Territorial de Godoy Cruz</h1>
@@ -626,7 +628,9 @@
 				bank= L.geoJson(Bancos, { pointToLayer: crearIconoAzul,  onEachFeature: agregarPopup}),
 				caja= L.geoJson(Cajeros, { pointToLayer: crearIconoAmarillo,  onEachFeature: agregarPopupbarrios}),
 				cobro= L.geoJson(Pagofacil, { pointToLayer: crearIconoNaranja,  onEachFeature: agregarPopupbarrios}),
-				turis= L.geoJson(Turismo, { pointToLayer: crearIconoAzul,  onEachFeature: agregarPopupturismo}),
+				bode= L.geoJson(Bodegas, { pointToLayer: crearIconoRojo,  onEachFeature: agregarPopupturismo}),
+				informador= L.geoJson(Informador, { pointToLayer: crearIconoNaranja,  onEachFeature: agregarPopupturismo}),
+				bicicleta= L.geoJson(PuestosBici, { pointToLayer: crearIconoVerde,  onEachFeature: agregarPopupturismo}),
 				sistcloacal= L.geoJson(SistemaCloacal, { onEachFeature: agregarPopupcloacas});
 				
 
@@ -716,7 +720,9 @@
 				
 				},
                 "Turismo": {
-				"Puntos de Interes Turistico": turis,
+				"Bodegas": bode,
+				"Informador Turistico": informador,
+				"Puestos Programa en la Bici": bicicleta,
 				},
 				
 				"Infraestructura Urbana":{
