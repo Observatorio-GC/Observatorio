@@ -385,7 +385,7 @@
 			}
 			function agregarPopuppatrimoniales(feature, layer) { 
 				if (feature.properties && feature.properties.Nombre) { 
-						layer.bindPopup( "<strong>" + feature.properties.Nombre + "</strong><br/>" + feature.properties.UBICACION + "</strong><br/>" +  feature.properties.AÑO + "</strong><br/>" + feature.properties.DISTRITO + "</strong><br><img src='img/Barrios/"+ feature.properties.Fotos + "' height='160px' width='200px' style='display:block; margin: auto; margin-top:7px;' />"); 
+						layer.bindPopup( "<strong>" + feature.properties.Nombre + "</strong><br/>" + feature.properties.UBICACION + "</strong><br/>" +  feature.properties.AÑO + "</strong><br/>" + feature.properties.DISTRITO + "</strong><br><img src='img/Muvi/"+ feature.properties.Fotos + "' height='160px' width='200px' style='display:block; margin: auto; margin-top:7px;' />"); 
 				} 
 			
 			
@@ -681,37 +681,6 @@
 			     "Street View": {
 				"Marcador":marker,
 				},
-				
-				"Infraestructura de Salud": {
-					"Centros de Salud":centrosdesalud,
-					"Clínicas Privadas":clinicaspriv,
-					"Farmacias":farmacias,
-					"Hospitales":hospital,
-				},
-				"Infraestructura Ambiental": {
-				    "Planta Recicladora":recic,
-					"Puntos de Recepción de Pilas":puntospilas,	
-					"Puntos Verdes":punt,
-					"Solmáforos":solma,
-					
-				},
-				"Infraestructura de Servicio": {                 
-					"Estaciones de Servicio":estacion,
-					"Lineas de Distribución de Energía":lineasd,
-					"Lineas de Transporte de Energía":lineast,
-					"Red Colectora Cloacal":sistcloacal,
-					"Red Distribuidora de Agua Potable":redesagua,
-					
-				},
-				"Movilidad": {
-					"Ciclovías Existentes":cicloviasexist,
-					"Ciclovías Proyectadas":cicloviasproy,
-				
-                },
-				"Patrimonio": {
-				"Esculturas":escultura,
-                
-				},
 				"Muvi GC": {
 				"Edificios ":edificios,
 				"Sitios y Conjuntos Edilicios":SyCE,
@@ -719,12 +688,6 @@
 				"Tramos y Carriles":TyC,
 				
 				},
-                "Turismo": {
-				"Bodegas": bode,
-				"Informador Turistico": informador,
-				"Puestos Programa en la Bici": bicicleta,
-				},
-				
 				"Infraestructura Urbana":{
 				"Bancos":bank,
 				"Barrios y Loteos":BarriosyLoteos,
@@ -749,9 +712,47 @@
 				"Zona Especial de Conservacion Natural":zonatu,
 				"Zonificación":zonificacion,
 				
-				
+								
 				},
-			   
+				"Infraestructura de Salud": {
+					"Centros de Salud":centrosdesalud,
+					"Clínicas Privadas":clinicaspriv,
+					"Farmacias":farmacias,
+					"Hospitales":hospital,
+					
+				},
+				"Infraestructura Ambiental": {
+				    "Planta Recicladora":recic,
+					"Puntos de Recepción de Pilas":puntospilas,	
+					"Puntos Verdes":punt,
+					"Solmáforos":solma,
+					
+				},
+				"Infraestructura de Servicio": {                 
+					"Estaciones de Servicio":estacion,
+					"Lineas de Distribución de Energía":lineasd,
+					"Lineas de Transporte de Energía":lineast,
+					"Red Colectora Cloacal":sistcloacal,
+					"Red Distribuidora de Agua Potable":redesagua,
+					
+				},
+				"Movilidad": {
+					"Ciclovías Existentes":cicloviasexist,
+					"Ciclovías Proyectadas":cicloviasproy,
+				
+                },
+				"Patrimonio": {
+				"Esculturas":escultura,
+                
+								
+				},
+                "Turismo": {
+				"Bodegas": bode,
+				"Informador Turistico": informador,
+				"Puestos Programa en la Bici": bicicleta,
+				},
+				
+							   
 				
 				
 			};
