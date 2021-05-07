@@ -178,6 +178,8 @@
 				iconoUnivec = new iconoComun({iconUrl: 'img/univec_r2.png'}),
 				iconoSTV = new iconoComun({iconUrl: 'img/pegman_3.png'}),
 				iconoVerde2 = new iconoComun({iconUrl: 'img/verde2_r2.png'});
+				iconositios = new iconoComun({iconUrl: 'img/sitios.png'});
+				iconoedi = new iconoComun({iconUrl: 'img/edificios.png'});
 				
 
 			
@@ -333,6 +335,21 @@
 			  pointToLayer: crearIconoPoli
 			}
 			
+			function crearIconositios(feature, latlng) {
+				return L.marker(latlng, { icon: iconositios})
+			}
+			var asignarIconositios = {
+			  pointToLayer: crearIconositios
+			}
+			
+			function crearIconoedi(feature, latlng) {
+				return L.marker(latlng, { icon: iconoedi})
+			}
+			var asignarIconoedi = {
+			  pointToLayer: crearIconoedi
+			}
+									
+						
 			function crearIconoUnivec(feature, latlng) {
 				return L.marker(latlng, { icon: iconoUnivec})
 			}
@@ -587,8 +604,8 @@
 			/* OVERLAYS Y GRUPOS */
 			var plazagc = L.marker([-32.92524, -68.84439]).bindPopup('Plaza GC.').openPopup(),
 				centrosdesalud = L.geoJson(centrosdesalud, { pointToLayer: crearIconoCentrosalud, onEachFeature: agregarPopup }),
-				edificios= L.geoJson( Edificios, { pointToLayer: crearIconoNaranja, onEachFeature: agregarPopuppatrimoniales}),
-				SyCE= L.geoJson( SitiosyConjuntosEdilicios, { pointToLayer: crearIconoDorado, onEachFeature: agregarPopuppatrimoniales}),
+				edificios= L.geoJson( Edificios, { pointToLayer: crearIconoedi, onEachFeature: agregarPopuppatrimoniales}),
+				SyCE= L.geoJson( SitiosyConjuntosEdilicios, { pointToLayer: crearIconositios, onEachFeature: agregarPopuppatrimoniales}),
 				TyC= L.geoJson( TramosyCarriles, { onEachFeature: agregarPopuppatrimoniales}).setStyle({color:"#C35918"}),
 				barrios= L.geoJson( Barrios, {onEachFeature: agregarPopuppatrimoniales}).setStyle({color:"#E86211",fillOpacity: 0.75})
 				escultura= L.geoJson(Esculturas , { pointToLayer: crearIconoEscul, onEachFeature: agregarPopupesculturas}),
