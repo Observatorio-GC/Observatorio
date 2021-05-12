@@ -92,7 +92,7 @@
 		<script type="text/javascript" src="scripts/Reservorios.js"></script>
 		<script type="text/javascript" src="scripts/BarriosPopulares.js"></script>
 		<script type="text/javascript" src="scripts/Zonificacion.js"></script>
-		<script type="text/javascript" src="scripts/BarriosyLoteos.js"></script>
+		<script type="text/javascript" src="scripts/BarriosConsolidados.js"></script>
 		<script type="text/javascript" src="scripts/RedesdeAguas.js"></script>
 		<script type="text/javascript" src="scripts/SistemaCloacal.js"></script>
 		<script type="text/javascript" src="scripts/LineasD.js"></script>
@@ -442,7 +442,7 @@
 					layer.bindPopup( "<strong>" + feature.properties.Layer + "</strong>"); 
 				} 
 			}
-			function agregarPopupBarriosyLoteos(feature, layer) { 
+			function agregarPopupBarriosConsolidados(feature, layer) { 
 				if (feature.properties && feature.properties.Nombre_1) { 
 					layer.bindPopup( "<strong>" + feature.properties.Nombre_1 + "</strong>"); 
 				}
@@ -626,7 +626,7 @@
 				barriospopulares=L.geoJson(BarriosPopulares, {onEachFeature: agregarPopupbarrios}).setStyle({color:"#e31a1c",fillOpacity: 0.75})
 				reservorios=L.geoJson(Reservorios,{onEachFeature: agregarPopupres}).setStyle({color:"#729b6f",fillOpacity: 0.75}),
 				zonificacion=  L.geoJson(Zonificacion,{ onEachFeature: agregarPopupzoni }),
-				BarriosyLoteos=  L.geoJson(BarriosyLoteos,{ onEachFeature: agregarPopupBarriosyLoteos }),
+				BarriosConsolidados=  L.geoJson(BarriosConsolidados,{ onEachFeature: agregarPopupBarriosConsolidados }),
 				redesagua= L.geoJson(RedesdeAguas,{ onEachFeature: agregarPopupredes}),
 				espverdes= L.geoJson(EspaciosVerdes, { onEachFeature: agregarPopupespaciosverdes }).setStyle({color:"#4daf4a",fillOpacity: 0.75}),
 				cuencas= L.geoJson(Cuencashidrograficas,{ onEachFeature: agregarPopupcuencas}),
@@ -707,7 +707,7 @@
 				},
 				"Infraestructura Urbana":{
 				"Bancos":bank,
-				"Barrios y Loteos":BarriosyLoteos,
+				"Barrios Consolidados":BarriosConsolidados,
 				"Barrios Populares":barriospopulares,
 				"Cajeros":caja,
 				"Canales Colectores Hijuelas":CanalesColectoresHijuelas,
