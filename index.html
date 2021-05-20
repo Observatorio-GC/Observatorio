@@ -181,6 +181,7 @@
 				iconoVerde2 = new iconoComun({iconUrl: 'img/verde2_r2.png'});
 				iconositios = new iconoComun({iconUrl: 'img/sitios.png'});
 				iconoedi = new iconoComun({iconUrl: 'img/edificios.png'});
+				iconoPersi = new iconoComun({iconUrl: 'img/persianas_r2.png'});
 				
 
 			
@@ -378,6 +379,15 @@
 			var asignarIconoSema_r2 = {
 			  pointToLayer: crearIconoSema_r2
 			}
+			
+			function crearIconoPersi(feature, latlng) {
+				return L.marker(latlng, { icon: iconoPersi})
+			}
+			var asignarIconoPersi = {
+			  pointToLayer: crearIconoPersi
+			}
+								
+			
 				
 			/* POPUPS */
 			
@@ -616,7 +626,7 @@
 				barrios= L.geoJson( Barrios, {onEachFeature: agregarPopuppatrimoniales}).setStyle({color:"#E86211",fillOpacity: 0.75})
 				escultura= L.geoJson(Esculturas , { pointToLayer: crearIconoEscul, onEachFeature: agregarPopupesculturas}),
 				godoycruz = L.geoJson(godoycruz),
-				persianas= L.geoJson(Persianas, { onEachFeature: agregarPopuppersianas}),
+				persianas= L.geoJson(Persianas, { pointToLayer: crearIconoPersi, onEachFeature: agregarPopuppersianas}),
 				cicloviasproy = L.geoJson(CicloviasProyectadas,{ onEachFeature: agregarPopupciclovias}).setStyle({color:"yellow"}),
 				cicloviasexist =L.geoJson(CicloviasExistentes,{ onEachFeature: agregarPopupciclovias}).setStyle({color:"red"}),
 				lineasd=L.geoJson(LineasD,{ onEachFeature: agregarPopuplineas}).setStyle({color:"orange"}),
