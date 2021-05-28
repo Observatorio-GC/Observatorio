@@ -72,6 +72,7 @@
 		
 		
 		<!-- GEOJSON -->
+		<script type="text/javascript" src="scripts/ZonaLey4886.js"></script>
 		<script type="text/javascript" src="scripts/Edificios.js"></script>
 		<script type="text/javascript" src="scripts/Persianas.js"></script>
 		<script type="text/javascript" src="scripts/Barrios.js"></script>
@@ -493,6 +494,11 @@
 					layer.bindPopup( "<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + feature.properties.Area_km2);
 				} 
 			}			
+			function agregarPopupzonaLey4886(feature, layer) { 
+				if (feature.properties && feature.properties.REFERENCIA) { 
+					layer.bindPopup( "<strong>" + feature.properties.REFERENCIA + "</strong><br/>" + feature.properties.NOMBRE);
+				} 
+			}	
 			function agregarPopupcuencas(feature, layer) { 
 				if (feature.properties && feature.properties.Nombre_1) { 
 						layer.bindPopup( "<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + feature.properties.Superficie);
@@ -612,7 +618,25 @@
 					});
 				});
 			}
-			
+			function estiloley() {
+				zonaley.eachLayer(function(featureInstanceLayer) {
+					var id_feature = featureInstanceLayer.feature.properties['id'];
+					if (id_feature == 1) {
+						color_actual = '#fafafa';
+					} else if (id_feature ==2) {
+						color_actual = '#9f9f9f';	
+					} else if (id_feature == 3) {
+						color_actual = '#b8b8b8';	
+					} else if (id_feature == 4) {
+						color_actual = '#d7d7d7';
+					} else if (id_feature == 5) {
+						color_actual = '#848484';
+					} 
+					featureInstanceLayer.setStyle({
+						color: color_actual,fillOpacity: 0.75
+					});
+				});
+			}
 			/* BASE LAYERS */
 			var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 				osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -648,6 +672,7 @@
 				barriospopulares=L.geoJson(BarriosPopulares, {onEachFeature: agregarPopupbarrios}).setStyle({color:"#e31a1c",fillOpacity: 0.75})
 				reservorios=L.geoJson(Reservorios,{onEachFeature: agregarPopupres}).setStyle({color:"#729b6f",fillOpacity: 0.75}),
 				zonificacion=  L.geoJson(Zonificacion,{ onEachFeature: agregarPopupzoni }),
+				zonaley= L.geoJson(ZonaLey4886,{ onEachFeature: agregarPopupzonaLey4886 }),	
 				BarriosConsolidados=  L.geoJson(BarriosConsolidados,{ onEachFeature: agregarPopupBarriosConsolidados }),
 				redesagua= L.geoJson(RedesdeAguas,{ onEachFeature: agregarPopupredes}),
 				espverdes= L.geoJson(EspaciosVerdes, { onEachFeature: agregarPopupespaciosverdes }).setStyle({color:"#4daf4a",fillOpacity: 0.75}),
@@ -691,6 +716,7 @@
 			estilored();
 			estilocloacas();
 			estilocuencas();
+			estiloley();
           
 			/* CREACIÓN DEL LAYERS CONTROL */
 			var baseMaps = {
@@ -750,6 +776,7 @@
 				"Zona con Características Especiales de Urbanización":zonaurb,
 				"Zona Especial de Conservacion Natural":zonatu,
 				"Zonificación":zonificacion,
+				"Zona Ley 4886" :zonaley,
 				
 								
 				},
