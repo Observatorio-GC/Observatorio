@@ -496,9 +496,10 @@
 			}			
 			function agregarPopupzonaLey4886(feature, layer) { 
 				if (feature.properties && feature.properties.REFERENCIA) { 
-					layer.bindPopup( "<strong>" + feature.properties.REFERENCIA + "</strong><br/>" + feature.properties.NOMBRE);
+					layer.bindPopup( "<strong>" + feature.properties.REFERENCIA + "</strong><br/>" + feature.properties.NOMBRE + "</strong><br/>" + "Uso de Suelo Dominante: <strong>" + feature.properties.UsoDominan + "</strong><br/>" + "Uso de Suelo Condicional: <strong>" + feature.properties.UsoCondic + "</strong><br/>" 
+					+ "Densidad Minima: <strong>" + feature.properties.DensidMin + "</strong><br/>" + "Densidad Maxima: <strong>" + feature.properties.DensidMax);
 				} 
-			}	
+			}		
 			function agregarPopupcuencas(feature, layer) { 
 				if (feature.properties && feature.properties.Nombre_1) { 
 						layer.bindPopup( "<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + feature.properties.Superficie);
