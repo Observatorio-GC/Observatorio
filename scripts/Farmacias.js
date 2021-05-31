@@ -84,6 +84,6 @@ var Farmacias ={
 { "type": "Feature", "properties": { "Nombre": "Farmacia MESURA CENTRAL", "Direccion": "Chuquisaca 1294", "Telefono": "Tel. 4393681", "Distrito": "Distrito Villa del Parque" }, "geometry": { "type": "Point", "coordinates": [ -68.8770566, -32.9121278 ] } },
 { "type": "Feature", "properties": { "Nombre": "Farmacia NUEVA MOSCONI", "Direccion": "Talcahuano 2801", "Telefono": "Tel. 4280065", "Distrito": "Distrito Villa del Parque" }, "geometry": { "type": "Point", "coordinates": [ -68.8770237, -32.9015162 ] } },
 { "type": "Feature", "properties": { "Nombre": "Farmacia MITRE 12 (farmacity)", "Direccion": "Local 1, Sarmiento 978,", "Telefono": "Tel. 4526466", "Distrito": "Distrito San Francisco del Monte" }, "geometry": { "type": "Point", "coordinates": [ -68.8347919, -32.939243 ] } },
-{ "type": "Feature", "properties": { "Nombre": "Farmacia Del Centro Express 10", "Direccion": "San Martin esqu. Rivadavia", "Telefono": null, "Distrito": "Distrito Centro" }, "geometry": { "type": "Point", "coordinates": [ -68.848321958049141, -32.924000367074704 ] } }
+{ "type": "Feature", "properties": { "Nombre": "Farmacia Del Centro Express 10", "Direccion": "San Martin y Rivadavia", "Telefono": null, "Distrito": "Distrito Centro" }, "geometry": { "type": "Point", "coordinates": [ -68.848321958049141, -32.924000367074704 ] } }
 ]
 }
