@@ -73,6 +73,7 @@
 		
 		<!-- GEOJSON -->
 		<script type="text/javascript" src="scripts/ZonaLey4886.js"></script>
+<script type="text/javascript" src="scripts/Mastiles.js"></script>
 		<script type="text/javascript" src="scripts/Edificios.js"></script>
 		<script type="text/javascript" src="scripts/Persianas.js"></script>
 		<script type="text/javascript" src="scripts/Barrios.js"></script>
@@ -183,6 +184,7 @@
 				iconositios = new iconoComun({iconUrl: 'img/sitios.png'});
 				iconoedi = new iconoComun({iconUrl: 'img/edificios.png'});
 				iconoPersi = new iconoComun({iconUrl: 'img/persianas_r2.png'});
+				iconoMast = new iconoComun({iconUrl: 'img/mastil_r2.png'});
 				
 
 			
@@ -352,7 +354,13 @@
 			  pointToLayer: crearIconoedi
 			}
 									
-						
+			function crearIconMast(feature, latlng) {
+				return L.marker(latlng, { icon: iconoMast})
+			}
+			var asignarIconoMast = {
+			  pointToLayer: crearIconoMast
+			}
+			
 			function crearIconoUnivec(feature, latlng) {
 				return L.marker(latlng, { icon: iconoUnivec})
 			}
@@ -388,8 +396,15 @@
 			  pointToLayer: crearIconoPersi
 			}
 								
+			function crearIconoMast(feature, latlng) {
+				return L.marker(latlng, { icon: iconoMast})
+			}
+			var asignarIconoMast = {
+			  pointToLayer: crearIconoMast
+			}
 			
-				
+
+			
 			/* POPUPS */
 			
 			function agregarPopupbarrios(feature, layer) { 
@@ -406,6 +421,11 @@
 				if (feature.properties && feature.properties.Nombre) { 
 						layer.bindPopup( "<strong>" + feature.properties.Nombre + "</strong><br><img src='img/persianas/"+ feature.properties.Fotos + "' height='160px' width='200px' style='display:block; margin: auto; margin-top:7px;' />");
 				} 
+            }
+			function agregarPopupmasti(feature, layer) { 
+				if (feature.properties && feature.properties.Name) { 
+						layer.bindPopup( "<strong>" + feature.properties.Name + "</strong>" );
+				}	
             }
 			function agregarPopupesculturas(feature, layer) { 
 				if (feature.properties && feature.properties.Referencia) { 
@@ -651,6 +671,7 @@
 			var plazagc = L.marker([-32.92524, -68.84439]).bindPopup('Plaza GC.').openPopup(),
 				centrosdesalud = L.geoJson(centrosdesalud, { pointToLayer: crearIconoCentrosalud, onEachFeature: agregarPopup }),
 				edificios= L.geoJson( Edificios, { pointToLayer: crearIconoedi, onEachFeature: agregarPopuppatrimoniales}),
+				mastil= L.geoJson( Mastiles, { pointToLayer: crearIconMast, onEachFeature: agregarPopupmasti}),
 				SyCE= L.geoJson( SitiosyConjuntosEdilicios, { pointToLayer: crearIconositios, onEachFeature: agregarPopuppatrimoniales}),
 				TyC= L.geoJson( TramosyCarriles, { onEachFeature: agregarPopuppatrimoniales}).setStyle({color:"#C35918"}),
 				barrios= L.geoJson( Barrios, {onEachFeature: agregarPopuppatrimoniales}).setStyle({color:"#E86211",fillOpacity: 0.75})
@@ -778,7 +799,7 @@
 				"Zona Especial de Conservacion Natural":zonatu,
 				"Zonificación":zonificacion,
 				"Zona Ley 4886" :zonaley,
-				
+				"Mastiles vía Pública" :mastil,
 								
 				},
 				"Infraestructura de Salud": {
