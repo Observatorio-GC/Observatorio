@@ -121,6 +121,10 @@
 	<script type="text/javascript" src="scripts/Bodegas.js"></script>
 		<script type="text/javascript" src="scripts/Informador.js"></script>
 		<script type="text/javascript" src="scripts/PuestosBici.js"></script>
+		<script type="text/javascript" src="scripts/Fallas.js"></script>
+		<script type="text/javascript" src="scripts/Inundacion.js"></script>
+		<script type="text/javascript" src="scripts/Suelo.js"></script>
+		<script type="text/javascript" src="scripts/RedHidrica.js"></script>
 	</head>
 	<body> 
 		<h1 style="position: relative; margin-top: 10px; margin-left: 100px; z-index: 2">Observatorio Territorial de Godoy Cruz</h1>
@@ -407,6 +411,11 @@
 			
 			/* POPUPS */
 			
+			function agregarPopupfallas(feature, layer) { 
+				if (feature.properties && feature.properties.Falla) { 
+						layer.bindPopup( "<strong>" + feature.properties.Falla + "</strong><br/>" + "Tipo <strong>" + feature.properties.Tipo); 
+				} 
+			}
 			function agregarPopupbarrios(feature, layer) { 
 				if (feature.properties && feature.properties.Nombre_1) { 
 						layer.bindPopup( "<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + feature.properties.Descrip); 
@@ -441,7 +450,6 @@
 				if (feature.properties && feature.properties.Nombre) { 
 						layer.bindPopup( "<strong>" + feature.properties.Nombre + "</strong><br/>" + feature.properties.UBICACION + "</strong><br/>" +  feature.properties.AÑO + "</strong><br/>" + feature.properties.DISTRITO + "</strong><br><img src='img/Muvi/"+ feature.properties.Fotos + "' height='160px' width='200px' style='display:block; margin: auto; margin-top:7px;' />"); 
 				} 
-			
 			
 			}		
 			function agregarPopupespaciosverdes(feature, layer) { 
@@ -525,6 +533,7 @@
 						layer.bindPopup( "<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + feature.properties.Superficie);
 				} 
 			}
+			
 			function estiloDistritosDepartamentales() {
 				Depa.eachLayer(function(featureInstanceLayer) {
 					var id_feature = featureInstanceLayer.feature.properties['qc_id'];
@@ -658,6 +667,38 @@
 					});
 				});
 			}
+			function estiloinundacion() {
+				inundacion.eachLayer(function(featureInstanceLayer) {
+					var id_feature = featureInstanceLayer.feature.properties['id'];
+					if (id_feature == 1) {
+						color_actual = '#c2dffb';
+					} else if (id_feature ==2) {
+						color_actual = '#73b3d8';	
+					} else if (id_feature == 3) {
+						color_actual = '#08306b';	
+					} else if (id_feature == 4) {
+						color_actual = '#08306b';	
+					} 	
+					featureInstanceLayer.setStyle({
+						color: color_actual,fillOpacity: 0.75
+					});
+				});
+			}
+			function estilosuelo() {
+				suelo.eachLayer(function(featureInstanceLayer) {
+					var id_feature = featureInstanceLayer.feature.properties['id'];
+					if (id_feature == 1) {
+						color_actual = '#d18581';
+					} else if (id_feature == 2) {
+						color_actual = '#64c589';	
+					} else if (id_feature == 3) {
+						color_actual = '#dcc57d';	
+					} 
+					featureInstanceLayer.setStyle({
+						color: color_actual,fillOpacity: 0.75
+					});
+				});
+			}
 			/* BASE LAYERS */
 			var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 				osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -682,7 +723,7 @@
 				cicloviasexist =L.geoJson(CicloviasExistentes,{ onEachFeature: agregarPopupciclovias}).setStyle({color:"red"}),
 				lineasd=L.geoJson(LineasD,{ onEachFeature: agregarPopuplineas}).setStyle({color:"orange"}),
 				lineast=L.geoJson(LineasT,{ onEachFeature: agregarPopuplineas}).setStyle({color:"red"}),
-				CanalesColectoresHijuelas=L.geoJson(CanalesColectoresHijuelas,{ onEachFeature: agregarPopupCanalesColectoresHijuelas}).setStyle({color:"#1fc5ee"}),
+				CanalesColectoresHijuelas=L.geoJson(CanalesColectoresHijuelas,{ onEachFeature: agregarPopupCanalesColectoresHijuelas}).setStyle({color:"#1a6eeb"}),
 				clinicaspriv = L. geoJson(ClinicasPrivadas,{ pointToLayer: crearIconoClinicaprivada, onEachFeature: agregarPopupjardinesmuni }),
 				hospital = L.geoJson(Hospital, { pointToLayer: crearIconoHospitales, onEachFeature: agregarPopup }),
 				escuelas = L.geoJson(Escuelas, { pointToLayer: crearIconoEstabeducat, onEachFeature: agregarPopup }),
@@ -717,6 +758,10 @@
 				bode= L.geoJson(Bodegas, { pointToLayer: crearIconoRojo,  onEachFeature: agregarPopupturismo}),
 				informador= L.geoJson(Informador, { pointToLayer: crearIconoNaranja,  onEachFeature: agregarPopupturismo}),
 				bicicleta= L.geoJson(PuestosBici, { pointToLayer: crearIconoVerde,  onEachFeature: agregarPopupturismo}),
+				fall= L.geoJson(Fallas, { onEachFeature: agregarPopupfallas}).setStyle({color:"orange"}),
+				inundacion= L.geoJson(Inundacion, { onEachFeature: agregarPopupbarrios}),
+				suelo= L.geoJson(Suelo, { onEachFeature: agregarPopup}),
+				hidrico= L.geoJson(RedHidrica,{ onEachFeature: agregarPopup}).setStyle({color:"#15c8f0"}),
 				sistcloacal= L.geoJson(SistemaCloacal, { onEachFeature: agregarPopupcloacas});
 				
 
@@ -739,6 +784,8 @@
 			estilocloacas();
 			estilocuencas();
 			estiloley();
+			estiloinundacion();
+			estilosuelo();
           
 			/* CREACIÓN DEL LAYERS CONTROL */
 			var baseMaps = {
@@ -767,12 +814,23 @@
 			var groupedOverlays = {
 			     "Street View": {
 				"Marcador":marker,
+				
 				},
 				"Muvi GC": {
-				"Edificios ":edificios,
+				"Edificios":edificios,
 				"Sitios y Conjuntos Edilicios":SyCE,
 				"Barrios":barrios,
 				"Tramos y Carriles":TyC,
+				
+				},
+				"Riesgo": {
+				"Amenaza de Inundacion":inundacion,
+				"Canales Colectores Hijuelas":CanalesColectoresHijuelas,
+				"Cuencas Hidrográficas":cuencas,
+				"Fallas Geologicas":fall,
+				"Red Hidrica":hidrico,
+				"Reservorios urbanos":reservorios,
+				"Suelo":suelo,
 				
 				},
 				"Educacion":{
@@ -792,10 +850,8 @@
 				"Infraestructura Urbana":{
 				"Bancos":bank,
 				"Barrios Consolidados":BarriosConsolidados,
-				 "Barrios Populares":barriospopulares,
+				"Barrios Populares":barriospopulares,
 				"Cajeros":caja,
-				"Canales Colectores Hijuelas":CanalesColectoresHijuelas,
-				"Cuencas Hidrográficas":cuencas,
 				"Dependencias Municipales":depen,
 				"Espacios Verdes":espverdes,
 				"Estaciones Meteorológicas":meteo,
@@ -845,9 +901,6 @@
 				"Informador Turistico": informador,
 				"Puestos Programa en la Bici": bicicleta,
 				},
-				
-							   
-				
 				
 			};
 
