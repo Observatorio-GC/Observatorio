@@ -75,6 +75,7 @@
 		<script type="text/javascript" src="scripts/ZonaLey4886.js"></script>
 <script type="text/javascript" src="scripts/Mastiles.js"></script>
 		<script type="text/javascript" src="scripts/Edificios.js"></script>
+		<script type="text/javascript" src="scripts/Puntoswifi.js"></script>
 		<script type="text/javascript" src="scripts/Persianas.js"></script>
 		<script type="text/javascript" src="scripts/Barrios.js"></script>
 		<script type="text/javascript" src="scripts/SitiosyConjuntosEdilicios.js"></script>
@@ -718,6 +719,7 @@
 				barrios= L.geoJson( Barrios, {onEachFeature: agregarPopuppatrimoniales}).setStyle({color:"#E86211",fillOpacity: 0.75})
 				escultura= L.geoJson(Esculturas , { pointToLayer: crearIconoEscul, onEachFeature: agregarPopupesculturas}),
 				godoycruz = L.geoJson(godoycruz),
+				puntoswifi = L.geoJson(Puntoswifi, {pointToLayer: crearIconoGris, onEachFeature:agregarPopupfarmacias}),
 				persianas= L.geoJson(Persianas, { pointToLayer: crearIconoPersi, onEachFeature: agregarPopuppersianas}),
 				cicloviasproy = L.geoJson(CicloviasProyectadas,{ onEachFeature: agregarPopupciclovias}).setStyle({color:"yellow"}),
 				cicloviasexist =L.geoJson(CicloviasExistentes,{ onEachFeature: agregarPopupciclovias}).setStyle({color:"red"}),
@@ -859,6 +861,7 @@
 				"Mastiles vía Pública" :mastil,
 				"Pago Facil - Rapipago":cobro,
 				"Polideportivos":polideportivos,
+				"Puntos de Wifi":puntoswifi,
 				"Residencias de Adultos Mayores":residenciasad,
 				
 				
