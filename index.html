@@ -190,6 +190,7 @@
 				iconoedi = new iconoComun({iconUrl: 'img/edificios.png'});
 				iconoPersi = new iconoComun({iconUrl: 'img/persianas_r2.png'});
 				iconoMast = new iconoComun({iconUrl: 'img/mastil_r2.png'});
+			        iconoWifi = new iconoComun({iconUrl: 'img/wIfI_r2.png'});
 				
 
 			
@@ -249,6 +250,13 @@
 			  pointToLayer: crearIconoVioleta
 			}
 
+			function crearIconoWifi (feature, latlng) {
+				return L.marker(latlng, { icon: iconoWifi })
+			}
+			var asignarIconoWifi = {
+			  pointToLayer: crearIconoWifi
+			}
+			
 			function crearIconoAmarillo (feature, latlng) {
 				return L.marker(latlng, { icon: iconoAmarillo })
 			}
