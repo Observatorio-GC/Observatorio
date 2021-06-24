@@ -73,7 +73,7 @@
 		
 		<!-- GEOJSON -->
 		<script type="text/javascript" src="scripts/ZonaLey4886.js"></script>
-<script type="text/javascript" src="scripts/Mastiles.js"></script>
+        <script type="text/javascript" src="scripts/Mastiles.js"></script>
 		<script type="text/javascript" src="scripts/Edificios.js"></script>
 		<script type="text/javascript" src="scripts/Puntoswifi.js"></script>
 		<script type="text/javascript" src="scripts/Persianas.js"></script>
@@ -100,6 +100,7 @@
 		<script type="text/javascript" src="scripts/RedesdeAguas.js"></script>
 		<script type="text/javascript" src="scripts/SistemaCloacal.js"></script>
 		<script type="text/javascript" src="scripts/LineasD.js"></script>
+		<script type="text/javascript" src="scripts/LineaMunicipal.js"></script>
 		<script type="text/javascript" src="scripts/Cuencashidrograficas.js"></script>
 		<script type="text/javascript" src="scripts/LineasT.js"></script>
 		<script type="text/javascript" src="scripts/CanalesColectoresHijuelas.js"></script>
@@ -190,7 +191,7 @@
 				iconoedi = new iconoComun({iconUrl: 'img/edificios.png'});
 				iconoPersi = new iconoComun({iconUrl: 'img/persianas_r2.png'});
 				iconoMast = new iconoComun({iconUrl: 'img/mastil_r2.png'});
-			        iconoWifi = new iconoComun({iconUrl: 'img/wIfI_r2.png'});
+			    iconoWifi = new iconoComun({iconUrl: 'img/wIfI_r2.png'});
 				
 
 			
@@ -520,6 +521,12 @@
 				if (feature.properties && feature.properties.TENSION) {	 
 					layer.bindPopup( "<strong>" + feature.properties.TENSION + "</strong>");
 				}
+				
+	    	}		
+			function agregarPopuplineasMu(feature, layer) {
+				if (feature.properties && feature.properties.Name) {	 
+					layer.bindPopup( "<strong>" + feature.properties.Name + "</strong><br/>" );
+				}		
 			}
 			function agregarPopupCanalesColectoresHijuelas(feature, layer) {
 				if (feature.properties && feature.properties.Name) {	 
@@ -708,6 +715,7 @@
 					});
 				});
 			}
+			
 			/* BASE LAYERS */
 			var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 				osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -732,6 +740,7 @@
 				cicloviasproy = L.geoJson(CicloviasProyectadas,{ onEachFeature: agregarPopupciclovias}).setStyle({color:"yellow"}),
 				cicloviasexist =L.geoJson(CicloviasExistentes,{ onEachFeature: agregarPopupciclovias}).setStyle({color:"red"}),
 				lineasd=L.geoJson(LineasD,{ onEachFeature: agregarPopuplineas}).setStyle({color:"orange"}),
+			lineasmun=L.geoJson(LineaMunicipal,{ onEachFeature: agregarPopuplineasMu}).setStyle({color:"orange"}),	
 				lineast=L.geoJson(LineasT,{ onEachFeature: agregarPopuplineas}).setStyle({color:"red"}),
 				CanalesColectoresHijuelas=L.geoJson(CanalesColectoresHijuelas,{ onEachFeature: agregarPopupCanalesColectoresHijuelas}).setStyle({color:"#1a6eeb"}),
 				clinicaspriv = L. geoJson(ClinicasPrivadas,{ pointToLayer: crearIconoClinicaprivada, onEachFeature: agregarPopupjardinesmuni }),
@@ -894,6 +903,8 @@
 					"Lineas de Transporte de Energía":lineast,
 					"Red Colectora Cloacal":sistcloacal,
 					"Red Distribuidora de Agua Potable":redesagua,
+					"Lineas Municipal":lineasmun,
+					
 					
 				},
 				"Movilidad": {
