@@ -51,5 +51,6 @@ var Mastiles ={
 { "type": "Feature", "properties": { "Name": "Parque Arturo Illia", "Fotos": null }, "geometry": { "type": "Point", "coordinates": [ -68.860962661351621, -32.941905493354909 ] } },
 { "type": "Feature", "properties": { "Name": "Plaza Laprida", "Fotos": null }, "geometry": { "type": "Point", "coordinates": [ -68.856857689129697, -32.918378070197662 ] } },
 { "type": "Feature", "properties": { "Name": "Villa Jovita", "Fotos": null }, "geometry": { "type": "Point", "coordinates": [ -68.86230372917554, -32.90462645547005 ] } },
+  { "type": "Feature", "properties": { "Name": "Barrio Palumbo", "Fotos": null }, "geometry": { "type": "Point", "coordinates": [ -68.85550077530073, -32.93950926111505 ] } },
 ]
 }
