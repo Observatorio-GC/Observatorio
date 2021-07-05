@@ -127,6 +127,7 @@
 		<script type="text/javascript" src="scripts/Inundacion.js"></script>
 		<script type="text/javascript" src="scripts/Suelo.js"></script>
 		<script type="text/javascript" src="scripts/RedHidrica.js"></script>
+		<script type="text/javascript" src="scripts/PanelesSolares.js"></script>
 	</head>
 	<body> 
 		<h1 style="position: relative; margin-top: 10px; margin-left: 100px; z-index: 2">Observatorio Territorial de Godoy Cruz</h1>
@@ -192,6 +193,8 @@
 				iconoPersi = new iconoComun({iconUrl: 'img/persianas_r2.png'});
 				iconoMast = new iconoComun({iconUrl: 'img/mastil_r2.png'});
 			    iconoWifi = new iconoComun({iconUrl: 'img/wIfI_r2.png'});
+				iconoPanel = new iconoComun({iconUrl: 'img/paneles_3.png'});
+				
 				
 
 			
@@ -416,11 +419,22 @@
 			var asignarIconoMast = {
 			  pointToLayer: crearIconoMast
 			}
+				
+			function crearIconoPanel (feature, latlng) {
+				return L.marker(latlng, { icon: iconoPanel})
+			}
+			var asignarIconoPanel = {
+			  pointToLayer: crearIconoPanel
+			}
 			
-
+		
+            /* POPUPS */
 			
-			/* POPUPS */
-			
+			function agregarPopupPaneles(feature, layer) { 
+				if (feature.properties && feature.properties.Ubicacion) { 
+						layer.bindPopup( "<strong>" + feature.properties.Ubicacion + "</strong>"); 
+				} 
+            }
 			function agregarPopupfallas(feature, layer) { 
 				if (feature.properties && feature.properties.Falla) { 
 						layer.bindPopup( "<strong>" + feature.properties.Falla + "</strong><br/>" + "Tipo <strong>" + feature.properties.Tipo +  "</strong><br/>" + "Movimiento <strong>" + feature.properties.Movimiento +  "</strong><br/>" + "Actividad <strong>" + feature.properties.Actividad);
@@ -548,7 +562,7 @@
 				if (feature.properties && feature.properties.Nombre_1) { 
 						layer.bindPopup( "<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + feature.properties.Superficie);
 				} 
-			}
+		    }
 			
 			function estiloDistritosDepartamentales() {
 				Depa.eachLayer(function(featureInstanceLayer) {
@@ -781,6 +795,7 @@
 				inundacion= L.geoJson(Inundacion, { onEachFeature: agregarPopupbarrios}),
 				suelo= L.geoJson(Suelo, { onEachFeature: agregarPopup}),
 				hidrico= L.geoJson(RedHidrica,{ onEachFeature: agregarPopup}).setStyle({color:"#15c8f0"}),
+				paneles= L.geoJson(PanelesSolares, { pointToLayer: crearIconoPanel,  onEachFeature: agregarPopupPaneles}),
 				sistcloacal= L.geoJson(SistemaCloacal, { onEachFeature: agregarPopupcloacas});
 				
 
@@ -835,13 +850,6 @@
 				"Marcador":marker,
 				
 				},
-				"Muvi GC": {
-				"Barrios Historicos":barrios,
-				"Edificios":edificios,
-				"Sitios y Conjuntos Edilicios":SyCE,
-				"Tramos y Carriles":TyC,
-				
-				},
 				"Riesgo": {
 				"Amenaza de Inundacion":inundacion,
 				"Canales Colectores Hijuelas":CanalesColectoresHijuelas,
@@ -850,11 +858,6 @@
 				"Red Hidrica":hidrico,
 				"Reservorios urbanos":reservorios,
 				"Suelo":suelo,
-				
-				},
-				"Educacion":{
-				"Establecimientos Educativos":escuelas,
-				"Jardines Municipales":jardinesmuni,
 				
 				},
 				"Ordenanzas":{
@@ -866,6 +869,30 @@
 				"Zonificación":zonificacion,
 				"Zona Ley 4886" :zonaley,
 				
+				},
+				"Infraestructura Ambiental": {
+				    "Paneles Solares": paneles,
+				    "Planta Recicladora":recic,
+					"Puntos de Recepción de Pilas":puntospilas,	
+					"Puntos Verdes":punt,
+					"Solmáforos":solma,
+				
+				},
+				"Movilidad": {
+					"Ciclovías Existentes":cicloviasexist,
+					"Ciclovías Proyectadas":cicloviasproy,
+				
+                },
+				"Muvi GC": {
+				"Barrios Historicos":barrios,
+				"Edificios":edificios,
+				"Sitios y Conjuntos Edilicios":SyCE,
+				"Tramos y Carriles":TyC,
+				
+				},
+				"Educacion":{
+				"Establecimientos Educativos":escuelas,
+				"Jardines Municipales":jardinesmuni,
 				
 				},
 				"Infraestructura Urbana":{
@@ -892,13 +919,6 @@
 					"Hospitales":hospital,
 					
 				},
-				"Infraestructura Ambiental": {
-				    "Planta Recicladora":recic,
-					"Puntos de Recepción de Pilas":puntospilas,	
-					"Puntos Verdes":punt,
-					"Solmáforos":solma,
-					
-				},
 				"Infraestructura de Servicio": {                 
 					"Estaciones de Servicio":estacion,
 					"Lineas de Distribución de Energía":lineasd,
@@ -906,13 +926,7 @@
 					"Red Colectora Cloacal":sistcloacal,
 					"Red Distribuidora de Agua Potable":redesagua,
 				
-								
 				},
-				"Movilidad": {
-					"Ciclovías Existentes":cicloviasexist,
-					"Ciclovías Proyectadas":cicloviasproy,
-				
-                },
 				"Patrimonio": {
 				"Esculturas":escultura,
 				"Persianas Comerciales": persianas,
