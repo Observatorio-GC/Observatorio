@@ -431,8 +431,8 @@
             /* POPUPS */
 			
 			function agregarPopupPaneles(feature, layer) { 
-				if (feature.properties && feature.properties.Ubicacion) { 
-						layer.bindPopup( "<strong>" + feature.properties.Ubicacion + "</strong>"); 
+				if (feature.properties && feature.properties.descriptio) { 
+						layer.bindPopup( "<strong>" + feature.properties.descriptio + "</strong><br/>" + feature.properties.Name + "</strong><br/>"); 
 				} 
             }
 			function agregarPopupfallas(feature, layer) { 
