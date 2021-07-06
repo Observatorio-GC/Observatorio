@@ -539,7 +539,7 @@
 	    	}		
 			function agregarPopuplineasMu(feature, layer) {
 				if (feature.properties && feature.properties.Name) {	 
-					layer.bindPopup( "<strong>" + feature.properties.Name + "</strong><br/>" );
+					layer.bindPopup( "<strong>" + feature.properties.Name + "</strong><br/>" + feature.properties.description +"</strong><br/>");
 				}		
 			}
 			function agregarPopupCanalesColectoresHijuelas(feature, layer) {
