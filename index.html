@@ -128,6 +128,7 @@
 		<script type="text/javascript" src="scripts/Suelo.js"></script>
 		<script type="text/javascript" src="scripts/RedHidrica.js"></script>
 		<script type="text/javascript" src="scripts/PanelesSolares.js"></script>
+		<script type="text/javascript" src="scripts/InfoAmbiente.js"></script>
 	</head>
 	<body> 
 		<h1 style="position: relative; margin-top: 10px; margin-left: 100px; z-index: 2">Observatorio Territorial de Godoy Cruz</h1>
@@ -564,6 +565,18 @@
 				} 
 		    }
 			
+			
+			/// POPUP infoambiente
+			function agregarPopupDepen(feature, layer) { 
+				if (feature.properties && feature.properties.Nombre_1) { 
+						if (feature.properties.ENLACE) { 
+							layer.bindPopup( "<strong>" + feature.properties.Nombre_1 + "</strong><br /><iframe src='" + feature.properties.ENLACE + "' style='width: 301px; height: 480px; border: 2px solid #888888; margin-top:10px' scrolling='no'></iframe><br /><a href='" + feature.properties.ENLACE + "' target='_blank'>Abrir en otra pestaña</a>"); 
+						} else {
+							layer.bindPopup( "<strong>" + feature.properties.Nombre_1 + "</strong>"); 
+						} 
+				}
+			}
+			
 			function estiloDistritosDepartamentales() {
 				Depa.eachLayer(function(featureInstanceLayer) {
 					var id_feature = featureInstanceLayer.feature.properties['qc_id'];
@@ -774,7 +787,7 @@
 				espverdes= L.geoJson(EspaciosVerdes, { onEachFeature: agregarPopupespaciosverdes }).setStyle({color:"#4daf4a",fillOpacity: 0.75}),
 				cuencas= L.geoJson(Cuencashidrograficas,{ onEachFeature: agregarPopupcuencas}),
 				puntospilas= L.geoJson(PuntosRecepcionPilas, { pointToLayer: crearIconoPilas, onEachFeature: agregarPopuppuntorecepcionpilas  }),
-				depen= L.geoJson(DependenciasMunicipales, { pointToLayer: crearIconoDependmuni, onEachFeature: agregarPopup }),
+				depen= L.geoJson(DependenciasMunicipales, { pointToLayer: crearIconoDependmuni, onEachFeature: agregarPopupDepen }),
 				punt= L.geoJson(PuntosVerdes, { pointToLayer: crearIconoVerde2, onEachFeature: agregarPopup }),
 				solma= L.geoJson(Solmaforos, { pointToLayer: crearIconoSema_r2, onEachFeature: agregarPopupfarmacias }),
 				estacion= L.geoJson(EstacionesdeServicio, { pointToLayer: crearIconoAzul, onEachFeature: agregarPopupfarmacias }),
@@ -796,7 +809,8 @@
 				suelo= L.geoJson(Suelo, { onEachFeature: agregarPopup}),
 				hidrico= L.geoJson(RedHidrica,{ onEachFeature: agregarPopup}).setStyle({color:"#15c8f0"}),
 				paneles= L.geoJson(PanelesSolares, { pointToLayer: crearIconoPanel,  onEachFeature: agregarPopupPaneles}),
-				sistcloacal= L.geoJson(SistemaCloacal, { onEachFeature: agregarPopupcloacas});
+				sistcloacal= L.geoJson(SistemaCloacal, { onEachFeature: agregarPopupcloacas}),
+				infoambiente= L.geoJson(InfoAmbiente, { onEachFeature: agregarPopupDepen});
 				
 
 			/* CREACIÓN DEL MAPA CON BASE LAYERS Y OVERLAYS */
@@ -878,6 +892,10 @@
 					"Solmáforos":solma,
 				
 				},
+				"Gobernanza Ambiental": {
+					"Información Ambiental": infoambiente,
+				
+                },
 				"Movilidad": {
 					"Ciclovías Existentes":cicloviasexist,
 					"Ciclovías Proyectadas":cicloviasproy,
