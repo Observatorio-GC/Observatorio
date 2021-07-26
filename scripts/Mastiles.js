@@ -53,6 +53,10 @@ var Mastiles ={
 { "type": "Feature", "properties": { "Name": "Villa Jovita", "Fotos": null }, "geometry": { "type": "Point", "coordinates": [ -68.86230372917554, -32.90462645547005 ] } },
   { "type": "Feature", "properties": { "Name": "Barrio Ginner", "Fotos": null }, "geometry": { "type": "Point", "coordinates": [ -68.85550077530073, -32.93950926111505 ] } },
   { "type": "Feature", "properties": { "Name": "Barrio Union Vecinal Gobernador Benegas", "Fotos": null }, "geometry": { "type": "Point", "coordinates": [ -68.84083485557422, -32.9483741037317 ] } },
-  { "type": "Feature", "properties": { "Name": "Centro de Salud Dr.Ramon Carrillo", "Fotos": null }, "geometry": { "type": "Point", "coordinates": [ -68.86492122915786, --32.922479150193944 ] } }, 
+  { "type": "Feature", "properties": { "Name": "Jardin Centro de Salud Dr.Ramon Carrillo", "Fotos": null }, "geometry": { "type": "Point", "coordinates": [ -68.86492122915786, -32.922479150193944 ] } },
+  { "type": "Feature", "properties": { "Name": "Ingreso a Direccion de Servicios Publicos", "Fotos": null }, "geometry": { "type": "Point", "coordinates": [ -68.86457709447855, -32.92304988455344 ] } },  
+]
+}
+
 ]
 }
