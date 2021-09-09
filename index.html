@@ -570,6 +570,12 @@
 				} 
 		    }
 			
+			function agregarPopupescuelas(feature, layer) { 
+				if (feature.properties && feature.properties.Nombre_1) { 
+						layer.bindPopup( "<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + "Nivel: <strong>" + feature.properties.Nivel + "</strong><br/>" + "Gestion: <strong>"+ feature.properties.Gestion);
+			    } 	
+			}
+			
 			/// POPUP infoambiente
 			function agregarPopupDepen(feature, layer) { 
 				if (feature.properties && feature.properties.Nombre_1) { 
@@ -776,7 +782,7 @@
 				CanalesColectoresHijuelas=L.geoJson(CanalesColectoresHijuelas,{ onEachFeature: agregarPopupCanalesColectoresHijuelas}).setStyle({color:"#1a6eeb"}),
 				clinicaspriv = L. geoJson(ClinicasPrivadas,{ pointToLayer: crearIconoClinicaprivada, onEachFeature: agregarPopupjardinesmuni }),
 				hospital = L.geoJson(Hospital, { pointToLayer: crearIconoHospitales, onEachFeature: agregarPopup }),
-				escuelas = L.geoJson(Escuelas, { pointToLayer: crearIconoEstabeducat, onEachFeature: agregarPopup }),
+				escuelas = L.geoJson(Escuelas, { pointToLayer: crearIconoEstabeducat, onEachFeature: agregarPopupescuelas }),
 				farmacias = L.geoJson(Farmacias, { pointToLayer: crearIconoFarmacias, onEachFeature: agregarPopupfarmaciasgc }),
 				polideportivos = L.geoJson(Polideportivos,  { pointToLayer: crearIconoPoli, onEachFeature: agregarPopup }),
 				jardinesmuni = L.geoJson(JardinesMunicipales,{ pointToLayer: crearIconoJardmatern, onEachFeature: agregarPopupjardinesmuni }),
