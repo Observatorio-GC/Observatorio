@@ -6,4 +6,4 @@ https://observatorio-gc.github.io/Observatorio/.
 [![Estadisticas Visor](https://github-readme-stats.vercel.app/api/?username=Observatorio-GC&repo=Observatorio)](https://observatorio-gc.github.io/Observatorio/)
 [![Codigos](https://github-readme-stats.vercel.app/api/top-langs/?username=Observatorio-GC&repo=Observatorio)](https://observatorio-gc.github.io/Observatorio/)
 
-
+--
