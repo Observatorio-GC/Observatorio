@@ -10,7 +10,7 @@ L.StreetView1 = L.Control.extend({
   },
 
   providers: [
-    ['google', 'Mapa Indicadores Urbanos', 'FOT Y FOS', false,
+    ['google', 'Mapa Indicadores Urbanos', 'Enlace externo a FOT Y FOS', false,
       'https://observatorio-gc.github.io/Indicadores-Urbanos/'],
    
   ],
@@ -54,6 +54,8 @@ L.StreetView1 = L.Control.extend({
     button.target = 'streetview';
     button.style.padding = '0 8px';
     button.style.width = 'auto';
+	button.style.color='#ffffff';
+	  button.style.backgroundColor='#800080 ';
 
     // Some buttons require complex logic
     if (provider[0] == 'mapillary') {
