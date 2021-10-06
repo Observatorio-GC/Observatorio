@@ -10,7 +10,7 @@ L.StreetView = L.Control.extend({
   },
 
   providers: [
-    ['google', 'Ver Street View según marcador', 'Google Street View', false,
+    ['google', 'Enlace externo a Street View ', 'Google Street View', false,
       'https://www.google.com/maps?layer=c&cbll={lat},{lon}'],
    
   ],
@@ -54,6 +54,8 @@ L.StreetView = L.Control.extend({
     button.target = 'streetview';
     button.style.padding = '0 8px';
     button.style.width = 'auto';
+	button.style.color='#010000';
+	  button.style.backgroundColor='#FFC300 ';
 
     // Some buttons require complex logic
     if (provider[0] == 'mapillary') {
