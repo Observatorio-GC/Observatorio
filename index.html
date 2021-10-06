@@ -839,7 +839,7 @@
 			var map = L.map('map', {
 				layers: [mapa_bing ,godoycruz]
 			}).setView([-32.9337, -68.8978], 13);
-			var marker = L.marker(map.getCenter(),{icon:iconoSTV}).bindPopup('Marcador de Street View').addTo(map);
+			var marker = L.marker(map.getCenter(),{icon:iconoSTV}).bindPopup('Mover éste marcador y clickear el boton "Enlace externo de Street View", ubicado a la izquierda del mapa').addTo(map);
             map.on('move', function() { marker.setLatLng(map.getCenter()); });
 			var printer = L.easyPrint();
 			
