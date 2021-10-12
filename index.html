@@ -587,6 +587,12 @@
 				} 
 		    }
 			
+			function agregarPopupSalud(feature, layer) { 
+				if (feature.properties && feature.properties.Nombre_1) { 
+						layer.bindPopup( "<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + feature.properties.Direccion);
+				} 
+		    }
+			
 			function agregarPopupescuelas(feature, layer) { 
 				if (feature.properties && feature.properties.Nombre_1) { 
 						layer.bindPopup( "<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + "Nivel: <strong>" + feature.properties.Nivel + "</strong><br/>" + "Gestion: <strong>"+ feature.properties.Gestion);
@@ -791,7 +797,7 @@
 							
 			/* OVERLAYS Y GRUPOS */
 			var plazagc = L.marker([-32.92524, -68.84439]).bindPopup('Plaza GC.').openPopup(),
-				centrosdesalud = L.geoJson(centrosdesalud, { pointToLayer: crearIconoCentrosalud, onEachFeature: agregarPopup }),
+				centrosdesalud = L.geoJson(centrosdesalud, { pointToLayer: crearIconoCentrosalud, onEachFeature: agregarPopupSalud}),
 				edificios= L.geoJson( Edificios, { pointToLayer: crearIconoedi, onEachFeature: agregarPopuppatrimoniales}),
 				mastil= L.geoJson( Mastiles, { pointToLayer: crearIconMast, onEachFeature: agregarPopupmasti}),
 				SyCE= L.geoJson( SitiosyConjuntosEdilicios, { pointToLayer: crearIconositios, onEachFeature: agregarPopuppatrimoniales}),
@@ -807,7 +813,7 @@
 			lineasmun=L.geoJson(LineaMunicipal,{ onEachFeature: agregarPopuplineasMu}).setStyle({color:"orange"}),	
 				lineast=L.geoJson(LineasT,{ onEachFeature: agregarPopuplineas}).setStyle({color:"red"}),
 				CanalesColectoresHijuelas=L.geoJson(CanalesColectoresHijuelas,{ onEachFeature: agregarPopupCanalesColectoresHijuelas}).setStyle({color:"#1a6eeb"}),
-				clinicaspriv = L. geoJson(ClinicasPrivadas,{ pointToLayer: crearIconoClinicaprivada, onEachFeature: agregarPopupjardinesmuni }),
+				clinicaspriv = L. geoJson(ClinicasPrivadas,{ pointToLayer: crearIconoClinicaprivada, onEachFeature: agregarPopupSalud }),
 				hospital = L.geoJson(Hospital, { pointToLayer: crearIconoHospitales, onEachFeature: agregarPopup }),
 				escuelas = L.geoJson(Escuelas, { pointToLayer: crearIconoEstabeducat, onEachFeature: agregarPopupescuelas }),
 				farmacias = L.geoJson(Farmacias, { pointToLayer: crearIconoFarmacias, onEachFeature: agregarPopupfarmaciasgc }),
