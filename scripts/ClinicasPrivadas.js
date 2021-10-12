@@ -3,7 +3,6 @@ var ClinicasPrivadas ={
 "name": "ClinicasPrivadas",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
 "features": [
-{ "type": "Feature", "properties": { "qc_id": 7, "Nombre_1": "Hospital Español", "Direccion": "Av. San Martín 965" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -68.845143413187614, -32.914804910509417 ] ] } },
 { "type": "Feature", "properties": { "qc_id": 0, "Nombre_1": "Hospital Privado de Mendoza", "Direccion": "Av. San Martín 1930" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -68.843309648895257, -32.904990535354955 ] ] } },
 { "type": "Feature", "properties": { "qc_id": 1, "Nombre_1": "Clinica Del Pilar", "Direccion": "Av. San Martín 1867" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -68.843244768055243, -32.905754886494734 ] ] } },
 { "type": "Feature", "properties": { "qc_id": 2, "Nombre_1": "Cerpol", "Direccion": "Av. San Martín 1831" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -68.843400641444887, -32.906488485586038 ] ] } },
@@ -13,7 +12,6 @@ var ClinicasPrivadas ={
 { "type": "Feature", "properties": { "qc_id": 9, "Nombre_1": "Clinica Santa Clara", "Direccion": "Av. San Martín 835" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -68.845733610691326, -32.91580701701352 ] ] } },
 { "type": "Feature", "properties": { "qc_id": 11, "Nombre_1": "Neuromed", "Direccion": "Leguizamón 398" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -68.849574062855723, -32.928943118020079 ] ] } },
 { "type": "Feature", "properties": { "qc_id": 13, "Nombre_1": "Centro Medico Palmares", "Direccion": "Palmares Open Mall -  Ruta Panamericana 2650" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -68.859004495966502, -32.955441126096503 ] ] } },
-{ "type": "Feature", "properties": { "qc_id": 14, "Nombre_1": "Hospital El Carmen - OSEP", "Direccion": "Joaquín V. González 245" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -68.860224472490572, -32.927523939813923 ] ] } },
 { "type": "Feature", "properties": { "qc_id": 15, "Nombre_1": "Centro Especializado en Rehabilitacion", "Direccion": "Jean Jaures 132" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -68.843939442415916, -32.917682723587397 ] ] } },
 { "type": "Feature", "properties": { "qc_id": 16, "Nombre_1": "Clinica Schweizer", "Direccion": "Av. San Martín 1034" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -68.845699178112611, -32.914020682354632 ] ] } },
 { "type": "Feature", "properties": { "qc_id": 17, "Nombre_1": "Respira Salud", "Direccion": "Tte. 1 Ibañez 71" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ -68.844223838167366, -32.912824402311081 ] ] } },
