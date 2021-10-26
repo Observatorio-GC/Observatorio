@@ -462,7 +462,7 @@
 			}
 			function agregarPopupbarrios(feature, layer) { 
 				if (feature.properties && feature.properties.Nombre_1) { 
-						layer.bindPopup( "<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + feature.properties.Descrip); 
+						layer.bindPopup( "<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + feature.properties.Descrip + "</strong><br/>" + "Contacto: <strong>" + feature.properties.Contacto + "</strong><br/>" + "Tel: <strong>" + feature.properties.Tel); 
 				} 
 			}
 			function agregarPopuppuntorecepcionpilas(feature, layer) { 
@@ -830,7 +830,7 @@
 				jardinesmuni = L.geoJson(JardinesMunicipales,{ pointToLayer: crearIconoJardmatern, onEachFeature: agregarPopupjardinesmuni }),
 				seguridad =L.geoJson(Seguridad,{ pointToLayer: crearIconoSeguridad, onEachFeature: agregarPopup }),
 				residenciasad =L.geoJson(ResidenciasAdultosMayores,{ pointToLayer: crearIconoNaranja, onEachFeature: agregarPopup }),
-				barriospopulares=L.geoJson(BarriosPopulares, {onEachFeature: agregarPopupbarrios}).setStyle({color:"#e31a1c",fillOpacity: 0.75})
+				barriospopulares=L.geoJson(BarriosPopulares, {onEachFeature: agregarPopupbarrios}).setStyle({color:"#56b78f",fillOpacity: 0.75}),
 				reservorios=L.geoJson(Reservorios,{onEachFeature: agregarPopupres}).setStyle({color:"#729b6f",fillOpacity: 0.75}),
 				zonificacion=  L.geoJson(Zonificacion,{ onEachFeature: agregarPopupzoni }),
 				zonaley= L.geoJson(ZonaLey4886,{ onEachFeature: agregarPopupzonaLey4886 }),	
