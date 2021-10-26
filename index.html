@@ -849,7 +849,7 @@
 				limiurb=L.geoJson(LimiteUrbano, {onEachFeature: agregarPopupfarmacias}).setStyle({color:"red"}),
 				Depa= L.geoJson(DistritosDepartamentales, { onEachFeature: agregarPopupDistritosDepartamentales}),
 				recic= L.geoJson(PlantaRecicladora, { pointToLayer: crearIconoVerde, onEachFeature: agregarPopupres}),
-				bank= L.geoJson(Bancos, { pointToLayer: crearIconoNegro,  onEachFeature: agregarPopup}),
+				bank= L.geoJson(Bancos, { pointToLayer: crearIconoNegro,  onEachFeature: agregarPopupSalud}),
 				caja= L.geoJson(Cajeros, { pointToLayer: crearIconoAmarillo,  onEachFeature: agregarPopupbarrios}),
 				cobro= L.geoJson(Pagofacil, { pointToLayer: crearIconoNaranja,  onEachFeature: agregarPopupbarrios}),
 				bode= L.geoJson(Bodegas, { pointToLayer: crearIconoRojo,  onEachFeature: agregarPopupturismo}),
