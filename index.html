@@ -214,10 +214,9 @@
 				iconoMast = new iconoComun({iconUrl: 'img/mastil_r2.png'});
 			    iconoWifi = new iconoComun({iconUrl: 'img/wIfI_r2.png'});
 				iconoPanel = new iconoComun({iconUrl: 'img/paneles_3.png'});
-				
-				
-
 			
+				
+            
 			function crearIconoVerde (feature, latlng) {
 				return L.marker(latlng, { icon: iconoVerde })
 			}
@@ -462,7 +461,7 @@
 			}
 			function agregarPopupbarrios(feature, layer) { 
 				if (feature.properties && feature.properties.Nombre_1) { 
-						layer.bindPopup( "<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + feature.properties.Descrip + "</strong><br/>" + "Contacto: <strong>" + feature.properties.Contacto + "</strong><br/>" + "Tel: <strong>" + feature.properties.Tel); 
+						layer.bindPopup( "<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + feature.properties.Descrip + "</strong><br/>");
 				} 
 			}
 			function agregarPopuppuntorecepcionpilas(feature, layer) { 
@@ -850,7 +849,7 @@
 				limiurb=L.geoJson(LimiteUrbano, {onEachFeature: agregarPopupfarmacias}).setStyle({color:"red"}),
 				Depa= L.geoJson(DistritosDepartamentales, { onEachFeature: agregarPopupDistritosDepartamentales}),
 				recic= L.geoJson(PlantaRecicladora, { pointToLayer: crearIconoVerde, onEachFeature: agregarPopupres}),
-				bank= L.geoJson(Bancos, { pointToLayer: crearIconoAzul,  onEachFeature: agregarPopup}),
+				bank= L.geoJson(Bancos, { pointToLayer: crearIconoNegro,  onEachFeature: agregarPopup}),
 				caja= L.geoJson(Cajeros, { pointToLayer: crearIconoAmarillo,  onEachFeature: agregarPopupbarrios}),
 				cobro= L.geoJson(Pagofacil, { pointToLayer: crearIconoNaranja,  onEachFeature: agregarPopupbarrios}),
 				bode= L.geoJson(Bodegas, { pointToLayer: crearIconoRojo,  onEachFeature: agregarPopupturismo}),
