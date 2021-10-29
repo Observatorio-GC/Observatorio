@@ -842,7 +842,7 @@
 				punt= L.geoJson(PuntosVerdes, { pointToLayer: crearIconoVerde2, onEachFeature: agregarPopupPV }),
 				solma= L.geoJson(Solmaforos, { pointToLayer: crearIconoSema_r2, onEachFeature: agregarPopupfarmacias }),
 				estacion= L.geoJson(EstacionesdeServicio, { pointToLayer: crearIconoAzul, onEachFeature: agregarPopupPV }),
-				meteo= L.geoJson(Estaciones, { pointToLayer: crearIconoNegro, onEachFeature: agregarPopupfarmacias }),
+				meteo= L.geoJson(Estaciones, { pointToLayer: crearIconoNegro, onEachFeature: agregarPopupPV }),
 				ripieras=L.geoJson(Ripieras, {onEachFeature: agregarPopupfarmacias}).setStyle({color:"#e31a1c",fillOpacity: 0.75}),
 				zonatu=L.geoJson(ZonaNatural, {onEachFeature: agregarPopupPiedemonte}).setStyle({color:"#e31a1c",fillOpacity: 0.75}),
 				zonaurb=L.geoJson(ZonaUrbana, {onEachFeature: agregarPopupPiedemonte}).setStyle({color:"#e2e21a",fillOpacity: 0.75}),
