@@ -88,7 +88,7 @@
 		
 		<!-- GEOJSON -->
 		<script type="text/javascript" src="scripts/ZonaLey4886.js"></script>
-                <script type="text/javascript" src="scripts/Mastiles.js"></script>
+        <script type="text/javascript" src="scripts/Mastiles.js"></script>
 		<script type="text/javascript" src="scripts/Edificios.js"></script>
 		<script type="text/javascript" src="scripts/Puntoswifi.js"></script>
 		<script type="text/javascript" src="scripts/Persianas.js"></script>
@@ -596,7 +596,7 @@
 			
 			function agregarPopupHospital(feature, layer) { 
 				if (feature.properties && feature.properties.Nombre_1) { 
-						layer.bindPopup( "<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + feature.properties.Direccion + "</strong><br/>" + feature.properties.Jurisdiccion);
+						layer.bindPopup( "<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + feature.properties.Direccion + "</strong><br/>" + "Jurisdicción: <strong>" + feature.properties.Jurisdiccion);
 				} 
 		    }
 			
