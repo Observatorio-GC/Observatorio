@@ -522,7 +522,7 @@
 			}
 			function agregarPopupjardinesmuni(feature, layer) { 
 				if (feature.properties && feature.properties.nombre) { 
-						layer.bindPopup( "<strong>" + feature.properties.nombre + "</strong>"); 
+						layer.bindPopup( "<strong>" + feature.properties.nombre + "</strong><br/>" + feature.properties.Direccion ); 
 				} 
 			}
 			function agregarPopupciclovias(feature, layer) { 
