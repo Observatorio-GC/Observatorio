@@ -165,6 +165,9 @@
 	<script type="text/javascript" src="scripts/InfoAmbiente.js"></script>
 	<script type="text/javascript" src="scripts/Ciclovias Proyectadas (DAMI II).js"></script>
 	<script type="text/javascript" src="scripts/Ciclovias Proyectadas (Obras Particulares).js"></script>
+	<script type="text/javascript" src="scripts/Metrotranvia.js"></script>
+	<script type="text/javascript" src="scripts/ParadasMetrotranvia.js"></script>
+
 
 
 </head>
@@ -175,9 +178,9 @@
 	<img src="favicon.png" height="45px" width="45px" align=right class="logogc">
 	<div id="map" class="map map-home" style="margin:8px 0 8px 0;height:800px"></div>
 	<div id="referencias">
-		<div class="icono_referencia" id="ref_cicloObras">Ciclovias Proyectadas Municipalidad:</br>7,62 Km.</div> <b>
+		<div class="icono_referencia" id="ref_cicloObras">Ciclovias Proyectadas Municipalidad:</br>8,33 Km.</div> <b>
 			<div class="icono_referencia" id="ref_cicloDami">Ciclovias Proyectadas DAMI II:<br>18,26 Km.</div>
-			<div class="icono_referencia" id="ref_cicloviasexist">Ciclovias Existentes:</br>29,53 Km.</div>
+			<div class="icono_referencia" id="ref_cicloviasexist">Ciclovias Existentes:</br>26,10 Km.</div>
 
 	</div>
 
@@ -817,6 +820,21 @@
 			});
 		}
 
+		function estilometro() {
+			metro.eachLayer(function (featureInstanceLayer) {
+				var id_feature = featureInstanceLayer.feature.properties['id'];
+				if (id_feature == 1) {
+					color_actual = '#cf7601';
+				} else if (id_feature == 2) {
+					color_actual = '#b4afb3';
+				}	
+				featureInstanceLayer.setStyle({
+					color: color_actual, fillOpacity: 0.75
+				});
+			});
+		}
+
+
 		/* BASE LAYERS */
 		var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 			osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -884,6 +902,8 @@
 			suelo = L.geoJson(Suelo, { onEachFeature: agregarPopup }),
 			hidrico = L.geoJson(RedHidrica, { onEachFeature: agregarPopup }).setStyle({ color: "#15c8f0" }),
 			paneles = L.geoJson(PanelesSolares, { pointToLayer: crearIconoPanel, onEachFeature: agregarPopupPaneles }),
+			metro = L.geoJson(Metrotranvia, { onEachFeature: agregarPopupfarmacias }),
+			paradasMetro = L.geoJson(ParadasMetro, {pointToLayer: crearIconoNegro, onEachFeature: agregarPopupfarmacias}),
 			sistcloacal = L.geoJson(SistemaCloacal, { onEachFeature: agregarPopupcloacas }),
 			infoambiente = L.geoJson(InfoAmbiente, { onEachFeature: agregarPopupDepen });
 
@@ -909,6 +929,7 @@
 		estiloley();
 		estiloinundacion();
 		estilosuelo();
+		estilometro();
 
 		/* CREACIÓN DEL LAYERS CONTROL */
 		var baseMaps = {
@@ -975,6 +996,8 @@
 				"Ciclovías Existentes": cicloviasexist,
 				"Ciclovías Proyectadas DAMI II": cicloDami,
 				"Ciclovías Proyectadas Municipalidad": cicloObras,
+				"Metrotranvia": metro,
+				"Paradas Metrotranvia": paradasMetro,
 
 			},
 			"<a href='https://museovirtual.godoycruz.gob.ar/'+ target=_blank'>Museo Virtual de Godoy Cruz (Muvi GC) </a>": {
