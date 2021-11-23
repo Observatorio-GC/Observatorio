@@ -903,7 +903,7 @@
 			hidrico = L.geoJson(RedHidrica, { onEachFeature: agregarPopup }).setStyle({ color: "#15c8f0" }),
 			paneles = L.geoJson(PanelesSolares, { pointToLayer: crearIconoPanel, onEachFeature: agregarPopupPaneles }),
 			metro = L.geoJson(Metrotranvia, { onEachFeature: agregarPopupfarmacias }),
-			paradasMetro = L.geoJson(ParadasMetro, {pointToLayer: crearIconoNegro, onEachFeature: agregarPopupfarmacias}),
+			paradasMetro = L.geoJson(ParadasMetro, {pointToLayer: crearIconoNegro, onEachFeature: agregarPopupbarrios}),
 			sistcloacal = L.geoJson(SistemaCloacal, { onEachFeature: agregarPopupcloacas }),
 			infoambiente = L.geoJson(InfoAmbiente, { onEachFeature: agregarPopupDepen });
 
@@ -970,7 +970,7 @@
 				"Suelo": suelo,
 
 			},
-			"Marco Normativo": {
+			"Sistema Juridíco-Administrativo": {
 				"Distritos": Depa,
 				"Limite Urbano": limiurb,
 				"Línea Municipal y de Edificación (Capa en construcción) ": lineasmun,
@@ -1000,19 +1000,19 @@
 				"Paradas Metrotranvia": paradasMetro,
 
 			},
-			"<a href='https://museovirtual.godoycruz.gob.ar/'+ target=_blank'>Museo Virtual de Godoy Cruz (Muvi GC) </a>": {
-				"Barrios Historicos": barrios,
-				"Edificios": edificios,
-				"Sitios y Conjuntos Edilicios": SyCE,
-				"Tramos y Carriles": TyC,
+            "Infraestructura de Salud": {
+				"Centros de Salud": centrosdesalud,
+				"Clínicas Privadas": clinicaspriv,
+				"Farmacias": farmacias,
+				"Hospitales": hospital,
 
 			},
-			"Educacion": {
+            "Educacion": {
 				"Establecimientos Educativos": escuelas,
 				"Jardines Municipales": jardinesmuni,
 
 			},
-			"Infraestructura Urbana": {
+            "Infraestructura Urbana": {
 				"Bancos": bank,
 				"Barrios Consolidados": BarriosConsolidados,
 				"Barrios Populares": barriospopulares,
@@ -1027,21 +1027,20 @@
 				"Puntos de Wifi": puntoswifi,
 				"Residencias de Adultos Mayores": residenciasad,
 
-
-			},
-			"Infraestructura de Salud": {
-				"Centros de Salud": centrosdesalud,
-				"Clínicas Privadas": clinicaspriv,
-				"Farmacias": farmacias,
-				"Hospitales": hospital,
-
-			},
+            },
 			"Infraestructura de Servicio": {
 				"Estaciones de Servicio": estacion,
 				"Lineas de Distribución de Energía": lineasd,
 				"Lineas de Transporte de Energía": lineast,
 				"Red Colectora Cloacal": sistcloacal,
 				"Red Distribuidora de Agua Potable": redesagua,
+
+			},
+			"<a href='https://museovirtual.godoycruz.gob.ar/'+ target=_blank'>Museo Virtual de Godoy Cruz (Muvi GC) </a>": {
+				"Barrios Historicos": barrios,
+				"Edificios": edificios,
+				"Sitios y Conjuntos Edilicios": SyCE,
+				"Tramos y Carriles": TyC,
 
 			},
 			"Patrimonio": {
