@@ -32,7 +32,7 @@ var PanelesSolares ={
 { "type": "Feature", "properties": { "Name": "PARQUE MARGARITA MALHARRO DE TORRES", "descriptio": "Panel Solar" }, "geometry": { "type": "Point", "coordinates": [ -68.8300274, -32.931954, 0.0 ] } },
 { "type": "Feature", "properties": { "Name": "POLIDEPORTIVO BIRITOS", "descriptio": "Panel Solar" }, "geometry": { "type": "Point", "coordinates": [ -68.8463279, -32.9106079, 0.0 ] } },
 { "type": "Feature", "properties": { "Name": "DIRECCION DE AMBIENTE Y ENERGIA", "descriptio": "Estación Solar para  vehículos electricos" }, "geometry": { "type": "Point", "coordinates": [ -68.8515554, -32.9284605, 0.0 ] } },
-{ "type": "Feature", "properties": { "Name": "PLAZA MIRTA ELENA DE GOMEZ", "descriptio": "Panel Solar" }, "geometry": { "type": "Point", "coordinates": [ -68.8564434, -32.9502326, 0.0 ] } },
+{ "type": "Feature", "properties": { "Name": "PLAZA SOLAR MIRTA ELENA DE GOMEZ", "descriptio": "Panel Solar" }, "geometry": { "type": "Point", "coordinates": [ -68.8564434, -32.9502326, 0.0 ] } },
 { "type": "Feature", "properties": { "Name": "PARQUE LUIS MENOTTI PESCARMONA", "descriptio": "Panel Solar" }, "geometry": { "type": "Point", "coordinates": [ -68.8419717, -32.9239041, 0.0 ] } },
 { "type": "Feature", "properties": { "Name": "JARDINES HCD", "descriptio": "Panel Solar" }, "geometry": { "type": "Point", "coordinates": [ -68.8432509, -32.9249909, 0.0 ] } },
 { "type": "Feature", "properties": { "Name": "ESTACION ALSINA", "descriptio": "Paneles Solares" }, "geometry": { "type": "Point", "coordinates": [ -68.8259325, -32.9325442, 0.0 ] } },
