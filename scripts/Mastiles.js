@@ -55,6 +55,7 @@ var Mastiles ={
 { "type": "Feature", "properties": { "Name": "Barrio Union Vecinal Gobernador Benegas", "Fotos": null }, "geometry": { "type": "Point", "coordinates": [ -68.84083485557422, -32.9483741037317 ] } },
 { "type": "Feature", "properties": { "Name": "Ingreso a Dirección de Servicios Públicos", "Fotos": null }, "geometry": { "type": "Point", "coordinates": [ -68.86460214410414, -32.92305901634828 ] } },
 { "type": "Feature", "properties": { "Name": "Jardin Centro de Salud Dr. Ramon Carillo", "Fotos": null }, "geometry": { "type": "Point", "coordinates": [ -68.86490672500273, -32.92247079734809 ] } },
-{ "type": "Feature", "properties": { "Name": "Espacio Verde frente a Puente Ciclovia", "Fotos": null }, "geometry": { "type": "Point", "coordinates": [ -68.85015080710355, -32.94024758286977 ] } }, 
+{ "type": "Feature", "properties": { "Name": "Espacio Verde frente a Puente Ciclovia", "Fotos": null }, "geometry": { "type": "Point", "coordinates": [ -68.85015080710355, -32.94024758286977 ] } },
+{ "type": "Feature", "properties": { "Name": "Calle Roca y Catamarca Esquina Nor_Este", "Fotos": null }, "geometry": { "type": "Point", "coordinates": [ -68.83451713969724, -32.944489612634726 ] } }, 
 ]
 }
