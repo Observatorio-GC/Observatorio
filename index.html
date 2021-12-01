@@ -168,6 +168,8 @@
 	<script type="text/javascript" src="scripts/Metrotranvia.js"></script>
 	<script type="text/javascript" src="scripts/ParadasMetrotranvia.js"></script>
 	<script type="text/javascript" src="scripts/GranjaSolar.js"></script>
+	<script type="text/javascript" src="scripts/SenderoGeologico.js"></script>
+	<script type="text/javascript" src="scripts/ParadasSendero.js"></script>
 
 
 
@@ -835,7 +837,18 @@
 			});
 		}
 
-
+		function estilosendero() {
+			sendGeo.eachLayer(function (featureInstanceLayer) {
+				var id_feature = featureInstanceLayer.feature.properties['id'];
+				if (id_feature == 1) {
+					color_actual = '#cf7601';
+				} 	
+				featureInstanceLayer.setStyle({
+					color: color_actual, fillOpacity: 0.75
+				});
+			});
+		}
+		
 		/* BASE LAYERS */
 		var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 			osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -907,6 +920,7 @@
 			paradasMetro = L.geoJson(ParadasMetro, {pointToLayer: crearIconoNegro, onEachFeature: agregarPopupbarrios}),
 			granjaSolar= L.geoJson(GranjaSolar, { onEachFeature: agregarPopupbarrios }).setStyle({ color: "#e37e12", fillOpacity: 0.75 }),
 			sistcloacal = L.geoJson(SistemaCloacal, { onEachFeature: agregarPopupcloacas }),
+			sendGeo = L.geoJson(SenderoGeologico, { onEachFeature: agregarPopupfarmacias }),
 			infoambiente = L.geoJson(InfoAmbiente, { onEachFeature: agregarPopupDepen });
 
 
@@ -932,6 +946,7 @@
 		estiloinundacion();
 		estilosuelo();
 		estilometro();
+		estilosendero();
 
 		/* CREACIÓN DEL LAYERS CONTROL */
 		var baseMaps = {
@@ -963,18 +978,18 @@
 
 			},
 			"Riesgo": {
-				"Amenaza de Inundacion": inundacion,
+				"Amenaza de Inundación": inundacion,
 				"Canales Colectores Hijuelas": CanalesColectoresHijuelas,
 				"Cuencas Hidrográficas": cuencas,
 				"Fallas Geologicas": fall,
-				"Red Hidrica": hidrico,
+				"Red Hídrica": hidrico,
 				"Reservorios urbanos": reservorios,
 				"Suelo": suelo,
 
 			},
 			"Sistema Juridíco-Administrativo": {
 				"Distritos": Depa,
-				"Limite Urbano": limiurb,
+				"Límite Urbano": limiurb,
 				"Línea Municipal y de Edificación (Capa en construcción) ": lineasmun,
 				"Zona con Características Especiales de Urbanización": zonaurb,
 				"Zona Especial de Conservacion Natural": zonatu,
@@ -983,7 +998,10 @@
 
 			},
 			"Infraestructura Ambiental": {
+				"Espacios Verdes": espverdes,
+				"Estaciones Meteorológicas": meteo,
 				"Granja Solar (Proyectada)": granjaSolar,
+				"Gobernanza Ambiental": infoambiente,
 				"Paneles Solares": paneles,
 				"Planta de Clasificación de Residuos": recic,
 				"Puntos de Recepción de Pilas": puntospilas,
@@ -991,73 +1009,55 @@
 				"Solmáforos": solma,
 
 			},
-			"Gobernanza Ambiental": {
-				"Información Ambiental": infoambiente,
-
-			},
 			"Movilidad": {
 				"Ciclovías Existentes": cicloviasexist,
 				"Ciclovías Proyectadas DAMI II": cicloDami,
 				"Ciclovías Proyectadas Municipalidad": cicloObras,
-				"Metrotranvia": metro,
-				"Paradas Metrotranvia": paradasMetro,
+				"Metrotranvía": metro,
+				"Paradas Metrotranvía": paradasMetro,
 
 			},
-            "Infraestructura de Salud": {
-				"Centros de Salud": centrosdesalud,
-				"Clínicas Privadas": clinicaspriv,
-				"Farmacias": farmacias,
-				"Hospitales": hospital,
-
-			},
-            "Educacion": {
-				"Establecimientos Educativos": escuelas,
-				"Jardines Municipales": jardinesmuni,
-
-			},
-            "Infraestructura Urbana": {
-				"Bancos": bank,
-				"Barrios Consolidados": BarriosConsolidados,
-				"Barrios Populares": barriospopulares,
-				"Cajeros": caja,
-				"Dependencias Municipales": depen,
-				"Espacios Verdes": espverdes,
-				"Estaciones Meteorológicas": meteo,
-				"Instituciones de Seguridad": seguridad,
-				"Mastiles vía Pública": mastil,
-				"Pago Facil - Rapipago": cobro,
-				"Polideportivos": polideportivos,
-				"Puntos de Wifi": puntoswifi,
-				"Residencias de Adultos Mayores": residenciasad,
-
-            },
-			"Infraestructura de Servicio": {
-				"Estaciones de Servicio": estacion,
-				"Lineas de Distribución de Energía": lineasd,
-				"Lineas de Transporte de Energía": lineast,
-				"Red Colectora Cloacal": sistcloacal,
-				"Red Distribuidora de Agua Potable": redesagua,
-
-			},
-			"<a href='https://museovirtual.godoycruz.gob.ar/'+ target=_blank'>Museo Virtual de Godoy Cruz (Muvi GC) </a>": {
+			"Turismo, Patrimonio y Cultura": {
 				"Barrios Historicos": barrios,
+				"Bodegas": bode,
 				"Edificios": edificios,
+				"Esculturas": escultura,
+				"Informador Turistico": informador,
+				"Persianas Comerciales": persianas,
+				"Puestos Programa en la Bici": bicicleta,
+				"Sendero Geológico": sendGeo,
 				"Sitios y Conjuntos Edilicios": SyCE,
 				"Tramos y Carriles": TyC,
 
 			},
-			"Patrimonio": {
-				"Esculturas": escultura,
-				"Persianas Comerciales": persianas,
-
-
+			"Equipamiento Social": {
+				"Centros de Salud": centrosdesalud,
+				"Clínicas Privadas": clinicaspriv,
+				"Dependencias Municipales": depen,
+				"Establecimientos Educativos": escuelas,
+				"Jardines Municipales": jardinesmuni,
+				"Farmacias": farmacias,
+				"Hospitales": hospital,
+				"Instituciones de Seguridad": seguridad,
+				"Polideportivos": polideportivos,
+				"Puntos de Wifi": puntoswifi,
+				"Residencias de Adultos Mayores": residenciasad,
+			
 			},
-			"Turismo": {
-				"Bodegas": bode,
-				"Informador Turistico": informador,
-				"Puestos Programa en la Bici": bicicleta,
-			},
-
+            "Infraestructura Urbana y de Servicio": {
+				"Bancos": bank,
+				"Barrios Consolidados": BarriosConsolidados,
+				"Barrios Populares": barriospopulares,
+				"Cajeros": caja,
+				"Estaciones de Servicio": estacion,
+				"Líneas de Distribución de Energía": lineasd,
+				"Líneas de Transporte de Energía": lineast,
+				"Mastiles vía Pública": mastil,
+				"Pago Facil - Rapipago": cobro,
+				"Red Colectora Cloacal": sistcloacal,
+				"Red Distribuidora de Agua Potable": redesagua,
+				
+            },
 		};
 
 		var opciones_groupedlayers = {
