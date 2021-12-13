@@ -884,7 +884,7 @@
 			polideportivos = L.geoJson(Polideportivos, { pointToLayer: crearIconoPoli, onEachFeature: agregarPopupSalud }),
 			jardinesmuni = L.geoJson(JardinesMunicipales, { pointToLayer: crearIconoJardmatern, onEachFeature: agregarPopupjardinesmuni }),
 			seguridad = L.geoJson(Seguridad, { pointToLayer: crearIconoSeguridad, onEachFeature: agregarPopupSalud }),
-			residenciasad = L.geoJson(ResidenciasAdultosMayores, { pointToLayer: crearIconoNaranja, onEachFeature: agregarPopup }),
+			residenciasad = L.geoJson(ResidenciasAdultosMayores, { pointToLayer: crearIconoNaranja, onEachFeature: agregarPopupSalud }),
 			barriospopulares = L.geoJson(BarriosPopulares, { onEachFeature: agregarPopupbarrios }).setStyle({ color: "#f2d119", fillOpacity: 0.75 }),
 			reservorios = L.geoJson(Reservorios, { onEachFeature: agregarPopupres }).setStyle({ color: "#729b6f", fillOpacity: 0.75 }),
 			zonificacion = L.geoJson(Zonificacion, { onEachFeature: agregarPopupzoni }),
