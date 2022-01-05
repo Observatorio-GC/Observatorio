@@ -17,7 +17,7 @@ var Seguridad ={
 { "type": "Feature", "properties": { "NUM.": null, "Nombre_1": "Destacamento Alberto Cuello", "Direccion": "Lago Correntoso y Laguna de la Esquina" }, "geometry": { "type": "Point", "coordinates": [ -68.859411574043705, -32.945943802701713, 0.0 ] } },
 { "type": "Feature", "properties": { "NUM.": null, "Nombre_1": "Comisaría Nº52 Cabo H. F. Le Bihan", "Direccion": "Rawson y Velez Sarfield" }, "geometry": { "type": "Point", "coordinates": [ -68.832134375366294, -32.954322783259045, 0.0 ] } },
 { "type": "Feature", "properties": { "NUM.": "37", "Nombre_1": "Comisaria Nº37", "Direccion": "Terrada y Formosa" }, "geometry": { "type": "Point", "coordinates": [ -68.822130028077694, -32.943859473800025, 0.0 ] } },
-{ "type": "Feature", "properties": { "NUM.": "U.M.A.R.", "Nombre_1": "Unidad Motorizada de Accion Rapida", "Direccion": "Pareditas y La Consulta (Barrio Sol y Esperanza)" }, "geometry": { "type": "Point", "coordinates": [ -68.873020940059362, -32.924832177844223, 0.0 ] } },
+{ "type": "Feature", "properties": { "NUM.": "U.M.A.R.", "Nombre_1": "Unidad Motorizada de Accion Rapida", "Direccion": "Pareditas y La Consulta" }, "geometry": { "type": "Point", "coordinates": [ -68.873020940059362, -32.924832177844223, 0.0 ] } },
 { "type": "Feature", "properties": { "NUM.": null, "Nombre_1": "Unidad Policial Metrotranviaria", "Direccion": "Mitre s\/n" }, "geometry": { "type": "Point", "coordinates": [ -68.838824138917474, -32.920487032086086, 0.0 ] } },
 { "type": "Feature", "properties": { "NUM.": null, "Nombre_1": "Subcomisaria Gobernador Benegas", "Direccion": "Castroman y Salvador Mara del Carril" }, "geometry": { "type": "Point", "coordinates": [ -68.840547348845647, -32.946864786750538, 0.0 ] } }
 ]
