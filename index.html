@@ -177,6 +177,7 @@
 	<script type="text/javascript" src="scripts/Heladerias.js"></script>
 	<script type="text/javascript" src="scripts/Bares.js"></script>
 	<script type="text/javascript" src="scripts/Restaurantes.js"></script>
+	<script type="text/javascript" src="scripts/Incubadora.js"></script>
 
 
 </head>
@@ -946,6 +947,7 @@
 			ave = L.geoJson(Aventura, { pointToLayer: crearIconoAzul, onEachFeature: agregarPopupGastronomia2 }),
 			hospe = L.geoJson(Hospedajes, { pointToLayer: crearIconoAmarillo, onEachFeature: agregarPopupGastronomia2 }),
 			spa = L.geoJson(Spa, { pointToLayer: crearIconoVerde, onEachFeature: agregarPopupGastronomia2 }),
+			incu = L.geoJson(Incubadora, { pointToLayer: crearIconoVerde, onEachFeature: agregarPopup}),
 			infoambiente = L.geoJson(InfoAmbiente, { onEachFeature: agregarPopupDepen });
 
 
@@ -1073,6 +1075,7 @@
 				"Jardines Municipales": jardinesmuni,
 				"Farmacias": farmacias,
 				"Hospitales": hospital,
+				"Incubadora de Empresas y Escuela de Oficios": incu,
 				"Instituciones de Seguridad": seguridad,
 				"Polideportivos": polideportivos,
 				"Puntos de Wifi": puntoswifi,
