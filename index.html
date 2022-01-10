@@ -170,7 +170,13 @@
 	<script type="text/javascript" src="scripts/GranjaSolar.js"></script>
 	<script type="text/javascript" src="scripts/SenderoGeologico.js"></script>
 	<script type="text/javascript" src="scripts/ParadasSendero.js"></script>
-
+	<script type="text/javascript" src="scripts/cafe.js"></script>
+	<script type="text/javascript" src="scripts/Aventura.js"></script>
+	<script type="text/javascript" src="scripts/Hospedajes.js"></script>
+	<script type="text/javascript" src="scripts/Spa.js"></script>
+	<script type="text/javascript" src="scripts/Heladerias.js"></script>
+	<script type="text/javascript" src="scripts/Bares.js"></script>
+	<script type="text/javascript" src="scripts/Restaurantes.js"></script>
 
 
 </head>
@@ -657,6 +663,18 @@
 			}
 		}
 
+		function agregarPopupGastronomia(feature, layer) {
+			if (feature.properties && feature.properties.Nombre) {
+				layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong><br/>" + "Dirección <strong>" + feature.properties.Direccion + "</strong><br/>" + "Horario <strong>" + feature.properties.Horario + "</strong><br/>" + "Contacto <strong>" + feature.properties.Contacto);
+			}
+		}
+
+		function agregarPopupGastronomia2(feature, layer) {
+			if (feature.properties && feature.properties.Nombre) {
+				layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong><br/>" + "Dirección <strong>" + feature.properties.Direccion + "</strong><br/>" + "Contacto <strong>" + feature.properties.Contacto);
+			}
+		}
+
 		function estiloDistritosDepartamentales() {
 			Depa.eachLayer(function (featureInstanceLayer) {
 				var id_feature = featureInstanceLayer.feature.properties['qc_id'];
@@ -921,6 +939,13 @@
 			granjaSolar= L.geoJson(GranjaSolar, { onEachFeature: agregarPopupbarrios }).setStyle({ color: "#e37e12", fillOpacity: 0.75 }),
 			sistcloacal = L.geoJson(SistemaCloacal, { onEachFeature: agregarPopupcloacas }),
 			sendGeo = L.geoJson(SenderoGeologico, { onEachFeature: agregarPopupfarmacias }),
+			bar = L.geoJson(Bares, { pointToLayer: crearIconoVioleta, onEachFeature: agregarPopupGastronomia }),
+			resto = L.geoJson(Restaurantes, { pointToLayer: crearIconoNegro, onEachFeature: agregarPopupGastronomia }),
+			cafe = L.geoJson(cafe, { pointToLayer: crearIconoNaranja, onEachFeature: agregarPopupGastronomia }),
+            hela = L.geoJson(Heladerias, { pointToLayer: crearIconoRojo, onEachFeature: agregarPopupGastronomia }),
+			ave = L.geoJson(Aventura, { pointToLayer: crearIconoAzul, onEachFeature: agregarPopupGastronomia2 }),
+			hospe = L.geoJson(Hospedajes, { pointToLayer: crearIconoAmarillo, onEachFeature: agregarPopupGastronomia2 }),
+			spa = L.geoJson(Spa, { pointToLayer: crearIconoVerde, onEachFeature: agregarPopupGastronomia2 }),
 			infoambiente = L.geoJson(InfoAmbiente, { onEachFeature: agregarPopupDepen });
 
 
@@ -1017,15 +1042,25 @@
 				"Paradas Metrotranvía": paradasMetro,
 
 			},
-			"Turismo, Patrimonio y Cultura": {
-				"Barrios Historicos": barrios,
+			"Turismo": {
+				"Aventura": ave,
+				"Bares y Comidas": bar, 
 				"Bodegas": bode,
-				"Edificios": edificios,
-				"Esculturas": escultura,
-				"Informador Turistico": informador,
+				"Casas de Té y Café": cafe,
+				"Heladerías": hela,
+				"Hospedajes": hospe,
+				"Informador Turístico": informador,
 				"Persianas Comerciales": persianas,
 				"Puestos Programa en la Bici": bicicleta,
+				"Restaurantes": resto,
 				"Sendero Turístico - Geológico": sendGeo,
+				"Spa": spa,
+			},
+
+			"Patrimonio y Cultura": {
+				"Barrios Historicos": barrios,
+				"Edificios": edificios,
+				"Esculturas": escultura,
 				"Sitios y Conjuntos Edilicios": SyCE,
 				"Tramos y Carriles": TyC,
 
