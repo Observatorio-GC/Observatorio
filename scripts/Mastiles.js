@@ -58,6 +58,8 @@ var Mastiles ={
 { "type": "Feature", "properties": { "Name": "Espacio Verde frente a Puente Ciclovia", "Fotos": null }, "geometry": { "type": "Point", "coordinates": [ -68.85015080710355, -32.94024758286977 ] } },
 { "type": "Feature", "properties": { "Name": "Calle Roca y Catamarca Esquina Nor_Este", "Fotos": null }, "geometry": { "type": "Point", "coordinates": [ -68.83451713969724, -32.944489612634726 ] } },
 { "type": "Feature", "properties": { "Name": "Calle P.Groussac y Olaya P. de Tomba ex Destacamento barrio Sardi", "Fotos": null }, "geometry": { "type": "Point", "coordinates": [ -68.85944111333595, -32.93727949995846 ] } },
+{ "type": "Feature", "properties": { "Name": "Calle Bouchard y B. Ortiz ", "Fotos": null }, "geometry": { "type": "Point", "coordinates": [ -68.84212921909779, -32.928793483912 ] } },
+{ "type": "Feature", "properties": { "Name": "Calle Bouchard y B. Ortiz ", "Fotos": null }, "geometry": { "type": "Point", "coordinates": [ -68.85194510219107, -32.94431148983697 ] } },
 
 ]
 }
