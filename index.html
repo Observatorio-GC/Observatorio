@@ -513,7 +513,8 @@
 		}
 		function agregarPopupmasti(feature, layer) {
 			if (feature.properties && feature.properties.Name) {
-				layer.bindPopup("<strong>" + feature.properties.Name + "</strong>");
+				layer.bindPopup("<strong>" + feature.properties.Name + "</strong><br><img src='img/mastil/" + feature.properties.Fotos + "' height='160px' width='200px' style='display:block; margin: auto; margin-top:7px;' />");
+
 			}
 		}
 		function agregarPopupesculturas(feature, layer) {
