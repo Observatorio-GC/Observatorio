@@ -514,7 +514,7 @@
 		}
 		function agregarPopupmasti(feature, layer) {
 			if (feature.properties && feature.properties.Name) {
-				layer.bindPopup("<strong>" + feature.properties.Name + "</strong><br><img src='img/turismo/mastil/" + feature.properties.Fotos + "' height='160px' width='200px' style='display:block; margin: auto; margin-top:7px;' />");
+				layer.bindPopup("<strong>" + feature.properties.Nombre_Descripcion + "</strong><br/>" + feature.properties.Ubicaci__n + "</strong><br/>" + feature.properties.Distrito + "</strong><br/>" +feature.properties.Posee_Mastil + "</strong><br><img src='img/turismo/mastil/" + feature.properties.Fotos + "' height='160px' width='200px' style='display:block; margin: auto; margin-top:7px;' />");
 
 			}
 		}
