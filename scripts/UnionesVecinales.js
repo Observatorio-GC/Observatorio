@@ -1,0 +1,33 @@
+var UnionesVecinales ={
+"type": "FeatureCollection",
+"name": "UnionesVecinales",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Nombre": "Sede Unión Vecinal Barrio Parque", "Direccion": "Mansilla 1660" }, "geometry": { "type": "Point", "coordinates": [ -68.846123, -32.943834, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre": "Sede U V Victoriano Montes", "Direccion": "Portugal s\/n" }, "geometry": { "type": "Point", "coordinates": [ -68.839546, -32.939323, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre": "Sede Unión Vecinal Islas Malvinas", "Direccion": "Las Orquideas s\/n" }, "geometry": { "type": "Point", "coordinates": [ -68.83288, -32.938713, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre": "Sede Unión Vecinal La Perla", "Direccion": "Sarmiento 1940" }, "geometry": { "type": "Point", "coordinates": [ -68.823301, -32.941751, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre": "Sede U V City fathers", "Direccion": "Gral. Alvear 730" }, "geometry": { "type": "Point", "coordinates": [ -68.862471441199631, -32.917898423679176, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre": "Unión Vecinal Leandro Alem", "Direccion": null }, "geometry": { "type": "Point", "coordinates": [ -68.834876, -32.945325, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre": "Sede U V Gobernador Benegas", "Direccion": "Del Carril 1872" }, "geometry": { "type": "Point", "coordinates": [ -68.841039, -32.948428, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre": "U V Barrio La Gloria", "Direccion": "Velez Sarfield y Bahia Blanca" }, "geometry": { "type": "Point", "coordinates": [ -68.831784990175848, -32.957073813702749, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre": "Sede U V Santa Lucía", "Direccion": "Javier Morales 1710" }, "geometry": { "type": "Point", "coordinates": [ -68.840799, -32.94667, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre": "Unión Vecinal Bº Angelica Civit de Suarez", "Direccion": "Rio Juramento 2574" }, "geometry": { "type": "Point", "coordinates": [ -68.867763, -32.922203, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre": "Unión Vecinal Barrio Parque Sur", "Direccion": "Lautaro Manzana 28" }, "geometry": { "type": "Point", "coordinates": [ -68.868198, -32.906028, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre": "Unión Vecinal  Villa del Parque", "Direccion": "San Vicente y Bulnes" }, "geometry": { "type": "Point", "coordinates": [ -68.877971, -32.906026, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre": "Unión Vecinal Bº Gráfico", "Direccion": "Copérnico 2298" }, "geometry": { "type": "Point", "coordinates": [ -68.881397, -32.901898, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre": "Union Vecinal Barrio Supe", "Direccion": "Talcahuano 4000" }, "geometry": { "type": "Point", "coordinates": [ -68.888525590632639, -32.900688624600996, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre": "Unión Vecinal bella Vista", "Direccion": "Pablo Iglesias 2638" }, "geometry": { "type": "Point", "coordinates": [ -68.871356587026611, -32.917997959253164, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre": "Unión Vecinal Godoy Cruz Centro Centro", "Direccion": "Beltrán 571" }, "geometry": { "type": "Point", "coordinates": [ -68.850476, -32.917992, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre": "Asociación Vecinal Villa Mercedes", "Direccion": "Laprida 1065" }, "geometry": { "type": "Point", "coordinates": [ -68.856507, -32.909329, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre": "Asociación de Fomento Edilicio de Villa Jovita", "Direccion": null }, "geometry": { "type": "Point", "coordinates": [ -68.862317, -32.903285, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre": "Terreno Unión Vecinal Tapón de Sevilla", "Direccion": null }, "geometry": { "type": "Point", "coordinates": [ -68.854328, -32.903593, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre": "Sede U V Bº Sol y Sierra", "Direccion": null }, "geometry": { "type": "Point", "coordinates": [ -68.892565, -32.932142, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre": "Sede U V Estanzuela", "Direccion": null }, "geometry": { "type": "Point", "coordinates": [ -68.869697, -32.946076, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre": "Sede U V Postas Argentinas", "Direccion": null }, "geometry": { "type": "Point", "coordinates": [ -68.872642, -32.936309, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre": "Asociación Mutual La esperanza Sede", "Direccion": "Pte. Arturo Illia 971" }, "geometry": { "type": "Point", "coordinates": [ -68.869415, -32.932212, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre": "Unión Vecinal Gloria del Libertador", "Direccion": "Salvador Arias 1575" }, "geometry": { "type": "Point", "coordinates": [ -68.863359, -32.928682, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre": "Sede Union Vecinal COVIMET III", "Direccion": "Penitentes 1971" }, "geometry": { "type": "Point", "coordinates": [ -68.822377, -32.943949, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre": "Vecinal Barraquero", "Direccion": null }, "geometry": { "type": "Point", "coordinates": [ -68.841842, -32.905636, 0.0 ] } }
+]
+}
