@@ -178,6 +178,7 @@
 	<script type="text/javascript" src="scripts/Bares.js"></script>
 	<script type="text/javascript" src="scripts/Restaurantes.js"></script>
 	<script type="text/javascript" src="scripts/Incubadora.js"></script>
+	<script type="text/javascript" src="scripts/UnionesVecinales.js"></script>
 
 
 </head>
@@ -949,6 +950,7 @@
 			hospe = L.geoJson(Hospedajes, { pointToLayer: crearIconoAmarillo, onEachFeature: agregarPopupGastronomia2 }),
 			spa = L.geoJson(Spa, { pointToLayer: crearIconoVerde, onEachFeature: agregarPopupGastronomia2 }),
 			incu = L.geoJson(Incubadora, { pointToLayer: crearIconoVerde, onEachFeature: agregarPopup}),
+			union = L.geoJson(UnionesVecinales, { pointToLayer: crearIconoAmarillo, onEachFeature: agregarPopupPV}),
 			infoambiente = L.geoJson(InfoAmbiente, { onEachFeature: agregarPopupDepen });
 
 
@@ -1081,6 +1083,7 @@
 				"Polideportivos": polideportivos,
 				"Puntos de Wifi": puntoswifi,
 				"Residencias de Adultos Mayores": residenciasad,
+				"Uniones Vecinales": union,
 			
 			},
             "Infraestructura Urbana y de Servicio": {
