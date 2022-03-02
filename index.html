@@ -428,13 +428,6 @@
 			pointToLayer: crearIconoedi
 		}
 
-		function crearIconMast(feature, latlng) {
-			return L.marker(latlng, { icon: iconoMast })
-		}
-		var asignarIconoMast = {
-			pointToLayer: crearIconoMast
-		}
-
 		function crearIconoUnivec(feature, latlng) {
 			return L.marker(latlng, { icon: iconoUnivec })
 		}
@@ -883,7 +876,7 @@
 		var plazagc = L.marker([-32.92524, -68.84439]).bindPopup('Plaza GC.').openPopup(),
 			centrosdesalud = L.geoJson(centrosdesalud, { pointToLayer: crearIconoCentrosalud, onEachFeature: agregarPopupSalud }),
 			edificios = L.geoJson(Edificios, { pointToLayer: crearIconoedi, onEachFeature: agregarPopuppatrimoniales }),
-			mastil = L.geoJson(Mastiles, { pointToLayer: crearIconMast, onEachFeature: agregarPopupmasti }),
+			mastil = L.geoJson(Mastiles, { pointToLayer: crearIconoMast, onEachFeature: agregarPopupmasti }),
 			SyCE = L.geoJson(SitiosyConjuntosEdilicios, { pointToLayer: crearIconositios, onEachFeature: agregarPopuppatrimoniales }),
 			TyC = L.geoJson(TramosyCarriles, { onEachFeature: agregarPopuppatrimoniales }).setStyle({ color: "#C35918" }),
 			barrios = L.geoJson(Barrios, { onEachFeature: agregarPopuppatrimoniales }).setStyle({ color: "#E86211", fillOpacity: 0.75 }),
