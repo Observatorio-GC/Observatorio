@@ -889,7 +889,7 @@
 			barrios = L.geoJson(Barrios, { onEachFeature: agregarPopuppatrimoniales }).setStyle({ color: "#E86211", fillOpacity: 0.75 }),
 		    escultura = L.geoJson(Esculturas, { pointToLayer: crearIconoEscul, onEachFeature: agregarPopupesculturas }),
 			godoycruz = L.geoJson(godoycruz),
-			puntoswifi = L.geoJson(Puntoswifi, { pointToLayer: crearIconoWifi, onEachFeature: agregarPopupmasti }),
+			puntoswifi = L.geoJson(Puntoswifi, { pointToLayer: crearIconoWifi, onEachFeature: agregarPopuppuntorecepcionpilas }),
 			persianas = L.geoJson(Persianas, { pointToLayer: crearIconoPersi, onEachFeature: agregarPopuppersianas }),
 			cicloObras = L.geoJson(CicloviaProyectadaObras, { onEachFeature: agregarPopupciclovias }).setStyle({ color: "yellow" }),
 			cicloDami = L.geoJson(CicloviasProyectadasDami, { onEachFeature: agregarPopupciclovias }).setStyle({ color: "orange" }),
