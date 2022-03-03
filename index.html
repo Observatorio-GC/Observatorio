@@ -109,6 +109,7 @@
 	<!-- GEOJSON -->
 	<script type="text/javascript" src="scripts/ZonaLey4886.js"></script>
 	<script type="text/javascript" src="scripts/Mastiles.js"></script>
+	<script type="text/javascript" src="scripts/MastilesPublicos.js"></script>
 	<script type="text/javascript" src="scripts/Edificios.js"></script>
 	<script type="text/javascript" src="scripts/Puntoswifi.js"></script>
 	<script type="text/javascript" src="scripts/Persianas.js"></script>
@@ -250,6 +251,7 @@
 		iconoedi = new iconoComun({ iconUrl: 'img/edificios.png' });
 		iconoPersi = new iconoComun({ iconUrl: 'img/persianas_r2.png' });
 		iconoMast = new iconoComun({ iconUrl: 'img/mastil_r2.png' });
+		iconoMastp = new iconoComun({ iconUrl: 'img/banderita_r2.png' });
 		iconoWifi = new iconoComun({ iconUrl: 'img/wIfI_r2.png' });
 		iconoPanel = new iconoComun({ iconUrl: 'img/paneles_3.png' });
 
@@ -469,7 +471,15 @@
 		var asignarIconoMast = {
 			pointToLayer: crearIconoMast
 		}
-
+		
+		function crearIconoMastp(feature, latlng) {
+			return L.marker(latlng, { icon: iconoMastp })
+		}
+		var asignarIconoMastp = {
+			pointToLayer: crearIconoMastp
+			
+		}
+		
 		function crearIconoPanel(feature, latlng) {
 			return L.marker(latlng, { icon: iconoPanel })
 		}
@@ -882,6 +892,7 @@
 			centrosdesalud = L.geoJson(centrosdesalud, { pointToLayer: crearIconoCentrosalud, onEachFeature: agregarPopupSalud }),
 			edificios = L.geoJson(Edificios, { pointToLayer: crearIconoedi, onEachFeature: agregarPopuppatrimoniales }),
 			mastil = L.geoJson(Mastiles, { pointToLayer: crearIconoMast, onEachFeature: agregarPopupmasti }),
+			mastilp = L.geoJson(MastilesPublicos, { pointToLayer: crearIconoMastp, onEachFeature: agregarPopupmasti }),
 			SyCE = L.geoJson(SitiosyConjuntosEdilicios, { pointToLayer: crearIconositios, onEachFeature: agregarPopuppatrimoniales }),
 			TyC = L.geoJson(TramosyCarriles, { onEachFeature: agregarPopuppatrimoniales }).setStyle({ color: "#C35918" }),
 			barrios = L.geoJson(Barrios, { onEachFeature: agregarPopuppatrimoniales }).setStyle({ color: "#E86211", fillOpacity: 0.75 }),
@@ -1093,6 +1104,7 @@
 				"Líneas de Distribución de Energía": lineasd,
 				"Líneas de Transporte de Energía": lineast,
 				"Mastiles con Identidad Barrial": mastil,
+				"Mastiles en vía Pública": mastilp,
 				"Pago Facil - Rapipago": cobro,
 				"Red Colectora Cloacal (AYSAM)": sistcloacal,
 				"Red Distribuidora de Agua Potable (AYSAM)": redesagua,
