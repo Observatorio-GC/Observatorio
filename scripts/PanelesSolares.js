@@ -35,8 +35,8 @@ var PanelesSolares ={
 { "type": "Feature", "properties": { "Name": "PLAZA SOLAR MIRTA ELENA DE GOMEZ", "descriptio": "Panel Solar" }, "geometry": { "type": "Point", "coordinates": [ -68.8564434, -32.9502326, 0.0 ] } },
 { "type": "Feature", "properties": { "Name": "PARQUE LUIS MENOTTI PESCARMONA", "descriptio": "Panel Solar" }, "geometry": { "type": "Point", "coordinates": [ -68.8419717, -32.9239041, 0.0 ] } },
 { "type": "Feature", "properties": { "Name": "JARDINES HCD", "descriptio": "Panel Solar" }, "geometry": { "type": "Point", "coordinates": [ -68.8432509, -32.9249909, 0.0 ] } },
-{ "type": "Feature", "properties": { "Name": "ESTACION ALSINA", "descriptio": "Paneles Solares" }, "geometry": { "type": "Point", "coordinates": [ -68.8259325, -32.9325442, 0.0 ] } },
+{ "type": "Feature", "properties": { "Name": "ESTACIÓN ALSINA", "descriptio": "Paneles Solares" }, "geometry": { "type": "Point", "coordinates": [ -68.8259325, -32.9325442, 0.0 ] } },
 { "type": "Feature", "properties": { "Name": "PARQUE LUIS MENOTTI PESCARMONA", "descriptio": "Torre de Carga celulares - agua caliente" }, "geometry": { "type": "Point", "coordinates": [ -68.8417548, -32.9249847, 0.0 ] } },
-{ "type": "Feature", "properties": { "Name": "ESTACION BENEGAS", "descriptio": "Torre Carga celulares - agua caliente" }, "geometry": { "type": "Point", "coordinates": [ -68.8534207, -32.9522564, 0.0 ] } }
+{ "type": "Feature", "properties": { "Name": "ESTACIÓN BENEGAS", "descriptio": "Torre Carga celulares - agua caliente" }, "geometry": { "type": "Point", "coordinates": [ -68.8534207, -32.9522564, 0.0 ] } }
 ]
 }
