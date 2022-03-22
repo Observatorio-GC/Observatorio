@@ -184,6 +184,8 @@
 	<script type="text/javascript" src="scripts/Restaurantes.js"></script>
 	<script type="text/javascript" src="scripts/Incubadora.js"></script>
 	<script type="text/javascript" src="scripts/UnionesVecinales.js"></script>
+	<script type="text/javascript" src="scripts/VasoInundacionMaure.js"></script>
+	<script type="text/javascript" src="scripts/SubcuencasMaure.js"></script>
 
 
 </head>
@@ -876,6 +878,7 @@
 				});
 			});
 		}
+
 		
 		/* BASE LAYERS */
 		var esriUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
@@ -900,7 +903,7 @@
 			SyCE = L.geoJson(SitiosyConjuntosEdilicios, { pointToLayer: crearIconositios, onEachFeature: agregarPopuppatrimoniales }),
 			TyC = L.geoJson(TramosyCarriles, { onEachFeature: agregarPopuppatrimoniales }).setStyle({ color: "#C35918" }),
 			barrios = L.geoJson(Barrios, { onEachFeature: agregarPopuppatrimoniales }).setStyle({ color: "#E86211", fillOpacity: 0.75 }),
-		        escultura = L.geoJson(Esculturas, { pointToLayer: crearIconoEscul, onEachFeature: agregarPopupesculturas }),
+		    escultura = L.geoJson(Esculturas, { pointToLayer: crearIconoEscul, onEachFeature: agregarPopupesculturas }),
 			godoycruz = L.geoJson(godoycruz),
 			puntoswifi = L.geoJson(Puntoswifi, { pointToLayer: crearIconoWifi, onEachFeature: agregarPopuppuntorecepcionpilas }),
 			persianas = L.geoJson(Persianas, { pointToLayer: crearIconoPersi, onEachFeature: agregarPopuppersianas }),
@@ -958,13 +961,16 @@
 			bar = L.geoJson(Bares, { pointToLayer: crearIconoVioleta, onEachFeature: agregarPopupGastronomia }),
 			resto = L.geoJson(Restaurantes, { pointToLayer: crearIconoNegro, onEachFeature: agregarPopupGastronomia }),
 			cafe = L.geoJson(cafe, { pointToLayer: crearIconoNaranja, onEachFeature: agregarPopupGastronomia }),
-                        hela = L.geoJson(Heladerias, { pointToLayer: crearIconoRojo, onEachFeature: agregarPopupGastronomia }),
+            hela = L.geoJson(Heladerias, { pointToLayer: crearIconoRojo, onEachFeature: agregarPopupGastronomia }),
 			ave = L.geoJson(Aventura, { pointToLayer: crearIconoAzul, onEachFeature: agregarPopupGastronomia2 }),
 			hospe = L.geoJson(Hospedajes, { pointToLayer: crearIconoAmarillo, onEachFeature: agregarPopupGastronomia2 }),
 			spa = L.geoJson(Spa, { pointToLayer: crearIconoVerde, onEachFeature: agregarPopupGastronomia2 }),
 			incu = L.geoJson(Incubadora, { pointToLayer: crearIconoVerde, onEachFeature: agregarPopup}),
 			union = L.geoJson(UnionesVecinales, { pointToLayer: crearIconoAmarillo, onEachFeature: agregarPopupPV}),
+			maure = L.geoJson(VasoInundacionMaure, { onEachFeature: agregarPopupfarmacias }).setStyle({ color: "#f16e31", fillOpacity: 0.75 }),
+			subcuencas = L.geoJson(SubcuencasMaure, { onEachFeature: agregarPopupfarmacias }).setStyle({ color: "#a3f1f0", fillOpacity: 0.50 }),
 			infoambiente = L.geoJson(InfoAmbiente, { onEachFeature: agregarPopupDepen });
+
 
 
 		/* CREACIÓN DEL MAPA CON BASE LAYERS Y OVERLAYS */
@@ -1027,7 +1033,9 @@
 				"Fallas Geologicas": fall,
 				"Red Hídrica": hidrico,
 				"Reservorios urbanos": reservorios,
+				"Subcuencas Maure": subcuencas,
 				"Suelo": suelo,
+				"Vaso Inundación Maure": maure,
 
 			},
 			"Sistema Juridíco-Administrativo": {
