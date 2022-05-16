@@ -186,6 +186,7 @@
 	<script type="text/javascript" src="scripts/UnionesVecinales.js"></script>
 	<script type="text/javascript" src="scripts/VasoInundacionMaure.js"></script>
 	<script type="text/javascript" src="scripts/SubcuencasMaure.js"></script>
+	<script type="text/javascript" src="scripts/Ciclovias en Ejecucion (DAMI II).js"></script>
 
 
 </head>
@@ -197,7 +198,8 @@
 	<div id="map" class="map map-home" style="margin:8px 0 8px 0;height:800px"></div>
 	<div id="referencias">
 		<div class="icono_referencia" id="ref_cicloObras">Ciclovias Proyectadas Municipalidad:</br>2,88 Km.</div> <b>
-			<div class="icono_referencia" id="ref_cicloDami">Ciclovias Proyectadas DAMI II:<br>15,42 Km.</div> <b>
+			<div class="icono_referencia" id="ref_cicloDami">Ciclovias Proyectadas DAMI II:<br>7,3 Km.</div> <b>
+			<div class="icono_referencia" id="ref_cicloEjec">Ciclovias en Ejecución DAMI II:</br>8,12 Km.</div> </b>	
 			<div class="icono_referencia" id="ref_cicloviasexist">Ciclovias Existentes:</br>36,68 Km.</div> </b>
 
 	</div>
@@ -910,6 +912,7 @@
 			cicloObras = L.geoJson(CicloviaProyectadaObras, { onEachFeature: agregarPopupciclovias }).setStyle({ color: "yellow" }),
 			cicloDami = L.geoJson(CicloviasProyectadasDami, { onEachFeature: agregarPopupciclovias }).setStyle({ color: "orange" }),
 			cicloviasexist = L.geoJson(CicloviasExistentes, { onEachFeature: agregarPopupciclovias }).setStyle({ color: "red" }),
+            cicloEjec = L.geoJson(CicloviasenEjecucionDami, { onEachFeature: agregarPopupciclovias }).setStyle({ color: "#03db5d" }),
 			lineasd = L.geoJson(LineasD, { onEachFeature: agregarPopuplineas }).setStyle({ color: "orange" }),
 			lineasmun = L.geoJson(LineaMunicipal, { onEachFeature: agregarPopuplineasMu }).setStyle({ color: "yellow" }),
 			lineast = L.geoJson(LineasT, { onEachFeature: agregarPopuplineas }).setStyle({ color: "red" }),
@@ -1064,6 +1067,7 @@
 				"Ciclovías Existentes": cicloviasexist,
 				"Ciclovías Proyectadas DAMI II": cicloDami,
 				"Ciclovías Proyectadas Municipalidad": cicloObras,
+				"Ciclovías en Ejecución DAMI II": cicloEjec,
 				"Metrotranvía": metro,
 				"Paradas Metrotranvía": paradasMetro,
 
@@ -1152,12 +1156,12 @@
 
         function onOverlayAdd(e) {
 			idlayer = "";
-			if (e.name == "Ciclovías Proyectadas Municipalidad") {
-				idlayer = "cicloObras";
-			} else if (e.name == "Ciclovías Existentes") {
+			 if (e.name == "Ciclovías Existentes") {
 				idlayer = "cicloviasexist";
 			} else if (e.name == "Ciclovías Proyectadas DAMI II") {
 				idlayer = "cicloDami"
+		    } else if (e.name == "Ciclovías en Ejecución DAMI II") {
+				idlayer = "cicloEjec"
 			}
 
 			document.getElementById("ref_" + idlayer).style.display = 'block';
@@ -1165,13 +1169,12 @@
 
 		function onOverlayRemove(e) {
 			idlayer = "";
-			if (e.name == "Ciclovías Proyectadas Municipalidad") {
-				idlayer = "cicloObras";
-
-			} else if (e.name == "Ciclovías Existentes") {
+			if (e.name == "Ciclovías Existentes") {
 				idlayer = "cicloviasexist";
 			} else if (e.name == "Ciclovías Proyectadas DAMI II") {
 				idlayer = "cicloDami"
+			} else if (e.name == "Ciclovías en Ejecución DAMI II") {
+				idlayer = "cicloEjec"
 			}
 
 			document.getElementById("ref_" + idlayer).style.display = 'none';
