@@ -187,7 +187,7 @@
 	<script type="text/javascript" src="scripts/VasoInundacionMaure.js"></script>
 	<script type="text/javascript" src="scripts/SubcuencasMaure.js"></script>
 	<script type="text/javascript" src="scripts/Ciclovias en Ejecucion (DAMI II).js"></script>
-	<script type="text/javascript" src="scripts/RENABAP.js"></script>
+
 	
 
 </head>
@@ -981,7 +981,6 @@
 			union = L.geoJson(UnionesVecinales, { pointToLayer: crearIconoAmarillo, onEachFeature: agregarPopupPV}),
 			maure = L.geoJson(VasoInundacionMaure, { onEachFeature: agregarPopupfarmacias }).setStyle({ color: "#f16e31", fillOpacity: 0.75 }),
 			subcuencas = L.geoJson(SubcuencasMaure, { onEachFeature: agregarPopupfarmacias }).setStyle({ color: "#a3f1f0", fillOpacity: 0.50 }),
-			rena = L.geoJson(Renabap,  {onEachFeature: agregarPopupRenabap }).setStyle({ color: "#40e0d0", fillOpacity: 0.50 }),
 			infoambiente = L.geoJson(InfoAmbiente, { onEachFeature: agregarPopupDepen });
 
 
@@ -1122,10 +1121,11 @@
 			
 			},
             "Infraestructura Urbana y de Servicio": {
+				
 				"Bancos": bank,
 				"Barrios Consolidados": BarriosConsolidados,
 				"Barrios Populares": barriospopulares,
-				"Registro Nacional de Barrios Populares (RENABAP)": rena,
+				
 				"Cajeros": caja,
 				"Estaciones de Servicio": estacion,
 				"Líneas de Distribución de Energía": lineasd,
