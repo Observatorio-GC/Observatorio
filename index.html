@@ -990,9 +990,9 @@
 			maure = L.geoJson(VasoInundacionMaure, { onEachFeature: agregarPopupfarmacias }).setStyle({ color: "#f16e31", fillOpacity: 0.75 }),
 			subcuencas = L.geoJson(SubcuencasMaure, { onEachFeature: agregarPopupfarmacias }).setStyle({ color: "#a3f1f0", fillOpacity: 0.50 }),
 			rena = L.geoJson(Renabap,  {onEachFeature: agregarPopupRenabap }).setStyle({ color: "#40e0d0", fillOpacity: 0.50 }),
-			//circuitoCieneguita = L.geoJson(CieneguitaTrancas, {onEachFeature: agregarPopupCircuitos }).setStyle({ color: "#20e41d" }),
-			//circuitoIgnacio = L.geoJson(TrancasIgnacio, {onEachFeature: agregarPopupCircuitos }).setStyle({ color: "yellow" }),
-			//puestos = L.geoJson(Puestos, { pointToLayer: crearIconoRojo, onEachFeature: agregarPopupfarmacias }), 
+			circuitoCieneguita = L.geoJson(CieneguitaTrancas, {onEachFeature: agregarPopupCircuitos }).setStyle({ color: "#20e41d" }),
+			circuitoIgnacio = L.geoJson(TrancasIgnacio, {onEachFeature: agregarPopupCircuitos }).setStyle({ color: "yellow" }),
+			puestos = L.geoJson(Puestos, { pointToLayer: crearIconoRojo, onEachFeature: agregarPopupfarmacias }), 
 			infoambiente = L.geoJson(InfoAmbiente, { onEachFeature: agregarPopupDepen });
 
 
