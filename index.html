@@ -187,7 +187,10 @@
 	<script type="text/javascript" src="scripts/VasoInundacionMaure.js"></script>
 	<script type="text/javascript" src="scripts/SubcuencasMaure.js"></script>
 	<script type="text/javascript" src="scripts/Ciclovias en Ejecucion (DAMI II).js"></script>
-	<script type="text/javascript" src="scripts/Renabap.js"></script>
+	<script type="text/javascript" src="scripts/TrancasIgnacio.js"></script>
+	<script type="text/javascript" src="scripts/CieneguitaTrancas.js"></script>
+	<script type="text/javascript" src="scripts/Puestos.js"></script>
+	<script type="text/javascript" src="scripts/RENABAP.js"></script>
 	
 
 </head>
@@ -500,6 +503,11 @@
 
 		/* POPUPS */
 
+		function agregarPopupCircuitos(feature, layer) {
+			if (feature.properties && feature.properties.Nombre) {
+				layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong><br/>" + feature.properties.Distancia + "</strong><br/>");
+			}
+		}
 		function agregarPopupPaneles(feature, layer) {
 			if (feature.properties && feature.properties.descriptio) {
 				layer.bindPopup("<strong>" + feature.properties.descriptio + "</strong><br/>" + feature.properties.Name + "</strong><br/>");
@@ -982,6 +990,9 @@
 			maure = L.geoJson(VasoInundacionMaure, { onEachFeature: agregarPopupfarmacias }).setStyle({ color: "#f16e31", fillOpacity: 0.75 }),
 			subcuencas = L.geoJson(SubcuencasMaure, { onEachFeature: agregarPopupfarmacias }).setStyle({ color: "#a3f1f0", fillOpacity: 0.50 }),
 			rena = L.geoJson(Renabap,  {onEachFeature: agregarPopupRenabap }).setStyle({ color: "#40e0d0", fillOpacity: 0.50 }),
+			circuitoCieneguita = L.geoJson(CieneguitaTrancas, {onEachFeature: agregarPopupCircuitos }).setStyle({ color: "#20e41d" }),
+			circuitoIgnacio = L.geoJson(TrancasIgnacio, {onEachFeature: agregarPopupCircuitos }).setStyle({ color: "yellow" }),
+			puestos = L.geoJson(Puestos, { pointToLayer: crearIconoRojo, onEachFeature: agregarPopupfarmacias }), 
 			infoambiente = L.geoJson(InfoAmbiente, { onEachFeature: agregarPopupDepen });
 
 
@@ -1087,11 +1098,14 @@
 				"Bares y Comidas": bar, 
 				"Bodegas": bode,
 				"Casas de Té y Café": cafe,
+				"Circuito Trekking Cieneguita - Las Trancas": circuitoCieneguita,
+				"Circuito Trekking Las Trancas - Estancia San Ignacio": circuitoIgnacio, 
 				"Heladerías": hela,
 				"Hospedajes": hospe,
 				"Informador Turístico": informador,
 				"Persianas Comerciales": persianas,
 				"Puestos Programa en la Bici": bicicleta,
+				"Puestos Piedemonte": puestos,
 				"Restaurantes": resto,
 				"Sendero Turístico - Geológico": sendGeo,
 				"Spa": spa,
