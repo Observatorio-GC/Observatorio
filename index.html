@@ -189,6 +189,8 @@
 	<script type="text/javascript" src="scripts/Ciclovias en Ejecucion (DAMI II).js"></script>
 	<script type="text/javascript" src="scripts/Ciclovias en Ejecucion (Municipalidad).js"></script>
 	<script type="text/javascript" src="scripts/Puestos.js"></script>
+	<script type="text/javascript" src="scripts/CieneguitaTrancas.js"></script>
+	<script type="text/javascript" src="scripts/TrancasIgnacio.js"></script>
 
 
 
@@ -500,6 +502,12 @@
 
 
 		/* POPUPS */
+
+		function agregarPopupCircuitos(feature, layer) {
+			if (feature.properties && feature.properties.Nombre) {
+				layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong><br/>" + feature.properties.Distancia + "</strong><br/>");
+			}
+		}
 
 		function agregarPopupPaneles(feature, layer) {
 			if (feature.properties && feature.properties.descriptio) {
@@ -977,6 +985,8 @@
 			maure = L.geoJson(VasoInundacionMaure, { onEachFeature: agregarPopupfarmacias }).setStyle({ color: "#f16e31", fillOpacity: 0.75 }),
 			subcuencas = L.geoJson(SubcuencasMaure, { onEachFeature: agregarPopupfarmacias }).setStyle({ color: "#a3f1f0", fillOpacity: 0.50 }),
 			puestos = L.geoJson(Puestos, { pointToLayer: crearIconoRojo, onEachFeature: agregarPopupfarmacias }),
+			circuitoCieneguita = L.geoJson(CieneguitaTrancas, {onEachFeature: agregarPopupCircuitos }).setStyle({ color: "#20e41d" }),
+			circuitoIgnacio = L.geoJson(TrancasIgnacio, {onEachFeature: agregarPopupCircuitos }).setStyle({ color: "yellow" }),
 			infoambiente = L.geoJson(InfoAmbiente, { onEachFeature: agregarPopupDepen });
 
 
@@ -1079,6 +1089,8 @@
 
 			},
 			"Turismo": {
+				"Circuito Trekking Cieneguita - Las Trancas": circuitoCieneguita,
+				"Circuito Trekking Las Trancas - Estancia San Ignacio": circuitoIgnacio,
 				"Puestos": puestos,
 				"Aventura": ave,
 				"Bares y Comidas": bar, 
