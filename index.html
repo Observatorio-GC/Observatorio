@@ -188,6 +188,8 @@
 	<script type="text/javascript" src="scripts/SubcuencasMaure.js"></script>
 	<script type="text/javascript" src="scripts/Ciclovias en Ejecucion (DAMI II).js"></script>
 	<script type="text/javascript" src="scripts/Ciclovias en Ejecucion (Municipalidad).js"></script>
+	<script type="text/javascript" src="scripts/Puestos.js"></script>
+
 
 
 </head>
@@ -974,6 +976,7 @@
 			union = L.geoJson(UnionesVecinales, { pointToLayer: crearIconoAmarillo, onEachFeature: agregarPopupPV}),
 			maure = L.geoJson(VasoInundacionMaure, { onEachFeature: agregarPopupfarmacias }).setStyle({ color: "#f16e31", fillOpacity: 0.75 }),
 			subcuencas = L.geoJson(SubcuencasMaure, { onEachFeature: agregarPopupfarmacias }).setStyle({ color: "#a3f1f0", fillOpacity: 0.50 }),
+			puestos = L.geoJson(Puestos, { pointToLayer: crearIconoRojo, onEachFeature: agregarPopupfarmacias }),
 			infoambiente = L.geoJson(InfoAmbiente, { onEachFeature: agregarPopupDepen });
 
 
@@ -1076,6 +1079,7 @@
 
 			},
 			"Turismo": {
+				"Puestos": puestos,
 				"Aventura": ave,
 				"Bares y Comidas": bar, 
 				"Bodegas": bode,
