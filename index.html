@@ -187,7 +187,9 @@
 	<script type="text/javascript" src="scripts/VasoInundacionMaure.js"></script>
 	<script type="text/javascript" src="scripts/SubcuencasMaure.js"></script>
 	<script type="text/javascript" src="scripts/Ciclovias en Ejecucion (DAMI II).js"></script>
-
+	<script type="text/javascript" src="scripts/Ciclovias en Ejecucion (Municipalidad).js"></script>
+	<script type="text/javascript" src="scripts/RENABAP.js"></script>
+	
 
 </head>
 
@@ -207,6 +209,7 @@
 	<div><abbr title="Conozca el proyecto Piedemonte"><a
 				href="https://sites.google.com/view/observatorio-territorial/piedemonte?authuser=0" target="_blank"><img
 					src="favicon2.png" height="57px" width="256px" align=right class="logoobserv"></abbr></div>
+
 	<!-- FUNCIONES LEAFLET -->
 	<script>
 		/* ARGENMAP */
@@ -498,6 +501,11 @@
 
 		/* POPUPS */
 
+		function agregarPopupCircuitos(feature, layer) {
+			if (feature.properties && feature.properties.Nombre) {
+				layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong><br/>" + feature.properties.Distancia + "</strong><br/>");
+			}
+		}
 		function agregarPopupPaneles(feature, layer) {
 			if (feature.properties && feature.properties.descriptio) {
 				layer.bindPopup("<strong>" + feature.properties.descriptio + "</strong><br/>" + feature.properties.Name + "</strong><br/>");
@@ -686,6 +694,13 @@
 		function agregarPopupGastronomia2(feature, layer) {
 			if (feature.properties && feature.properties.Nombre) {
 				layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong><br/>" + "Dirección <strong>" + feature.properties.Direccion + "</strong><br/>" + "Contacto <strong>" + feature.properties.Contacto);
+			}
+		}
+
+		function agregarPopupRenabap(feature, layer) {
+			if (feature.properties && feature.properties.nombre_barrio) {
+				layer.bindPopup("<strong>" + feature.properties.nombre_barrio + "</strong><br/>" + "Acceso Electricidad: <strong>" + feature.properties.acceso_electricidad + "</strong><br/>" + "Acceso Cloacas: <strong>" + feature.properties.acceso_cloacas + 
+				"</strong><br/>" + "Acceso Agua: <strong>" + feature.properties.acceso_agua + "</strong><br/>" + "Familias Estimadas: <strong>" + feature.properties.familias_estimadas);
 			}
 		}
 
@@ -913,6 +928,7 @@
 			cicloDami = L.geoJson(CicloviasProyectadasDami, { onEachFeature: agregarPopupciclovias }).setStyle({ color: "orange" }),
 			cicloviasexist = L.geoJson(CicloviasExistentes, { onEachFeature: agregarPopupciclovias }).setStyle({ color: "red" }),
             cicloEjec = L.geoJson(CicloviasenEjecucionDami, { onEachFeature: agregarPopupciclovias }).setStyle({ color: "#03db5d" }),
+			muniEjec = L.geoJson(CicloviasenEjecucionMuni, { onEachFeature: agregarPopupciclovias }).setStyle({ color: "#17fff3" }),
 			lineasd = L.geoJson(LineasD, { onEachFeature: agregarPopuplineas }).setStyle({ color: "orange" }),
 			lineasmun = L.geoJson(LineaMunicipal, { onEachFeature: agregarPopuplineasMu }).setStyle({ color: "yellow" }),
 			lineast = L.geoJson(LineasT, { onEachFeature: agregarPopuplineas }).setStyle({ color: "red" }),
@@ -972,6 +988,8 @@
 			union = L.geoJson(UnionesVecinales, { pointToLayer: crearIconoAmarillo, onEachFeature: agregarPopupPV}),
 			maure = L.geoJson(VasoInundacionMaure, { onEachFeature: agregarPopupfarmacias }).setStyle({ color: "#f16e31", fillOpacity: 0.75 }),
 			subcuencas = L.geoJson(SubcuencasMaure, { onEachFeature: agregarPopupfarmacias }).setStyle({ color: "#a3f1f0", fillOpacity: 0.50 }),
+			rena = L.geoJson(Renabap,  {onEachFeature: agregarPopupRenabap }).setStyle({ color: "#40e0d0", fillOpacity: 0.50 }),
+			
 			infoambiente = L.geoJson(InfoAmbiente, { onEachFeature: agregarPopupDepen });
 
 
@@ -1068,11 +1086,13 @@
 				"Ciclovías Proyectadas DAMI II": cicloDami,
 				"Ciclovías Proyectadas Municipalidad": cicloObras,
 				"Ciclovías en Ejecución DAMI II": cicloEjec,
+				"Ciclovias en Ejecución Municipalidad": muniEjec,
 				"Metrotranvía": metro,
 				"Paradas Metrotranvía": paradasMetro,
 
 			},
 			"Turismo": {
+				
 				"Aventura": ave,
 				"Bares y Comidas": bar, 
 				"Bodegas": bode,
@@ -1083,8 +1103,8 @@
 				"Persianas Comerciales": persianas,
 				"Puestos Programa en la Bici": bicicleta,
 				"Restaurantes": resto,
-				"Sendero Turístico - Geológico": sendGeo,
 				"Spa": spa,
+				
 			},
 
 			"Patrimonio y Cultura": {
@@ -1115,6 +1135,7 @@
 				"Bancos": bank,
 				"Barrios Consolidados": BarriosConsolidados,
 				"Barrios Populares": barriospopulares,
+				"Registro Nacional de Barrios Populares (RENABAP)": rena,
 				"Cajeros": caja,
 				"Estaciones de Servicio": estacion,
 				"Líneas de Distribución de Energía": lineasd,
@@ -1125,7 +1146,7 @@
 				"Red Colectora Cloacal (AYSAM)": sistcloacal,
 				"Red Distribuidora de Agua Potable (AYSAM)": redesagua,
 				
-            },
+		     },
 		};
 
 		var opciones_groupedlayers = {
