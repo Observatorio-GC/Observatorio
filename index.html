@@ -187,6 +187,7 @@
 	<script type="text/javascript" src="scripts/VasoInundacionMaure.js"></script>
 	<script type="text/javascript" src="scripts/SubcuencasMaure.js"></script>
 	<script type="text/javascript" src="scripts/Ciclovias en Ejecucion (DAMI II).js"></script>
+	<script type="text/javascript" src="scripts/Ciclovias en Ejecucion (Municipalidad).js"></script>
 
 
 </head>
@@ -913,6 +914,7 @@
 			cicloDami = L.geoJson(CicloviasProyectadasDami, { onEachFeature: agregarPopupciclovias }).setStyle({ color: "orange" }),
 			cicloviasexist = L.geoJson(CicloviasExistentes, { onEachFeature: agregarPopupciclovias }).setStyle({ color: "red" }),
             cicloEjec = L.geoJson(CicloviasenEjecucionDami, { onEachFeature: agregarPopupciclovias }).setStyle({ color: "#03db5d" }),
+			muniEjec = L.geoJson(CicloviasenEjecucionMuni, { onEachFeature: agregarPopupciclovias }).setStyle({ color: "#17fff3" }),
 			lineasd = L.geoJson(LineasD, { onEachFeature: agregarPopuplineas }).setStyle({ color: "orange" }),
 			lineasmun = L.geoJson(LineaMunicipal, { onEachFeature: agregarPopuplineasMu }).setStyle({ color: "yellow" }),
 			lineast = L.geoJson(LineasT, { onEachFeature: agregarPopuplineas }).setStyle({ color: "red" }),
@@ -1068,6 +1070,7 @@
 				"Ciclovías Proyectadas DAMI II": cicloDami,
 				"Ciclovías Proyectadas Municipalidad": cicloObras,
 				"Ciclovías en Ejecución DAMI II": cicloEjec,
+				"Ciclovias en Ejecución Municipalidad": muniEjec,
 				"Metrotranvía": metro,
 				"Paradas Metrotranvía": paradasMetro,
 
