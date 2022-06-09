@@ -26,11 +26,14 @@
 	<link rel="shortcut icon" type="image/x-icon" href="favicon1.png">
 
 	<!-- CSS -->
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin="" />
 	<link rel="stylesheet" href="css/Leaflet.PolylineMeasure.css">
 	<link rel="stylesheet" href="css/Leaflet.StreetViewButtons.css">
 	<link rel="stylesheet" href="css/Leaflet.StreetView1Buttons.css">
 	<link rel="stylesheet" href="css/leaflet.groupedlayercontrol.min.css">
+	<link rel="stylesheet" href="css/Control.Coordinates.css" />
+	<link rel="stylesheet" href="css/L.Control.MousePosition.css" />
+	<link rel="stylesheet" href="css/Leaflet.Weather.css" />
 
 	<style type="text/css">
 		.leaflet-control-attribution.leaflet-control a:hover {
@@ -96,10 +99,18 @@
 			border-style: solid;
 			padding: 10px;
 		}
+
+		.icon {
+            max-width: 70%;
+            max-height: 70%;
+            margin: 4px;
+        }
+
 	</style>
 
 	<!-- SCRIPTS -->
-	<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+	<script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
+	<script src="https://unpkg.com/togeojson@0.14.2"></script>
 	<script src="scripts/Leaflet.PolylineMeasure.js"></script>
 	<script src="scripts/StreetViewButtons.js"></script>
 	<script src="scripts/StreetView1Buttons.js"></script>
@@ -108,6 +119,9 @@
 	<script src="scripts/leaflet.groupedlayercontrol.min.js"></script>
 	<script src="scripts/Bing.js"></script>
 	<script src="js/bundle.js"></script>
+	<script src="scripts/leaflet.filelayer.js"></script>
+	<script src="scripts/Control.Coordinates.js"></script>
+	<script src="scripts/L.Control.MousePosition.js"></script>
 
 
 	<!-- GEOJSON -->
@@ -1159,15 +1173,63 @@
 		L.control.polylineMeasure().addTo(map);
 		L.streetView({ position: 'topleft' }).addTo(map);
 		L.streetView1({ position: 'topleft' }).addTo(map);
+		L.control.mousePosition().addTo(map);
+
+		  /* CARGA ARCHIVOS */
+		  (function (window) {
+			
+			function initMap() {
+            var control;
+            var L = window.L;
+		
+            var style = {
+             color: 'red',
+             opacity: 1.0,
+             fillOpacity: 1.0,
+             weight: 2,
+             clickable: false
+		    };
+
+        L.Control.FileLayerLoad.LABEL = '<img class="icon" src="js/nube.png" alt="file icon"/>';
+        control = L.Control.fileLayerLoad({
+            fitBounds: true,
+            layerOptions: {
+                style: style,
+                pointToLayer: function (data, latlng) {
+                    return L.circleMarker(
+                        latlng,
+                        { style: style }
+                    );
+                }
+            }
+        });
+        control.addTo(map);
+        control.loader.on('data:loaded', function (e) {
+            var layer = e.layer;
+            console.log(layer);
+        });
+    }
+
+         window.addEventListener('load', function () {
+         initMap();
+         });}(window));
 
 
-		var printer = L.easyPrint({
+         /* COORDENADAS CLICK MOUSE */
+      	var c = new L.Control.Coordinates();
+		c.addTo(map);
+		    function onMapClick(e) {
+			   c.setCoordinates(e);
+	        }map.on('click', onMapClick);
+
+
+		/*var printer = L.easyPrint({
 			position: 'topleft',
       		sizeModes: ['Current', 'A4Landscape', 'A4Portrait'],
       		filename: 'myMap',
       		exportOnly: true,
       		hideControlContainer: true,
-		}).addTo(map);
+		}).addTo(map);*/
 
 		function manualPrint () {
 			printer.printMap('CurrentSize', 'MyManualPrint')
