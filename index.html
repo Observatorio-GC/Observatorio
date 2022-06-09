@@ -33,7 +33,6 @@
 	<link rel="stylesheet" href="css/leaflet.groupedlayercontrol.min.css">
 	<link rel="stylesheet" href="css/Control.Coordinates.css" />
 	<link rel="stylesheet" href="css/L.Control.MousePosition.css" />
-	<link rel="stylesheet" href="css/Leaflet.Weather.css" />
 
 	<style type="text/css">
 		.leaflet-control-attribution.leaflet-control a:hover {
@@ -118,7 +117,7 @@
 	<script src="scripts/leaflet-tilelayer-wmts.js"></script>
 	<script src="scripts/leaflet.groupedlayercontrol.min.js"></script>
 	<script src="scripts/Bing.js"></script>
-	<script src="js/bundle.js"></script>
+	<script src="scripts/leaflet.browser.print.js"></script>
 	<script src="scripts/leaflet.filelayer.js"></script>
 	<script src="scripts/Control.Coordinates.js"></script>
 	<script src="scripts/L.Control.MousePosition.js"></script>
@@ -1175,6 +1174,30 @@
 		L.streetView1({ position: 'topleft' }).addTo(map);
 		L.control.mousePosition().addTo(map);
 
+		
+        //var browserControl = L.control.browserPrint().addTo(map);
+
+		var customActionToPrint = function(context, mode) {
+	      return function() {
+		  window.alert("We are printing the MAP. Let's do Custom print here!");
+		  context._printMode(mode);
+	       }};
+
+            L.control.browserPrint({
+	          title: 'Just print me!',
+	          //documentTitle: 'Map printed using leaflet.browser.print plugin',
+	          printLayer: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', godoycruz),
+	          closePopupsOnPrint: false,
+	          printModes: [
+                //L.BrowserPrint.Mode.Landscape("Tabloid",{title: "Tabloid VIEW"}),
+                
+                //L.BrowserPrint.Mode.Landscape(),
+                //"Portrait",
+                L.BrowserPrint.Mode.Auto("A4",{title: "Auto"}),
+                L.BrowserPrint.Mode.Custom("A3",{title:"Selecionar "})],
+	            manualMode: false}).addTo(map);
+			
+
 		  /* CARGA ARCHIVOS */
 		  (function (window) {
 			
@@ -1223,17 +1246,8 @@
 	        }map.on('click', onMapClick);
 
 
-		/*var printer = L.easyPrint({
-			position: 'topleft',
-      		sizeModes: ['Current', 'A4Landscape', 'A4Portrait'],
-      		filename: 'myMap',
-      		exportOnly: true,
-      		hideControlContainer: true,
-		}).addTo(map);*/
+	    
 
-		function manualPrint () {
-			printer.printMap('CurrentSize', 'MyManualPrint')
-		}
 
         function onOverlayAdd(e) {
 			idlayer = "";
