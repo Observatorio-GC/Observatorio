@@ -2,10 +2,8 @@
 <html>
 
 <head>
-
 	<meta charset=utf-8 />
-	<meta name='viewport'
-		content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui' />
+	<meta name='viewport' content="width=device-width, initial-scale=1, maximum-scale=1">
 	<title>ObservatorioTerritorialGC</title>
 
 	<!-- Global site tag (gtag.js) - Google Ad-Sense -->
@@ -22,17 +20,20 @@
 		gtag('config', 'G-33KRTS12JB');
 	</script>
 
-
 	<link rel="shortcut icon" type="image/x-icon" href="favicon1.png">
 
 	<!-- CSS -->
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin="" />
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css">
 	<link rel="stylesheet" href="css/Leaflet.PolylineMeasure.css">
 	<link rel="stylesheet" href="css/Leaflet.StreetViewButtons.css">
 	<link rel="stylesheet" href="css/Leaflet.StreetView1Buttons.css">
 	<link rel="stylesheet" href="css/leaflet.groupedlayercontrol.min.css">
-	<link rel="stylesheet" href="css/Control.Coordinates.css" />
-	<link rel="stylesheet" href="css/L.Control.MousePosition.css" />
+	<link rel="stylesheet" href="css/Control.Coordinates.css">
+	<link rel="stylesheet" href="css/L.Control.MousePosition.css">
+	<link rel="stylesheet" href="js/leaflet-search.min.css">
+	<link rel="stylesheet" href="js/leaflet-search.mobile.min.css">
+	<link rel="stylesheet" href="js/leaflet-search.mobile.src.css">
+	<link rel="stylesheet" href="js/leaflet-search.src.css">
 
 	<style type="text/css">
 		.leaflet-control-attribution.leaflet-control a:hover {
@@ -41,41 +42,43 @@
 
 		.logogc {
 			position: absolute;
-			z-index: 2;
+            z-index: 2;
 			top: 15px;
-			right: 450px
+            right: 450px;
 		}
 
 		.logoobserv {
 			position: absolute;
-			z-index: 2;
-			top: 8px;
-			right: 120px;
+            z-index: 2;
+            top: 8px;
+            right: 120px;
 		}
-
+		
 		h1 {
 			color: #800080;
-			width: 100%;
-		}
+			width: 90%;
+			height: auto;
+			font-family: PlayfairDisplay;
+        }
 
 		.leaflet-control-attribution.leaflet-control {
 			font-size: 16px;
 		}
 
 		@font-face {
-			font-family: Gotham;
-			src: url(fonts/Gotham-Book.otf);
-			font-weight: normal;
-		}
+            font-family: PlayfairDisplay;
+            src: url(fonts/PlayfairDisplay-Regular.ttf);
+            font-weight: normal;
+        }
 
 		@font-face {
-			font-family: Gotham;
-			src: url(fonts/Gotham-Bold.otf);
-			font-weight: bold;
-		}
+            font-family: Gotham;
+            src: url(fonts/Gotham-Book.otf);
+            font-weight: normal;
+        }
 
 		.leaflet-container {
-			font: 11px/1.5 Gotham;
+			font: 12px Gotham;
 		}
 
 		#referencias {
@@ -89,7 +92,7 @@
 
 		.icono_referencia {
 			display: none;
-			font: 18px/1.5 Gotham;
+			font: 18px/1.5 PlayfairDisplay;
 			color: #000000;
 			margin-bottom: 15px;
 			text-align: left;
@@ -109,7 +112,7 @@
 	</style>
 
 	<!-- SCRIPTS -->
-	<script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
+	<script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"></script>
 	<script src="https://unpkg.com/togeojson@0.14.2"></script>
 	<script src="scripts/Leaflet.PolylineMeasure.js"></script>
 	<script src="scripts/StreetViewButtons.js"></script>
@@ -122,7 +125,9 @@
 	<script src="scripts/leaflet.filelayer.js"></script>
 	<script src="scripts/Control.Coordinates.js"></script>
 	<script src="scripts/L.Control.MousePosition.js"></script>
-
+	<script src="js/leaflet-search.src.js"></script>
+	<script src="js/leaflet-search.min.js"></script>
+	
 
 	<!-- GEOJSON -->
 	<script type="text/javascript" src="scripts/ZonaLey4886.js"></script>
@@ -206,26 +211,26 @@
 	<script type="text/javascript" src="scripts/CieneguitaTrancas.js"></script>
 	<script type="text/javascript" src="scripts/TrancasIgnacio.js"></script>
 
-
-
 </head>
 
 <body>
+	<!-- FORMATO PAGINA PRINCIPAL VISOR -->
 	<h1 style="position: relative; margin-top: 10px; margin-left: 100px; z-index: 2">Observatorio Territorial de Godoy
 		Cruz</h1>
-	<img src="favicon.png" height="45px" width="45px" align=right class="logogc">
-	<div id="map" class="map map-home" style="margin:8px 0 8px 0;height:800px"></div>
+	<img src="favicon.png" height="auto" width="45px" class="logogc">
+	<div id="map" class="map map-home" style="height: 800px;"></div>
 	<div id="referencias">
 		<div class="icono_referencia" id="ref_cicloObras">Ciclovias Proyectadas Municipalidad:</br>2,88 Km.</div> <b>
 			<div class="icono_referencia" id="ref_cicloDami">Ciclovias Proyectadas DAMI II:<br>7,3 Km.</div> <b>
 			<div class="icono_referencia" id="ref_cicloEjec">Ciclovias en Ejecución DAMI II:</br>8,12 Km.</div> </b>	
 			<div class="icono_referencia" id="ref_cicloviasexist">Ciclovias Existentes:</br>36,68 Km.</div> </b>
+    </div>
 
-	</div>
-
+    <!-- PAGINA OBSERVATORIO -->
 	<div><abbr title="Conozca el proyecto Piedemonte"><a
 				href="https://sites.google.com/view/observatorio-territorial/piedemonte?authuser=0" target="_blank"><img
-					src="favicon2.png" height="57px" width="256px" align=right class="logoobserv"></abbr></div>
+					src="favicon2.png" height="57px" width="256px" aling=right class="logoobserv"></abbr></div>
+
 	<!-- FUNCIONES LEAFLET -->
 	<script>
 		/* ARGENMAP */
@@ -274,13 +279,13 @@
 			iconoUnivec = new iconoComun({ iconUrl: 'img/univec_r2.png' }),
 			iconoSTV = new iconoComun({ iconUrl: 'img/pegman_3.png' }),
 			iconoVerde2 = new iconoComun({ iconUrl: 'img/verde2_r2.png' });
-		iconositios = new iconoComun({ iconUrl: 'img/sitios.png' });
-		iconoedi = new iconoComun({ iconUrl: 'img/edificios.png' });
-		iconoPersi = new iconoComun({ iconUrl: 'img/persianas_r2.png' });
-		iconoMast = new iconoComun({ iconUrl: 'img/mastil_r2.png' });
-		iconoMastp = new iconoComun({ iconUrl: 'img/banderita_r2.png' });
-		iconoWifi = new iconoComun({ iconUrl: 'img/wIfI_r2.png' });
-		iconoPanel = new iconoComun({ iconUrl: 'img/paneles_3.png' });
+	     	iconositios = new iconoComun({ iconUrl: 'img/sitios.png' });
+		    iconoedi = new iconoComun({ iconUrl: 'img/edificios.png' });
+		    iconoPersi = new iconoComun({ iconUrl: 'img/persianas_r2.png' });
+		    iconoMast = new iconoComun({ iconUrl: 'img/mastil_r2.png' });
+		    iconoMastp = new iconoComun({ iconUrl: 'img/banderita_r2.png' });
+		    iconoWifi = new iconoComun({ iconUrl: 'img/wIfI_r2.png' });
+		    iconoPanel = new iconoComun({ iconUrl: 'img/paneles_3.png' });
 
 
 
@@ -504,7 +509,6 @@
 		}
 		var asignarIconoMastp = {
 			pointToLayer: crearIconoMastp
-			
 		}
 		
 		function crearIconoPanel(feature, latlng) {
@@ -513,7 +517,6 @@
 		var asignarIconoPanel = {
 			pointToLayer: crearIconoPanel
 		}
-
 
 		/* POPUPS */
 
@@ -629,7 +632,6 @@
 			if (feature.properties && feature.properties.TENSION) {
 				layer.bindPopup("<strong>" + feature.properties.TENSION + "</strong>");
 			}
-
 		}
 		function agregarPopuplineasMu(feature, layer) {
 			if (feature.properties && feature.properties.Name) {
@@ -662,26 +664,21 @@
 				layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong><br/>" + feature.properties.Direccion);
 			}
 		}
-
 		function agregarPopupSalud(feature, layer) {
 			if (feature.properties && feature.properties.Nombre_1) {
 				layer.bindPopup("<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + feature.properties.Direccion);
 			}
 		}
-
 		function agregarPopupHospital(feature, layer) {
 			if (feature.properties && feature.properties.Nombre_1) {
 				layer.bindPopup("<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + feature.properties.Direccion + "</strong><br/>" + "Jurisdicción: <strong>" + feature.properties.Jurisdiccion);
 			}
 		}
-
 		function agregarPopupescuelas(feature, layer) {
 			if (feature.properties && feature.properties.Nombre_1) {
 				layer.bindPopup("<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + "Nivel: <strong>" + feature.properties.Nivel + "</strong><br/>" + "Gestion: <strong>" + feature.properties.Gestion);
 			}
 		}
-
-		/// POPUP infoambiente
 		function agregarPopupDepen(feature, layer) {
 			if (feature.properties && feature.properties.Nombre_1) {
 				if (feature.properties.ENLACE) {
@@ -776,6 +773,7 @@
 				});
 			});
 		}
+
 		function estilored() {
 			redesagua.eachLayer(function (featureInstanceLayer) {
 				var id_feature = featureInstanceLayer.feature.properties['id'];
@@ -793,6 +791,7 @@
 				});
 			});
 		}
+
 		function estilocloacas() {
 			sistcloacal.eachLayer(function (featureInstanceLayer) {
 				var id_feature = featureInstanceLayer.feature.properties['id'];
@@ -810,6 +809,7 @@
 				});
 			});
 		}
+
 		function estilocuencas() {
 			cuencas.eachLayer(function (featureInstanceLayer) {
 				var id_feature = featureInstanceLayer.feature.properties['qc_id'];
@@ -828,6 +828,7 @@
 				});
 			});
 		}
+
 		function estiloley() {
 			zonaley.eachLayer(function (featureInstanceLayer) {
 				var id_feature = featureInstanceLayer.feature.properties['id'];
@@ -847,6 +848,7 @@
 				});
 			});
 		}
+		
 		function estiloinundacion() {
 			inundacion.eachLayer(function (featureInstanceLayer) {
 				var id_feature = featureInstanceLayer.feature.properties['id'];
@@ -864,6 +866,7 @@
 				});
 			});
 		}
+
 		function estilosuelo() {
 			suelo.eachLayer(function (featureInstanceLayer) {
 				var id_feature = featureInstanceLayer.feature.properties['id'];
@@ -905,7 +908,6 @@
 				});
 			});
 		}
-
 		
 		/* BASE LAYERS */
 		var esriUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
@@ -1004,18 +1006,12 @@
 			infoambiente = L.geoJson(InfoAmbiente, { onEachFeature: agregarPopupDepen });
 
 
-
 		/* CREACIÓN DEL MAPA CON BASE LAYERS Y OVERLAYS */
 		var map = L.map('map', {
 			layers: [mapabase_esri, godoycruz]
 		}).setView([-32.9337, -68.8978], 13);
 		var marker = L.marker(map.getCenter(), { icon: iconoSTV }).bindPopup('Mover éste marcador y clickear el boton "Enlace externo de Street View", ubicado a la izquierda del mapa').addTo(map);
 		map.on('move', function () { marker.setLatLng(map.getCenter()); });
-
-
-
-		/* Make sure the marker stays in the centre when the map is moved
-		 map.on('move', function() { marker.setLatLng(map.getCenter()); });*/
 
 		/* FUNCIONES DE ESTILO DE OVERLAYS */
 		estiloDistritosDepartamentales();
@@ -1036,23 +1032,6 @@
 			"ESRI Satelital": mapabase_esri,
 		};
 
-
-		/*var overlayMaps = {
-			"Infraestructura urbana":{
-			"Barrios Populares":barriospopulares,
-			"Colectores Aluvionales":colec,
-			"Cuencas Hidrográficas":cuencas,
-			"Distritos Departamentales":Depa,
-			"Establecimientos Educativos":escuelas,
-			"Estaciones Meteorológicas":meteo,
-			"Instituciones de Seguridad":seguridad,
-			"Polideportivos":polideportivos,
-			"Reservorios urbanos":reservorios,
-			"Residencias de Adultos Mayores":residenciasad,
-			"Zonificación":zonificacion,
-			"Barrios y Loteos":BarriosyLoteos,
-			
-		};*/
 		var groupedOverlays = {
 			"Street View": {
 				"Marcador": marker,
@@ -1164,8 +1143,8 @@
 		var opciones_groupedlayers = {
 			groupCheckboxes: false
 		};
-		//L.control.layers(baseMaps, overlayMaps).addTo(map);
 
+		/* L.CONTROL.LAYERS(baseMaps, overlayMaps).addTo(map) */
 		L.control.groupedLayers(baseMaps, groupedOverlays, opciones_groupedlayers).addTo(map);
 		map.on('overlayadd', onOverlayAdd);
 		map.on('overlayremove', onOverlayRemove);
@@ -1176,9 +1155,8 @@
 		L.control.mousePosition().addTo(map);
 
 		
-        //var browserControl = L.control.browserPrint().addTo(map);
-
-		var customActionToPrint = function(context, mode) {
+		/* IMPRESIÓN DE PANTALLA */
+     	var customActionToPrint = function(context, mode) {
 	      return function() {
 		  window.alert("We are printing the MAP. Let's do Custom print here!");
 		  context._printMode(mode);
@@ -1190,17 +1168,13 @@
 	          printLayer: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', godoycruz),
 	          closePopupsOnPrint: false,
 	          printModes: [
-                //L.BrowserPrint.Mode.Landscape("Tabloid",{title: "Tabloid VIEW"}),
-                
-                //L.BrowserPrint.Mode.Landscape(),
-                //"Portrait",
                 L.BrowserPrint.Mode.Auto("A4",{title: "Auto"}),
-                L.BrowserPrint.Mode.Custom("A3",{title:"Seleccionar "})],
+                L.BrowserPrint.Mode.Custom("A3",{title:"Selecionar "})],
 	            manualMode: false}).addTo(map);
 			
 
-		  /* CARGA ARCHIVOS */
-		  (function (window) {
+		/* CARGA ARCHIVOS */
+		(function (window) {
 			
 			function initMap() {
             var control;
@@ -1231,26 +1205,34 @@
         control.loader.on('data:loaded', function (e) {
             var layer = e.layer;
             console.log(layer);
-        });
-    }
+        });}
 
-         window.addEventListener('load', function () {
+        window.addEventListener('load', function () {
          initMap();
          });}(window));
 
 
-         /* COORDENADAS CLICK MOUSE */
+        /* COORDENADAS CLICK MOUSE */
       	var c = new L.Control.Coordinates();
 		c.addTo(map);
 		    function onMapClick(e) {
 			   c.setCoordinates(e);
 	        }map.on('click', onMapClick);
 
+		
+		L.control.search({
+		    layer: Hospital,
+		    initial: false,
+		    propertyName: 'Nombre_1',
+		buildTip: function(text, val) {
+			var type = val.layer.feature.properties.Nombre_1;
+			return '<a href="#" class="'+type+'">'+text+'<b>'+type+'</b></a>';
+		}
+	    }).addTo(map);
 
-	    
 
-
-        function onOverlayAdd(e) {
+        /* TEXTOS CICLOVIAS */
+	    function onOverlayAdd(e) {
 			idlayer = "";
 			 if (e.name == "Ciclovías Existentes") {
 				idlayer = "cicloviasexist";
