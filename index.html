@@ -20,7 +20,7 @@
 		gtag('config', 'G-33KRTS12JB');
 	</script>
 
-	<link rel="shortcut icon" type="image/x-icon" href="favicon1.png">
+	<link rel="shortcut icon" type="image/x-icon" href="favicon1.png"> 
 
 	<!-- CSS -->
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css">
@@ -188,7 +188,7 @@
 	<script type="text/javascript" src="scripts/PanelesSolares.js"></script>
 	<script type="text/javascript" src="scripts/InfoAmbiente.js"></script>
 	<script type="text/javascript" src="scripts/Ciclovias Proyectadas (DAMI II).js"></script>
-	<script type="text/javascript" src="scripts/Ciclovias Proyectadas (Obras Particulares).js"></script>
+	<script type="text/javascript" src="scripts/Ciclovias Proyectadas (Municipalidad).js"></script>
 	<script type="text/javascript" src="scripts/Metrotranvia.js"></script>
 	<script type="text/javascript" src="scripts/ParadasMetrotranvia.js"></script>
 	<script type="text/javascript" src="scripts/GranjaSolar.js"></script>
@@ -220,10 +220,10 @@
 	<img src="favicon.png" height="auto" width="45px" class="logogc">
 	<div id="map" class="map map-home" style="height: 800px;"></div>
 	<div id="referencias">
-		<div class="icono_referencia" id="ref_cicloObras">Ciclovias Proyectadas Municipalidad:</br>2,88 Km.</div> <b>
+		<div class="icono_referencia" id="ref_cicloObras">Ciclovias Proyectadas Municipalidad:</br>2,17 Km.</div> <b>
 			<div class="icono_referencia" id="ref_cicloDami">Ciclovias Proyectadas DAMI II:<br>7,3 Km.</div> <b>
-			<div class="icono_referencia" id="ref_cicloEjec">Ciclovias en Ejecución DAMI II:</br>8,12 Km.</div> </b>	
-			<div class="icono_referencia" id="ref_cicloviasexist">Ciclovias Existentes:</br>36,68 Km.</div> </b>
+			<div class="icono_referencia" id="ref_cicloEjec">Ciclovias en Ejecución DAMI II:</br>9,33 Km.</div> </b>	
+			<div class="icono_referencia" id="ref_cicloviasexist">Ciclovias Existentes:</br>37,39 Km.</div> </b>
     </div>
 
     <!-- PAGINA OBSERVATORIO -->
@@ -936,7 +936,7 @@
 			godoycruz = L.geoJson(godoycruz),
 			puntoswifi = L.geoJson(Puntoswifi, { pointToLayer: crearIconoWifi, onEachFeature: agregarPopuppuntorecepcionpilas }),
 			persianas = L.geoJson(Persianas, { pointToLayer: crearIconoPersi, onEachFeature: agregarPopuppersianas }),
-			cicloObras = L.geoJson(CicloviaProyectadaObras, { onEachFeature: agregarPopupciclovias }).setStyle({ color: "yellow" }),
+			cicloMuni = L.geoJson(CicloviasProyectadasMuni, { onEachFeature: agregarPopupciclovias }).setStyle({ color: "yellow" }),
 			cicloDami = L.geoJson(CicloviasProyectadasDami, { onEachFeature: agregarPopupciclovias }).setStyle({ color: "orange" }),
 			cicloviasexist = L.geoJson(CicloviasExistentes, { onEachFeature: agregarPopupciclovias }).setStyle({ color: "red" }),
             cicloEjec = L.geoJson(CicloviasenEjecucionDami, { onEachFeature: agregarPopupciclovias }).setStyle({ color: "#03db5d" }),
@@ -1074,7 +1074,7 @@
 			"Movilidad": {
 				"Ciclovías Existentes": cicloviasexist,
 				"Ciclovías Proyectadas DAMI II": cicloDami,
-				"Ciclovías Proyectadas Municipalidad": cicloObras,
+				"Ciclovías Proyectadas Municipalidad": cicloMuni,
 				"Ciclovías en Ejecución DAMI II": cicloEjec,
 				"Ciclovias en Ejecución Municipalidad": muniEjec,
 				"Metrotranvía": metro,
