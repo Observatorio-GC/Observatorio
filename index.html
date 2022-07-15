@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -78,6 +78,7 @@
         }
 
 		.leaflet-container {
+			display: flex;
 			font: 12px Gotham;
 		}
 
@@ -213,24 +214,30 @@
 
 </head>
 
-<body>
-	<!-- FORMATO PAGINA PRINCIPAL VISOR -->
+<header>
+	
 	<h1 style="position: relative; margin-top: 10px; margin-left: 100px; z-index: 2">Observatorio Territorial de Godoy
 		Cruz</h1>
 	<img src="favicon.png" height="auto" width="45px" class="logogc">
 	<div id="map" class="map map-home" style="height: 800px;"></div>
 	<div id="referencias">
 		<div class="icono_referencia" id="ref_cicloObras">Ciclovias Proyectadas Municipalidad:</br>2,17 Km.</div> <b>
-			<div class="icono_referencia" id="ref_cicloDami">Ciclovias Proyectadas DAMI II:<br>7,07 Km.</div> <b>
-			<div class="icono_referencia" id="ref_cicloEjec">Ciclovias en Ejecución DAMI II:</br>2,84 Km.</div> </b>	
-			<div class="icono_referencia" id="ref_cicloviasexist">Ciclovias Existentes:</br>44,15 Km.</div> </b>
-    </div>
+			<div class="icono_referencia" id="ref_cicloDami">Ciclovias Proyectadas DAMI II:<br>7,1 Km.</div> <b>
+				<div class="icono_referencia" id="ref_cicloEjec">Ciclovias en Ejecución DAMI II:</br>9,33 Km.</div>
+			</b>
+			<div class="icono_referencia" id="ref_cicloviasexist">Ciclovias Existentes:</br>37,39 Km.</div>
+		</b>
+	</div>
 
-    <!-- PAGINA OBSERVATORIO -->
+	<!-- PAGINA OBSERVATORIO -->
 	<div><abbr title="Conozca el proyecto Piedemonte"><a
 				href="https://sites.google.com/view/observatorio-territorial/piedemonte?authuser=0" target="_blank"><img
 					src="favicon2.png" height="57px" width="256px" aling=right class="logoobserv"></abbr></div>
 
+</header>
+
+<body>
+	
 	<!-- FUNCIONES LEAFLET -->
 	<script>
 		/* ARGENMAP */
@@ -1037,7 +1044,18 @@
 				"Marcador": marker,
 
 			},
-			
+			"Gestión del Riesgo": {
+				"Amenaza de Inundación": inundacion,
+				"Canales Colectores Hijuelas": CanalesColectoresHijuelas,
+				"Cuencas Hidrográficas": cuencas,
+				"Fallas Geologicas": fall,
+				"Red Hídrica": hidrico,
+				"Reservorios urbanos": reservorios,
+				"Subcuencas Maure": subcuencas,
+				"Suelo": suelo,
+				"Vaso Inundación Maure": maure,
+
+			},
 			"Sistema Juridíco-Administrativo": {
 				"Distritos": Depa,
 				"Límite Urbano": limiurb,
@@ -1065,26 +1083,14 @@
 				"Ciclovías Proyectadas DAMI II": cicloDami,
 				"Ciclovías Proyectadas Municipalidad": cicloMuni,
 				"Ciclovías en Ejecución DAMI II": cicloEjec,
-				//"Ciclovias en Ejecución Municipalidad": muniEjec,
+				"Ciclovias en Ejecución Municipalidad": muniEjec,
 				"Metrotranvía": metro,
 				"Paradas Metrotranvía": paradasMetro,
 
 			},
-			"Gestión del Riesgo": {
-				"Amenaza de Inundación": inundacion,
-				"Canales Colectores Hijuelas": CanalesColectoresHijuelas,
-				"Cuencas Hidrográficas": cuencas,
-				"Fallas Geologicas": fall,
-				"Red Hídrica": hidrico,
-				"Reservorios urbanos": reservorios,
-				"Subcuencas Maure": subcuencas,
-				"Suelo": suelo,
-				"Vaso Inundación Maure": maure,
-
-			},
 			"Turismo": {
 				//"Circuito Trekking Cieneguita - Las Trancas": circuitoCieneguita,
-				//"Circuito Trekking Las Trancas - Chambon": circuitoIgnacio,
+				//"Circuito Trekking Las Trancas - Estancia San Ignacio": circuitoIgnacio,
 				"Puestos": puestos,
 				"Sendero Turístico - Geológico": sendGeo,
 				"Aventura": ave,
