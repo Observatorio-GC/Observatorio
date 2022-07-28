@@ -211,6 +211,9 @@
 	<script type="text/javascript" src="scripts/Puestos.js"></script>
 	<script type="text/javascript" src="scripts/CieneguitaTrancas.js"></script>
 	<script type="text/javascript" src="scripts/TrancasIgnacio.js"></script>
+	<script type="text/javascript" src="scripts/Diques.js"></script>
+	<script type="text/javascript" src="scripts/Canales.js"></script>
+
 
 </head>
 
@@ -1010,6 +1013,9 @@
 			puestos = L.geoJson(Puestos, { pointToLayer: crearIconoRojo, onEachFeature: agregarPopupfarmacias }),
 			circuitoCieneguita = L.geoJson(CieneguitaTrancas, {onEachFeature: agregarPopupCircuitos }).setStyle({ color: "#20e41d" }),
 			circuitoIgnacio = L.geoJson(TrancasIgnacio, {onEachFeature: agregarPopupCircuitos }).setStyle({ color: "yellow" }),
+			diques = L.geoJson(Diques, { pointToLayer: crearIconoNaranja, onEachFeature: agregarPopuppatrimoniales }),
+			canales = L.geoJson(Canales, { onEachFeature: agregarPopuppatrimoniales }).setStyle({ color: "blue" }),
+			
 			infoambiente = L.geoJson(InfoAmbiente, { onEachFeature: agregarPopupDepen });
 
 
@@ -1108,8 +1114,10 @@
 
 			"Patrimonio y Cultura": {
 				"Barrios Historicos": barrios,
+				"Canales": canales,
 				"Edificios": edificios,
 				"Esculturas": escultura,
+				"Diques y Planta Potabilizadora": diques,
 				"Sitios y Conjuntos Edilicios": SyCE,
 				"Tramos y Carriles": TyC,
 
