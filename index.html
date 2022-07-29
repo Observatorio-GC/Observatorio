@@ -994,7 +994,7 @@
 			suelo = L.geoJson(Suelo, { onEachFeature: agregarPopup }),
 			hidrico = L.geoJson(RedHidrica, { onEachFeature: agregarPopup }).setStyle({ color: "#15c8f0" }),
 			paneles = L.geoJson(PanelesSolares, { pointToLayer: crearIconoPanel, onEachFeature: agregarPopupPaneles }),
-			metro = L.geoJson(Metrotranvia, { onEachFeature: agregarPopupfarmacias }),
+			metro = L.geoJson(Metrotranvia, { onEachFeature: agregarPopupfarmacias }).setStyle({ color: "red" }),
 			paradasMetro = L.geoJson(ParadasMetro, {pointToLayer: crearIconoNegro, onEachFeature: agregarPopupbarrios}),
 			granjaSolar= L.geoJson(GranjaSolar, { onEachFeature: agregarPopupbarrios }).setStyle({ color: "#e37e12", fillOpacity: 0.75 }),
 			sistcloacal = L.geoJson(SistemaCloacal, { onEachFeature: agregarPopupcloacas }),
