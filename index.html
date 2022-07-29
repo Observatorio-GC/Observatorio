@@ -897,7 +897,7 @@
 			metro.eachLayer(function (featureInstanceLayer) {
 				var id_feature = featureInstanceLayer.feature.properties['id'];
 				if (id_feature == 1) {
-					color_actual = '#cf7601';
+					color_actual = 'red';
 				} else if (id_feature == 2) {
 					color_actual = '#b4afb3';
 				}	
@@ -994,7 +994,7 @@
 			suelo = L.geoJson(Suelo, { onEachFeature: agregarPopup }),
 			hidrico = L.geoJson(RedHidrica, { onEachFeature: agregarPopup }).setStyle({ color: "#15c8f0" }),
 			paneles = L.geoJson(PanelesSolares, { pointToLayer: crearIconoPanel, onEachFeature: agregarPopupPaneles }),
-			metro = L.geoJson(Metrotranvia, { onEachFeature: agregarPopupfarmacias }).setStyle({ color: "red" }),
+			metro = L.geoJson(Metrotranvia, { onEachFeature: agregarPopupfarmacias }),
 			paradasMetro = L.geoJson(ParadasMetro, {pointToLayer: crearIconoNegro, onEachFeature: agregarPopupbarrios}),
 			granjaSolar= L.geoJson(GranjaSolar, { onEachFeature: agregarPopupbarrios }).setStyle({ color: "#e37e12", fillOpacity: 0.75 }),
 			sistcloacal = L.geoJson(SistemaCloacal, { onEachFeature: agregarPopupcloacas }),
