@@ -674,6 +674,11 @@
 				layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong><br/>" + feature.properties.Direccion);
 			}
 		}
+		function agregarPopupPuntos(feature, layer) {
+			if (feature.properties && feature.properties.Locación) {
+				layer.bindPopup("<strong>" + feature.properties.Locación + "</strong><br/>" + feature.properties.Dirección);
+			}
+		}
 		function agregarPopupSalud(feature, layer) {
 			if (feature.properties && feature.properties.Nombre_1) {
 				layer.bindPopup("<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + feature.properties.Direccion);
@@ -973,7 +978,7 @@
 			cuencas = L.geoJson(Cuencashidrograficas, { onEachFeature: agregarPopupcuencas }),
 			puntospilas = L.geoJson(PuntosRecepcionPilas, { pointToLayer: crearIconoPilas, onEachFeature: agregarPopuppuntorecepcionpilas }),
 			depen = L.geoJson(DependenciasMunicipales, { pointToLayer: crearIconoDependmuni, onEachFeature: agregarPopupSalud }),
-			punt = L.geoJson(PuntosVerdes, { pointToLayer: crearIconoVerde2, onEachFeature: agregarPopupPV }),
+			punt = L.geoJson(PuntosVerdes, { pointToLayer: crearIconoVerde2, onEachFeature: agregarPopupPuntos }),
 			solma = L.geoJson(Solmaforos, { pointToLayer: crearIconoSema_r2, onEachFeature: agregarPopupfarmacias }),
 			estacion = L.geoJson(EstacionesdeServicio, { pointToLayer: crearIconoAzul, onEachFeature: agregarPopupPV }),
 			meteo = L.geoJson(Estaciones, { pointToLayer: crearIconoNegro, onEachFeature: agregarPopupPV }),
