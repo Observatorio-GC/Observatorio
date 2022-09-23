@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+
+
+h1{
+    font-family: 'Playfair Display', serif;
+    color: #800080;
+    width: 90%;
+    height: auto;
+    position: relative; 
+    margin-top: 10px; 
+    margin-left: 10px; 
+    z-index: 2;
+}
+.logogc {
+    visibility: hidden;
+    position: absolute;
+    z-index: 2;
+    top: 15px;
+    right: 450px;
+}
+
+.logoobserv {
+    visibility: hidden;
+    position: absolute;
+    z-index: 2;
+    top: 8px;
+    right: 120px;
+}
+
+.icon {
+    visibility: hidden;
+    max-width: 70%;
+    max-height: 70%;
+    margin: 4px;
+}
+
+#map{
+    height: 640px;
+}
+
+#referencias {
+    font-family: 'Playfair Display';
+    font-size: 21px;
+    font-weight: lighter;
+    position: absolute;
+    width: 150px;
+    height: 50%;
+    top: 40%;
+    left: 20px;
+    z-index: 400;
+}
+
+.icono_referencia {
+    display: none;
+    font-family: 'PlayfairDisplay', serif;
+    font-size: 18px/1.5;
+    color: #000000;
+    margin-bottom: 15px;
+    text-align: left;
+    background-color: rgba(255, 255, 255, 0.76);
+    border-color: #444444;
+    border-width: 3px;
+    border-style: solid;
+    padding: 10px;
+}
+
+@media (min-width:750px){
+    .logogc {
+        visibility: visible;
+        position: absolute;
+        z-index: 2;
+        top: 15px;
+        right: 70px;
+    }
+    
+    .logoobserv {
+        visibility: hidden;
+        position: absolute;
+        z-index: 2;
+        top: 8px;
+        right: 120px;
+    }
+
+    .icon {
+        visibility: visible;
+        max-width: 70%;
+        max-height: 70%;
+        margin: 4px;
+    }
+
+    #map{
+        height: 760px;
+    }
+}
+
+@media (min-width:1024px){
+    .logogc {
+        visibility: visible;
+        position: absolute;
+        z-index: 2;
+        top: 15px;
+        right: 350px;
+    }
+    
+    .logoobserv {
+        visibility: visible;
+        position: absolute;
+        z-index: 2;
+        top: 8px;
+        right: 40px;
+    }
+
+    .icon {
+        visibility: visible;
+        max-width: 70%;
+        max-height: 70%;
+        margin: 4px;
+    }
+
+    #map{
+        height: 860px;
+    }
+}
+
+@media (min-width:1366px){
+
+    .logogc {
+        visibility: visible;
+        position: absolute;
+        z-index: 2;
+        top: 15px;
+        right: 450px;
+    }
+    
+    .logoobserv {
+        visibility: visible;
+        position: absolute;
+        z-index: 2;
+        top: 8px;
+        right: 120px;
+    }
+
+    .icon {
+        visibility: visible;
+        max-width: 70%;
+        max-height: 70%;
+        margin: 4px;
+    }
+
+    #map{
+        height: 860px;
+    }
+}
+
+@media (min-width:1920px){
+    h1{
+        font-family: 'Playfair Display', serif;
+        color: #800080;
+        width: 90%;
+        height: auto;
+        position: relative; 
+        margin-top: 10px; 
+        margin-left: 100px; 
+        z-index: 2;
+    }
+
+    .logogc {
+        visibility: visible;
+        position: absolute;
+        z-index: 2;
+        top: 15px;
+        right: 450px;
+    }
+    
+    .logoobserv {
+        visibility: visible;
+        position: absolute;
+        z-index: 2;
+        top: 8px;
+        right: 120px;
+    }
+
+    .icon {
+        visibility: visible;
+        max-width: 70%;
+        max-height: 70%;
+        margin: 4px;
+    }
+    
+    #map{
+        height: 860px;
+    }
+}
+    
+
+ 
