@@ -3,26 +3,32 @@
 
 <head>
 	<meta charset=utf-8 />
-	<meta name='viewport' content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="description"
+		content="Visor que permite visualizar información geográfica del municipio de Godoy Cruz, Desarrollado con HTML, CSS y JavaScript, Alojado en GitHub">
+	<meta name="keywords"
+		content="Godoy Cruz, Planificación Urbana, Secretaria de Ambiente y Desarrollo Sustentable, Visor, Observatorio Territorial">
+	<meta name="author" content="IgnacioDiaz - FernandoCruceño">
+	<meta name="copyright" content="Observatorio Territorial Godoy Cruz">
 	<title>ObservatorioTerritorialGC</title>
 
-	<!-- Global site tag (gtag.js) - Google Ad-Sense -->
-	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5850198782664021"
-        crossorigin="anonymous"></script>
-	
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-33KRTS12JB"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
-		function gtag() { dataLayer.push(arguments); }
+
+		function gtag() {
+			dataLayer.push(arguments);
+		}
 		gtag('js', new Date());
 
 		gtag('config', 'G-33KRTS12JB');
 	</script>
 
-	<link rel="shortcut icon" type="image/x-icon" href="favicon1.png"> 
+	<link rel="shortcut icon" type="image/x-icon" href="./img/favicon1.png">
 
 	<!-- CSS -->
+	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css">
 	<link rel="stylesheet" href="css/Leaflet.PolylineMeasure.css">
 	<link rel="stylesheet" href="css/Leaflet.StreetViewButtons.css">
@@ -30,87 +36,6 @@
 	<link rel="stylesheet" href="css/leaflet.groupedlayercontrol.min.css">
 	<link rel="stylesheet" href="css/Control.Coordinates.css">
 	<link rel="stylesheet" href="css/L.Control.MousePosition.css">
-	<link rel="stylesheet" href="js/leaflet-search.min.css">
-	<link rel="stylesheet" href="js/leaflet-search.mobile.min.css">
-	<link rel="stylesheet" href="js/leaflet-search.mobile.src.css">
-	<link rel="stylesheet" href="js/leaflet-search.src.css">
-
-	<style type="text/css">
-		.leaflet-control-attribution.leaflet-control a:hover {
-			color: #800080
-		}
-
-		.logogc {
-			position: absolute;
-            z-index: 2;
-			top: 15px;
-            right: 450px;
-		}
-
-		.logoobserv {
-			position: absolute;
-            z-index: 2;
-            top: 8px;
-            right: 120px;
-		}
-		
-		h1 {
-			color: #800080;
-			width: 90%;
-			height: auto;
-			font-family: PlayfairDisplay;
-        }
-
-		.leaflet-control-attribution.leaflet-control {
-			font-size: 16px;
-		}
-
-		@font-face {
-            font-family: PlayfairDisplay;
-            src: url(fonts/PlayfairDisplay-Regular.ttf);
-            font-weight: normal;
-        }
-
-		@font-face {
-            font-family: Gotham;
-            src: url(fonts/Gotham-Book.otf);
-            font-weight: normal;
-        }
-
-		.leaflet-container {
-			display: flex;
-			font: 12px Gotham;
-		}
-
-		#referencias {
-			position: absolute;
-			width: 150px;
-			height: 50%;
-			top: 40%;
-			left: 20px;
-			z-index: 400;
-		}
-
-		.icono_referencia {
-			display: none;
-			font: 18px/1.5 PlayfairDisplay;
-			color: #000000;
-			margin-bottom: 15px;
-			text-align: left;
-			background-color: rgba(255, 255, 255, 0.4);
-			border-color: #444444;
-			border-width: 3px;
-			border-style: solid;
-			padding: 10px;
-		}
-
-		.icon {
-            max-width: 70%;
-            max-height: 70%;
-            margin: 4px;
-        }
-
-	</style>
 
 	<!-- SCRIPTS -->
 	<script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"></script>
@@ -121,14 +46,12 @@
 	<script src="scripts/leaflet.pattern.js"></script>
 	<script src="scripts/leaflet-tilelayer-wmts.js"></script>
 	<script src="scripts/leaflet.groupedlayercontrol.min.js"></script>
-	<script src="scripts/Bing.js"></script>
 	<script src="scripts/leaflet.browser.print.js"></script>
 	<script src="scripts/leaflet.filelayer.js"></script>
 	<script src="scripts/Control.Coordinates.js"></script>
 	<script src="scripts/L.Control.MousePosition.js"></script>
-	<script src="js/leaflet-search.src.js"></script>
-	<script src="js/leaflet-search.min.js"></script>
-	
+	<script src="js/popups.js"></script>
+	<script src="js/iconos.js"></script>
 
 	<!-- GEOJSON -->
 	<script type="text/javascript" src="scripts/ZonaLey4886.js"></script>
@@ -213,34 +136,47 @@
 	<script type="text/javascript" src="scripts/TrancasIgnacio.js"></script>
 	<script type="text/javascript" src="scripts/Diques.js"></script>
 	<script type="text/javascript" src="scripts/Canales.js"></script>
-
-
 </head>
 
 <header>
-	
-	<h1 style="position: relative; margin-top: 10px; margin-left: 100px; z-index: 2">Observatorio Territorial de Godoy
-		Cruz</h1>
-	<img src="favicon.png" height="auto" width="45px" class="logogc">
-	<div id="map" class="map map-home" style="height: 800px;"></div>
+
+	<style>
+		.leaflet-container {
+			display: flex;
+			font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+			font-size: 12px;
+		}
+
+		.leaflet-control-attribution.leaflet-control {
+			font-family: 'Playfair Display', serif;
+			font-size: 15px;
+		}
+
+		.leaflet-control-attribution.leaflet-control a:hover {
+			color: #800080;
+		}
+	</style>
+
+	<h1>Observatorio Territorial de Godoy Cruz</h1>
+	<img src="img/favicon.png" height="auto" width="45px" class="logogc">
+	<div id="map"></div>
 	<div id="referencias">
-		<div class="icono_referencia" id="ref_cicloObras">Ciclovias Proyectadas Municipalidad:</br>2,17 Km.</div> <b>
-			<div class="icono_referencia" id="ref_cicloDami">Ciclovias Proyectadas DAMI II:<br>6,24 Km.</div> <b>
-				<div class="icono_referencia" id="ref_cicloEjec">Ciclovias en Ejecución DAMI II:</br>10,19 Km.</div>
-			</b>
-			<div class="icono_referencia" id="ref_cicloviasexist">Ciclovias Existentes:</br>43,04 Km.</div>
+		<div class="icono_referencia" id="ref_cicloDami">Ciclovias Proyectadas DAMI II:<br>6,24 Km.</div> <b>
+			<div class="icono_referencia" id="ref_cicloEjec">Ciclovias en Ejecución DAMI II:</br>10,19 Km.</div>
+		</b>
+		<div class="icono_referencia" id="ref_cicloviasexist">Ciclovias Existentes:</br>43,04 Km.</div>
 		</b>
 	</div>
 
 	<!-- PAGINA OBSERVATORIO -->
 	<div><abbr title="Conozca el proyecto Piedemonte"><a
 				href="https://sites.google.com/view/observatorio-territorial/piedemonte?authuser=0" target="_blank"><img
-					src="favicon2.png" height="57px" width="256px" aling=right class="logoobserv"></abbr></div>
+					src="img/favicon2.png" height="57px" width="256px" aling=right class="logoobserv"></abbr></div>
 
 </header>
 
 <body>
-	
+
 	<!-- FUNCIONES LEAFLET -->
 	<script>
 		/* ARGENMAP */
@@ -252,784 +188,393 @@
 			attribution: " <a href='https://www.ign.gob.ar/AreaServicios/Argenmap/IntroduccionV2'> IGN - Argenmap v2 </a> | <a href='https://www.godoycruz.gob.ar/'>Secretaria de Ambiente y Desarrollo Sustentable - Godoy Cruz</a> | <a href='https://github.com/mylen/leaflet.TileLayer.WMTS'>GitHub</a>&copy "
 		});
 
-		/* ICONOS */
-		var iconoComun = L.Icon.extend({
-			options: {
-				shadowUrl: 'img/marker-shadow.png',
-				iconSize: [25, 41],
-				shadowSize: [41, 41],
-				iconAnchor: [12, 41],
-				popupAnchor: [1, -34]
-			}
-		});
 
-		var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
-			iconoRojo = new iconoComun({ iconUrl: 'img/marker-icon-2x-red.png' }),
-			iconoNegro = new iconoComun({ iconUrl: 'img/marker-icon-2x-black.png' }),
-			iconoAzul = new iconoComun({ iconUrl: 'img/marker-icon-2x-blue.png' }),
-			iconoDorado = new iconoComun({ iconUrl: 'img/marker-icon-2x-gold.png' }),
-			iconoNaranja = new iconoComun({ iconUrl: 'img/marker-icon-2x-orange.png' }),
-			iconoGris = new iconoComun({ iconUrl: 'img/marker-icon-2x-grey.png' }),
-			iconoVioleta = new iconoComun({ iconUrl: 'img/marker-icon-2x-violet.png' }),
-			iconoAmarillo = new iconoComun({ iconUrl: 'img/marker-icon-2x-yellow.png' }),
-			iconoAntena = new iconoComun({ iconUrl: 'img/ante_r2.png' }),
-			iconoBiblio = new iconoComun({ iconUrl: 'img/biblio_r2.png' }),
-			iconoEscul = new iconoComun({ iconUrl: 'img/escultura_3.png' }),
-			iconoCentrosalud = new iconoComun({ iconUrl: 'img/centrosalud_r2.png' }),
-			iconoClinicaprivada = new iconoComun({ iconUrl: 'img/clinicaprivada_r2.png' }),
-			iconoDependmuni = new iconoComun({ iconUrl: 'img/dependmuni_r2.png' }),
-			iconoEstabeducat = new iconoComun({ iconUrl: 'img/estabeducat_r2.png' }),
-			iconoFarmacias = new iconoComun({ iconUrl: 'img/farmacias_r2.png' }),
-			iconoHospitales = new iconoComun({ iconUrl: 'img/hospitales2.png' }),
-			iconoSeguridad = new iconoComun({ iconUrl: 'img/institucseguridad_r2.png' }),
-			iconoJardmatern = new iconoComun({ iconUrl: 'img/jardmatern_r2.png' }),
-			iconoPoli = new iconoComun({ iconUrl: 'img/poli_r2.png' }),
-			iconoSema_r2 = new iconoComun({ iconUrl: 'img/sema_r2.png' }),
-			iconoPilas = new iconoComun({ iconUrl: 'img/pilas_r2.png' }),
-			iconoUnivec = new iconoComun({ iconUrl: 'img/univec_r2.png' }),
-			iconoSTV = new iconoComun({ iconUrl: 'img/pegman_3.png' }),
-			iconoVerde2 = new iconoComun({ iconUrl: 'img/verde2_r2.png' });
-	     	iconositios = new iconoComun({ iconUrl: 'img/sitios.png' });
-		    iconoedi = new iconoComun({ iconUrl: 'img/edificios.png' });
-		    iconoPersi = new iconoComun({ iconUrl: 'img/persianas_r2.png' });
-		    iconoMast = new iconoComun({ iconUrl: 'img/mastil_r2.png' });
-		    iconoMastp = new iconoComun({ iconUrl: 'img/banderita_r2.png' });
-		    iconoWifi = new iconoComun({ iconUrl: 'img/wIfI_r2.png' });
-		    iconoPanel = new iconoComun({ iconUrl: 'img/paneles_3.png' });
-
-
-
-		function crearIconoVerde(feature, latlng) {
-			return L.marker(latlng, { icon: iconoVerde })
-		}
-		var asignarIconoVerde = {
-			pointToLayer: crearIconoVerde
-		}
-
-		function crearIconoRojo(feature, latlng) {
-			return L.marker(latlng, { icon: iconoRojo })
-		}
-		var asignarIconoRojo = {
-			pointToLayer: crearIconoRojo
-		}
-
-		function crearIconoNegro(feature, latlng) {
-			return L.marker(latlng, { icon: iconoNegro })
-		}
-		var asignarIconoNegro = {
-			pointToLayer: crearIconoNegro
-		}
-
-		function crearIconoAzul(feature, latlng) {
-			return L.marker(latlng, { icon: iconoAzul })
-		}
-		var asignarIconoAzul = {
-			pointToLayer: crearIconoAzul
-		}
-
-		function crearIconoDorado(feature, latlng) {
-			return L.marker(latlng, { icon: iconoDorado })
-		}
-		var asignarIconoDorado = {
-			pointToLayer: crearIconoDorado
-		}
-
-		function crearIconoNaranja(feature, latlng) {
-			return L.marker(latlng, { icon: iconoNaranja })
-		}
-		var asignarIconoNaranja = {
-			pointToLayer: crearIconoNaranja
-		}
-
-		function crearIconoGris(feature, latlng) {
-			return L.marker(latlng, { icon: iconoGris })
-		}
-		var asignarIconoGris = {
-			pointToLayer: crearIconoGris
-		}
-
-		function crearIconoVioleta(feature, latlng) {
-			return L.marker(latlng, { icon: iconoVioleta })
-		}
-		var asignarIconoVioleta = {
-			pointToLayer: crearIconoVioleta
-		}
-
-		function crearIconoWifi(feature, latlng) {
-			return L.marker(latlng, { icon: iconoWifi })
-		}
-		var asignarIconoWifi = {
-			pointToLayer: crearIconoWifi
-		}
-
-		function crearIconoAmarillo(feature, latlng) {
-			return L.marker(latlng, { icon: iconoAmarillo })
-		}
-		var asignarIconoAmarillo = {
-			pointToLayer: crearIconoAmarillo
-		}
-
-		function crearIconoAntena(feature, latlng) {
-			return L.marker(latlng, { icon: iconoAntena })
-		}
-		var asignarIconoAntena = {
-			pointToLayer: crearIconoAntena
-		}
-
-		function crearIconoBiblio(feature, latlng) {
-			return L.marker(latlng, { icon: iconoBiblio })
-		}
-		var asignarIconoBiblio = {
-			pointToLayer: crearIconoBiblio
-		}
-
-		function crearIconoCentrosalud(feature, latlng) {
-			return L.marker(latlng, { icon: iconoCentrosalud })
-		}
-		var asignarIconoCentrosalud = {
-			pointToLayer: crearIconoCentrosalud
-		}
-
-		function crearIconoEscul(feature, latlng) {
-			return L.marker(latlng, { icon: iconoEscul })
-		}
-		var asignarIconoescul = {
-			pointToLayer: crearIconoEscul
-		}
-
-		function crearIconoClinicaprivada(feature, latlng) {
-			return L.marker(latlng, { icon: iconoClinicaprivada })
-		}
-		var asignarIconoClinicaprivada = {
-			pointToLayer: crearIconoClinicaprivada
-		}
-
-		function crearIconoDependmuni(feature, latlng) {
-			return L.marker(latlng, { icon: iconoDependmuni })
-		}
-		var asignarIconoDependmuni = {
-			pointToLayer: crearIconoDependmuni
-		}
-
-		function crearIconoEstabeducat(feature, latlng) {
-			return L.marker(latlng, { icon: iconoEstabeducat })
-		}
-		var asignarIconoEstabeducat = {
-			pointToLayer: crearIconoEstabeducat
-		}
-
-		function crearIconoFarmacias(feature, latlng) {
-			return L.marker(latlng, { icon: iconoFarmacias })
-		}
-		var asignarIconoFarmacias = {
-			pointToLayer: crearIconoFarmacias
-		}
-
-		function crearIconoHospitales(feature, latlng) {
-			return L.marker(latlng, { icon: iconoHospitales })
-		}
-		var asignarIconoHospitales = {
-			pointToLayer: crearIconoHospitales
-		}
-		function crearIconoPilas(feature, latlng) {
-			return L.marker(latlng, { icon: iconoPilas })
-		}
-		var asignarIconoPilas = {
-			pointToLayer: crearIconoPilas
-		}
-		function crearIconoSeguridad(feature, latlng) {
-			return L.marker(latlng, { icon: iconoSeguridad })
-		}
-		var asignarIconoSeguridad = {
-			pointToLayer: crearIconoSeguridad
-		}
-
-		function crearIconoJardmatern(feature, latlng) {
-			return L.marker(latlng, { icon: iconoJardmatern })
-		}
-		var asignarIconoJardmatern = {
-			pointToLayer: crearIconoJardmatern
-		}
-
-		function crearIconoPoli(feature, latlng) {
-			return L.marker(latlng, { icon: iconoPoli })
-		}
-		var asignarIconoPoli = {
-			pointToLayer: crearIconoPoli
-		}
-
-		function crearIconositios(feature, latlng) {
-			return L.marker(latlng, { icon: iconositios })
-		}
-		var asignarIconositios = {
-			pointToLayer: crearIconositios
-		}
-
-		function crearIconoedi(feature, latlng) {
-			return L.marker(latlng, { icon: iconoedi })
-		}
-		var asignarIconoedi = {
-			pointToLayer: crearIconoedi
-		}
-
-		function crearIconoUnivec(feature, latlng) {
-			return L.marker(latlng, { icon: iconoUnivec })
-		}
-		var asignarIconoUnivec = {
-			pointToLayer: crearIconoUnivec
-		}
-
-		function crearIconoSTV(feature, latlng) {
-			return L.marker(latlng, { icon: iconoSTV })
-		}
-		var asignarIconoUnivec = {
-			pointToLayer: crearIconoSTV
-		}
-
-		function crearIconoVerde2(feature, latlng) {
-			return L.marker(latlng, { icon: iconoVerde2 })
-		}
-		var asignarIconoVerde2 = {
-			pointToLayer: crearIconoVerde2
-		}
-
-		function crearIconoSema_r2(feature, latlng) {
-			return L.marker(latlng, { icon: iconoSema_r2 })
-		}
-		var asignarIconoSema_r2 = {
-			pointToLayer: crearIconoSema_r2
-		}
-
-		function crearIconoPersi(feature, latlng) {
-			return L.marker(latlng, { icon: iconoPersi })
-		}
-		var asignarIconoPersi = {
-			pointToLayer: crearIconoPersi
-		}
-
-		function crearIconoMast(feature, latlng) {
-			return L.marker(latlng, { icon: iconoMast })
-		}
-		var asignarIconoMast = {
-			pointToLayer: crearIconoMast
-		}
-		
-		function crearIconoMastp(feature, latlng) {
-			return L.marker(latlng, { icon: iconoMastp })
-		}
-		var asignarIconoMastp = {
-			pointToLayer: crearIconoMastp
-		}
-		
-		function crearIconoPanel(feature, latlng) {
-			return L.marker(latlng, { icon: iconoPanel })
-		}
-		var asignarIconoPanel = {
-			pointToLayer: crearIconoPanel
-		}
-
-		/* POPUPS */
-
-		function agregarPopupCircuitos(feature, layer) {
-			if (feature.properties && feature.properties.Nombre) {
-				layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong><br/>" + feature.properties.Distancia + "</strong><br/>");
-			}
-		}
-
-		function agregarPopupPaneles(feature, layer) {
-			if (feature.properties && feature.properties.descriptio) {
-				layer.bindPopup("<strong>" + feature.properties.descriptio + "</strong><br/>" + feature.properties.Name + "</strong><br/>");
-			}
-		}
-		function agregarPopupfallas(feature, layer) {
-			if (feature.properties && feature.properties.Falla) {
-				layer.bindPopup("<strong>" + feature.properties.Falla + "</strong><br/>" + "Tipo <strong>" + feature.properties.Tipo + "</strong><br/>" + "Movimiento <strong>" + feature.properties.Movimiento + "</strong><br/>" + "Actividad <strong>" + feature.properties.Actividad);
-			}
-		}
-		function agregarPopupbarrios(feature, layer) {
-			if (feature.properties && feature.properties.Nombre_1) {
-				layer.bindPopup("<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + feature.properties.Descrip + "</strong><br/>");
-			}
-		}
-		function agregarPopuppuntorecepcionpilas(feature, layer) {
-			if (feature.properties && feature.properties.Name) {
-				layer.bindPopup("<strong>" + feature.properties.Name + "</strong>");
-			}
-		}
-		function agregarPopuppersianas(feature, layer) {
-			if (feature.properties && feature.properties.Nombre) {
-				layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong><br><img src='img/persianas/" + feature.properties.Fotos + "' height='160px' width='200px' style='display:block; margin: auto; margin-top:7px;' />");
-			}
-		}
-		function agregarPopupmasti(feature, layer) {
-			if (feature.properties && feature.properties.Name) {
-				layer.bindPopup("<strong>" + feature.properties.Nombre_Descripcion + "</strong><br/>" + feature.properties.Ubicaci__n + "</strong><br/>" + feature.properties.Distrito + "</strong><br/>" +feature.properties.Posee_Mastil + "</strong><br><img src='img/turismo/mastil/" + feature.properties.Fotos + "' height='160px' width='200px' style='display:block; margin: auto; margin-top:7px;' />");
-
-			}
-		}
-		function agregarPopupesculturas(feature, layer) {
-			if (feature.properties && feature.properties.Referencia) {
-				layer.bindPopup("<strong>" + feature.properties.Referencia + "</strong><br/>" + feature.properties.Escultura + "</strong><br><img src='img/esculturas/" + feature.properties.Fotos + "' height='160px' width='200px' style='display:block; margin: auto; margin-top:7px;' />");
-			}
-		}
-		function agregarPopupturismo(feature, layer) {
-			if (feature.properties && feature.properties.Nombre) {
-				layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong><br/>" + feature.properties.Ubicacion + "</strong><br><img src='img/turismo/" + feature.properties.Fotos + "' height='160px' width='200px' style='display:block; margin: auto; margin-top:7px;' />");
-			}
-		}
-		function agregarPopuppatrimoniales(feature, layer) {
-			if (feature.properties && feature.properties.Nombre) {
-				layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong><br/>" + feature.properties.UBICACION + "</strong><br/>" + feature.properties.AÑO + "</strong><br/>" + feature.properties.DISTRITO + "</strong><br><img src='img/Muvi/" + feature.properties.Fotos + "' height='160px' width='200px' style='display:block; margin: auto; margin-top:7px;' />");
-			}
-
-		}
-		function agregarPopupespaciosverdes(feature, layer) {
-			if (feature.properties && feature.properties.NOMBRE) {
-				layer.bindPopup("<strong>" + feature.properties.Descriptio + "</strong><br/>" + feature.properties.NOMBRE);
-			}
-		}
-		function agregarPopup(feature, layer) {
-			if (feature.properties && feature.properties.Nombre_1) {
-				layer.bindPopup("<strong>" + feature.properties.Nombre_1 + "</strong>");
-			}
-		}
-		function agregarPopupfarmacias(feature, layer) {
-			if (feature.properties && feature.properties.Nombre) {
-				layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong>");
-			}
-		}
-		function agregarPopupfarmaciasgc(feature, layer) {
-			if (feature.properties && feature.properties.Nombre) {
-				layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong><br/>" + feature.properties.Direccion + "</strong><br/>" + feature.properties.Telefono + "</strong><br/>" + feature.properties.Distrito);
-			}
-		}
-		function agregarPopupres(feature, layer) {
-			if (feature.properties && feature.properties.UBICACION) {
-				layer.bindPopup("<strong>" + feature.properties.UBICACION + "</strong>");
-			}
-		}
-		function agregarPopupjardinesmuni(feature, layer) {
-			if (feature.properties && feature.properties.nombre) {
-				layer.bindPopup("<strong>" + feature.properties.nombre + "</strong><br/>" + feature.properties.Direccion);
-			}
-		}
-		function agregarPopupciclovias(feature, layer) {
-			if (feature.properties && feature.properties.Distancia) {
-				layer.bindPopup("<strong>" + feature.properties.TIPO_2 + "</strong><br/>" + feature.properties.Distancia);
-			}
-		}
-		function agregarPopupzoni(feature, layer) {
-			if (feature.properties && feature.properties.Layer) {
-				layer.bindPopup("<strong>" + feature.properties.Layer + "</strong>");
-			}
-		}
-		function agregarPopupBarriosConsolidados(feature, layer) {
-			if (feature.properties && feature.properties.Nombre_1) {
-				layer.bindPopup("<strong>" + feature.properties.Nombre_1 + "</strong>");
-			}
-		}
-		function agregarPopupredes(feature, layer) {
-			if (feature.properties && feature.properties.Estado) {
-				layer.bindPopup("<strong>" + feature.properties.Estado + "</strong>");
-			}
-		}
-		function agregarPopupcloacas(feature, layer) {
-			if (feature.properties && feature.properties.Estado) {
-				layer.bindPopup("<strong>" + feature.properties.Estado + "</strong>");
-			}
-		}
-		function agregarPopuplineas(feature, layer) {
-			if (feature.properties && feature.properties.TENSION) {
-				layer.bindPopup("<strong>" + feature.properties.TENSION + "</strong>");
-			}
-		}
-		function agregarPopuplineasMu(feature, layer) {
-			if (feature.properties && feature.properties.Name) {
-				layer.bindPopup("<strong>" + feature.properties.Name + "</strong><br/>" + feature.properties.description + "</strong><br/>");
-			}
-		}
-		function agregarPopupCanalesColectoresHijuelas(feature, layer) {
-			if (feature.properties && feature.properties.Name) {
-				layer.bindPopup("<strong>" + feature.properties.Name + "</strong>");
-			}
-		}
-		function agregarPopupDistritosDepartamentales(feature, layer) {
-			if (feature.properties && feature.properties.Nombre_1) {
-				layer.bindPopup("<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + feature.properties.Area_km2);
-			}
-		}
-		function agregarPopupzonaLey4886(feature, layer) {
-			if (feature.properties && feature.properties.REFERENCIA) {
-				layer.bindPopup("<strong>" + feature.properties.REFERENCIA + "</strong><br/>" + feature.properties.NOMBRE + "</strong><br/>" + "Uso de Suelo Dominante: <strong>" + feature.properties.UsoDominan + "</strong><br/>" + "Uso de Suelo Condicional: <strong>" + feature.properties.UsoCondic + "</strong><br/>"
-					+ "Densidad Minima: <strong>" + feature.properties.DensidMin + "</strong><br/>" + "Densidad Maxima: <strong>" + feature.properties.DensidMax);
-			}
-		}
-		function agregarPopupcuencas(feature, layer) {
-			if (feature.properties && feature.properties.Nombre_1) {
-				layer.bindPopup("<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + feature.properties.Superficie);
-			}
-		}
-		function agregarPopupPV(feature, layer) {
-			if (feature.properties && feature.properties.Nombre) {
-				layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong><br/>" + feature.properties.Direccion);
-			}
-		}
-		function agregarPopupPuntos(feature, layer) {
-			if (feature.properties && feature.properties.Locación) {
-				layer.bindPopup("<strong>" + feature.properties.Locación + "</strong><br/>" + feature.properties.Dirección);
-			}
-		}
-		function agregarPopupSalud(feature, layer) {
-			if (feature.properties && feature.properties.Nombre_1) {
-				layer.bindPopup("<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + feature.properties.Direccion);
-			}
-		}
-		function agregarPopupHospital(feature, layer) {
-			if (feature.properties && feature.properties.Nombre_1) {
-				layer.bindPopup("<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + feature.properties.Direccion + "</strong><br/>" + "Jurisdicción: <strong>" + feature.properties.Jurisdiccion);
-			}
-		}
-		function agregarPopupescuelas(feature, layer) {
-			if (feature.properties && feature.properties.Nombre_1) {
-				layer.bindPopup("<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + "Nivel: <strong>" + feature.properties.Nivel + "</strong><br/>" + "Gestion: <strong>" + feature.properties.Gestion);
-			}
-		}
-		function agregarPopupDepen(feature, layer) {
-			if (feature.properties && feature.properties.Nombre_1) {
-				if (feature.properties.ENLACE) {
-					layer.bindPopup("<strong>" + feature.properties.Nombre_1 + "</strong><br /><iframe src='" + feature.properties.ENLACE + "' style='width: 301px; height: 480px; border: 2px solid #888888; margin-top:10px' scrolling='no'></iframe><br /><a href='" + feature.properties.ENLACE + "' target='_blank'>Abrir en otra pestaña</a>");
-				} else {
-					layer.bindPopup("<strong>" + feature.properties.Nombre_1 + "</strong>");
-				}
-			}
-		}
-
-		function agregarPopupPiedemonte(feature, layer) {
-			if (feature.properties && feature.properties.Nombre) {
-				if (feature.properties.Link) {
-					layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong><br>" + "Según el Plan Municipal de Ordenamiento Territorial <strong>" + "Acceso al Link: <strong>" + "'<a href=https://drive.google.com/file/d/1e4dmPCJDyeEmXtNe2WLacZlpMDvlPPHX/view?usp=sharing + target='_blank'>PMOT</a>'");
-				} else {
-					layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong>");
-				}
-			}
-		}
-
-		function agregarPopupGastronomia(feature, layer) {
-			if (feature.properties && feature.properties.Nombre) {
-				layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong><br/>" + "Dirección <strong>" + feature.properties.Direccion + "</strong><br/>" + "Horario <strong>" + feature.properties.Horario + "</strong><br/>" + "Contacto <strong>" + feature.properties.Contacto);
-			}
-		}
-
-		function agregarPopupGastronomia2(feature, layer) {
-			if (feature.properties && feature.properties.Nombre) {
-				layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong><br/>" + "Dirección <strong>" + feature.properties.Direccion + "</strong><br/>" + "Contacto <strong>" + feature.properties.Contacto);
-			}
-		}
-
-		function estiloDistritosDepartamentales() {
-			Depa.eachLayer(function (featureInstanceLayer) {
-				var id_feature = featureInstanceLayer.feature.properties['qc_id'];
-				if (id_feature == 0) {
-					color_actual = '#d48871';
-				} else if (id_feature == 1) {
-					color_actual = '#e3f1df';
-				} else if (id_feature == 2) {
-					color_actual = '#f1dfed';
-				} else if (id_feature == 3) {
-					color_actual = '#adddf7';
-				} else if (id_feature == 4) {
-					color_actual = '#fcfacf';
-				} else if (id_feature == 5) {
-					color_actual = '#d4bd8b';
-				} else if (id_feature == 6) {
-					color_actual = '#427710';
-				} else if (id_feature == 7) {
-					color_actual = '#ffa400';
-				} else if (id_feature == 8) {
-					color_actual = '#a028ad';
-				}
-
-				featureInstanceLayer.setStyle({
-					color: color_actual, fillOpacity: 0.65
-				});
-			});
-		}
-
-		function estilozoni() {
-			zonificacion.eachLayer(function (featureInstanceLayer) {
-				var id_feature = featureInstanceLayer.feature.properties['qc_id'];
-				if (id_feature == 0) {
-					color_actual = 'grey';
-				} else if (id_feature == 1) {
-					color_actual = '#FF0000';
-				} else if (id_feature == 2) {
-					color_actual = '#ff7f00';
-				} else if (id_feature == 3) {
-					color_actual = '#fff600';
-				} else if (id_feature == 4) {
-					color_actual = '#800080';
-				} else if (id_feature == 5) {
-					color_actual = '#5d3064';
-				} else if (id_feature == 6) {
-					color_actual = '#1feeb4';
-				} else if (id_feature == 7) {
-					color_actual = '#199f2d';
-				} else if (id_feature == 8) {
-					color_actual = '#74d1af';
-				} else if (id_feature == 9) {
-					color_actual = '#2f6e9e';
-				} else if (id_feature == 10) {
-					color_actual = '#b31417';
-				} else if (id_feature == 11) {
-					color_actual = '#E1E1E1';
-				}
-				featureInstanceLayer.setStyle({
-					color: color_actual, fillOpacity: 0.75
-				});
-			});
-		}
-
-		function estilored() {
-			redesagua.eachLayer(function (featureInstanceLayer) {
-				var id_feature = featureInstanceLayer.feature.properties['id'];
-				if (id_feature == 1) {
-					color_actual = '#62b8e5';
-				} else if (id_feature == 1) {
-					color_actual = '#62b8e5';
-				} else if (id_feature == 2) {
-					color_actual = '#fbb75b';
-				} else if (id_feature == 3) {
-					color_actual = '#f05d51';
-				}
-				featureInstanceLayer.setStyle({
-					color: color_actual, fillOpacity: 0.75
-				});
-			});
-		}
-
-		function estilocloacas() {
-			sistcloacal.eachLayer(function (featureInstanceLayer) {
-				var id_feature = featureInstanceLayer.feature.properties['id'];
-				if (id_feature == 1) {
-					color_actual = '#62b8e5';
-				} else if (id_feature == 1) {
-					color_actual = '#62b8e5';
-				} else if (id_feature == 2) {
-					color_actual = '#fbb75b';
-				} else if (id_feature == 3) {
-					color_actual = '#f05d51';
-				}
-				featureInstanceLayer.setStyle({
-					color: color_actual, fillOpacity: 0.75
-				});
-			});
-		}
-
-		function estilocuencas() {
-			cuencas.eachLayer(function (featureInstanceLayer) {
-				var id_feature = featureInstanceLayer.feature.properties['qc_id'];
-				if (id_feature == 1) {
-					color_actual = '#62b8e5';
-				} else if (id_feature == 2) {
-					color_actual = '#fbb75b';
-				} else if (id_feature == 3) {
-					color_actual = '#f05d51';
-				}
-				var optiones_textura = { height: 8, weight: 4, spaceWeight: 4, color: color_actual, spaceColor: color_actual, spaceOpacity: 0.3, angle: -45 };
-				var textura_cuencas = new L.StripePattern(optiones_textura); textura_cuencas.addTo(map);
-
-				featureInstanceLayer.setStyle({
-					color: color_actual, fillOpacity: 0.75, fillPattern: textura_cuencas
-				});
-			});
-		}
-
-		function estiloley() {
-			zonaley.eachLayer(function (featureInstanceLayer) {
-				var id_feature = featureInstanceLayer.feature.properties['id'];
-				if (id_feature == 1) {
-					color_actual = '#fafafa';
-				} else if (id_feature == 2) {
-					color_actual = '#9f9f9f';
-				} else if (id_feature == 3) {
-					color_actual = '#b8b8b8';
-				} else if (id_feature == 4) {
-					color_actual = '#d7d7d7';
-				} else if (id_feature == 5) {
-					color_actual = '#848484';
-				}
-				featureInstanceLayer.setStyle({
-					color: color_actual, fillOpacity: 0.75
-				});
-			});
-		}
-		
-		function estiloinundacion() {
-			inundacion.eachLayer(function (featureInstanceLayer) {
-				var id_feature = featureInstanceLayer.feature.properties['id'];
-				if (id_feature == 1) {
-					color_actual = '#c2dffb';
-				} else if (id_feature == 2) {
-					color_actual = '#73b3d8';
-				} else if (id_feature == 3) {
-					color_actual = '#08306b';
-				} else if (id_feature == 4) {
-					color_actual = '#08306b';
-				}
-				featureInstanceLayer.setStyle({
-					color: color_actual, fillOpacity: 0.75
-				});
-			});
-		}
-
-		function estilosuelo() {
-			suelo.eachLayer(function (featureInstanceLayer) {
-				var id_feature = featureInstanceLayer.feature.properties['id'];
-				if (id_feature == 1) {
-					color_actual = '#d18581';
-				} else if (id_feature == 2) {
-					color_actual = '#64c589';
-				} else if (id_feature == 3) {
-					color_actual = '#dcc57d';
-				}
-				featureInstanceLayer.setStyle({
-					color: color_actual, fillOpacity: 0.75
-				});
-			});
-		}
-
-		function estilometro() {
-			metro.eachLayer(function (featureInstanceLayer) {
-				var id_feature = featureInstanceLayer.feature.properties['id'];
-				if (id_feature == 1) {
-					color_actual = 'red';
-				} else if (id_feature == 2) {
-					color_actual = '#b4afb3';
-				}	
-				featureInstanceLayer.setStyle({
-					color: color_actual, fillOpacity: 0.75
-				});
-			});
-		}
-
-		function estilosendero() {
-			sendGeo.eachLayer(function (featureInstanceLayer) {
-				var id_feature = featureInstanceLayer.feature.properties['id'];
-				if (id_feature == 1) {
-					color_actual = '#cf7601';
-				} 	
-				featureInstanceLayer.setStyle({
-					color: color_actual, fillOpacity: 0.75
-				});
-			});
-		}
-		
 		/* BASE LAYERS */
 		var esriUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-		    esriAttrib = 'Powered by &copy; <a href="https://www.esri.com/en-us/home">ESRI</a>',
-			mapabase_esri = L.tileLayer(esriUrl,{ maxZoom: 20, attribution: esriAttrib });
+			esriAttrib = 'Powered by &copy; <a href="https://www.esri.com/en-us/home">ESRI</a>',
+			mapabase_esri = L.tileLayer(esriUrl, {
+				maxZoom: 20,
+				attribution: esriAttrib
+			});
 
 		var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 			osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-			mapabase_osm = L.tileLayer(osmUrl, { maxZoom: 20, attribution: osmAttrib });
+			mapabase_osm = L.tileLayer(osmUrl, {
+				maxZoom: 20,
+				attribution: osmAttrib
+			});
 
 		var otUrl = 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
-			otAttrib = 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
-			mapabase_ot = L.tileLayer(otUrl, { maxZoom: 20, attribution: otAttrib });
-		
+			otAttrib =
+			'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
+			mapabase_ot = L.tileLayer(otUrl, {
+				maxZoom: 20,
+				attribution: otAttrib
+			});
+
 
 		/* OVERLAYS Y GRUPOS */
 		var plazagc = L.marker([-32.92524, -68.84439]).bindPopup('Plaza GC.').openPopup(),
-			centrosdesalud = L.geoJson(centrosdesalud, { pointToLayer: crearIconoCentrosalud, onEachFeature: agregarPopupSalud }),
-			edificios = L.geoJson(Edificios, { pointToLayer: crearIconoedi, onEachFeature: agregarPopuppatrimoniales }),
-			mastil = L.geoJson(Mastiles, { pointToLayer: crearIconoMast, onEachFeature: agregarPopupmasti }),
-			mastilp = L.geoJson(MastilesPublicos, { pointToLayer: crearIconoMastp, onEachFeature: agregarPopupmasti }),
-			SyCE = L.geoJson(SitiosyConjuntosEdilicios, { pointToLayer: crearIconositios, onEachFeature: agregarPopuppatrimoniales }),
-			TyC = L.geoJson(TramosyCarriles, { onEachFeature: agregarPopuppatrimoniales }).setStyle({ color: "#C35918" }),
-			barrios = L.geoJson(Barrios, { onEachFeature: agregarPopuppatrimoniales }).setStyle({ color: "#E86211", fillOpacity: 0.75 }),
-		    escultura = L.geoJson(Esculturas, { pointToLayer: crearIconoEscul, onEachFeature: agregarPopupesculturas }),
+			centrosdesalud = L.geoJson(centrosdesalud, {
+				pointToLayer: crearIconoCentrosalud,
+				onEachFeature: agregarPopupSalud
+			}),
+			edificios = L.geoJson(Edificios, {
+				pointToLayer: crearIconoedi,
+				onEachFeature: agregarPopuppatrimoniales
+			}),
+			mastil = L.geoJson(Mastiles, {
+				pointToLayer: crearIconoMast,
+				onEachFeature: agregarPopupmasti
+			}),
+			mastilp = L.geoJson(MastilesPublicos, {
+				pointToLayer: crearIconoMastp,
+				onEachFeature: agregarPopupmasti
+			}),
+			SyCE = L.geoJson(SitiosyConjuntosEdilicios, {
+				pointToLayer: crearIconositios,
+				onEachFeature: agregarPopuppatrimoniales
+			}),
+			TyC = L.geoJson(TramosyCarriles, {
+				onEachFeature: agregarPopuppatrimoniales
+			}).setStyle({
+				color: "#C35918"
+			}),
+			barrios = L.geoJson(Barrios, {
+				onEachFeature: agregarPopuppatrimoniales
+			}).setStyle({
+				color: "#E86211",
+				fillOpacity: 0.75
+			}),
+			escultura = L.geoJson(Esculturas, {
+				pointToLayer: crearIconoEscul,
+				onEachFeature: agregarPopupesculturas
+			}),
 			godoycruz = L.geoJson(godoycruz),
-			puntoswifi = L.geoJson(Puntoswifi, { pointToLayer: crearIconoWifi, onEachFeature: agregarPopuppuntorecepcionpilas }),
-			persianas = L.geoJson(Persianas, { pointToLayer: crearIconoPersi, onEachFeature: agregarPopuppersianas }),
-			cicloMuni = L.geoJson(CicloviasProyectadasMuni, { onEachFeature: agregarPopupciclovias }).setStyle({ color: "yellow" }),
-			cicloDami = L.geoJson(CicloviasProyectadasDami, { onEachFeature: agregarPopupciclovias }).setStyle({ color: "orange" }),
-			cicloviasexist = L.geoJson(CicloviasExistentes, { onEachFeature: agregarPopupciclovias }).setStyle({ color: "red" }),
-            cicloEjec = L.geoJson(CicloviasenEjecucionDami, { onEachFeature: agregarPopupciclovias }).setStyle({ color: "#03db5d" }),
-			muniEjec = L.geoJson(CicloviasenEjecucionMuni, { onEachFeature: agregarPopupciclovias }).setStyle({ color: "#17fff3" }),
-			lineasd = L.geoJson(LineasD, { onEachFeature: agregarPopuplineas }).setStyle({ color: "orange" }),
-			lineasmun = L.geoJson(LineaMunicipal, { onEachFeature: agregarPopuplineasMu }).setStyle({ color: "orange" }),
-			lineast = L.geoJson(LineasT, { onEachFeature: agregarPopuplineas }).setStyle({ color: "red" }),
-			CanalesColectoresHijuelas = L.geoJson(CanalesColectoresHijuelas, { onEachFeature: agregarPopupCanalesColectoresHijuelas }).setStyle({ color: "#1a6eeb" }),
-			clinicaspriv = L.geoJson(ClinicasPrivadas, { pointToLayer: crearIconoClinicaprivada, onEachFeature: agregarPopupSalud }),
-			hospital = L.geoJson(Hospital, { pointToLayer: crearIconoHospitales, onEachFeature: agregarPopupHospital }),
-			escuelas = L.geoJson(Escuelas, { pointToLayer: crearIconoEstabeducat, onEachFeature: agregarPopupescuelas }),
-			farmacias = L.geoJson(Farmacias, { pointToLayer: crearIconoFarmacias, onEachFeature: agregarPopupfarmaciasgc }),
-			polideportivos = L.geoJson(Polideportivos, { pointToLayer: crearIconoPoli, onEachFeature: agregarPopupSalud }),
-			jardinesmuni = L.geoJson(JardinesMunicipales, { pointToLayer: crearIconoJardmatern, onEachFeature: agregarPopupjardinesmuni }),
-			seguridad = L.geoJson(Seguridad, { pointToLayer: crearIconoSeguridad, onEachFeature: agregarPopupSalud }),
-			residenciasad = L.geoJson(ResidenciasAdultosMayores, { pointToLayer: crearIconoNaranja, onEachFeature: agregarPopupSalud }),
-			barriospopulares = L.geoJson(BarriosPopulares, { onEachFeature: agregarPopupbarrios }).setStyle({ color: "#f2d119", fillOpacity: 0.75 }),
-			reservorios = L.geoJson(Reservorios, { onEachFeature: agregarPopupres }).setStyle({ color: "#729b6f", fillOpacity: 0.75 }),
-			zonificacion = L.geoJson(Zonificacion, { onEachFeature: agregarPopupzoni }),
-			zonaley = L.geoJson(ZonaLey4886, { onEachFeature: agregarPopupzonaLey4886 }),
-			BarriosConsolidados = L.geoJson(BarriosConsolidados, { onEachFeature: agregarPopupBarriosConsolidados }),
-			redesagua = L.geoJson(RedesdeAguas, { onEachFeature: agregarPopupredes }),
-			espverdes = L.geoJson(EspaciosVerdes, { onEachFeature: agregarPopupespaciosverdes }).setStyle({ color: "#4daf4a", fillOpacity: 0.75 }),
-			cuencas = L.geoJson(Cuencashidrograficas, { onEachFeature: agregarPopupcuencas }),
-			puntospilas = L.geoJson(PuntosRecepcionPilas, { pointToLayer: crearIconoPilas, onEachFeature: agregarPopuppuntorecepcionpilas }),
-			depen = L.geoJson(DependenciasMunicipales, { pointToLayer: crearIconoDependmuni, onEachFeature: agregarPopupSalud }),
-			punt = L.geoJson(PuntosVerdes, { pointToLayer: crearIconoVerde2, onEachFeature: agregarPopupPuntos }),
-			solma = L.geoJson(Solmaforos, { pointToLayer: crearIconoSema_r2, onEachFeature: agregarPopupfarmacias }),
-			estacion = L.geoJson(EstacionesdeServicio, { pointToLayer: crearIconoAzul, onEachFeature: agregarPopupPV }),
-			meteo = L.geoJson(Estaciones, { pointToLayer: crearIconoNegro, onEachFeature: agregarPopupPV }),
-			ripieras = L.geoJson(Ripieras, { onEachFeature: agregarPopupfarmacias }).setStyle({ color: "#e31a1c", fillOpacity: 0.75 }),
-			zonatu = L.geoJson(ZonaNatural, { onEachFeature: agregarPopupPiedemonte }).setStyle({ color: "#e31a1c", fillOpacity: 0.75 }),
-			zonaurb = L.geoJson(ZonaUrbana, { onEachFeature: agregarPopupPiedemonte }).setStyle({ color: "#e2e21a", fillOpacity: 0.75 }),
-			limiurb = L.geoJson(LimiteUrbano, { onEachFeature: agregarPopupfarmacias }).setStyle({ color: "red" }),
-			Depa = L.geoJson(DistritosDepartamentales, { onEachFeature: agregarPopupDistritosDepartamentales }),
-			recic = L.geoJson(PlantaRecicladora, { pointToLayer: crearIconoVerde, onEachFeature: agregarPopupres }),
-			bank = L.geoJson(Bancos, { pointToLayer: crearIconoNegro, onEachFeature: agregarPopupSalud }),
-			caja = L.geoJson(Cajeros, { pointToLayer: crearIconoAmarillo, onEachFeature: agregarPopupbarrios }),
-			cobro = L.geoJson(Pagofacil, { pointToLayer: crearIconoNaranja, onEachFeature: agregarPopupbarrios }),
-			bode = L.geoJson(Bodegas, { pointToLayer: crearIconoRojo, onEachFeature: agregarPopupturismo }),
-			informador = L.geoJson(Informador, { pointToLayer: crearIconoNaranja, onEachFeature: agregarPopupturismo }),
-			bicicleta = L.geoJson(PuestosBici, { pointToLayer: crearIconoVerde, onEachFeature: agregarPopupturismo }),
-			fall = L.geoJson(Fallas, { onEachFeature: agregarPopupfallas }).setStyle({ color: "orange" }),
-			inundacion = L.geoJson(Inundacion, { onEachFeature: agregarPopupbarrios }),
-			suelo = L.geoJson(Suelo, { onEachFeature: agregarPopup }),
-			hidrico = L.geoJson(RedHidrica, { onEachFeature: agregarPopup }).setStyle({ color: "#15c8f0" }),
-			paneles = L.geoJson(PanelesSolares, { pointToLayer: crearIconoPanel, onEachFeature: agregarPopupPaneles }),
-			metro = L.geoJson(Metrotranvia, { onEachFeature: agregarPopupfarmacias }),
-			paradasMetro = L.geoJson(ParadasMetro, {pointToLayer: crearIconoNegro, onEachFeature: agregarPopupbarrios}),
-			granjaSolar= L.geoJson(GranjaSolar, { onEachFeature: agregarPopupbarrios }).setStyle({ color: "#e37e12", fillOpacity: 0.75 }),
-			sistcloacal = L.geoJson(SistemaCloacal, { onEachFeature: agregarPopupcloacas }),
-			sendGeo = L.geoJson(SenderoGeologico, { onEachFeature: agregarPopupfarmacias }),
-			bar = L.geoJson(Bares, { pointToLayer: crearIconoVioleta, onEachFeature: agregarPopupGastronomia }),
-			resto = L.geoJson(Restaurantes, { pointToLayer: crearIconoNegro, onEachFeature: agregarPopupGastronomia }),
-			cafe = L.geoJson(cafe, { pointToLayer: crearIconoNaranja, onEachFeature: agregarPopupGastronomia }),
-            hela = L.geoJson(Heladerias, { pointToLayer: crearIconoRojo, onEachFeature: agregarPopupGastronomia }),
-			ave = L.geoJson(Aventura, { pointToLayer: crearIconoAzul, onEachFeature: agregarPopupGastronomia2 }),
-			hospe = L.geoJson(Hospedajes, { pointToLayer: crearIconoAmarillo, onEachFeature: agregarPopupGastronomia2 }),
-			spa = L.geoJson(Spa, { pointToLayer: crearIconoVerde, onEachFeature: agregarPopupGastronomia2 }),
-			incu = L.geoJson(Incubadora, { pointToLayer: crearIconoVerde, onEachFeature: agregarPopup}),
-			union = L.geoJson(UnionesVecinales, { pointToLayer: crearIconoAmarillo, onEachFeature: agregarPopupPV}),
-			maure = L.geoJson(VasoInundacionMaure, { onEachFeature: agregarPopupfarmacias }).setStyle({ color: "#f16e31", fillOpacity: 0.75 }),
-			subcuencas = L.geoJson(SubcuencasMaure, { onEachFeature: agregarPopupfarmacias }).setStyle({ color: "#a3f1f0", fillOpacity: 0.50 }),
-			puestos = L.geoJson(Puestos, { pointToLayer: crearIconoRojo, onEachFeature: agregarPopupfarmacias }),
-			circuitoCieneguita = L.geoJson(CieneguitaTrancas, {onEachFeature: agregarPopupCircuitos }).setStyle({ color: "#20e41d" }),
-			circuitoIgnacio = L.geoJson(TrancasIgnacio, {onEachFeature: agregarPopupCircuitos }).setStyle({ color: "yellow" }),
-			diques = L.geoJson(Diques, { pointToLayer: crearIconoNaranja, onEachFeature: agregarPopuppatrimoniales }),
-			canales = L.geoJson(Canales, { onEachFeature: agregarPopuppatrimoniales }).setStyle({ color: "blue" }),
-			
-			infoambiente = L.geoJson(InfoAmbiente, { onEachFeature: agregarPopupDepen });
+			puntoswifi = L.geoJson(Puntoswifi, {
+				pointToLayer: crearIconoWifi,
+				onEachFeature: agregarPopuppuntorecepcionpilas
+			}),
+			persianas = L.geoJson(Persianas, {
+				pointToLayer: crearIconoPersi,
+				onEachFeature: agregarPopuppersianas
+			}),
+			cicloMuni = L.geoJson(CicloviasProyectadasMuni, {
+				onEachFeature: agregarPopupciclovias
+			}).setStyle({
+				color: "yellow"
+			}),
+			cicloDami = L.geoJson(CicloviasProyectadasDami, {
+				onEachFeature: agregarPopupciclovias
+			}).setStyle({
+				color: "orange"
+			}),
+			cicloviasexist = L.geoJson(CicloviasExistentes, {
+				onEachFeature: agregarPopupciclovias
+			}).setStyle({
+				color: "red"
+			}),
+			cicloEjec = L.geoJson(CicloviasenEjecucionDami, {
+				onEachFeature: agregarPopupciclovias
+			}).setStyle({
+				color: "#03db5d"
+			}),
+			muniEjec = L.geoJson(CicloviasenEjecucionMuni, {
+				onEachFeature: agregarPopupciclovias
+			}).setStyle({
+				color: "#17fff3"
+			}),
+			lineasd = L.geoJson(LineasD, {
+				onEachFeature: agregarPopuplineas
+			}).setStyle({
+				color: "orange"
+			}),
+			lineasmun = L.geoJson(LineaMunicipal, {
+				onEachFeature: agregarPopuplineasMu
+			}).setStyle({
+				color: "orange"
+			}),
+			lineast = L.geoJson(LineasT, {
+				onEachFeature: agregarPopuplineas
+			}).setStyle({
+				color: "red"
+			}),
+			CanalesColectoresHijuelas = L.geoJson(CanalesColectoresHijuelas, {
+				onEachFeature: agregarPopupCanalesColectoresHijuelas
+			}).setStyle({
+				color: "#1a6eeb"
+			}),
+			clinicaspriv = L.geoJson(ClinicasPrivadas, {
+				pointToLayer: crearIconoClinicaprivada,
+				onEachFeature: agregarPopupSalud
+			}),
+			hospital = L.geoJson(Hospital, {
+				pointToLayer: crearIconoHospitales,
+				onEachFeature: agregarPopupHospital
+			}),
+			escuelas = L.geoJson(Escuelas, {
+				pointToLayer: crearIconoEstabeducat,
+				onEachFeature: agregarPopupescuelas
+			}),
+			farmacias = L.geoJson(Farmacias, {
+				pointToLayer: crearIconoFarmacias,
+				onEachFeature: agregarPopupfarmaciasgc
+			}),
+			polideportivos = L.geoJson(Polideportivos, {
+				pointToLayer: crearIconoPoli,
+				onEachFeature: agregarPopupSalud
+			}),
+			jardinesmuni = L.geoJson(JardinesMunicipales, {
+				pointToLayer: crearIconoJardmatern,
+				onEachFeature: agregarPopupjardinesmuni
+			}),
+			seguridad = L.geoJson(Seguridad, {
+				pointToLayer: crearIconoSeguridad,
+				onEachFeature: agregarPopupSalud
+			}),
+			residenciasad = L.geoJson(ResidenciasAdultosMayores, {
+				pointToLayer: crearIconoNaranja,
+				onEachFeature: agregarPopupSalud
+			}),
+			barriospopulares = L.geoJson(BarriosPopulares, {
+				onEachFeature: agregarPopupbarrios
+			}).setStyle({
+				color: "#f2d119",
+				fillOpacity: 0.75
+			}),
+			reservorios = L.geoJson(Reservorios, {
+				onEachFeature: agregarPopupres
+			}).setStyle({
+				color: "#729b6f",
+				fillOpacity: 0.75
+			}),
+			zonificacion = L.geoJson(Zonificacion, {
+				onEachFeature: agregarPopupzoni
+			}),
+			zonaley = L.geoJson(ZonaLey4886, {
+				onEachFeature: agregarPopupzonaLey4886
+			}),
+			BarriosConsolidados = L.geoJson(BarriosConsolidados, {
+				onEachFeature: agregarPopupBarriosConsolidados
+			}),
+			redesagua = L.geoJson(RedesdeAguas, {
+				onEachFeature: agregarPopupredes
+			}),
+			espverdes = L.geoJson(EspaciosVerdes, {
+				onEachFeature: agregarPopupespaciosverdes
+			}).setStyle({
+				color: "#4daf4a",
+				fillOpacity: 0.75
+			}),
+			cuencas = L.geoJson(Cuencashidrograficas, {
+				onEachFeature: agregarPopupcuencas
+			}),
+			puntospilas = L.geoJson(PuntosRecepcionPilas, {
+				pointToLayer: crearIconoPilas,
+				onEachFeature: agregarPopuppuntorecepcionpilas
+			}),
+			depen = L.geoJson(DependenciasMunicipales, {
+				pointToLayer: crearIconoDependmuni,
+				onEachFeature: agregarPopupSalud
+			}),
+			punt = L.geoJson(PuntosVerdes, {
+				pointToLayer: crearIconoVerde2,
+				onEachFeature: agregarPopupPuntos
+			}),
+			solma = L.geoJson(Solmaforos, {
+				pointToLayer: crearIconoSema_r2,
+				onEachFeature: agregarPopupfarmacias
+			}),
+			estacion = L.geoJson(EstacionesdeServicio, {
+				pointToLayer: crearIconoAzul,
+				onEachFeature: agregarPopupPV
+			}),
+			meteo = L.geoJson(Estaciones, {
+				pointToLayer: crearIconoNegro,
+				onEachFeature: agregarPopupPV
+			}),
+			ripieras = L.geoJson(Ripieras, {
+				onEachFeature: agregarPopupfarmacias
+			}).setStyle({
+				color: "#e31a1c",
+				fillOpacity: 0.75
+			}),
+			zonatu = L.geoJson(ZonaNatural, {
+				onEachFeature: agregarPopupPiedemonte
+			}).setStyle({
+				color: "#e31a1c",
+				fillOpacity: 0.75
+			}),
+			zonaurb = L.geoJson(ZonaUrbana, {
+				onEachFeature: agregarPopupPiedemonte
+			}).setStyle({
+				color: "#e2e21a",
+				fillOpacity: 0.75
+			}),
+			limiurb = L.geoJson(LimiteUrbano, {
+				onEachFeature: agregarPopupfarmacias
+			}).setStyle({
+				color: "red"
+			}),
+			Depa = L.geoJson(DistritosDepartamentales, {
+				onEachFeature: agregarPopupDistritosDepartamentales
+			}),
+			recic = L.geoJson(PlantaRecicladora, {
+				pointToLayer: crearIconoVerde,
+				onEachFeature: agregarPopupres
+			}),
+			bank = L.geoJson(Bancos, {
+				pointToLayer: crearIconoNegro,
+				onEachFeature: agregarPopupSalud
+			}),
+			caja = L.geoJson(Cajeros, {
+				pointToLayer: crearIconoAmarillo,
+				onEachFeature: agregarPopupbarrios
+			}),
+			cobro = L.geoJson(Pagofacil, {
+				pointToLayer: crearIconoNaranja,
+				onEachFeature: agregarPopupbarrios
+			}),
+			bode = L.geoJson(Bodegas, {
+				pointToLayer: crearIconoRojo,
+				onEachFeature: agregarPopupturismo
+			}),
+			informador = L.geoJson(Informador, {
+				pointToLayer: crearIconoNaranja,
+				onEachFeature: agregarPopupturismo
+			}),
+			bicicleta = L.geoJson(PuestosBici, {
+				pointToLayer: crearIconoVerde,
+				onEachFeature: agregarPopupturismo
+			}),
+			fall = L.geoJson(Fallas, {
+				onEachFeature: agregarPopupfallas
+			}).setStyle({
+				color: "orange"
+			}),
+			inundacion = L.geoJson(Inundacion, {
+				onEachFeature: agregarPopupbarrios
+			}),
+			suelo = L.geoJson(Suelo, {
+				onEachFeature: agregarPopup
+			}),
+			hidrico = L.geoJson(RedHidrica, {
+				onEachFeature: agregarPopup
+			}).setStyle({
+				color: "#15c8f0"
+			}),
+			paneles = L.geoJson(PanelesSolares, {
+				pointToLayer: crearIconoPanel,
+				onEachFeature: agregarPopupPaneles
+			}),
+			metro = L.geoJson(Metrotranvia, {
+				onEachFeature: agregarPopupfarmacias
+			}),
+			paradasMetro = L.geoJson(ParadasMetro, {
+				pointToLayer: crearIconoNegro,
+				onEachFeature: agregarPopupbarrios
+			}),
+			granjaSolar = L.geoJson(GranjaSolar, {
+				onEachFeature: agregarPopupbarrios
+			}).setStyle({
+				color: "#e37e12",
+				fillOpacity: 0.75
+			}),
+			sistcloacal = L.geoJson(SistemaCloacal, {
+				onEachFeature: agregarPopupcloacas
+			}),
+			sendGeo = L.geoJson(SenderoGeologico, {
+				onEachFeature: agregarPopupfarmacias
+			}),
+			bar = L.geoJson(Bares, {
+				pointToLayer: crearIconoVioleta,
+				onEachFeature: agregarPopupGastronomia
+			}),
+			resto = L.geoJson(Restaurantes, {
+				pointToLayer: crearIconoNegro,
+				onEachFeature: agregarPopupGastronomia
+			}),
+			cafe = L.geoJson(cafe, {
+				pointToLayer: crearIconoNaranja,
+				onEachFeature: agregarPopupGastronomia
+			}),
+			hela = L.geoJson(Heladerias, {
+				pointToLayer: crearIconoRojo,
+				onEachFeature: agregarPopupGastronomia
+			}),
+			ave = L.geoJson(Aventura, {
+				pointToLayer: crearIconoAzul,
+				onEachFeature: agregarPopupGastronomia2
+			}),
+			hospe = L.geoJson(Hospedajes, {
+				pointToLayer: crearIconoAmarillo,
+				onEachFeature: agregarPopupGastronomia2
+			}),
+			spa = L.geoJson(Spa, {
+				pointToLayer: crearIconoVerde,
+				onEachFeature: agregarPopupGastronomia2
+			}),
+			incu = L.geoJson(Incubadora, {
+				pointToLayer: crearIconoVerde,
+				onEachFeature: agregarPopup
+			}),
+			union = L.geoJson(UnionesVecinales, {
+				pointToLayer: crearIconoAmarillo,
+				onEachFeature: agregarPopupPV
+			}),
+			maure = L.geoJson(VasoInundacionMaure, {
+				onEachFeature: agregarPopupfarmacias
+			}).setStyle({
+				color: "#f16e31",
+				fillOpacity: 0.75
+			}),
+			subcuencas = L.geoJson(SubcuencasMaure, {
+				onEachFeature: agregarPopupfarmacias
+			}).setStyle({
+				color: "#a3f1f0",
+				fillOpacity: 0.50
+			}),
+			puestos = L.geoJson(Puestos, {
+				pointToLayer: crearIconoRojo,
+				onEachFeature: agregarPopupfarmacias
+			}),
+			circuitoCieneguita = L.geoJson(CieneguitaTrancas, {
+				onEachFeature: agregarPopupCircuitos
+			}).setStyle({
+				color: "#20e41d"
+			}),
+			circuitoIgnacio = L.geoJson(TrancasIgnacio, {
+				onEachFeature: agregarPopupCircuitos
+			}).setStyle({
+				color: "yellow"
+			}),
+			diques = L.geoJson(Diques, {
+				pointToLayer: crearIconoNaranja,
+				onEachFeature: agregarPopuppatrimoniales
+			}),
+			canales = L.geoJson(Canales, {
+				onEachFeature: agregarPopuppatrimoniales
+			}).setStyle({
+				color: "blue"
+			}),
+
+			infoambiente = L.geoJson(InfoAmbiente, {
+				onEachFeature: agregarPopupDepen
+			});
 
 
 		/* CREACIÓN DEL MAPA CON BASE LAYERS Y OVERLAYS */
 		var map = L.map('map', {
 			layers: [mapabase_esri, godoycruz]
 		}).setView([-32.9337, -68.8978], 13);
-		var marker = L.marker(map.getCenter(), { icon: iconoSTV }).bindPopup('Mover éste marcador y clickear el boton "Enlace externo de Street View", ubicado a la izquierda del mapa').addTo(map);
-		map.on('move', function () { marker.setLatLng(map.getCenter()); });
+		var marker = L.marker(map.getCenter(), {
+				icon: iconoSTV
+			}).bindPopup(
+				'Mover éste marcador y clickear el boton "Enlace externo de Street View", ubicado a la izquierda del mapa')
+			.addTo(map);
+		map.on('move', function () {
+			marker.setLatLng(map.getCenter());
+		});
 
 		/* FUNCIONES DE ESTILO DE OVERLAYS */
 		estiloDistritosDepartamentales();
@@ -1094,18 +639,15 @@
 				"Ciclovías Proyectadas DAMI II": cicloDami,
 				"Ciclovías Proyectadas Municipalidad": cicloMuni,
 				"Ciclovías en Ejecución DAMI II": cicloEjec,
-				//"Ciclovias en Ejecución Municipalidad": muniEjec,
 				"Metrotranvía": metro,
 				"Paradas Metrotranvía": paradasMetro,
 
 			},
 			"Turismo": {
-				//"Circuito Trekking Cieneguita - Las Trancas": circuitoCieneguita,
-				//"Circuito Trekking Las Trancas - Estancia San Ignacio": circuitoIgnacio,
 				"Puestos": puestos,
 				"Sendero Turístico - Geológico": sendGeo,
 				"Aventura": ave,
-				"Bares y Comidas": bar, 
+				"Bares y Comidas": bar,
 				"Bodegas": bode,
 				"Casas de Té y Café": cafe,
 				"Heladerías": hela,
@@ -1141,9 +683,9 @@
 				"Puntos de Wifi": puntoswifi,
 				"Residencias de Adultos Mayores": residenciasad,
 				"Uniones Vecinales": union,
-			
+
 			},
-            "Infraestructura Urbana y de Servicio": {
+			"Infraestructura Urbana y de Servicio": {
 				"Bancos": bank,
 				"Barrios Consolidados": BarriosConsolidados,
 				"Barrios Populares": barriospopulares,
@@ -1156,129 +698,17 @@
 				"Pago Facil - Rapipago": cobro,
 				"Red Colectora Cloacal (AYSAM)": sistcloacal,
 				"Red Distribuidora de Agua Potable (AYSAM)": redesagua,
-				
-            },
-		};
 
+			},
+		};
 		var opciones_groupedlayers = {
 			groupCheckboxes: false
 		};
 
-		/* L.CONTROL.LAYERS(baseMaps, overlayMaps).addTo(map) */
-		L.control.groupedLayers(baseMaps, groupedOverlays, opciones_groupedlayers).addTo(map);
-		map.on('overlayadd', onOverlayAdd);
-		map.on('overlayremove', onOverlayRemove);
-		L.control.scale().addTo(map);
-		L.control.polylineMeasure().addTo(map);
-		L.streetView({ position: 'topleft' }).addTo(map);
-		L.streetView1({ position: 'topleft' }).addTo(map);
 		L.control.mousePosition().addTo(map);
-
-		
-		/* IMPRESIÓN DE PANTALLA */
-     	var customActionToPrint = function(context, mode) {
-	      return function() {
-		  window.alert("We are printing the MAP. Let's do Custom print here!");
-		  context._printMode(mode);
-	       }};
-
-            L.control.browserPrint({
-	          title: 'Impresión de pantalla',
-	          //documentTitle: 'Map printed using leaflet.browser.print plugin',
-	          printLayer: L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', godoycruz),
-	          closePopupsOnPrint: false,
-	          printModes: [
-                L.BrowserPrint.Mode.Auto("A4",{title: "Auto"}),
-                L.BrowserPrint.Mode.Custom("A3",{title:"Selecionar "})],
-	            manualMode: false}).addTo(map);
-			
-
-		/* CARGA ARCHIVOS */
-		(function (window) {
-			
-			function initMap() {
-            var control;
-            var L = window.L;
-		
-            var style = {
-             color: 'red',
-             opacity: 1.0,
-             fillOpacity: 1.0,
-             weight: 2,
-             clickable: false
-		    };
-
-        L.Control.FileLayerLoad.LABEL = '<img class="icon" src="js/nube.png" alt="file icon"/>';
-        control = L.Control.fileLayerLoad({
-            fitBounds: true,
-            layerOptions: {
-                style: style,
-                pointToLayer: function (data, latlng) {
-                    return L.circleMarker(
-                        latlng,
-                        { style: style }
-                    );
-                }
-            }
-        });
-        control.addTo(map);
-        control.loader.on('data:loaded', function (e) {
-            var layer = e.layer;
-            console.log(layer);
-        });}
-
-        window.addEventListener('load', function () {
-         initMap();
-         });}(window));
-
-
-        /* COORDENADAS CLICK MOUSE */
-      	var c = new L.Control.Coordinates();
-		c.addTo(map);
-		    function onMapClick(e) {
-			   c.setCoordinates(e);
-	        }map.on('click', onMapClick);
-
-		
-		L.control.search({
-		    layer: Hospital,
-		    initial: false,
-		    propertyName: 'Nombre_1',
-		buildTip: function(text, val) {
-			var type = val.layer.feature.properties.Nombre_1;
-			return '<a href="#" class="'+type+'">'+text+'<b>'+type+'</b></a>';
-		}
-	    }).addTo(map);
-
-
-        /* TEXTOS CICLOVIAS */
-	    function onOverlayAdd(e) {
-			idlayer = "";
-			 if (e.name == "Ciclovías Existentes") {
-				idlayer = "cicloviasexist";
-			} else if (e.name == "Ciclovías Proyectadas DAMI II") {
-				idlayer = "cicloDami"
-		    } else if (e.name == "Ciclovías en Ejecución DAMI II") {
-				idlayer = "cicloEjec"
-			}
-
-			document.getElementById("ref_" + idlayer).style.display = 'block';
-		}
-
-		function onOverlayRemove(e) {
-			idlayer = "";
-			if (e.name == "Ciclovías Existentes") {
-				idlayer = "cicloviasexist";
-			} else if (e.name == "Ciclovías Proyectadas DAMI II") {
-				idlayer = "cicloDami"
-			} else if (e.name == "Ciclovías en Ejecución DAMI II") {
-				idlayer = "cicloEjec"
-			}
-
-			document.getElementById("ref_" + idlayer).style.display = 'none';
-		}
-		include('logger.php');
 	</script>
+
+	<script src="js/funcionesMapa.js"></script>
 </body>
 
 </html>
