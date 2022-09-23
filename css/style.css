@@ -28,7 +28,7 @@ h1{
 }
 
 .icon {
-    visibility: hidden;
+    visibility: visible;
     max-width: 70%;
     max-height: 70%;
     margin: 4px;
