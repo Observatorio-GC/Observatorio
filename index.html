@@ -564,7 +564,7 @@
 
 
 		/* CREACIÓN DEL MAPA CON BASE LAYERS Y OVERLAYS */
-		var map = L.map('map', {
+		var map = L.map('map', { dragging: !L.Browser.mobile, tap: !L.Browser.mobile,
 			layers: [mapabase_esri, godoycruz]
 		}).setView([-32.9337, -68.8978], 13);
 		var marker = L.marker(map.getCenter(), {
