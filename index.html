@@ -54,7 +54,6 @@
 	<script src="js/iconos.js"></script>
 
 	<!-- GEOJSON -->
-	<script type="text/javascript" src="scripts/ZonaLey4886.js"></script>
 	<script type="text/javascript" src="scripts/Mastiles.js"></script>
 	<script type="text/javascript" src="scripts/MastilesPublicos.js"></script>
 	<script type="text/javascript" src="scripts/Edificios.js"></script>
@@ -136,6 +135,7 @@
 	<script type="text/javascript" src="scripts/TrancasIgnacio.js"></script>
 	<script type="text/javascript" src="scripts/Diques.js"></script>
 	<script type="text/javascript" src="scripts/Canales.js"></script>
+	<script type="text/javascript" src="scripts/APIyS.js"></script>
 </head>
 
 <header>
@@ -351,9 +351,6 @@
 			zonificacion = L.geoJson(Zonificacion, {
 				onEachFeature: agregarPopupzoni
 			}),
-			zonaley = L.geoJson(ZonaLey4886, {
-				onEachFeature: agregarPopupzonaLey4886
-			}),
 			BarriosConsolidados = L.geoJson(BarriosConsolidados, {
 				onEachFeature: agregarPopupBarriosConsolidados
 			}),
@@ -558,6 +555,13 @@
 				color: "blue"
 			}),
 
+			apys = L.geoJson(APIyS, {
+				onEachFeature: agregarPopupespaciosverdes
+			}).setStyle({
+				color: "orange",
+				fillOpacity: 0.30
+			}),
+
 			infoambiente = L.geoJson(InfoAmbiente, {
 				onEachFeature: agregarPopupDepen
 			});
@@ -582,7 +586,6 @@
 		estilored();
 		estilocloacas();
 		estilocuencas();
-		estiloley();
 		estiloinundacion();
 		estilosuelo();
 		estilometro();
@@ -613,13 +616,13 @@
 
 			},
 			"Sistema Juridíco-Administrativo": {
+				"Área de Planificación Integrada y Sostenible del Piedemonte": apys,
 				"Distritos": Depa,
 				"Límite Urbano": limiurb,
 				"Línea Municipal y de Edificación ": lineasmun,
 				"Zona con Características Especiales de Urbanización": zonaurb,
 				"Zona Especial de Conservacion Natural": zonatu,
 				"Zonificación": zonificacion,
-				"Zona Ley Piedemonte 4886": zonaley,
 
 			},
 			"Infraestructura Ambiental": {
