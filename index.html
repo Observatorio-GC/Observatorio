@@ -216,7 +216,7 @@
 		/* OVERLAYS Y GRUPOS */
 		var plazagc = L.marker([-32.92524, -68.84439]).bindPopup('Plaza GC.').openPopup(),
 			centrosdesalud = L.geoJson(centrosdesalud, {
-				pointToLayer: crearIconoCentrosalud,
+				pointToLayer: crearIconoAsistencia,
 				onEachFeature: agregarPopupSalud
 			}),
 			edificios = L.geoJson(Edificios, {
@@ -313,7 +313,7 @@
 				onEachFeature: agregarPopupHospital
 			}),
 			escuelas = L.geoJson(Escuelas, {
-				pointToLayer: crearIconoEstabeducat,
+				pointToLayer: crearIconoEnseñanza,
 				onEachFeature: agregarPopupescuelas
 			}),
 			farmacias = L.geoJson(Farmacias, {
@@ -333,7 +333,7 @@
 				onEachFeature: agregarPopupSalud
 			}),
 			residenciasad = L.geoJson(ResidenciasAdultosMayores, {
-				pointToLayer: crearIconoNaranja,
+				pointToLayer: crearIconoEsparcimiento,
 				onEachFeature: agregarPopupSalud
 			}),
 			barriospopulares = L.geoJson(BarriosPopulares, {
@@ -383,7 +383,7 @@
 				onEachFeature: agregarPopupfarmacias
 			}),
 			estacion = L.geoJson(EstacionesdeServicio, {
-				pointToLayer: crearIconoAzul,
+				pointToLayer: crearIconoServicios,
 				onEachFeature: agregarPopupPV
 			}),
 			meteo = L.geoJson(Estaciones, {
@@ -421,23 +421,23 @@
 				onEachFeature: agregarPopupres
 			}),
 			bank = L.geoJson(Bancos, {
-				pointToLayer: crearIconoNegro,
+				pointToLayer: crearIconoedi,
 				onEachFeature: agregarPopupSalud
 			}),
 			caja = L.geoJson(Cajeros, {
-				pointToLayer: crearIconoAmarillo,
+				pointToLayer: crearIconoServicios,
 				onEachFeature: agregarPopupbarrios
 			}),
 			cobro = L.geoJson(Pagofacil, {
-				pointToLayer: crearIconoNaranja,
+				pointToLayer: crearIconoServicios,
 				onEachFeature: agregarPopupbarrios
 			}),
 			bode = L.geoJson(Bodegas, {
-				pointToLayer: crearIconoRojo,
+				pointToLayer: crearIconoComercio,
 				onEachFeature: agregarPopupturismo
 			}),
 			informador = L.geoJson(Informador, {
-				pointToLayer: crearIconoNaranja,
+				pointToLayer: crearIconoOficina,
 				onEachFeature: agregarPopupturismo
 			}),
 			bicicleta = L.geoJson(PuestosBici, {
@@ -484,39 +484,39 @@
 				onEachFeature: agregarPopupfarmacias
 			}),
 			bar = L.geoJson(Bares, {
-				pointToLayer: crearIconoVioleta,
+				pointToLayer: crearIconoComercio,
 				onEachFeature: agregarPopupGastronomia
 			}),
 			resto = L.geoJson(Restaurantes, {
-				pointToLayer: crearIconoNegro,
+				pointToLayer: crearIconoComercio,
 				onEachFeature: agregarPopupGastronomia
 			}),
 			cafe = L.geoJson(cafe, {
-				pointToLayer: crearIconoNaranja,
+				pointToLayer: crearIconoComercio,
 				onEachFeature: agregarPopupGastronomia
 			}),
 			hela = L.geoJson(Heladerias, {
-				pointToLayer: crearIconoRojo,
+				pointToLayer: crearIconoComercio,
 				onEachFeature: agregarPopupGastronomia
 			}),
 			ave = L.geoJson(Aventura, {
-				pointToLayer: crearIconoAzul,
+				pointToLayer: crearIconoEsparcimiento,
 				onEachFeature: agregarPopupGastronomia2
 			}),
 			hospe = L.geoJson(Hospedajes, {
-				pointToLayer: crearIconoAmarillo,
+				pointToLayer: crearIconoEsparcimiento,
 				onEachFeature: agregarPopupGastronomia2
 			}),
 			spa = L.geoJson(Spa, {
-				pointToLayer: crearIconoVerde,
+				pointToLayer: crearIconoEsparcimiento,
 				onEachFeature: agregarPopupGastronomia2
 			}),
 			incu = L.geoJson(Incubadora, {
-				pointToLayer: crearIconoVerde,
+				pointToLayer: crearIconoOficina,
 				onEachFeature: agregarPopup
 			}),
 			union = L.geoJson(UnionesVecinales, {
-				pointToLayer: crearIconoAmarillo,
+				pointToLayer: crearIconoEsparcimiento,
 				onEachFeature: agregarPopupPV
 			}),
 			maure = L.geoJson(VasoInundacionMaure, {
@@ -546,7 +546,7 @@
 				color: "yellow"
 			}),
 			diques = L.geoJson(Diques, {
-				pointToLayer: crearIconoNaranja,
+				pointToLayer: crearIconoPlanta,
 				onEachFeature: agregarPopuppatrimoniales
 			}),
 			canales = L.geoJson(Canales, {
