@@ -43,6 +43,139 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
     iconoWifi = new iconoComun({ iconUrl: 'img/wIfI_r2.png' });
     iconoPanel = new iconoComun({ iconUrl: 'img/paneles_3.png' });
 
+    iconoComercio = new iconoComun({ iconUrl: 'img/Comercio.png' });
+    iconoCulto = new iconoComun({ iconUrl: 'img/Culto.png' });
+    iconoCultura = new iconoComun({ iconUrl: 'img/Cultura.png' });
+    iconoAsistencia = new iconoComun({ iconUrl: 'img/Asistencia.png' });
+    iconoEsparcimiento = new iconoComun({ iconUrl: 'img/Esparcimiento.png' });
+    iconoEnseñanza = new iconoComun({ iconUrl: 'img/Enseñanza.png' });
+    iconoOficina = new iconoComun({ iconUrl: 'img/Oficina.png' });
+    iconoServicios = new iconoComun({ iconUrl: 'img/Servicios.png' });
+    iconoPlanta = new iconoComun({ iconUrl: 'img/planta.png' });
+
+
+
+
+    function crearIconoComercio(feature, latlng) {
+        return L.marker(latlng, { icon: iconoComercio })
+    }
+    var asignarIconoComercio = {
+            pointToLayer: crearIconoComercio
+    }
+    
+    function crearIconoCulto(feature, latlng) {
+        return L.marker(latlng, { icon: iconoCulto })
+    }
+    var asignarIconoCulto = {
+            pointToLayer: crearIconoCulto
+    }
+    
+    function crearIconoCultura(feature, latlng) {
+        return L.marker(latlng, { icon: iconoCultura })
+    }
+    var asignarIconoCultura = {
+            pointToLayer: crearIconoCultura
+    }
+    
+    function crearIconoAsistencia(feature, latlng) {
+        return L.marker(latlng, { icon: iconoAsistencia })
+    }
+    var asignarIconoAsistencia = {
+            pointToLayer: crearIconoAsistencia
+    }
+    
+    function crearIconoEsparcimiento(feature, latlng) {
+        return L.marker(latlng, { icon: iconoEsparcimiento })
+    }
+    var asignarIconoEsparcimiento = {
+            pointToLayer: crearIconoEsparcimiento
+    }
+    
+    function crearIconoEnseñanza(feature, latlng) {
+        return L.marker(latlng, { icon: iconoEnseñanza })
+    }
+    var asignarIconoEnseñanza = {
+            pointToLayer: crearIconoEnseñanza
+    }
+    
+    function crearIconoOficina(feature, latlng) {
+        return L.marker(latlng, { icon: iconoOficina })
+    }
+    var asignarIconoOficina = {
+            pointToLayer: crearIconoOficina
+    }
+    
+    function crearIconoServicios(feature, latlng) {
+        return L.marker(latlng, { icon: iconoServicios })
+    }
+    var asignarIconoServicios = {
+            pointToLayer: crearIconoServicios
+    }
+
+    function crearIconoPlanta(feature, latlng) {
+        return L.marker(latlng, { icon: iconoPlanta })
+    }
+    var asignarIconoPlanta = {
+            pointToLayer: crearIconoPlanta
+    }
+    
+
+function crearIconoComercio(feature, latlng) {
+    return L.marker(latlng, { icon: iconoComercio })
+}
+var asignarIconoComercio = {
+        pointToLayer: crearIconoComercio
+}
+
+function crearIconoCulto(feature, latlng) {
+    return L.marker(latlng, { icon: iconoCulto })
+}
+var asignarIconoCulto = {
+        pointToLayer: crearIconoCulto
+}
+
+function crearIconoCultura(feature, latlng) {
+    return L.marker(latlng, { icon: iconoCultura })
+}
+var asignarIconoCultura = {
+        pointToLayer: crearIconoCultura
+}
+
+function crearIconoAsistencia(feature, latlng) {
+    return L.marker(latlng, { icon: iconoAsistencia })
+}
+var asignarIconoAsistencia = {
+        pointToLayer: crearIconoAsistencia
+}
+
+function crearIconoEsparcimiento(feature, latlng) {
+    return L.marker(latlng, { icon: iconoEsparcimiento })
+}
+var asignarIconoEsparcimiento = {
+        pointToLayer: crearIconoEsparcimiento
+}
+
+function crearIconoEnseñanza(feature, latlng) {
+    return L.marker(latlng, { icon: iconoEnseñanza })
+}
+var asignarIconoEnseñanza = {
+        pointToLayer: crearIconoEnseñanza
+}
+
+function crearIconoOficina(feature, latlng) {
+    return L.marker(latlng, { icon: iconoOficina })
+}
+var asignarIconoOficina = {
+        pointToLayer: crearIconoOficina
+}
+
+function crearIconoServicios(feature, latlng) {
+    return L.marker(latlng, { icon: iconoServicios })
+}
+var asignarIconoServicios = {
+        pointToLayer: crearIconoServicios
+}
+
 
 
 function crearIconoVerde(feature, latlng) {
