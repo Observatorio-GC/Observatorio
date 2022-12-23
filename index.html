@@ -164,7 +164,7 @@
 		<div class="icono_referencia" id="ref_cicloDami">Ciclovias Proyectadas DAMI II:<br>6,24 Km.</div> <b>
 			<div class="icono_referencia" id="ref_cicloEjec">Ciclovias en Ejecución DAMI II:</br>10,19 Km.</div>
 		</b>
-		<div class="icono_referencia" id="ref_cicloviasexist">Ciclovias Existentes:</br>47,99 Km.</div>
+		<div class="icono_referencia" id="ref_cicloviasexist">Ciclovias Existentes:</br>43,04 Km.</div>
 		</b>
 	</div>
 
@@ -211,6 +211,15 @@
 				maxZoom: 20,
 				attribution: otAttrib
 			});
+
+		var googleSatelite = 'http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}',
+		    googleSateliteAttrib =
+			"Powered by Google Maps" ,
+			mapabase_googleSatelite = L.tileLayer(googleSatelite, {
+				maxZoom: 20,
+				attribution: googleSateliteAttrib
+			});
+
 
 
 		/* OVERLAYS Y GRUPOS */
@@ -595,7 +604,9 @@
 		var baseMaps = {
 			"OpenTopoMap": mapabase_ot,
 			"Argenmap": mapabase_argenmap,
+			"Google Satelital": mapabase_googleSatelite,
 			"ESRI Satelital": mapabase_esri,
+			
 		};
 
 		var groupedOverlays = {
