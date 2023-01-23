@@ -136,6 +136,7 @@
 	<script type="text/javascript" src="scripts/Diques.js"></script>
 	<script type="text/javascript" src="scripts/Canales.js"></script>
 	<script type="text/javascript" src="scripts/APIyS.js"></script>
+	<script type="text/javascript" src="scripts/Traza.js"></script>
 </head>
 
 <header>
@@ -563,14 +564,15 @@
 			}).setStyle({
 				color: "blue"
 			}),
-
 			apys = L.geoJson(APIyS, {
 				onEachFeature: agregarPopupespaciosverdes
 			}).setStyle({
 				color: "orange",
 				fillOpacity: 0.30
 			}),
-
+			traza = L.geoJson(Traza, {
+				onEachFeature: agregarPopupCaminabilidad
+			}),
 			infoambiente = L.geoJson(InfoAmbiente, {
 				onEachFeature: agregarPopupDepen
 			});
@@ -599,6 +601,7 @@
 		estilosuelo();
 		estilometro();
 		estilosendero();
+		estilocaminabilidad();
 
 		/* CREACIÓN DEL LAYERS CONTROL */
 		var baseMaps = {
@@ -655,6 +658,7 @@
 				"Ciclovías en Ejecución DAMI II": cicloEjec,
 				"Metrotranvía": metro,
 				"Paradas Metrotranvía": paradasMetro,
+				"Traza Final Caminabilidad": traza,
 
 			},
 			"Turismo": {
