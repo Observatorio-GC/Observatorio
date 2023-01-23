@@ -117,6 +117,7 @@ function agregarPopuplineasMu(feature, layer) {
         layer.bindPopup("<strong>" + feature.properties.Name + "</strong><br/>" + feature.properties.description + "</strong><br/>");
     }
 }
+
 function agregarPopupCanalesColectoresHijuelas(feature, layer) {
     if (feature.properties && feature.properties.Name) {
         layer.bindPopup("<strong>" + feature.properties.Name + "</strong>");
@@ -192,6 +193,12 @@ function agregarPopupGastronomia(feature, layer) {
 function agregarPopupGastronomia2(feature, layer) {
     if (feature.properties && feature.properties.Nombre) {
         layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong><br/>" + "Dirección <strong>" + feature.properties.Direccion + "</strong><br/>" + "Contacto <strong>" + feature.properties.Contacto);
+    }
+}
+
+function agregarPopupCaminabilidad(feature, layer) {
+    if (feature.properties && feature.properties.Name) {
+        layer.bindPopup("<strong>" + feature.properties.Name + "</strong><br/>" + feature.properties.descriptio + "</strong><br/>");
     }
 }
 
@@ -392,3 +399,24 @@ function estilosendero() {
         });
     });
 }
+
+function estilocaminabilidad() {
+    traza.eachLayer(function (featureInstanceLayer) {
+        var id_feature = featureInstanceLayer.feature.properties['PROMEDIO_P'];
+        if (id_feature == 1) {
+            color_actual = '#e31a1c';
+        }else if (id_feature == 2) {
+            color_actual = '#ff7f00';
+        }else if (id_feature == 3) {
+            color_actual = '#fbeb09';
+        }else if (id_feature == 4) {
+            color_actual = '#16b934';
+        }				
+        featureInstanceLayer.setStyle({
+            color: color_actual, fillOpacity: 1, weight: 5
+        });
+    });
+}
+
+
+
