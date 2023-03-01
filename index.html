@@ -130,6 +130,7 @@
 	<script type="text/javascript" src="scripts/SubcuencasMaure.js"></script>
 	<script type="text/javascript" src="scripts/Ciclovias en Ejecucion (DAMI II).js"></script>
 	<script type="text/javascript" src="scripts/Ciclovias en Ejecucion (Municipalidad).js"></script>
+	<script type="text/javascript" src="scripts/Ciclovias Habilitadas (DAMI II).js"></script>
 	<script type="text/javascript" src="scripts/Puestos.js"></script>
 	<script type="text/javascript" src="scripts/CieneguitaTrancas.js"></script>
 	<script type="text/javascript" src="scripts/TrancasIgnacio.js"></script>
@@ -163,7 +164,7 @@
 	<div id="map"></div>
 	<div id="referencias">
 		<div class="icono_referencia" id="ref_cicloDami">Ciclovias Proyectadas DAMI II:<br>18,40 Km.</div> <b>
-			<div class="icono_referencia" id="ref_cicloEjec">Ciclovias en Ejecución DAMI II:</br>2,45 Km.</div>
+			<div class="icono_referencia" id="ref_cicloEjec">Ciclovias en Ejecución DAMI II:</br>3,90 Km.</div>
 		</b>
 		<div class="icono_referencia" id="ref_cicloviasexist">Ciclovias Existentes:</br>51,10 Km.</div>
 		</b>
@@ -293,6 +294,12 @@
 				onEachFeature: agregarPopupciclovias
 			}).setStyle({
 				color: "#17fff3"
+			}),
+			CicloviasHabilitaDami = L.geoJson(CicloviasHabilitaDami, {
+				onEachFeature: agregarPopupciclovias
+			}).setStyle({
+				color: "#17fff3"
+			
 			}),
 			lineasd = L.geoJson(LineasD, {
 				onEachFeature: agregarPopuplineas
@@ -655,7 +662,8 @@
 				"Ciclovías Existentes": cicloviasexist,
 				"Ciclovías Proyectadas DAMI II": cicloDami,
 				"Ciclovías en Ejecución DAMI II": cicloEjec,
-				"Ciclovías Proyectadas Municipalidad": cicloMuni,							
+				"Ciclovias Habilitadas DAMI II": CicloviasHabilitaDami,
+				"Ciclovías Proyectadas Municipalidad": cicloMuni,
 				"Metrotranvía": metro,
 				"Paradas Metrotranvía": paradasMetro,
 				"Índice Final de Caminabilidad": traza,
