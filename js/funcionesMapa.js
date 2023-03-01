@@ -82,6 +82,8 @@ function onOverlayAdd(e) {
         idlayer = "cicloDami"
     } else if (e.name == "Ciclovías en Ejecución DAMI II") {
         idlayer = "cicloEjec"
+    } else if (e.name == "Ciclovías Habilitadas DAMI II") {
+        idlayer = "CicloviasHabilitaDami"
     }
 
     document.getElementById("ref_" + idlayer).style.display = 'block';
@@ -95,6 +97,8 @@ function onOverlayRemove(e) {
         idlayer = "cicloDami"
     } else if (e.name == "Ciclovías en Ejecución DAMI II") {
         idlayer = "cicloEjec"
+    } else if (e.name == "Ciclovías Habilitadas DAMI II") {
+        idlayer = "CicloviasHabilitaDami"
     }
 
     document.getElementById("ref_" + idlayer).style.display = 'none';
