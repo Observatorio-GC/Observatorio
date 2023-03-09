@@ -192,7 +192,7 @@
 
 		/* BASE LAYERS */
 		var esriUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-			esriAttrib = "Powered by &copy <a href='https://www.esri.com/en-us/home'> ESRI </a> | <a href='https://www.godoycruz.gob.ar/'>Secretaría de Ambiente y Desarrollo Sustentable - Godoy Cruz</a>",
+			esriAttrib = "Powered by <a href='https://www.esri.com/en-us/home'> &copyESRI </a> | <a href='https://www.godoycruz.gob.ar/'>Secretaría de Ambiente y Desarrollo Sustentable - Godoy Cruz</a>",
 			mapabase_esri = L.tileLayer(esriUrl, {
 				maxZoom: 20,
 				attribution: esriAttrib
@@ -215,7 +215,7 @@
 
 		var googleSatelite = 'http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}',
 		    googleSateliteAttrib =
-			"Powered by Google Maps" ,
+			"Powered by &copy Google" ,
 			mapabase_googleSatelite = L.tileLayer(googleSatelite, {
 				maxZoom: 20,
 				attribution: googleSateliteAttrib
