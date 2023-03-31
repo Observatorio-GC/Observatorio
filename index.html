@@ -130,7 +130,6 @@
 	<script type="text/javascript" src="scripts/SubcuencasMaure.js"></script>
 	<script type="text/javascript" src="scripts/Ciclovias en Ejecucion (DAMI II).js"></script>
 	<script type="text/javascript" src="scripts/Ciclovias en Ejecucion (Municipalidad).js"></script>
-	<script type="text/javascript" src="scripts/Ciclovias Habilitadas (DAMI II).js"></script>
 	<script type="text/javascript" src="scripts/Puestos.js"></script>
 	<script type="text/javascript" src="scripts/CieneguitaTrancas.js"></script>
 	<script type="text/javascript" src="scripts/TrancasIgnacio.js"></script>
@@ -292,12 +291,6 @@
 				onEachFeature: agregarPopupciclovias
 			}).setStyle({
 				color: "#17fff3"
-			}),
-			CicloviasHabilitaDami = L.geoJson(CicloviasHabilitaDami, {
-				onEachFeature: agregarPopupciclovias
-			}).setStyle({
-				color: "#17fff3"
-			
 			}),
 			lineasd = L.geoJson(LineasD, {
 				onEachFeature: agregarPopuplineas
@@ -660,7 +653,6 @@
 				"Ciclovías Existentes": cicloviasexist,
 				"Ciclovías Proyectadas": cicloDami,
 				"Ciclovías en Ejecución": cicloEjec,
-				"Ciclovías Habilitadas DAMI II": CicloviasHabilitaDami,
 				"Ciclovías Proyectadas Municipalidad": cicloMuni,
 				"Metrotranvía": metro,
 				"Paradas Metrotranvía": paradasMetro,
