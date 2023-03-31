@@ -78,14 +78,12 @@ function onOverlayAdd(e) {
     idlayer = "";
      if (e.name == "Ciclovías Existentes") {
         idlayer = "cicloviasexist";
-    } else if (e.name == "Ciclovías Proyectadas DAMI II") {
+    } else if (e.name == "Ciclovías Proyectadas") {
         idlayer = "cicloDami"
-    } else if (e.name == "Ciclovías en Ejecución DAMI II") {
+    } else if (e.name == "Ciclovías en Ejecución") {
         idlayer = "cicloEjec"
-    } else if (e.name == "Ciclovías Habilitadas DAMI II") {
-        idlayer = "CicloviasHabilitaDami"
-    }
-
+    } 
+    
     document.getElementById("ref_" + idlayer).style.display = 'block';
 }
 
@@ -93,13 +91,11 @@ function onOverlayRemove(e) {
     idlayer = "";
     if (e.name == "Ciclovías Existentes") {
         idlayer = "cicloviasexist";
-    } else if (e.name == "Ciclovías Proyectadas DAMI II") {
+    } else if (e.name == "Ciclovías Proyectadas") {
         idlayer = "cicloDami"
-    } else if (e.name == "Ciclovías en Ejecución DAMI II") {
+    } else if (e.name == "Ciclovías en Ejecución") {
         idlayer = "cicloEjec"
-    } else if (e.name == "Ciclovías Habilitadas DAMI II") {
-        idlayer = "CicloviasHabilitaDami"
-    }
+    } 
 
     document.getElementById("ref_" + idlayer).style.display = 'none';
 }
