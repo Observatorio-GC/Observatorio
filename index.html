@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html  lang = "es">
 
 <head>
 	<meta charset=utf-8 />
@@ -92,7 +92,6 @@
 	<script type="text/javascript" src="scripts/Solmaforos.js"></script>
 	<script type="text/javascript" src="scripts/EstacionesdeServicio.js"></script>
 	<script type="text/javascript" src="scripts/Estaciones.js"></script>
-	<script type="text/javascript" src="scripts/Ripieras.js"></script>
 	<script type="text/javascript" src="scripts/ZonaNatural.js"></script>
 	<script type="text/javascript" src="scripts/ZonaUrbana.js"></script>
 	<script type="text/javascript" src="scripts/LimiteUrbano.js"></script>
@@ -111,12 +110,10 @@
 	<script type="text/javascript" src="scripts/PanelesSolares.js"></script>
 	<script type="text/javascript" src="scripts/InfoAmbiente.js"></script>
 	<script type="text/javascript" src="scripts/Ciclovias Proyectadas (DAMI II).js"></script>
-	<script type="text/javascript" src="scripts/Ciclovias Proyectadas (Municipalidad).js"></script>
 	<script type="text/javascript" src="scripts/Metrotranvia.js"></script>
 	<script type="text/javascript" src="scripts/ParadasMetrotranvia.js"></script>
 	<script type="text/javascript" src="scripts/GranjaSolar.js"></script>
 	<script type="text/javascript" src="scripts/SenderoGeologico.js"></script>
-	<script type="text/javascript" src="scripts/ParadasSendero.js"></script>
 	<script type="text/javascript" src="scripts/cafe.js"></script>
 	<script type="text/javascript" src="scripts/Aventura.js"></script>
 	<script type="text/javascript" src="scripts/Hospedajes.js"></script>
@@ -129,10 +126,7 @@
 	<script type="text/javascript" src="scripts/VasoInundacionMaure.js"></script>
 	<script type="text/javascript" src="scripts/SubcuencasMaure.js"></script>
 	<script type="text/javascript" src="scripts/Ciclovias en Ejecucion (DAMI II).js"></script>
-	<script type="text/javascript" src="scripts/Ciclovias en Ejecucion (Municipalidad).js"></script>
 	<script type="text/javascript" src="scripts/Puestos.js"></script>
-	<script type="text/javascript" src="scripts/CieneguitaTrancas.js"></script>
-	<script type="text/javascript" src="scripts/TrancasIgnacio.js"></script>
 	<script type="text/javascript" src="scripts/Diques.js"></script>
 	<script type="text/javascript" src="scripts/Canales.js"></script>
 	<script type="text/javascript" src="scripts/APIyS.js"></script>
@@ -145,12 +139,12 @@
 		.leaflet-container {
 			display: flex;
 			font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-			font-size: 12px;
+			font-size: 11px;
 		}
 
 		.leaflet-control-attribution.leaflet-control {
 			font-family: 'Playfair Display', serif;
-			font-size: 15px;
+			font-size: 12px;
 		}
 
 		.leaflet-control-attribution.leaflet-control a:hover {
@@ -164,7 +158,7 @@
 	<div id="referencias">
 		<div class="icono_referencia" id="ref_cicloDami">Ciclovias Proyectadas:</br>4,63 Km.</div> </b>
 		<div class="icono_referencia" id="ref_cicloEjec">Ciclovias en Ejecución:</br>2,20 Km.</div>	</b> 
-		<div class="icono_referencia" id="ref_cicloviasexist">Ciclovias Existentes:</br>63,17 Km.</div>	</b>
+		<div class="icono_referencia" id="ref_cicloviasexist">Ciclovias Existentes:</br>52,67 Km.</div>	</b>
 	</div>
 
 	<!-- PAGINA OBSERVATORIO -->
@@ -267,11 +261,6 @@
 				pointToLayer: crearIconoPersi,
 				onEachFeature: agregarPopuppersianas
 			}),
-			cicloMuni = L.geoJson(CicloviasProyectadasMuni, {
-				onEachFeature: agregarPopupciclovias
-			}).setStyle({
-				color: "yellow"
-			}),
 			cicloDami = L.geoJson(CicloviasProyectadasDami, {
 				onEachFeature: agregarPopupciclovias
 			}).setStyle({
@@ -286,11 +275,6 @@
 				onEachFeature: agregarPopupciclovias
 			}).setStyle({
 				color: "#03db5d"
-			}),
-			muniEjec = L.geoJson(CicloviasenEjecucionMuni, {
-				onEachFeature: agregarPopupciclovias
-			}).setStyle({
-				color: "#17fff3"
 			}),
 			lineasd = L.geoJson(LineasD, {
 				onEachFeature: agregarPopuplineas
@@ -397,12 +381,6 @@
 			meteo = L.geoJson(Estaciones, {
 				pointToLayer: crearIconoNegro,
 				onEachFeature: agregarPopupPV
-			}),
-			ripieras = L.geoJson(Ripieras, {
-				onEachFeature: agregarPopupfarmacias
-			}).setStyle({
-				color: "#e31a1c",
-				fillOpacity: 0.75
 			}),
 			zonatu = L.geoJson(ZonaNatural, {
 				onEachFeature: agregarPopupPiedemonte
@@ -542,16 +520,6 @@
 			puestos = L.geoJson(Puestos, {
 				pointToLayer: crearIconoRojo,
 				onEachFeature: agregarPopupfarmacias
-			}),
-			circuitoCieneguita = L.geoJson(CieneguitaTrancas, {
-				onEachFeature: agregarPopupCircuitos
-			}).setStyle({
-				color: "#20e41d"
-			}),
-			circuitoIgnacio = L.geoJson(TrancasIgnacio, {
-				onEachFeature: agregarPopupCircuitos
-			}).setStyle({
-				color: "yellow"
 			}),
 			diques = L.geoJson(Diques, {
 				pointToLayer: crearIconoPlanta,
