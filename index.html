@@ -131,6 +131,7 @@
 	<script type="text/javascript" src="scripts/Canales.js"></script>
 	<script type="text/javascript" src="scripts/APIyS.js"></script>
 	<script type="text/javascript" src="scripts/Traza.js"></script>
+	<script type="text/javascript" src="scripts/CentrosJubilados.js"></script>
 </head>
 
 <header>
@@ -539,6 +540,9 @@
 			traza = L.geoJson(Traza, {
 				onEachFeature: agregarPopupCaminabilidad
 			}),
+			jubilados = L.geoJson(CentrosJubilados, {
+				onEachFeature: agregarPopupbarrios
+			}),
 			infoambiente = L.geoJson(InfoAmbiente, {
 				onEachFeature: agregarPopupDepen
 			});
@@ -653,6 +657,7 @@
 
 			},
 			"Equipamiento Social": {
+				"Centros de Jubilados": jubilados,
 				"Centros de Salud": centrosdesalud,
 				"Clínicas Privadas": clinicaspriv,
 				"Dependencias Municipales": depen,
