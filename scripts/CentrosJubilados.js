@@ -1,0 +1,33 @@
+var CentrosJubilados ={
+"type": "FeatureCollection",
+"name": "CentrosJubilados",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Nombre_1": "Rosas de Otoño", "Descrip": "Chuquisaca 610" }, "geometry": { "type": "Point", "coordinates": [ -68.872893316063781, -32.919676475118003, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre_1": "S.U.P.E.", "Descrip": "Lavalle 472" }, "geometry": { "type": "Point", "coordinates": [ -68.850598313812554, -32.92539047579023, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre_1": "Las Orquideas", "Descrip": "Frías F. 51" }, "geometry": { "type": "Point", "coordinates": [ -68.855786702917968, -32.957921565479396, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre_1": "Sonrisas Otoñales", "Descrip": "Lamadrid 2204" }, "geometry": { "type": "Point", "coordinates": [ -68.8693573153203, -32.905737474550754, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre_1": "Nace Una Estrella", "Descrip": "Terrada 1502" }, "geometry": { "type": "Point", "coordinates": [ -68.822579311333001, -32.94604847724603, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre_1": "9 de Abril", "Descrip": "Joaquín V. Gonzalez 1982" }, "geometry": { "type": "Point", "coordinates": [ -68.85685631500732, -32.945394476581797, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre_1": "Corazones Unidos", "Descrip": "Lavalle 1356" }, "geometry": { "type": "Point", "coordinates": [ -68.862491315103185, -32.925785475587936, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre_1": "Nuevo Amanecer", "Descrip": "Laprida 1567" }, "geometry": { "type": "Point", "coordinates": [ -68.862666314702167, -32.909657474852644, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre_1": "Vivir en Plenitud", "Descrip": "Gutiérrez 935" }, "geometry": { "type": "Point", "coordinates": [ -68.855126313915505, -32.910614475035665, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre_1": "Jubilados y Pensionados de Godoy Cruz", "Descrip": "Perito Moreno 814" }, "geometry": { "type": "Point", "coordinates": [ -68.845954313526462, -32.933608476249105, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre_1": "Tiempo Presente", "Descrip": "Cerro Siete Colores y Penitentes" }, "geometry": { "type": "Point", "coordinates": [ -68.822741311294664, -32.943904477145757, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre_1": "Sueños de la 3ra Edad", "Descrip": "Sardi Groussac 1298" }, "geometry": { "type": "Point", "coordinates": [ -68.859542186398315, -32.937297702033092, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre_1": "Gloria a la Vida", "Descrip": "Salvador Arias 1575" }, "geometry": { "type": "Point", "coordinates": [ -68.86318639629404, -32.92876440901383, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre_1": "San Bernardo", "Descrip": "R. Sáenz Peña 1350" }, "geometry": { "type": "Point", "coordinates": [ -68.84587639928921, -32.910439040549448, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre_1": "Gracias a la Vida", "Descrip": "Belgrano y Castellani" }, "geometry": { "type": "Point", "coordinates": [ -68.842586873944427, -32.907417267267576, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre_1": "Honrar La Vida", "Descrip": "Sarmiento 1940" }, "geometry": { "type": "Point", "coordinates": [ -68.823437385494088, -32.941936419591215, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre_1": "29 de Enero", "Descrip": "Morales 1710" }, "geometry": { "type": "Point", "coordinates": [ -68.840712609503754, -32.946714229130102, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre_1": "Los Grandes de Corazon", "Descrip": "Las Orquídeas 1010" }, "geometry": { "type": "Point", "coordinates": [ -68.832780889301219, -32.938653848845384, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre_1": "Eterna Juventud", "Descrip": "Cacheuta 824" }, "geometry": { "type": "Point", "coordinates": [ -68.833476349205029, -32.933194488600797, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre_1": "Dias Felices", "Descrip": "Alberti 973" }, "geometry": { "type": "Point", "coordinates": [ -68.824779623108356, -32.940169951435564, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre_1": "El Trebol", "Descrip": "Bahia Ushuaia y Velez Sarfield" }, "geometry": { "type": "Point", "coordinates": [ -68.831946337416639, -32.957010513005351, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre_1": "Teresita", "Descrip": "Azul y Cabo Espiritu Santo" }, "geometry": { "type": "Point", "coordinates": [ -68.822599356309979, -32.949794247178829, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre_1": "Clotilde de Jacaranda", "Descrip": "Rawson y Velez Sarfield" }, "geometry": { "type": "Point", "coordinates": [ -68.831549925271503, -32.954059155038728, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre_1": "3ra Juventud", "Descrip": "San Vicente 1693" }, "geometry": { "type": "Point", "coordinates": [ -68.87759762948734, -32.905913878553697, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre_1": "Reflejos de Luna", "Descrip": "Plumerillo 2621" }, "geometry": { "type": "Point", "coordinates": [ -68.867539975291564, -32.923620396369202, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre_1": "Supe Sur", "Descrip": "Talcahuano 4000" }, "geometry": { "type": "Point", "coordinates": [ -68.88875258901254, -32.900679673452998, 0.0 ] } }
+]
+}
