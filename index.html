@@ -132,6 +132,8 @@
 	<script type="text/javascript" src="scripts/APIyS.js"></script>
 	<script type="text/javascript" src="scripts/Traza.js"></script>
 	<script type="text/javascript" src="scripts/CentrosJubilados.js"></script>
+	<script type="text/javascript" src="scripts/MetroFuturo.js"></script>
+	<script type="text/javascript" src="scripts/Paradas.js"></script>
 </head>
 
 <header>
@@ -454,9 +456,16 @@
 			metro = L.geoJson(Metrotranvia, {
 				onEachFeature: agregarPopupfarmacias
 			}),
+			metroFuturo = L.geoJson(MetroFuturo, {
+				onEachFeature: agregarPopupfarmacias
+			}),
 			paradasMetro = L.geoJson(ParadasMetro, {
-				pointToLayer: crearIconoNegro,
+				pointToLayer: crearIconoTren,
 				onEachFeature: agregarPopupbarrios
+			}),
+			paradas = L.geoJson(Paradas, {
+				pointToLayer: crearIconoTren,
+				onEachFeature: agregarPopupfarmacias
 			}),
 			granjaSolar = L.geoJson(GranjaSolar, {
 				onEachFeature: agregarPopupbarrios
@@ -570,6 +579,7 @@
 		estiloinundacion();
 		estilosuelo();
 		estilometro();
+		estilometroF();
 		estilosendero();
 		estilocaminabilidad();
 
@@ -627,6 +637,8 @@
 				"Ciclovías en Ejecución": cicloEjec,
 				"Metrotranvía": metro,
 				"Paradas Metrotranvía": paradasMetro,
+				"Traza Futura Metrotranvía": metroFuturo,
+				"Paradas Futuras Metrotranvía": paradas,
 				"Índice Final de Caminabilidad": traza,
 
 			},
