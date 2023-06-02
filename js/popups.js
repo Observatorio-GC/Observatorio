@@ -381,6 +381,24 @@ function estilometro() {
             color_actual = 'red';
         } else if (id_feature == 2) {
             color_actual = '#b4afb3';
+        } else if (id_feature == 3) {
+            color_actual = '#0dbed9';
+        }	
+        featureInstanceLayer.setStyle({
+            color: color_actual, fillOpacity: 0.75
+        });
+    });
+}
+
+function estilometroF() {
+    metroFuturo.eachLayer(function (featureInstanceLayer) {
+        var id_feature = featureInstanceLayer.feature.properties['id'];
+        if (id_feature == 1) {
+            color_actual = '#ff7f00';
+        } else if (id_feature == 2) {
+            color_actual = '#b4afb3';
+        } else if (id_feature == 3) {
+            color_actual = '#0dbed9';
         }	
         featureInstanceLayer.setStyle({
             color: color_actual, fillOpacity: 0.75

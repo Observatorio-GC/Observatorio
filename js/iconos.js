@@ -9,6 +9,17 @@ var iconoComun = L.Icon.extend({
     }
 });
 
+var iconoParaTren = L.Icon.extend({
+    options: {
+        shadowUrl: 'img/marker-shadow.png',
+        iconSize: [20, 20],
+        shadowSize: [41, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34]
+    }
+});
+
+
 var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
     iconoRojo = new iconoComun({ iconUrl: 'img/marker-icon-2x-red.png' }),
     iconoNegro = new iconoComun({ iconUrl: 'img/marker-icon-2x-black.png' }),
@@ -42,7 +53,6 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
     iconoMastp = new iconoComun({ iconUrl: 'img/banderita_r2.png' });
     iconoWifi = new iconoComun({ iconUrl: 'img/wIfI_r2.png' });
     iconoPanel = new iconoComun({ iconUrl: 'img/paneles_3.png' });
-
     iconoComercio = new iconoComun({ iconUrl: 'img/Comercio.png' });
     iconoCulto = new iconoComun({ iconUrl: 'img/Culto.png' });
     iconoCultura = new iconoComun({ iconUrl: 'img/Cultura.png' });
@@ -52,9 +62,16 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
     iconoOficina = new iconoComun({ iconUrl: 'img/Oficina.png' });
     iconoServicios = new iconoComun({ iconUrl: 'img/Servicios.png' });
     iconoPlanta = new iconoComun({ iconUrl: 'img/planta.png' });
+    iconoTren = new iconoParaTren({ iconUrl: 'img/tren.png' });
 
 
 
+    function crearIconoTren(feature, latlng) {
+        return L.marker(latlng, { icon: iconoTren })
+    }
+    var asignarIconoTren = {
+            pointToLayer: crearIconoTren
+    }
 
     function crearIconoComercio(feature, latlng) {
         return L.marker(latlng, { icon: iconoComercio })
