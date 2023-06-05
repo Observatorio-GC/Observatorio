@@ -550,6 +550,7 @@
 				onEachFeature: agregarPopupCaminabilidad
 			}),
 			jubilados = L.geoJson(CentrosJubilados, {
+				pointToLayer: crearIconoOficina,
 				onEachFeature: agregarPopupbarrios
 			}),
 			infoambiente = L.geoJson(InfoAmbiente, {
