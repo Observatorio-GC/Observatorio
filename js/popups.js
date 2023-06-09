@@ -233,34 +233,32 @@ function estiloDistritosDepartamentales() {
 
 function estilozoni() {
     zonificacion.eachLayer(function (featureInstanceLayer) {
-        var id_feature = featureInstanceLayer.feature.properties['qc_id'];
-        if (id_feature == 0) {
-            color_actual = 'grey';
-        } else if (id_feature == 1) {
-            color_actual = '#FF0000';
-        } else if (id_feature == 2) {
-            color_actual = '#ff7f00';
-        } else if (id_feature == 3) {
-            color_actual = '#fff600';
-        } else if (id_feature == 4) {
-            color_actual = '#800080';
-        } else if (id_feature == 5) {
-            color_actual = '#5d3064';
-        } else if (id_feature == 6) {
-            color_actual = '#1feeb4';
-        } else if (id_feature == 7) {
-            color_actual = '#199f2d';
-        } else if (id_feature == 8) {
-            color_actual = '#74d1af';
-        } else if (id_feature == 9) {
-            color_actual = '#2f6e9e';
-        } else if (id_feature == 10) {
-            color_actual = '#b31417';
-        } else if (id_feature == 11) {
-            color_actual = '#E1E1E1';
-        }
+        var id_feature = featureInstanceLayer.feature.properties['Layer'];
+        if (id_feature == "CEMENTERIO") {
+            color_actual = '#202bf1';
+        } else if (id_feature == "CENTRO CIVICO") {
+            color_actual = '#035d04';
+        } else if (id_feature == "COMERCIAL") {
+            color_actual = '#0055ff';
+        } else if (id_feature == "COMERCIAL MIXTA") {
+            color_actual = '#e9e517';
+        } else if (id_feature == "EXTENSION INDUSTRIAL") {
+            color_actual = '#6619ff';
+        } else if (id_feature == "INDUSTRIAL1") {
+            color_actual = '#dcc587';
+        } else if (id_feature == "INDUSTRIAL2") {
+            color_actual = '#6a9cd1';
+        } else if (id_feature == "PARQUE RECREACION") {
+            color_actual = '#1ed736';
+        } else if (id_feature ==  "CULTURAL") {
+            color_actual = '#c074d1';
+        } else if (id_feature == "RESIDENCIAL") {
+            color_actual = '#48ccdb';
+        } else if (id_feature == "RESIDENCIAL MIXTA") {
+            color_actual = '#e95f28';
+        } 
         featureInstanceLayer.setStyle({
-            color: color_actual, fillOpacity: 0.75
+            color: color_actual, fillOpacity: 0.35 
         });
     });
 }
