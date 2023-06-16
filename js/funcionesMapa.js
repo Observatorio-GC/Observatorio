@@ -73,6 +73,8 @@ c.addTo(map);
     }map.on('click', onMapClick);
 
 
+
+
 /* TEXTOS CICLOVIAS */
 function onOverlayAdd(e) {
     idlayer = "";
@@ -82,7 +84,9 @@ function onOverlayAdd(e) {
         idlayer = "cicloDami"
     } else if (e.name == "Ciclovías en Ejecución") {
         idlayer = "cicloEjec"
-    } 
+    } else if (e.name == "Índice Final de Caminabilidad") {
+        idlayer = "traza";
+    }
     
     document.getElementById("ref_" + idlayer).style.display = 'block';
 }
@@ -95,7 +99,9 @@ function onOverlayRemove(e) {
         idlayer = "cicloDami"
     } else if (e.name == "Ciclovías en Ejecución") {
         idlayer = "cicloEjec"
-    } 
+    } else if (e.name == "Índice Final de Caminabilidad") {
+        idlayer = "traza";
+    }
 
     document.getElementById("ref_" + idlayer).style.display = 'none';
 }
