@@ -23,6 +23,7 @@ var Polideportivos ={
 { "type": "Feature", "properties": { "Nombre_1": "Polideportivo N° 19 - La Gloria Sur", "Direccion": "Lateral Acceso Sur Puerto Año Nuevo" }, "geometry": { "type": "Point", "coordinates": [ -68.835578828824936, -32.957339629655962, 0.0 ] } },
 { "type": "Feature", "properties": { "Nombre_1": "Polideportivo N° 20 - Chuquisaca", "Direccion": "Chuquisaca y Pedro Zanni" }, "geometry": { "type": "Point", "coordinates": [ -68.872985092069825, -32.919828664621988, 0.0 ] } },
 { "type": "Feature", "properties": { "Nombre_1": "Micro Estadio de Hockey N° 21 - Liga 8", "Direccion": "Talcahuano y Las Tipas" }, "geometry": { "type": "Point", "coordinates": [ -68.867992098082027, -32.903690198535131, 0.0 ] } },
-{ "type": "Feature", "properties": { "Nombre_1": "Polideportivo N° 14 - Santiago F. Llaver", "Direccion": "Pte Arturo Illia y Cipolletti" }, "geometry": { "type": "Point", "coordinates": [ -68.869187833153674, -32.934504082288768, 0.0 ] } }
+{ "type": "Feature", "properties": { "Nombre_1": "Polideportivo N° 14 - Santiago F. Llaver", "Direccion": "Pte Arturo Illia y Cipolletti" }, "geometry": { "type": "Point", "coordinates": [ -68.869187833153674, -32.934504082288768, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre_1": "Playón Deportivo Bicentenario", "Direccion": "Astor Piazolla y Ángel Bustelo" }, "geometry": { "type": "Point", "coordinates": [ -68.867417101762641, -32.939295418351065, 0.0 ] } }
 ]
 }
