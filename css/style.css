@@ -51,6 +51,46 @@ h1{
     z-index: 400;
 }
 
+#caminar {
+    font-family: 'Playfair Display';
+    font-size: 17px;
+    font-weight: normal;
+    position: fixed;
+    width: 160px;
+    height: 30%;
+    top: 48%;
+    left: 20px;
+}
+
+.titulo{
+    text-align: center;
+    font-size: 18px;
+}
+
+.optimo{
+    background-color: #16b934;
+    border:3px solid black;
+    text-align:center;
+}
+
+.bueno{
+    background-color: #fbeb09;
+    border:3px solid black;
+    text-align:center;
+}
+
+.regular{
+    background-color: #ff7f00;
+    border:3px solid black;
+    text-align:center;
+}
+
+.malo{
+    background-color: #e31a1c;
+    border:3px solid black;
+    text-align:center;
+}
+
 .icono_referencia {
     display: none;
     font-family: 'PlayfairDisplay', serif;
