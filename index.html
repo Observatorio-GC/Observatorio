@@ -162,6 +162,18 @@
 		<div class="icono_referencia" id="ref_cicloDami">Ciclovias Proyectadas:</br>3,66 Km.</div> </b>
 		<div class="icono_referencia" id="ref_cicloEjec">Ciclovias en Ejecución:</br>1,27 Km.</div>	</b> 
 		<div class="icono_referencia" id="ref_cicloviasexist">Ciclovias Existentes:</br>64,08 Km.</div>	</b>
+
+		<div id="caminar">
+		<div class="icono_referencia" id="ref_traza">
+			<p class="titulo"> Índice Final de Caminabilidad
+				<p class="optimo">Óptimo</p>
+				<p class="bueno">Bueno</p>
+				<p class="regular">Regular</p>
+				<p class="malo">Malo</p>
+			</p>
+		</div>	  
+		
+		</div>	</b>
 	</div>
 
 	<!-- PAGINA OBSERVATORIO -->
@@ -586,7 +598,7 @@
 
 		/* CREACIÓN DEL LAYERS CONTROL */
 		var baseMaps = {
-			"OpenTopoMap": mapabase_ot,
+			"OpenStreetMap": mapabase_osm,
 			"Argenmap": mapabase_argenmap,
 			"Google Satelital": mapabase_googleSatelite,
 			"ESRI Satelital": mapabase_esri,
@@ -694,7 +706,7 @@
 				"Estaciones de Servicio": estacion,
 				"Líneas de Distribución de Energía": lineasd,
 				"Líneas de Transporte de Energía": lineast,
-				/*"Mastiles con Identidad Barrial": mastil,*/
+/* 				"Mastiles con Identidad Barrial": mastil, */
 				"Mastiles en vía Pública": mastilp,
 				"Pago Facil - Rapipago": cobro,
 				"Red Colectora Cloacal (AYSAM)": sistcloacal,
