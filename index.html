@@ -173,8 +173,9 @@
 				<p class="regular">Regular</p>
 				<p class="malo">Malo</p>
 			</p>
-		</div>	  
+		</div>	
 		
+	
 		</div>	</b>
 	</div>
 
@@ -309,7 +310,7 @@
 				color: "red"
 			}),
 			CanalesColectoresHijuelas = L.geoJson(CanalesColectoresHijuelas, {
-				onEachFeature: agregarPopupCanalesColectoresHijuelas
+				onEachFeature: agregarPopuppuntorecepcionpilas
 			}).setStyle({
 				color: "#1a6eeb"
 			}),
@@ -456,10 +457,10 @@
 				onEachFeature: agregarPopupbarrios
 			}),
 			suelo = L.geoJson(Suelo, {
-				onEachFeature: agregarPopup
+				onEachFeature: agregarPopupBarriosConsolidados
 			}),
 			hidrico = L.geoJson(RedHidrica, {
-				onEachFeature: agregarPopup
+				onEachFeature: agregarPopupBarriosConsolidados
 			}).setStyle({
 				color: "#15c8f0"
 			}),
@@ -488,7 +489,7 @@
 				fillOpacity: 0.75
 			}),
 			sistcloacal = L.geoJson(SistemaCloacal, {
-				onEachFeature: agregarPopupcloacas
+				onEachFeature: agregarPopupredes
 			}),
 			sendGeo = L.geoJson(SenderoGeologico, {
 				onEachFeature: agregarPopupfarmacias
@@ -523,7 +524,7 @@
 			}),
 			incu = L.geoJson(Incubadora, {
 				pointToLayer: crearIconoOficina,
-				onEachFeature: agregarPopup
+				onEachFeature: agregarPopupBarriosConsolidados
 			}),
 			union = L.geoJson(UnionesVecinales, {
 				pointToLayer: crearIconoEsparcimiento,
