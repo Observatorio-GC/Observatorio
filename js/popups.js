@@ -1,10 +1,5 @@
 /* POPUPS */
 
-function agregarPopupCircuitos(feature, layer) {
-    if (feature.properties && feature.properties.Nombre) {
-        layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong><br/>" + feature.properties.Distancia + "</strong><br/>");
-    }
-}
 function agregarPopupPaneles(feature, layer) {
     if (feature.properties && feature.properties.descriptio) {
         layer.bindPopup("<strong>" + feature.properties.descriptio + "</strong><br/>" + feature.properties.Name + "</strong><br/>");
@@ -33,7 +28,6 @@ function agregarPopuppersianas(feature, layer) {
 function agregarPopupmasti(feature, layer) {
     if (feature.properties && feature.properties.Name) {
         layer.bindPopup("<strong>" + feature.properties.Nombre_Descripcion + "</strong><br/>" + feature.properties.Ubicaci__n + "</strong><br/>" + feature.properties.Distrito + "</strong><br/>" +feature.properties.Posee_Mastil + "</strong><br><img src='img/turismo/mastil/" + feature.properties.Fotos + "' height='160px' width='200px' style='display:block; margin: auto; margin-top:7px;' />");
-
     }
 }
 function agregarPopupesculturas(feature, layer) {
@@ -50,16 +44,10 @@ function agregarPopuppatrimoniales(feature, layer) {
     if (feature.properties && feature.properties.Nombre) {
         layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong><br/>" + feature.properties.UBICACION + "</strong><br/>" + feature.properties.AÑO + "</strong><br/>" + feature.properties.DISTRITO + "</strong><br><img src='img/Muvi/" + feature.properties.Fotos + "' height='160px' width='200px' style='display:block; margin: auto; margin-top:7px;' />");
     }
-
 }
 function agregarPopupespaciosverdes(feature, layer) {
     if (feature.properties && feature.properties.NOMBRE) {
         layer.bindPopup("<strong>" + feature.properties.Descriptio + "</strong><br/>" + feature.properties.NOMBRE);
-    }
-}
-function agregarPopup(feature, layer) {
-    if (feature.properties && feature.properties.Nombre_1) {
-        layer.bindPopup("<strong>" + feature.properties.Nombre_1 + "</strong>");
     }
 }
 function agregarPopupfarmacias(feature, layer) {
@@ -102,11 +90,6 @@ function agregarPopupredes(feature, layer) {
         layer.bindPopup("<strong>" + feature.properties.Estado + "</strong>");
     }
 }
-function agregarPopupcloacas(feature, layer) {
-    if (feature.properties && feature.properties.Estado) {
-        layer.bindPopup("<strong>" + feature.properties.Estado + "</strong>");
-    }
-}
 function agregarPopuplineas(feature, layer) {
     if (feature.properties && feature.properties.TENSION) {
         layer.bindPopup("<strong>" + feature.properties.TENSION + "</strong>");
@@ -117,21 +100,9 @@ function agregarPopuplineasMu(feature, layer) {
         layer.bindPopup("<strong>" + feature.properties.Name + "</strong><br/>" + feature.properties.description + "</strong><br/>");
     }
 }
-
-function agregarPopupCanalesColectoresHijuelas(feature, layer) {
-    if (feature.properties && feature.properties.Name) {
-        layer.bindPopup("<strong>" + feature.properties.Name + "</strong>");
-    }
-}
 function agregarPopupDistritosDepartamentales(feature, layer) {
     if (feature.properties && feature.properties.Nombre_1) {
         layer.bindPopup("<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + feature.properties.Area_km2);
-    }
-}
-function agregarPopupzonaLey4886(feature, layer) {
-    if (feature.properties && feature.properties.REFERENCIA) {
-        layer.bindPopup("<strong>" + feature.properties.REFERENCIA + "</strong><br/>" + feature.properties.NOMBRE + "</strong><br/>" + "Uso de Suelo Dominante: <strong>" + feature.properties.UsoDominan + "</strong><br/>" + "Uso de Suelo Condicional: <strong>" + feature.properties.UsoCondic + "</strong><br/>"
-            + "Densidad Minima: <strong>" + feature.properties.DensidMin + "</strong><br/>" + "Densidad Maxima: <strong>" + feature.properties.DensidMax);
     }
 }
 function agregarPopupcuencas(feature, layer) {
@@ -173,7 +144,6 @@ function agregarPopupDepen(feature, layer) {
         }
     }
 }
-
 function agregarPopupPiedemonte(feature, layer) {
     if (feature.properties && feature.properties.Nombre) {
         if (feature.properties.Link) {
@@ -183,24 +153,23 @@ function agregarPopupPiedemonte(feature, layer) {
         }
     }
 }
-
 function agregarPopupGastronomia(feature, layer) {
     if (feature.properties && feature.properties.Nombre) {
         layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong><br/>" + "Dirección <strong>" + feature.properties.Direccion + "</strong><br/>" + "Horario <strong>" + feature.properties.Horario + "</strong><br/>" + "Contacto <strong>" + feature.properties.Contacto);
     }
 }
-
 function agregarPopupGastronomia2(feature, layer) {
     if (feature.properties && feature.properties.Nombre) {
         layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong><br/>" + "Dirección <strong>" + feature.properties.Direccion + "</strong><br/>" + "Contacto <strong>" + feature.properties.Contacto);
     }
 }
-
 function agregarPopupCaminabilidad(feature, layer) {
     if (feature.properties && feature.properties.Name) {
         layer.bindPopup("<strong>" + feature.properties.Name + "</strong><br/>" + feature.properties.descriptio + "</strong><br/>");
     }
 }
+
+/* ESTILOS */
 
 function estiloDistritosDepartamentales() {
     Depa.eachLayer(function (featureInstanceLayer) {
@@ -224,13 +193,11 @@ function estiloDistritosDepartamentales() {
         } else if (id_feature == 8) {
             color_actual = '#a028ad';
         }
-
         featureInstanceLayer.setStyle({
             color: color_actual, fillOpacity: 0.65
         });
     });
 }
-
 function estilozoni() {
     zonificacion.eachLayer(function (featureInstanceLayer) {
         var id_feature = featureInstanceLayer.feature.properties['Layer'];
@@ -262,7 +229,6 @@ function estilozoni() {
         });
     });
 }
-
 function estilored() {
     redesagua.eachLayer(function (featureInstanceLayer) {
         var id_feature = featureInstanceLayer.feature.properties['id'];
@@ -280,7 +246,6 @@ function estilored() {
         });
     });
 }
-
 function estilocloacas() {
     sistcloacal.eachLayer(function (featureInstanceLayer) {
         var id_feature = featureInstanceLayer.feature.properties['id'];
@@ -298,7 +263,6 @@ function estilocloacas() {
         });
     });
 }
-
 function estilocuencas() {
     cuencas.eachLayer(function (featureInstanceLayer) {
         var id_feature = featureInstanceLayer.feature.properties['qc_id'];
@@ -317,7 +281,6 @@ function estilocuencas() {
         });
     });
 }
-
 function estiloley() {
     zonaley.eachLayer(function (featureInstanceLayer) {
         var id_feature = featureInstanceLayer.feature.properties['id'];
@@ -337,7 +300,6 @@ function estiloley() {
         });
     });
 }
-
 function estiloinundacion() {
     inundacion.eachLayer(function (featureInstanceLayer) {
         var id_feature = featureInstanceLayer.feature.properties['id'];
@@ -355,7 +317,6 @@ function estiloinundacion() {
         });
     });
 }
-
 function estilosuelo() {
     suelo.eachLayer(function (featureInstanceLayer) {
         var id_feature = featureInstanceLayer.feature.properties['id'];
@@ -371,7 +332,6 @@ function estilosuelo() {
         });
     });
 }
-
 function estilometro() {
     metro.eachLayer(function (featureInstanceLayer) {
         var id_feature = featureInstanceLayer.feature.properties['id'];
@@ -387,7 +347,6 @@ function estilometro() {
         });
     });
 }
-
 function estilometroF() {
     metroFuturo.eachLayer(function (featureInstanceLayer) {
         var id_feature = featureInstanceLayer.feature.properties['id'];
@@ -403,7 +362,6 @@ function estilometroF() {
         });
     });
 }
-
 function estilosendero() {
     sendGeo.eachLayer(function (featureInstanceLayer) {
         var id_feature = featureInstanceLayer.feature.properties['id'];
@@ -415,7 +373,6 @@ function estilosendero() {
         });
     });
 }
-
 function estilocaminabilidad() {
     traza.eachLayer(function (featureInstanceLayer) {
         var id_feature = featureInstanceLayer.feature.properties['PROMEDIO_P'];
