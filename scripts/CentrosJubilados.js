@@ -4,8 +4,8 @@ var CentrosJubilados ={
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
 "features": [
 { "type": "Feature", "properties": { "Nombre_1": "Rosas de Otoño", "Descrip": "Chuquisaca 610" }, "geometry": { "type": "Point", "coordinates": [ -68.872893316063781, -32.919676475118003, 0.0 ] } },
-{ "type": "Feature", "properties": { "Nombre_1": "S.U.P.E.", "Descrip": "Lavalle 472" }, "geometry": { "type": "Point", "coordinates": [ -68.850598313812554, -32.92539047579023, 0.0 ] } },
-{ "type": "Feature", "properties": { "Nombre_1": "Las Orquideas", "Descrip": "Frías F. 51" }, "geometry": { "type": "Point", "coordinates": [ -68.855786702917968, -32.957921565479396, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre_1": "SUPE", "Descrip": "Lavalle 472" }, "geometry": { "type": "Point", "coordinates": [ -68.850598313812554, -32.92539047579023, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre_1": "Las Orquídeas", "Descrip": "Frías F. 51" }, "geometry": { "type": "Point", "coordinates": [ -68.855786702917968, -32.957921565479396, 0.0 ] } },
 { "type": "Feature", "properties": { "Nombre_1": "Sonrisas Otoñales", "Descrip": "Lamadrid 2204" }, "geometry": { "type": "Point", "coordinates": [ -68.8693573153203, -32.905737474550754, 0.0 ] } },
 { "type": "Feature", "properties": { "Nombre_1": "Nace Una Estrella", "Descrip": "Terrada 1502" }, "geometry": { "type": "Point", "coordinates": [ -68.822579311333001, -32.94604847724603, 0.0 ] } },
 { "type": "Feature", "properties": { "Nombre_1": "9 de Abril", "Descrip": "Joaquín V. Gonzalez 1982" }, "geometry": { "type": "Point", "coordinates": [ -68.85685631500732, -32.945394476581797, 0.0 ] } },
@@ -22,10 +22,10 @@ var CentrosJubilados ={
 { "type": "Feature", "properties": { "Nombre_1": "29 de Enero", "Descrip": "Morales 1710" }, "geometry": { "type": "Point", "coordinates": [ -68.840712609503754, -32.946714229130102, 0.0 ] } },
 { "type": "Feature", "properties": { "Nombre_1": "Los Grandes de Corazon", "Descrip": "Las Orquídeas 1010" }, "geometry": { "type": "Point", "coordinates": [ -68.832780889301219, -32.938653848845384, 0.0 ] } },
 { "type": "Feature", "properties": { "Nombre_1": "Eterna Juventud", "Descrip": "Cacheuta 824" }, "geometry": { "type": "Point", "coordinates": [ -68.833476349205029, -32.933194488600797, 0.0 ] } },
-{ "type": "Feature", "properties": { "Nombre_1": "Dias Felices", "Descrip": "Alberti 973" }, "geometry": { "type": "Point", "coordinates": [ -68.824779623108356, -32.940169951435564, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre_1": "Días Felices", "Descrip": "Alberti 973" }, "geometry": { "type": "Point", "coordinates": [ -68.824779623108356, -32.940169951435564, 0.0 ] } },
 { "type": "Feature", "properties": { "Nombre_1": "El Trebol", "Descrip": "Bahia Ushuaia y Velez Sarfield" }, "geometry": { "type": "Point", "coordinates": [ -68.831946337416639, -32.957010513005351, 0.0 ] } },
 { "type": "Feature", "properties": { "Nombre_1": "Teresita", "Descrip": "Azul y Cabo Espiritu Santo" }, "geometry": { "type": "Point", "coordinates": [ -68.822599356309979, -32.949794247178829, 0.0 ] } },
-{ "type": "Feature", "properties": { "Nombre_1": "Clotilde de Jacaranda", "Descrip": "Rawson y Velez Sarfield" }, "geometry": { "type": "Point", "coordinates": [ -68.831549925271503, -32.954059155038728, 0.0 ] } },
+{ "type": "Feature", "properties": { "Nombre_1": "Clotilde de Jacarandá", "Descrip": "Rawson y Velez Sarfield" }, "geometry": { "type": "Point", "coordinates": [ -68.831549925271503, -32.954059155038728, 0.0 ] } },
 { "type": "Feature", "properties": { "Nombre_1": "3ra Juventud", "Descrip": "San Vicente 1693" }, "geometry": { "type": "Point", "coordinates": [ -68.87759762948734, -32.905913878553697, 0.0 ] } },
 { "type": "Feature", "properties": { "Nombre_1": "Reflejos de Luna", "Descrip": "Plumerillo 2621" }, "geometry": { "type": "Point", "coordinates": [ -68.867539975291564, -32.923620396369202, 0.0 ] } },
 { "type": "Feature", "properties": { "Nombre_1": "Supe Sur", "Descrip": "Talcahuano 4000" }, "geometry": { "type": "Point", "coordinates": [ -68.88875258901254, -32.900679673452998, 0.0 ] } }

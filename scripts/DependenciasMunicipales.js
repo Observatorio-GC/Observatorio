@@ -19,6 +19,6 @@ var DependenciasMunicipales ={
 { "type": "Feature", "properties": { "ID": "14", "Nombre_1": "BODEGA ARIZU", "Direccion": "Av. San Martín entre Minuzzi y Lisandro de la Torre" }, "geometry": { "type": "Point", "coordinates": [ -68.843870164674868, -32.908618211886939 ] } },
 { "type": "Feature", "properties": { "ID": null, "Nombre_1": "CEMENTERIO", "Direccion": "Cervantes y Alsina" }, "geometry": { "type": "Point", "coordinates": [ -68.839503856105438, -32.933435768802639 ] } },
 { "type": "Feature", "properties": { "ID": null, "Nombre_1": "CASA DE LOS ABUELOS", "Direccion": "Derqui y Marmol" }, "geometry": { "type": "Point", "coordinates": [ -68.85714856266037, -32.916746261269061 ] } },
-{ "type": "Feature", "properties": { "ID": null, "Nombre_1": "JUZGADO DE TRANSITO", "Direccion": "J.V.González y Ing.Cipolletti" }, "geometry": { "type": "Point", "coordinates": [ -68.858653118261117, -32.932634056201437 ] } }
+{ "type": "Feature", "properties": { "ID": null, "Nombre_1": "JUZGADO DE TRÁNSITO", "Direccion": "J.V.González y Ing.Cipolletti" }, "geometry": { "type": "Point", "coordinates": [ -68.858653118261117, -32.932634056201437 ] } }
 ]
 }
