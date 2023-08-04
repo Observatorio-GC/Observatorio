@@ -12,13 +12,13 @@ var Seguridad ={
 { "type": "Feature", "properties": { "NUM.": null, "Nombre_1": "Centro de Monitoreo - Vigilancia Urbana", "Direccion": "Lavalle 37" }, "geometry": { "type": "Point", "coordinates": [ -68.84495978224281, -32.926136246981621, 0.0 ] } },
 { "type": "Feature", "properties": { "NUM.": "7", "Nombre_1": "Comisaría Nº7", "Direccion": "Italia y El Nihuil" }, "geometry": { "type": "Point", "coordinates": [ -68.856592815678013, -32.934250295811943, 0.0 ] } },
 { "type": "Feature", "properties": { "NUM.": null, "Nombre_1": "Destacamento Barrio Sardi", "Direccion": "Olaya Pescara de Tomba y Paul Groussac" }, "geometry": { "type": "Point", "coordinates": [ -68.859396802577308, -32.93716184233304, 0.0 ] } },
-{ "type": "Feature", "properties": { "NUM.": null, "Nombre_1": "Jefatura Departamental Godoy Cruz Oeste", "Direccion": "Punilla s\/n (Barrio Foecyt)" }, "geometry": { "type": "Point", "coordinates": [ -68.872485006946931, -32.935941225951943, 0.0 ] } },
+{ "type": "Feature", "properties": { "NUM.": null, "Nombre_1": "Jefatura Departamental Godoy Cruz Oeste", "Direccion": "Punilla s/n (Barrio Foecyt)" }, "geometry": { "type": "Point", "coordinates": [ -68.872485006946931, -32.935941225951943, 0.0 ] } },
 { "type": "Feature", "properties": { "NUM.": "40", "Nombre_1": "Comisaría Nº40", "Direccion": "Lago Hermoso y Olmo Zarate" }, "geometry": { "type": "Point", "coordinates": [ -68.869270423453543, -32.945968615076545, 0.0 ] } },
 { "type": "Feature", "properties": { "NUM.": null, "Nombre_1": "Destacamento Alberto Cuello", "Direccion": "Lago Correntoso y Laguna de la Esquina" }, "geometry": { "type": "Point", "coordinates": [ -68.859411574043705, -32.945943802701713, 0.0 ] } },
 { "type": "Feature", "properties": { "NUM.": null, "Nombre_1": "Comisaría Nº52 Cabo H. F. Le Bihan", "Direccion": "Rawson y Velez Sarfield" }, "geometry": { "type": "Point", "coordinates": [ -68.832134375366294, -32.954322783259045, 0.0 ] } },
 { "type": "Feature", "properties": { "NUM.": "37", "Nombre_1": "Comisaría Nº37", "Direccion": "Terrada y Formosa" }, "geometry": { "type": "Point", "coordinates": [ -68.822130028077694, -32.943859473800025, 0.0 ] } },
 { "type": "Feature", "properties": { "NUM.": "U.M.A.R.", "Nombre_1": "Unidad Motorizada de Accion Rápida", "Direccion": "Pareditas y La Consulta" }, "geometry": { "type": "Point", "coordinates": [ -68.873020940059362, -32.924832177844223, 0.0 ] } },
-{ "type": "Feature", "properties": { "NUM.": null, "Nombre_1": "Unidad Policial Metrotranviaria", "Direccion": "Mitre s\/n" }, "geometry": { "type": "Point", "coordinates": [ -68.838824138917474, -32.920487032086086, 0.0 ] } },
+{ "type": "Feature", "properties": { "NUM.": null, "Nombre_1": "Unidad Policial Metrotranviaria", "Direccion": "Mitre s/n" }, "geometry": { "type": "Point", "coordinates": [ -68.83962261547488, -32.921295219046726, 0.0 ] } },
 { "type": "Feature", "properties": { "NUM.": null, "Nombre_1": "Subcomisaría Gobernador Benegas", "Direccion": "Castroman y Salvador Mara del Carril" }, "geometry": { "type": "Point", "coordinates": [ -68.840547348845647, -32.946864786750538, 0.0 ] } }
 ]
 }
