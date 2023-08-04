@@ -58,8 +58,8 @@
 	<!-- GEOJSON -->
 	<script type="text/javascript" src="scripts/Mastiles.js"></script>
 	<script type="text/javascript" src="scripts/MastilesPublicos.js"></script>
-	<script type="text/javascript" src="scripts/Edificios.js"></script>
-	<script type="text/javascript" src="scripts/Puntoswifi.js"></script>
+ 	<script type="text/javascript" src="scripts/Edificios.js"></script> 
+    <script type="text/javascript" src="scripts/Puntoswifi.js"></script> 
 	<script type="text/javascript" src="scripts/Persianas.js"></script>
 	<script type="text/javascript" src="scripts/Barrios.js"></script>
 	<script type="text/javascript" src="scripts/SitiosyConjuntosEdilicios.js"></script>
@@ -238,10 +238,10 @@
 				pointToLayer: crearIconoAsistencia,
 				onEachFeature: agregarPopupSalud
 			}),
-			edificios = L.geoJson(Edificios, {
+			 edificios = L.geoJson(Edificios, {
 				pointToLayer: crearIconoedi,
 				onEachFeature: agregarPopuppatrimoniales
-			}),
+			}), 
 			mastil = L.geoJson(Mastiles, {
 				pointToLayer: crearIconoMast,
 				onEachFeature: agregarPopupmasti
@@ -273,7 +273,7 @@
 			puntoswifi = L.geoJson(Puntoswifi, {
 				pointToLayer: crearIconoWifi,
 				onEachFeature: agregarPopuppuntorecepcionpilas
-			}),
+			}), 
 			persianas = L.geoJson(Persianas, {
 				pointToLayer: crearIconoPersi,
 				onEachFeature: agregarPopuppersianas
@@ -637,7 +637,7 @@
 			"Infraestructura Ambiental": {
 				"Espacios Verdes": espverdes,
 				"Estaciones Meteorológicas": meteo,
-				"Parque Solar (En Ejecución)": granjaSolar,
+				"Granja Solar": granjaSolar,
 				"Inventario de Gases": infoambiente,
 				"Paneles Solares": paneles,
 				"Planta de Clasificación de Residuos": recic,
@@ -675,7 +675,7 @@
 			"Patrimonio y Cultura": {
 				"Barrios Historicos": barrios,
 				"Canales": canales,
-				"Edificios": edificios,
+			    "Edificios": edificios, 
 				"Esculturas": escultura,
 				"Diques y Planta Potabilizadora": diques,
 				"Sitios y Conjuntos Edilicios": SyCE,
@@ -707,7 +707,6 @@
 				"Estaciones de Servicio": estacion,
 				"Líneas de Distribución de Energía": lineasd,
 				"Líneas de Transporte de Energía": lineast,
-/* 				"Mastiles con Identidad Barrial": mastil, */
 				"Mastiles en vía Pública": mastilp,
 				"Pago Facil - Rapipago": cobro,
 				"Red Colectora Cloacal (AYSAM)": sistcloacal,
