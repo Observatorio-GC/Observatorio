@@ -155,7 +155,7 @@ function agregarPopupPiedemonte(feature, layer) {
 }
 function agregarPopupGastronomia(feature, layer) {
     if (feature.properties && feature.properties.Nombre) {
-        layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong><br/>" + "Dirección <strong>" + feature.properties.Direccion + "</strong><br/>" + "Horario <strong>" + feature.properties.Horario + "</strong><br/>" + "Contacto <strong>" + feature.properties.Contacto);
+        layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong><br/>" + "Dirección <strong>" + feature.properties.Direccion + "</strong><br/>" + "Horario <strong>" + feature.properties.Horarios + "</strong><br/>" + "Contacto <strong>" + feature.properties.Contacto);
     }
 }
 function agregarPopupGastronomia2(feature, layer) {
