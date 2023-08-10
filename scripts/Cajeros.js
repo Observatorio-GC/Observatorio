@@ -22,14 +22,14 @@ var Cajeros ={
 { "type": "Feature", "properties": { "id": null, "Nombre_1": "BBVA", "Descrip": "Av. San Martín 926" }, "geometry": { "type": "Point", "coordinates": [ -68.84605500467795, -32.915054752984055 ] } },
 { "type": "Feature", "properties": { "id": null, "Nombre_1": "Link", "Descrip": "Av. San Martín 1071" }, "geometry": { "type": "Point", "coordinates": [ -68.845295043762661, -32.913720681761063 ] } },
 { "type": "Feature", "properties": { "id": null, "Nombre_1": "HSBC", "Descrip": "Av. San Martín 978" }, "geometry": { "type": "Point", "coordinates": [ -68.845832636693103, -32.914560376295533 ] } },
-{ "type": "Feature", "properties": { "id": null, "Nombre_1": "Banelco", "Descrip": "Av San Martín 965 - Hospital Español" }, "geometry": { "type": "Point", "coordinates": [ -68.844754192693273, -32.914929620556265 ] } },
+{ "type": "Feature", "properties": { "id": null, "Nombre_1": "Banelco", "Descrip": "Av. San Martín 965 - Hospital Español" }, "geometry": { "type": "Point", "coordinates": [ -68.844754192693273, -32.914929620556265 ] } },
 { "type": "Feature", "properties": { "id": null, "Nombre_1": "Banco Superville", "Descrip": "Palmares Open Mall" }, "geometry": { "type": "Point", "coordinates": [ -68.85929526692675, -32.955583559650606 ] } },
 { "type": "Feature", "properties": { "id": null, "Nombre_1": "Banco Nación", "Descrip": "Paul Harris - frente a Palmares" }, "geometry": { "type": "Point", "coordinates": [ -68.857245897513181, -32.954153728810866 ] } },
 { "type": "Feature", "properties": { "id": null, "Nombre_1": "Banelco", "Descrip": "Av. San Martín y Paul Harris" }, "geometry": { "type": "Point", "coordinates": [ -68.856802790612932, -32.954304094519124 ] } },
 { "type": "Feature", "properties": { "id": null, "Nombre_1": "Banelco", "Descrip": "Banco Macro - Paul Harris" }, "geometry": { "type": "Point", "coordinates": [ -68.857258930069065, -32.954569284326617 ] } },
 { "type": "Feature", "properties": { "id": null, "Nombre_1": "Supervielle", "Descrip": "Walmart Palmares" }, "geometry": { "type": "Point", "coordinates": [ -68.857946397392197, -32.952223557183657 ] } },
 { "type": "Feature", "properties": { "id": null, "Nombre_1": "Link", "Descrip": "Banco Credicoop - Palmares Open Mall" }, "geometry": { "type": "Point", "coordinates": [ -68.858588250769742, -32.955456434136195 ] } },
-{ "type": "Feature", "properties": { "id": null, "Nombre_1": "Banelco", "Descrip": "Banco Santander Río - Av San Martín 35" }, "geometry": { "type": "Point", "coordinates": [ -68.848525488553875, -32.924373544626917 ] } },
-{ "type": "Feature", "properties": { "id": null, "Nombre_1": "Link Banco Credicoop", "Descrip": "Av San Martín y Carola Lorenzini" }, "geometry": { "type": "Point", "coordinates": [ -68.847808697979943, -32.922171966924459 ] } }
+{ "type": "Feature", "properties": { "id": null, "Nombre_1": "Banelco", "Descrip": "Banco Santander Río - Av. San Martín 35" }, "geometry": { "type": "Point", "coordinates": [ -68.848525488553875, -32.924373544626917 ] } },
+{ "type": "Feature", "properties": { "id": null, "Nombre_1": "Link Banco Credicoop", "Descrip": "Av. San Martín y Carola Lorenzini" }, "geometry": { "type": "Point", "coordinates": [ -68.847808697979943, -32.922171966924459 ] } }
 ]
 }
