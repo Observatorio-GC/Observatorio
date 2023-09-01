@@ -336,7 +336,7 @@ function estilometro() {
     metro.eachLayer(function (featureInstanceLayer) {
         var id_feature = featureInstanceLayer.feature.properties['id'];
         if (id_feature == 1) {
-            color_actual = 'red';
+            color_actual = '#30bb23';
         } else if (id_feature == 2) {
             color_actual = '#b4afb3';
         } else if (id_feature == 3) {
