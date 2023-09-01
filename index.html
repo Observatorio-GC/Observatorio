@@ -127,7 +127,7 @@
 	<script type="text/javascript" src="scripts/UnionesVecinales.js"></script>
 	<script type="text/javascript" src="scripts/VasoInundacionMaure.js"></script>
 	<script type="text/javascript" src="scripts/SubcuencasMaure.js"></script>
-	<script type="text/javascript" src="scripts/Ciclovias en Ejecucion (DAMI II).js"></script>
+<!-- 	<script type="text/javascript" src="scripts/Ciclovias en Ejecucion (DAMI II).js"></script> -->
 	<script type="text/javascript" src="scripts/Puestos.js"></script>
 	<script type="text/javascript" src="scripts/Diques.js"></script>
 	<script type="text/javascript" src="scripts/Canales.js"></script>
@@ -161,9 +161,9 @@
 	<img src="img/favicon.png" height="auto" width="45px" class="logogc">
 	<div id="map"></div>
 	<div id="referencias">
-		<div class="icono_referencia" id="ref_cicloDami">Ciclovias Proyectadas:</br>4,90 Km.</div> </b>
-		<div class="icono_referencia" id="ref_cicloEjec">Ciclovias en Ejecución:</br>0,16 Km.</div>	</b> 
-		<div class="icono_referencia" id="ref_cicloviasexist">Ciclovias Existentes:</br>66,89 Km.</div>	</b>
+		<div class="icono_referencia" id="ref_cicloDami">Ciclovias Proyectadas:</br>2,20 Km.</div> </b>
+		<!-- <div class="icono_referencia" id="ref_cicloEjec">Ciclovias en Ejecución:</br>0,16 Km.</div>	</b>  -->
+		<div class="icono_referencia" id="ref_cicloviasexist">Ciclovias Existentes:</br>66,86 Km.</div>	</b>
 
 		<div id="caminar">
 		<div class="icono_referencia" id="ref_traza">
@@ -288,11 +288,11 @@
 			}).setStyle({
 				color: "red"
 			}),
-			cicloEjec = L.geoJson(CicloviasenEjecucionDami, {
+			/* cicloEjec = L.geoJson(CicloviasenEjecucionDami, {
 				onEachFeature: agregarPopupciclovias
 			}).setStyle({
 				color: "#03db5d"
-			}),
+			}), */
 			lineasd = L.geoJson(LineasD, {
 				onEachFeature: agregarPopuplineas
 			}).setStyle({
@@ -649,7 +649,7 @@
 			"Movilidad": {
 				"Ciclovías Existentes": cicloviasexist,
 				"Ciclovías Proyectadas": cicloDami,
-				"Ciclovías en Ejecución": cicloEjec,
+				/*"Ciclovías en Ejecución": cicloEjec,*/
 				"Metrotranvía": metro,
 				"Paradas Metrotranvía": paradasMetro,
 				"Traza Futura Metrotranvía": metroFuturo,
