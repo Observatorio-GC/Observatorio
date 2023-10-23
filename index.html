@@ -59,7 +59,7 @@
 	<script type="text/javascript" src="scripts/Mastiles.js"></script>
 	<script type="text/javascript" src="scripts/MastilesPublicos.js"></script>
  	<script type="text/javascript" src="scripts/Edificios.js"></script> 
-        <script type="text/javascript" src="scripts/Puntoswifi.js"></script> 
+    <script type="text/javascript" src="scripts/Puntoswifi.js"></script> 
 	<script type="text/javascript" src="scripts/Persianas.js"></script>
 	<script type="text/javascript" src="scripts/Barrios.js"></script>
 	<script type="text/javascript" src="scripts/SitiosyConjuntosEdilicios.js"></script>
@@ -136,6 +136,9 @@
 	<script type="text/javascript" src="scripts/CentrosJubilados.js"></script>
 	<script type="text/javascript" src="scripts/MetroFuturo.js"></script>
 	<script type="text/javascript" src="scripts/Paradas.js"></script>
+	<script type="text/javascript" src="scripts/LOC.js"></script>
+	<script type="text/javascript" src="scripts/ZonaA.js"></script>
+	<script type="text/javascript" src="scripts/Curvas.js"></script>
 </head>
 
 <header>
@@ -506,7 +509,7 @@
 				onEachFeature: agregarPopupGastronomia
 			}),
 			hela = L.geoJson(Heladerias, {
-				pointToLayer: crearIconoComercio,
+				pointToLayer: crearIconoHelados,
 				onEachFeature: agregarPopupGastronomia2
 			}),
 			ave = L.geoJson(Aventura, {
@@ -567,6 +570,19 @@
 				pointToLayer: crearIconoOficina,
 				onEachFeature: agregarPopupbarrios
 			}),
+			loc = L.geoJson(LOC, {
+				onEachFeature: agregarPopupfarmacias
+			}).setStyle({
+				color: "#0fb4bf"
+			}),
+			zonaA = L.geoJson(ZonaA, {
+				onEachFeature: agregarPopupDepen
+			}),
+			curvas = L.geoJson(Curvas, {  
+				onEachFeature: agregarPopupBarriosConsolidados
+			}).setStyle({
+				color: "#b6ab05"
+			}),
 			infoambiente = L.geoJson(InfoAmbiente, {
 				onEachFeature: agregarPopupDepen
 			});
@@ -597,6 +613,7 @@
 		estilometroF();
 		estilosendero();
 		estilocaminabilidad();
+		estilozonaA();
 
 		/* CREACIÓN DEL LAYERS CONTROL */
 		var baseMaps = {
@@ -616,6 +633,7 @@
 				"Amenaza de Inundación": inundacion,
 				"Canales Colectores Hijuelas": CanalesColectoresHijuelas,
 				"Cuencas Hidrográficas": cuencas,
+				"Curvas de Nivel": curvas,
 				"Fallas Geológicas": fall,
 				"Red Hídrica": hidrico,
 				"Reservorios urbanos": reservorios,
@@ -626,6 +644,8 @@
 			},
 			"Sistema Juridíco-Administrativo": {
 				"Área de Planificación Integrada y Sostenible del Piedemonte": apys,
+				"Límite Óptimo Concertado (Ley 9.414)": loc,
+				"Zona A (Ley 9.414)": zonaA,
 				"Distritos": Depa,
 				"Límite Urbano": limiurb,
 				"Línea Municipal y de Edificación ": lineasmun,
@@ -676,7 +696,7 @@
 			"Patrimonio y Cultura": {
 				"Barrios Historicos": barrios,
 				"Canales": canales,
-			        "Edificios": edificios, 
+			    "Edificios": edificios, 
 				"Esculturas": escultura,
 				"Diques y Planta Potabilizadora": diques,
 				"Sitios y Conjuntos Edilicios": SyCE,
