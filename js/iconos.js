@@ -63,7 +63,15 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
     iconoServicios = new iconoComun({ iconUrl: 'img/Servicios.png' });
     iconoPlanta = new iconoComun({ iconUrl: 'img/planta.png' });
     iconoTren = new iconoParaTren({ iconUrl: 'img/tren.png' });
+    iconoHelados = new iconoComun({iconUrl: 'img/helados.png'});
 
+
+    function crearIconoHelados(feature, latlng) {
+        return L.marker(latlng, { icon: iconoHelados })
+    }
+    var asignarIconoHelados = {
+            pointToLayer: crearIconoHelados
+    }
 
 
     function crearIconoTren(feature, latlng) {
