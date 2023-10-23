@@ -281,6 +281,24 @@ function estilocuencas() {
         });
     });
 }
+function estilozonaA() {
+    zonaA.eachLayer(function (featureInstanceLayer) {
+        var id_feature = featureInstanceLayer.feature.properties['qc_id'];
+        if (id_feature == 1) {
+            color_actual = '#f05d51';
+        } else if (id_feature == 2) {
+            color_actual = '#fbb75b';
+        } else if (id_feature == 3) {
+            color_actual = '#f05d51';
+        }
+        var optiones_textura = { height: 8, weight: 4, spaceWeight: 4, color: color_actual, spaceColor: color_actual, spaceOpacity: 0.2, angle: -45 };
+        var textura_cuencas = new L.StripePattern(optiones_textura); textura_cuencas.addTo(map);
+
+        featureInstanceLayer.setStyle({
+            color: color_actual, fillOpacity: 0.75, fillPattern: textura_cuencas
+        });
+    });
+}
 function estiloley() {
     zonaley.eachLayer(function (featureInstanceLayer) {
         var id_feature = featureInstanceLayer.feature.properties['id'];
