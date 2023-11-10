@@ -242,7 +242,7 @@
 		/* OVERLAYS Y GRUPOS */
 		var plazagc = L.marker([-32.92524, -68.84439]).bindPopup('Plaza GC.').openPopup(),
 			centrosdesalud = L.geoJson(centrosdesalud, {
-				pointToLayer: crearIconoAsistencia,
+				pointToLayer: crearIconoHospitales,  /*crearIconoHospitales,*/
 				onEachFeature: agregarPopupSalud
 			}),
 			 edificios = L.geoJson(Edificios, {
@@ -312,11 +312,11 @@
 				onEachFeature: agregarPopupSalud
 			}),
 			hospital = L.geoJson(Hospital, {
-				pointToLayer: crearIconoHospitales,
+				pointToLayer: crearIconoHospital,
 				onEachFeature: agregarPopupHospital
 			}),
 			escuelas = L.geoJson(Escuelas, {
-				pointToLayer: crearIconoEnseñanza,
+				pointToLayer: crearIconoEscuela,
 				onEachFeature: agregarPopupescuelas
 			}),
 			farmacias = L.geoJson(Farmacias, {
@@ -426,7 +426,7 @@
 				onEachFeature: agregarPopupbarrios
 			}),
 			cobro = L.geoJson(Pagofacil, {
-				pointToLayer: crearIconoServicios,
+				pointToLayer: crearIconoRapipago,
 				onEachFeature: agregarPopupbarrios
 			}),
 			bode = L.geoJson(Bodegas, {
