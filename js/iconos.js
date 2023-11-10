@@ -32,7 +32,7 @@ var iconoParaGas = L.Icon.extend({
 var iconoParaBar = L.Icon.extend({
     options: {
         shadowUrl: 'img/marker-shadow.png',
-        iconSize: [29, 33],
+        iconSize: [31, 35],
         shadowSize: [41, 41],
         iconAnchor: [12, 41],
         popupAnchor: [1, -34]
@@ -76,7 +76,6 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
     iconoComercio = new iconoComun({ iconUrl: 'img/Comercio.png' });
     iconoCulto = new iconoComun({ iconUrl: 'img/Culto.png' });
     iconoCultura = new iconoComun({ iconUrl: 'img/Cultura.png' });
-    iconoAsistencia = new iconoComun({ iconUrl: 'img/Asistencia.png' });
     iconoEsparcimiento = new iconoComun({ iconUrl: 'img/Esparcimiento.png' });
     iconoEnseñanza = new iconoComun({ iconUrl: 'img/Enseñanza.png' });
     iconoOficina = new iconoComun({ iconUrl: 'img/Oficina.png' });
@@ -94,8 +93,37 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
     iconoVino = new iconoParaBar({iconUrl: 'img/vino.png'});
     iconoHelado = new iconoParaBar({iconUrl: 'img/heladeria.png'});
     iconoEstacion = new iconoParaGas({iconUrl: 'img/estacion.png'});
+    iconoRapipago = new iconoParaGas({iconUrl: 'img/rapipago.png'});
+    iconoEscuela = new iconoParaBar({iconUrl: 'img/escuela.png'});
+    iconoHospital = new iconoParaGas({iconUrl: 'img/hospital.png'});
 
 
+    function crearIconoHospital(feature, latlng) {
+        return L.marker(latlng, {
+            icon: iconoHospital
+        })
+    }
+    var asignarIconoHospital = {
+        pointToLayer: crearIconoHospital
+    }
+
+    function crearIconoEscuela(feature, latlng) {
+        return L.marker(latlng, {
+            icon: iconoEscuela
+        })
+    }
+    var asignarIconoEscuela = {
+        pointToLayer: crearIconoEscuela
+    }
+
+    function crearIconoRapipago(feature, latlng) {
+        return L.marker(latlng, {
+            icon: iconoRapipago
+        })
+    }
+    var asignarIconoRapipago = {
+        pointToLayer: crearIconoRapipago
+    }
 
     function crearIconoEstacion(feature, latlng) {
         return L.marker(latlng, {
@@ -239,15 +267,6 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
     }
     var asignarIconoCultura = {
         pointToLayer: crearIconoCultura
-    }
-
-    function crearIconoAsistencia(feature, latlng) {
-        return L.marker(latlng, {
-            icon: iconoAsistencia
-        })
-    }
-    var asignarIconoAsistencia = {
-        pointToLayer: crearIconoAsistencia
     }
 
     function crearIconoEsparcimiento(feature, latlng) {
