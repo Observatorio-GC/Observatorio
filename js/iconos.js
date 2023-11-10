@@ -96,6 +96,16 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
     iconoEstacion = new iconoParaGas({iconUrl: 'img/estacion.png'});
 
 
+
+    function crearIconoEstacion(feature, latlng) {
+        return L.marker(latlng, {
+            icon: iconoEstacion
+        })
+    }
+    var asignarIconoEstacion = {
+        pointToLayer: crearIconoEstacion
+    }
+
     function crearIconoEstacion(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoEstacion
