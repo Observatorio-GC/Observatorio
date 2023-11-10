@@ -8,7 +8,7 @@
 		content="Visor del Observatorio Territorial Godoy Cruz, el cual permite la visualización de información geográfica del municipio. Oficina de Planificación Urbana">
 	<meta name="keywords"
 		content="Godoy Cruz, Planificación Urbana, Secretaria de Ambiente y Desarrollo Sustentable, Visor, Observatorio Territorial">
-	<meta name="author" content="IgnacioDiaz - FernandoCruceño">
+	<meta name="author" content="Ignacio Diaz - Fernando Cruceño">
 	<meta name="copyright" content="Observatorio Territorial Godoy Cruz">
 	<title>ObservatorioTerritorialGC</title>
 
@@ -54,10 +54,12 @@
 	<script src="scripts/jquery-3.7.0.min.map"></script>
 	<script src="js/popups.js"></script>
 	<script src="js/iconos.js"></script>
+	<script src="scripts/Leaflet.TileLayer.MBTiles.js"></script>
+	<script src="https://unpkg.com/sql.js@0.3.2/js/sql.js"></script>
+    <script src="./Leaflet.TileLayer.MBTiles.js"></script>
 
 	<!-- GEOJSON -->
-	<script type="text/javascript" src="scripts/Mastiles.js"></script>
-	<script type="text/javascript" src="scripts/MastilesPublicos.js"></script>
+
  	<script type="text/javascript" src="scripts/Edificios.js"></script> 
     <script type="text/javascript" src="scripts/Puntoswifi.js"></script> 
 	<script type="text/javascript" src="scripts/Persianas.js"></script>
@@ -117,9 +119,7 @@
 	<script type="text/javascript" src="scripts/GranjaSolar.js"></script>
 	<script type="text/javascript" src="scripts/SenderoGeologico.js"></script>
 	<script type="text/javascript" src="scripts/cafe.js"></script>
-	<script type="text/javascript" src="scripts/Aventura.js"></script>
 	<script type="text/javascript" src="scripts/Hospedajes.js"></script>
-	<script type="text/javascript" src="scripts/Spa.js"></script>
 	<script type="text/javascript" src="scripts/Heladerias.js"></script>
 	<script type="text/javascript" src="scripts/Bares.js"></script>
 	<script type="text/javascript" src="scripts/Restaurantes.js"></script>
@@ -127,7 +127,6 @@
 	<script type="text/javascript" src="scripts/UnionesVecinales.js"></script>
 	<script type="text/javascript" src="scripts/VasoInundacionMaure.js"></script>
 	<script type="text/javascript" src="scripts/SubcuencasMaure.js"></script>
-<!-- 	<script type="text/javascript" src="scripts/Ciclovias en Ejecucion (DAMI II).js"></script> -->
 	<script type="text/javascript" src="scripts/Puestos.js"></script>
 	<script type="text/javascript" src="scripts/Diques.js"></script>
 	<script type="text/javascript" src="scripts/Canales.js"></script>
@@ -139,6 +138,7 @@
 	<script type="text/javascript" src="scripts/LOC.js"></script>
 	<script type="text/javascript" src="scripts/ZonaA.js"></script>
 	<script type="text/javascript" src="scripts/Curvas.js"></script>
+	
 </head>
 
 <header>
@@ -165,7 +165,6 @@
 	<div id="map"></div>
 	<div id="referencias">
 		<div class="icono_referencia" id="ref_cicloDami">Ciclovias Proyectadas:</br>2,20 Km.</div> </b>
-		<!-- <div class="icono_referencia" id="ref_cicloEjec">Ciclovias en Ejecución:</br>0,16 Km.</div>	</b>  -->
 		<div class="icono_referencia" id="ref_cicloviasexist">Ciclovias Existentes:</br>66,86 Km.</div>	</b>
 
 		<div id="caminar">
@@ -233,6 +232,11 @@
 				attribution: googleSateliteAttrib
 			});
 
+		var mb = L.tileLayer.mbTiles('ZonaB.mbtiles', {
+	            minZoom: 0,
+	            maxZoom: 20
+            });	
+
 
 
 		/* OVERLAYS Y GRUPOS */
@@ -245,14 +249,6 @@
 				pointToLayer: crearIconoedi,
 				onEachFeature: agregarPopuppatrimoniales
 			}), 
-			mastil = L.geoJson(Mastiles, {
-				pointToLayer: crearIconoMast,
-				onEachFeature: agregarPopupmasti
-			}),
-			mastilp = L.geoJson(MastilesPublicos, {
-				pointToLayer: crearIconoMastp,
-				onEachFeature: agregarPopupmasti
-			}),
 			SyCE = L.geoJson(SitiosyConjuntosEdilicios, {
 				pointToLayer: crearIconositios,
 				onEachFeature: agregarPopuppatrimoniales
@@ -291,11 +287,6 @@
 			}).setStyle({
 				color: "red"
 			}),
-			/* cicloEjec = L.geoJson(CicloviasenEjecucionDami, {
-				onEachFeature: agregarPopupciclovias
-			}).setStyle({
-				color: "#03db5d"
-			}), */
 			lineasd = L.geoJson(LineasD, {
 				onEachFeature: agregarPopuplineas
 			}).setStyle({
@@ -395,11 +386,11 @@
 				onEachFeature: agregarPopupfarmacias
 			}),
 			estacion = L.geoJson(EstacionesdeServicio, {
-				pointToLayer: crearIconoServicios,
+				pointToLayer: crearIconoGas,
 				onEachFeature: agregarPopupPV
 			}),
 			meteo = L.geoJson(Estaciones, {
-				pointToLayer: crearIconoNegro,
+				pointToLayer: crearIconoEstacion,
 				onEachFeature: agregarPopupPV
 			}),
 			zonatu = L.geoJson(ZonaNatural, {
@@ -431,7 +422,7 @@
 				onEachFeature: agregarPopupSalud
 			}),
 			caja = L.geoJson(Cajeros, {
-				pointToLayer: crearIconoServicios,
+				pointToLayer: crearIconoAtm,
 				onEachFeature: agregarPopupbarrios
 			}),
 			cobro = L.geoJson(Pagofacil, {
@@ -439,7 +430,7 @@
 				onEachFeature: agregarPopupbarrios
 			}),
 			bode = L.geoJson(Bodegas, {
-				pointToLayer: crearIconoComercio,
+				pointToLayer: crearIconoVino,
 				onEachFeature: agregarPopupturismo
 			}),
 			informador = L.geoJson(Informador, {
@@ -447,7 +438,7 @@
 				onEachFeature: agregarPopupturismo
 			}),
 			bicicleta = L.geoJson(PuestosBici, {
-				pointToLayer: crearIconoVerde,
+				pointToLayer: crearIconoBici,
 				onEachFeature: agregarPopupturismo
 			}),
 			fall = L.geoJson(Fallas, {
@@ -497,31 +488,23 @@
 				onEachFeature: agregarPopupfarmacias
 			}),
 			bar = L.geoJson(Bares, {
-				pointToLayer: crearIconoComercio,
+				pointToLayer: crearIconoBar,
 				onEachFeature: agregarPopupGastronomia
 			}),
 			resto = L.geoJson(Restaurantes, {
-				pointToLayer: crearIconoComercio,
+				pointToLayer: crearIconoResto,
 				onEachFeature: agregarPopupGastronomia
 			}),
 			cafe = L.geoJson(cafe, {
-				pointToLayer: crearIconoComercio,
+				pointToLayer: crearIconoCafe,
 				onEachFeature: agregarPopupGastronomia
 			}),
 			hela = L.geoJson(Heladerias, {
-				pointToLayer: crearIconoComercio,
-				onEachFeature: agregarPopupGastronomia2
-			}),
-			ave = L.geoJson(Aventura, {
-				pointToLayer: crearIconoEsparcimiento,
+				pointToLayer: crearIconoHelado,
 				onEachFeature: agregarPopupGastronomia2
 			}),
 			hospe = L.geoJson(Hospedajes, {
-				pointToLayer: crearIconoEsparcimiento,
-				onEachFeature: agregarPopupGastronomia2
-			}),
-			spa = L.geoJson(Spa, {
-				pointToLayer: crearIconoEsparcimiento,
+				pointToLayer: crearIconoHotel,
 				onEachFeature: agregarPopupGastronomia2
 			}),
 			incu = L.geoJson(Incubadora, {
@@ -529,7 +512,7 @@
 				onEachFeature: agregarPopupBarriosConsolidados
 			}),
 			union = L.geoJson(UnionesVecinales, {
-				pointToLayer: crearIconoEsparcimiento,
+				pointToLayer: crearIconoVecino,
 				onEachFeature: agregarPopupPV
 			}),
 			maure = L.geoJson(VasoInundacionMaure, {
@@ -621,7 +604,6 @@
 			"Argenmap": mapabase_argenmap,
 			"Google Satelital": mapabase_googleSatelite,
 			"ESRI Satelital": mapabase_esri,
-			
 		};
 
 		var groupedOverlays = {
@@ -669,7 +651,6 @@
 			"Movilidad": {
 				"Ciclovías Existentes": cicloviasexist,
 				"Ciclovías Proyectadas": cicloDami,
-				/*"Ciclovías en Ejecución": cicloEjec,*/
 				"Metrotranvía": metro,
 				"Paradas Metrotranvía": paradasMetro,
 				"Traza Futura Metrotranvía": metroFuturo,
@@ -680,7 +661,6 @@
 			"Turismo": {
 				"Puestos": puestos,
 				"Sendero Turístico - Geológico": sendGeo,
-				"Aventura": ave,
 				"Bares y Comidas": bar,
 				"Bodegas": bode,
 				"Casas de Té y Café": cafe,
@@ -690,7 +670,6 @@
 				"Persianas Comerciales": persianas,
 				"Puestos Programa en la Bici": bicicleta,
 				"Restaurantes": resto,
-				"Spa": spa,
 				
 			},
 			"Patrimonio y Cultura": {
@@ -728,7 +707,6 @@
 				"Estaciones de Servicio": estacion,
 				"Líneas de Distribución de Energía": lineasd,
 				"Líneas de Transporte de Energía": lineast,
-				/* "Mastiles en vía Pública": mastilp, */
 				"Pago Facil - Rapipago": cobro,
 				"Red Colectora Cloacal (AYSAM)": sistcloacal,
 				"Red Distribuidora de Agua Potable (AYSAM)": redesagua,
