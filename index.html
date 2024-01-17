@@ -27,9 +27,19 @@
 
 	<link rel="shortcut icon" type="image/x-icon" href="./img/favicon1.png">
 
+	  <!-- Load Leaflet from CDN-->
+	   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+	   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+ 
+	   <!-- Load Esri Leaflet from CDN -->
+	   <script src="https://unpkg.com/esri-leaflet"></script>
+ 
+	   <!-- Esri Leaflet Geocoder -->
+	   <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css"/>
+	   <script src="https://unpkg.com/esri-leaflet-geocoder"></script>
+
 	<!-- CSS -->
 	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css">
 	<link rel="stylesheet" href="css/Leaflet.PolylineMeasure.css">
 	<link rel="stylesheet" href="css/Leaflet.StreetViewButtons.css">
 	<link rel="stylesheet" href="css/Leaflet.StreetView1Buttons.css">
@@ -38,7 +48,6 @@
 	<link rel="stylesheet" href="css/L.Control.MousePosition.css">
 
 	<!-- SCRIPTS -->
-	<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>  
 	<script src="https://unpkg.com/togeojson@0.16.0"></script>
 	<script src="scripts/Leaflet.PolylineMeasure.js"></script>
 	<script src="scripts/StreetViewButtons.js"></script>
@@ -142,24 +151,6 @@
 </head>
 
 <header>
-
-	<style>
-		.leaflet-container {
-			display: flex;
-			font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-			font-size: 11px;
-		}
-
-		.leaflet-control-attribution.leaflet-control {
-			font-family: 'Playfair Display', serif;
-			font-size: 12px;
-		}
-
-		.leaflet-control-attribution.leaflet-control a:hover {
-			color: #800080;
-		}
-	</style>
-
 	<h1>Observatorio Territorial de Godoy Cruz</h1>
 	<img src="img/favicon.png" height="auto" width="45px" class="logogc">
 	<div id="map"></div>
@@ -177,7 +168,7 @@
 			</p>
 		</div>	
 		
-		</div>	</b>
+		</div>
 	</div>
 
 	<!-- PAGINA OBSERVATORIO -->
@@ -575,15 +566,16 @@
 		var map = L.map('map', { dragging: !L.Browser.mobile, tap: !L.Browser.mobile,
 			layers: [mapabase_esri, godoycruz]
 		}).setView([-32.9337, -68.8978], 13);
-		var marker = L.marker(map.getCenter(), {
+		
+	 	 var marker = L.marker(map.getCenter(), {
 				icon: iconoSTV
 			}).bindPopup(
 				'Mover éste marcador y clickear el boton "Enlace externo de Street View", ubicado a la izquierda del mapa')
 			.addTo(map);
 		map.on('move', function () {
 			marker.setLatLng(map.getCenter());
-		});
-
+		}); 
+ 
 		/* FUNCIONES DE ESTILO DE OVERLAYS */
 		estiloDistritosDepartamentales();
 		estilozoni();
@@ -610,7 +602,7 @@
 			"Street View": {
 				"Marcador": marker,
 
-			},
+			},  
 			"Gestión del Riesgo": {
 				"Amenaza de Inundación": inundacion,
 				"Canales Colectores Hijuelas": CanalesColectoresHijuelas,
