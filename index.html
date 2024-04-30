@@ -148,7 +148,6 @@
 	<script type="text/javascript" src="scripts/Pagofacil.js"></script>
 	<script type="text/javascript" src="scripts/Bodegas.js"></script>
 	<script type="text/javascript" src="scripts/Informador.js"></script>
-	<script type="text/javascript" src="scripts/PuestosBici.js"></script>
 	<script type="text/javascript" src="scripts/Fallas.js"></script>
 	<script type="text/javascript" src="scripts/Inundacion.js"></script>
 	<script type="text/javascript" src="scripts/Suelo.js"></script>
@@ -180,6 +179,8 @@
 	<script type="text/javascript" src="scripts/LOC.js"></script>
 	<script type="text/javascript" src="scripts/ZonaA.js"></script>
 	<script type="text/javascript" src="scripts/Curvas.js"></script>
+	<script type="text/javascript" src="scripts/Bicitran.js"></script>
+
 	
 </head>
 
@@ -466,10 +467,7 @@
 				pointToLayer: crearIconoOficina,
 				onEachFeature: agregarPopupturismo
 			}),
-			bicicleta = L.geoJson(PuestosBici, {
-				pointToLayer: crearIconoBici,
-				onEachFeature: agregarPopupturismo
-			}),
+			
 			fall = L.geoJson(Fallas, {
 				onEachFeature: agregarPopupfallas
 			}).setStyle({
@@ -595,6 +593,10 @@
 			}).setStyle({
 				color: "#b6ab05"
 			}),
+			bicitran = L.geoJson(Bicitran, {
+				pointToLayer: crearIconoBici,
+				onEachFeature: agregarPopupfarmacias
+			}),
 			infoambiente = L.geoJson(InfoAmbiente, {
 				onEachFeature: agregarPopupDepen
 			});
@@ -679,6 +681,7 @@
 
 			},
 			"Movilidad": {
+				"Estaciones BiciTran": bicitran,
 				"Ciclovías Existentes": cicloviasexist,
 				"Ciclovías Proyectadas": cicloDami,
 				"Metrotranvía": metro,
@@ -698,7 +701,6 @@
 				"Hospedajes": hospe,
 				"Informador Turístico": informador,
 				"Persianas Comerciales": persianas,
-				"Puestos Programa en la Bici": bicicleta,
 				"Restaurantes": resto,
 				
 			},
