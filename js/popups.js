@@ -147,9 +147,18 @@ function agregarPopupDepen(feature, layer) {
 function agregarPopupPiedemonte(feature, layer) {
     if (feature.properties && feature.properties.Nombre) {
         if (feature.properties.Link) {
-            layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong><br>" + "Según el Plan Municipal de Ordenamiento Territorial <strong>" + "Acceso al Link: <strong>" + "'<a href=https://drive.google.com/file/d/1e4dmPCJDyeEmXtNe2WLacZlpMDvlPPHX/view?usp=sharing + target='_blank'>PMOT</a>'");
+            layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong><br>" + "Según el Plan Municipal de Ordenamiento Territorial <strong>" + "Acceso al Link: <strong>" + "'<a href=https://drive.google.com/file/d/1AOpgP6pQGdng5A6eSS5_JihShP-CSp-l/view?usp=sharing + target='_blank'>PMOT</a>'");
         } else {
             layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong>");
+        }
+    }
+}
+function agregarPopupZonaB(feature, layer) {
+    if (feature.properties && feature.properties.Nombre) {
+        if (feature.properties.Enlace) {
+        layer.bindPopup("<strong>" +  "Zona por debajo del Límite Óptimo Concertado. <strong>" + "Ubicación subzonas: <strong>" + "'<a href=https://drive.google.com/file/d/1AOpgP6pQGdng5A6eSS5_JihShP-CSp-l/view?usp=sharing + target='_blank'>Ver</a>'"+ "</strong><br /><iframe src='" + feature.properties.Enlace + "' style='width: 301px; height: 515px; border: 2px solid #888888; margin-top:10px' scrolling='no'></iframe><br /><a href='" + feature.properties.Enlace + "' target='_blank'>Abrir en otra pestaña</a>");
+        } else {
+        layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong>");
         }
     }
 }
@@ -286,11 +295,21 @@ function estilozonaA() {
         var id_feature = featureInstanceLayer.feature.properties['qc_id'];
         if (id_feature == 1) {
             color_actual = '#f05d51';
-        } else if (id_feature == 2) {
-            color_actual = '#fbb75b';
-        } else if (id_feature == 3) {
-            color_actual = '#f05d51';
-        }
+        } 
+        var optiones_textura = { height: 8, weight: 4, spaceWeight: 4, color: color_actual, spaceColor: color_actual, spaceOpacity: 0.2, angle: -45 };
+        var textura_cuencas = new L.StripePattern(optiones_textura); textura_cuencas.addTo(map);
+
+        featureInstanceLayer.setStyle({
+            color: color_actual, fillOpacity: 0.75, fillPattern: textura_cuencas
+        });
+    });
+}
+function estilozonaB() {
+    zonaB.eachLayer(function (featureInstanceLayer) {
+        var id_feature = featureInstanceLayer.feature.properties['id'];
+        if (id_feature == 1) {
+            color_actual = '#ffd311';
+        } 
         var optiones_textura = { height: 8, weight: 4, spaceWeight: 4, color: color_actual, spaceColor: color_actual, spaceOpacity: 0.2, angle: -45 };
         var textura_cuencas = new L.StripePattern(optiones_textura); textura_cuencas.addTo(map);
 
