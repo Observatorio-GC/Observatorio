@@ -180,8 +180,8 @@
 	<script type="text/javascript" src="scripts/ZonaA.js"></script>
 	<script type="text/javascript" src="scripts/Curvas.js"></script>
 	<script type="text/javascript" src="scripts/Bicitran.js"></script>
+	<script type="text/javascript" src="scripts/ZonaB.js"></script>
 
-	
 </head>
 
 <header>
@@ -239,6 +239,7 @@
 				attribution: esriAttrib
 			});
 
+
 		var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 			osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 			mapabase_osm = L.tileLayer(osmUrl, {
@@ -261,13 +262,6 @@
 				maxZoom: 20,
 				attribution: googleSateliteAttrib
 			});
-
-		var mb = L.tileLayer.mbTiles('ZonaB.mbtiles', {
-	            minZoom: 0,
-	            maxZoom: 20
-            });	
-
-
 
 		/* OVERLAYS Y GRUPOS */
 		var plazagc = L.marker([-32.92524, -68.84439]).bindPopup('Plaza GC.').openPopup(),
@@ -570,8 +564,8 @@
 			apys = L.geoJson(APIyS, {
 				onEachFeature: agregarPopupespaciosverdes
 			}).setStyle({
-				color: "orange",
-				fillOpacity: 0.30
+				color: "#0af606",
+				fillOpacity: 0.20
 			}),
 			traza = L.geoJson(Traza, {
 				onEachFeature: agregarPopupCaminabilidad
@@ -585,9 +579,14 @@
 			}).setStyle({
 				color: "#0fb4bf"
 			}),
+
 			zonaA = L.geoJson(ZonaA, {
 				onEachFeature: agregarPopupDepen
 			}),
+			zonaB = L.geoJson(ZonaB, {
+				onEachFeature: agregarPopupZonaB
+			}),
+
 			curvas = L.geoJson(Curvas, {  
 				onEachFeature: agregarPopupBarriosConsolidados
 			}).setStyle({
@@ -629,6 +628,7 @@
 		estilosendero();
 		estilocaminabilidad();
 		estilozonaA();
+		estilozonaB();
 
 		/* CREACIÓN DEL LAYERS CONTROL */
 		var baseMaps = {
@@ -654,17 +654,17 @@
 				"Subcuencas Maure": subcuencas,
 				"Suelo": suelo,
 				"Vaso Inundación Maure": maure,
-
 			},
 			"Sistema Juridíco-Administrativo": {
 				"Área de Planificación Integrada y Sostenible del Piedemonte": apys,
-				"Límite Óptimo Concertado (Ley 9.414)": loc,
 				"Zona A (Ley 9.414)": zonaA,
+				"Zona B (Ley 9.414)" : zonaB,
+				"Límite Óptimo Concertado (Ley 9.414)": loc,
 				"Distritos": Depa,
 				"Límite Urbano": limiurb,
 				"Línea Municipal y de Edificación ": lineasmun,
-				"Zona con Características Especiales de Urbanización": zonaurb,
-				"Zona Especial de Conservación Natural": zonatu,
+				/* "Zona con Características Especiales de Urbanización": zonaurb,
+				"Zona Especial de Conservación Natural": zonatu, */
 				"Zonificación": zonificacion,
 
 			},
