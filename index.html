@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html  lang = "es">
+<html lang="es">
 
 <head>
 	<meta charset=utf-8 />
@@ -14,24 +14,25 @@
 	<title>Observatorio Territorial Godoy Cruz</title>
 
 	<!-- Google Tag Manager -->
-        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-               })(window,document,'script','dataLayer','GTM-N5LCFRBW');</script>
-        <!-- End Google Tag Manager -->
+	<script>(function (w, d, s, l, i) {
+			w[l] = w[l] || []; w[l].push({
+				'gtm.start':
+					new Date().getTime(), event: 'gtm.js'
+			}); var f = d.getElementsByTagName(s)[0],
+				j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+					'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+		})(window, document, 'script', 'dataLayer', 'GTM-N5LCFRBW');</script>
+	<!-- End Google Tag Manager -->
 
-	
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-G1F95KQCMX"></script>
-        <script>
-               window.dataLayer = window.dataLayer || [];
-               function gtag(){dataLayer.push(arguments);}
-               gtag('js', new Date());
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-G1F95KQCMX"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
 
-               gtag('config', 'G-G1F95KQCMX');
-        </script>
-
+		gtag('config', 'G-G1F95KQCMX');
+	</script>
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-33KRTS12JB"></script>
@@ -47,29 +48,29 @@
 	</script>
 
 	<!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-LDEXV7ENK0">
-        </script>
-        <script>
-                 window.dataLayer = window.dataLayer || [];
-                 function gtag(){dataLayer.push(arguments);}
-                 gtag('js', new Date());
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-LDEXV7ENK0">
+	</script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
 
-                 gtag('config', 'G-LDEXV7ENK0');
-         </script>
+		gtag('config', 'G-LDEXV7ENK0');
+	</script>
 
-	   <!-- Icono -->
-	   <link rel="icon" type="img/png" href="./img/favicon1.png">
+	<!-- Icono -->
+	<link rel="icon" type="img/png" href="./img/favicon1.png">
 
-	  <!-- Load Leaflet from CDN-->
-	   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-	   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
- 
-	   <!-- Load Esri Leaflet from CDN -->
-	   <script src="https://unpkg.com/esri-leaflet"></script>
- 
-	   <!-- Esri Leaflet Geocoder -->
-	   <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css"/>
-	   <script src="https://unpkg.com/esri-leaflet-geocoder"></script>
+	<!-- Load Leaflet from CDN-->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+	<!-- Load Esri Leaflet from CDN -->
+	<script src="https://unpkg.com/esri-leaflet"></script>
+
+	<!-- Esri Leaflet Geocoder -->
+	<link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css" />
+	<script src="https://unpkg.com/esri-leaflet-geocoder"></script>
 
 	<!-- CSS -->
 	<link rel="stylesheet" href="css/style.css">
@@ -79,7 +80,7 @@
 	<link rel="stylesheet" href="css/leaflet.groupedlayercontrol.min.css">
 	<link rel="stylesheet" href="css/Control.Coordinates.css">
 	<link rel="stylesheet" href="css/L.Control.MousePosition.css">
-
+	
 	<!-- SCRIPTS -->
 	<script src="https://unpkg.com/togeojson@0.16.0"></script>
 	<script src="scripts/Leaflet.PolylineMeasure.js"></script>
@@ -98,12 +99,11 @@
 	<script src="js/iconos.js"></script>
 	<script src="scripts/Leaflet.TileLayer.MBTiles.js"></script>
 	<script src="https://unpkg.com/sql.js@0.3.2/js/sql.js"></script>
-    <script src="./Leaflet.TileLayer.MBTiles.js"></script>
-
+	<script src="./Leaflet.TileLayer.MBTiles.js"></script>
+	
 	<!-- GEOJSON -->
-
- 	<script type="text/javascript" src="scripts/Edificios.js"></script> 
-    <script type="text/javascript" src="scripts/Puntoswifi.js"></script> 
+	<script type="text/javascript" src="scripts/Edificios.js"></script>
+	<script type="text/javascript" src="scripts/Puntoswifi.js"></script>
 	<script type="text/javascript" src="scripts/Persianas.js"></script>
 	<script type="text/javascript" src="scripts/Barrios.js"></script>
 	<script type="text/javascript" src="scripts/SitiosyConjuntosEdilicios.js"></script>
@@ -187,21 +187,19 @@
 <header>
 	<h1>Observatorio Territorial de Godoy Cruz</h1>
 	<div id="map"></div>
-	<!-- <img src="img/favicon.png" height="auto" width="45px" class="logogc"> -->
 	<div id="referencias">
 		<div class="icono_referencia" id="ref_cicloDami">Ciclovias Proyectadas:</br>2,20 Km.</div> </b>
-		<div class="icono_referencia" id="ref_cicloviasexist">Ciclovias Existentes:</br>66,86 Km.</div>	</b>
+		<div class="icono_referencia" id="ref_cicloviasexist">Ciclovias Existentes:</br>66,86 Km.</div> </b>
 
 		<div id="caminar">
-		<div class="icono_referencia" id="ref_traza">
-			<p class="titulo"> Índice Final de Caminabilidad
+			<div class="icono_referencia" id="ref_traza">
+				<p class="titulo"> Índice Final de Caminabilidad
 				<p class="optimo">Óptimo</p>
 				<p class="bueno">Bueno</p>
 				<p class="regular">Regular</p>
 				<p class="malo">Malo</p>
-			</p>
-		</div>	
-		
+				</p>
+			</div>
 		</div>
 	</div>
 
@@ -213,11 +211,11 @@
 </header>
 
 <body>
-	
+
 	<!-- Google Tag Manager (noscript) -->
-            <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N5LCFRBW"
-            height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-        <!-- End Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N5LCFRBW" height="0" width="0"
+			style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
 
 	<!-- FUNCIONES LEAFLET -->
 	<script>
@@ -230,7 +228,6 @@
 			attribution: " <a href='https://www.ign.gob.ar/AreaServicios/Argenmap/IntroduccionV2'> IGN - Argenmap v2 </a> | <a href='https://www.godoycruz.gob.ar/'>Secretaría de Ambiente, Obras y Servicios Públicos - Godoy Cruz</a> | <a href='https://github.com/mylen/leaflet.TileLayer.WMTS'>GitHub</a>&copy "
 		});
 
-
 		/* BASE LAYERS */
 		var esriUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
 			esriAttrib = "Powered by <a href='https://www.esri.com/en-us/home'> &copyESRI </a> | <a href='https://www.godoycruz.gob.ar/'>Secretaría de Ambiente, Obras y Servicios Públicos - Godoy Cruz</a>",
@@ -238,7 +235,6 @@
 				maxZoom: 20,
 				attribution: esriAttrib
 			});
-
 
 		var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 			osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -249,15 +245,15 @@
 
 		var otUrl = 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
 			otAttrib =
-			'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
+				'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
 			mapabase_ot = L.tileLayer(otUrl, {
 				maxZoom: 20,
 				attribution: otAttrib
 			});
 
 		var googleSatelite = 'http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}',
-		    googleSateliteAttrib =
-			"Powered by &copyGoogle" ,
+			googleSateliteAttrib =
+				"Powered by &copyGoogle",
 			mapabase_googleSatelite = L.tileLayer(googleSatelite, {
 				maxZoom: 20,
 				attribution: googleSateliteAttrib
@@ -266,13 +262,13 @@
 		/* OVERLAYS Y GRUPOS */
 		var plazagc = L.marker([-32.92524, -68.84439]).bindPopup('Plaza GC.').openPopup(),
 			centrosdesalud = L.geoJson(centrosdesalud, {
-				pointToLayer: crearIconoHospitales,  /*crearIconoHospitales,*/
+				pointToLayer: crearIconoHospitales,
 				onEachFeature: agregarPopupSalud
 			}),
-			 edificios = L.geoJson(Edificios, {
+			edificios = L.geoJson(Edificios, {
 				pointToLayer: crearIconoedi,
 				onEachFeature: agregarPopuppatrimoniales
-			}), 
+			}),
 			SyCE = L.geoJson(SitiosyConjuntosEdilicios, {
 				pointToLayer: crearIconositios,
 				onEachFeature: agregarPopuppatrimoniales
@@ -296,7 +292,7 @@
 			puntoswifi = L.geoJson(Puntoswifi, {
 				pointToLayer: crearIconoWifi,
 				onEachFeature: agregarPopuppuntorecepcionpilas
-			}), 
+			}),
 			persianas = L.geoJson(Persianas, {
 				pointToLayer: crearIconoPersi,
 				onEachFeature: agregarPopuppersianas
@@ -461,7 +457,6 @@
 				pointToLayer: crearIconoOficina,
 				onEachFeature: agregarPopupturismo
 			}),
-			
 			fall = L.geoJson(Fallas, {
 				onEachFeature: agregarPopupfallas
 			}).setStyle({
@@ -579,15 +574,13 @@
 			}).setStyle({
 				color: "#0fb4bf"
 			}),
-
 			zonaA = L.geoJson(ZonaA, {
 				onEachFeature: agregarPopupDepen
 			}),
 			zonaB = L.geoJson(ZonaB, {
 				onEachFeature: agregarPopupZonaB
 			}),
-
-			curvas = L.geoJson(Curvas, {  
+			curvas = L.geoJson(Curvas, {
 				onEachFeature: agregarPopupBarriosConsolidados
 			}).setStyle({
 				color: "#b6ab05"
@@ -600,21 +593,21 @@
 				onEachFeature: agregarPopupDepen
 			});
 
-
 		/* CREACIÓN DEL MAPA CON BASE LAYERS Y OVERLAYS */
-		var map = L.map('map', { dragging: !L.Browser.mobile, tap: !L.Browser.mobile,
-			layers: [mapabase_esri, godoycruz]
+		var map = L.map('map', {
+			dragging: !L.Browser.mobile, tap: !L.Browser.mobile,
+			layers: [mapabase_googleSatelite, godoycruz]
 		}).setView([-32.9337, -68.8978], 13);
-		
-	 	 var marker = L.marker(map.getCenter(), {
-				icon: iconoSTV
-			}).bindPopup(
-				'Mover éste marcador y clickear el boton "Enlace externo de Street View", ubicado a la izquierda del mapa')
+
+		var marker = L.marker(map.getCenter(), {
+			icon: iconoSTV
+		}).bindPopup(
+			'Mover éste marcador y clickear el boton "Enlace externo de Street View", ubicado a la izquierda del mapa')
 			.addTo(map);
 		map.on('move', function () {
 			marker.setLatLng(map.getCenter());
-		}); 
- 
+		});
+
 		/* FUNCIONES DE ESTILO DE OVERLAYS */
 		estiloDistritosDepartamentales();
 		estilozoni();
@@ -641,78 +634,28 @@
 		var groupedOverlays = {
 			"Street View": {
 				"Marcador": marker,
-
-			},  
-			"Gestión del Riesgo": {
-				"Amenaza de Inundación": inundacion,
-				"Canales Colectores Hijuelas": CanalesColectoresHijuelas,
-				"Cuencas Hidrográficas": cuencas,
-				"Curvas de Nivel": curvas,
-				"Fallas Geológicas": fall,
-				"Red Hídrica": hidrico,
-				"Reservorios urbanos": reservorios,
-				"Subcuencas Maure": subcuencas,
-				"Suelo": suelo,
-				"Vaso Inundación Maure": maure,
 			},
 			"Sistema Juridíco-Administrativo": {
-				"Área de Planificación Integrada y Sostenible del Piedemonte": apys,
-				"Zona A (Ley 9.414)": zonaA,
-				"Zona B (Ley 9.414)" : zonaB,
-				"Límite Óptimo Concertado (Ley 9.414)": loc,
 				"Distritos": Depa,
 				"Límite Urbano": limiurb,
 				"Línea Municipal y de Edificación ": lineasmun,
-				/* "Zona con Características Especiales de Urbanización": zonaurb,
-				"Zona Especial de Conservación Natural": zonatu, */
 				"Zonificación": zonificacion,
-
+				"Área de Planificación Integrada y Sostenible del Piedemonte": apys,
+				"Zona A (Ley 9.414)": zonaA,
+				"Zona B (Ley 9.414)": zonaB,
+				"Límite Óptimo Concertado (Ley 9.414)": loc,
 			},
-			"Infraestructura Ambiental": {
-				"Espacios Verdes": espverdes,
-				"Estaciones Meteorológicas": meteo,
-				"Granja Solar": granjaSolar,
-				"Inventario de Gases": infoambiente,
-				"Paneles Solares": paneles,
-				"Planta de Clasificación de Residuos": recic,
-				"Puntos de Recepción de Pilas": puntospilas,
-				"Puntos Verdes": punt,
-				"Solmáforos": solma,
-
-			},
-			"Movilidad": {
-				"Estaciones BiciTran": bicitran,
-				"Ciclovías Existentes": cicloviasexist,
-				"Ciclovías Proyectadas": cicloDami,
-				"Metrotranvía": metro,
-				"Paradas Metrotranvía": paradasMetro,
-				"Traza Futura Metrotranvía": metroFuturo,
-				"Paradas Futuras Metrotranvía": paradas,
-				"Índice Final de Caminabilidad": traza,
-
-			},
-			"Turismo": {
-				"Puestos": puestos,
-				"Sendero Turístico - Geológico": sendGeo,
-				"Bares y Comidas": bar,
-				"Bodegas": bode,
-				"Casas de Té y Café": cafe,
-				"Heladerías": hela,
-				"Hospedajes": hospe,
-				"Informador Turístico": informador,
-				"Persianas Comerciales": persianas,
-				"Restaurantes": resto,
-				
-			},
-			"Patrimonio y Cultura": {
-				"Barrios Historicos": barrios,
-				"Canales": canales,
-			    "Edificios": edificios, 
-				"Esculturas": escultura,
-				"Diques y Planta Potabilizadora": diques,
-				"Sitios y Conjuntos Edilicios": SyCE,
-				"Tramos y Carriles": TyC,
-
+			"Infraestructura Urbana y de Servicio": {
+				"Bancos": bank,
+				"Barrios Consolidados": BarriosConsolidados,
+				"Barrios Populares": barriospopulares,
+				"Cajeros": caja,
+				"Estaciones de Servicio": estacion,
+				"Líneas de Distribución de Energía": lineasd,
+				"Líneas de Transporte de Energía": lineast,
+				"Pago Facil - Rapipago": cobro,
+				"Red Colectora Cloacal (AYSAM)": sistcloacal,
+				"Red Distribuidora de Agua Potable (AYSAM)": redesagua,
 			},
 			"Equipamiento Social": {
 				"Centros de Jubilados": jubilados,
@@ -729,20 +672,60 @@
 				"Puntos de Wifi": puntoswifi,
 				"Residencias de Adultos Mayores": residenciasad,
 				"Uniones Vecinales": union,
+			},
+			"Movilidad": {
+				"Estaciones BiciTran": bicitran,
+				"Ciclovías Existentes": cicloviasexist,
+				"Ciclovías Proyectadas": cicloDami,
+				"Metrotranvía": metro,
+				"Paradas Metrotranvía": paradasMetro,
+				"Traza Futura Metrotranvía": metroFuturo,
+				"Paradas Futuras Metrotranvía": paradas,
+				"Índice Final de Caminabilidad": traza,
+			},
+			"Infraestructura Ambiental": {
+				"Espacios Verdes": espverdes,
+				"Estaciones Meteorológicas": meteo,
+				"Granja Solar": granjaSolar,
+				"Inventario de Gases": infoambiente,
+				"Paneles Solares": paneles,
+				"Planta de Clasificación de Residuos": recic,
+				"Puntos de Recepción de Pilas": puntospilas,
+				"Puntos Verdes": punt,
+				"Solmáforos": solma,
+			},
+			"Patrimonio y Cultura": {
+				"Barrios Historicos": barrios,
+				"Canales": canales,
+				"Edificios": edificios,
+				"Esculturas": escultura,
+				"Diques y Planta Potabilizadora": diques,
+				"Sitios y Conjuntos Edilicios": SyCE,
+				"Tramos y Carriles": TyC,
+			},
+			"Turismo": {
+				"Puestos": puestos,
+				"Sendero Turístico - Geológico": sendGeo,
+				"Bares y Comidas": bar,
+				"Bodegas": bode,
+				"Casas de Té y Café": cafe,
+				"Heladerías": hela,
+				"Hospedajes": hospe,
+				"Informador Turístico": informador,
+				"Restaurantes": resto,
 
 			},
-			"Infraestructura Urbana y de Servicio": {
-				"Bancos": bank,
-				"Barrios Consolidados": BarriosConsolidados,
-				"Barrios Populares": barriospopulares,
-				"Cajeros": caja,
-				"Estaciones de Servicio": estacion,
-				"Líneas de Distribución de Energía": lineasd,
-				"Líneas de Transporte de Energía": lineast,
-				"Pago Facil - Rapipago": cobro,
-				"Red Colectora Cloacal (AYSAM)": sistcloacal,
-				"Red Distribuidora de Agua Potable (AYSAM)": redesagua,
-
+			"Gestión del Riesgo": {
+				"Amenaza de Inundación": inundacion,
+				"Canales Colectores Hijuelas": CanalesColectoresHijuelas,
+				"Cuencas Hidrográficas": cuencas,
+				"Curvas de Nivel": curvas,
+				"Fallas Geológicas": fall,
+				"Red Hídrica": hidrico,
+				"Reservorios urbanos": reservorios,
+				"Subcuencas Maure": subcuencas,
+				"Suelo": suelo,
+				"Vaso Inundación Maure": maure,
 			},
 		};
 		var opciones_groupedlayers = {
