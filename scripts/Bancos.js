@@ -23,6 +23,7 @@ var Bancos ={
 { "type": "Feature", "properties": { "id": null, "Nombre_1": "HSBC", "Direccion": "Av. San Martín 926" }, "geometry": { "type": "Point", "coordinates": [ -68.845885557586627, -32.914555543733776 ] } },
 { "type": "Feature", "properties": { "id": null, "Nombre_1": "Credicoop", "Direccion": "Av. San Martín 1071" }, "geometry": { "type": "Point", "coordinates": [ -68.84527864882962, -32.913664430600271 ] } },
 { "type": "Feature", "properties": { "id": null, "Nombre_1": "Nación", "Direccion": "Antonio Tomba 40" }, "geometry": { "type": "Point", "coordinates": [ -68.843470958007444, -32.924250451919256 ] } },
-{ "type": "Feature", "properties": { "id": null, "Nombre_1": "Supervielle", "Direccion": "Montes de Oca 76" }, "geometry": { "type": "Point", "coordinates": [ -68.864676946240593, -32.922857570167189 ] } }
+{ "type": "Feature", "properties": { "id": null, "Nombre_1": "Supervielle", "Direccion": "Montes de Oca 76" }, "geometry": { "type": "Point", "coordinates": [ -68.864676946240593, -32.922857570167189 ] } },
+{ "type": "Feature", "properties": { "id": null, "Nombre_1": "Comafi", "Direccion": "Lavalle 199" }, "geometry": { "type": "Point", "coordinates": [ -68.846516966367787, -32.92545697629189 ] } }
 ]
 }
