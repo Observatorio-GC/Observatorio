@@ -21,6 +21,7 @@ var EstacionesdeServicio ={
 { "type": "Feature", "properties": { "id": 16, "Nombre": "YPF", "Direccion": "Perito Moreno y Mansilla" }, "geometry": { "type": "Point", "coordinates": [ -68.847494683915954, -32.940135386013338 ] } },
 { "type": "Feature", "properties": { "id": 17, "Nombre": "GNC Corredor", "Direccion": "Amengual y Corredor del Oeste" }, "geometry": { "type": "Point", "coordinates": [ -68.864357741621163, -32.908023511643329 ] } },
 { "type": "Feature", "properties": { "id": 18, "Nombre": "GNC", "Direccion": "Paso de los Andes y Pellegrini" }, "geometry": { "type": "Point", "coordinates": [ -68.860519478838313, -32.90842672426534 ] } },
-{ "type": "Feature", "properties": { "id": 19, "Nombre": "Petrosur", "Direccion": "Paso de los Andes y Maza" }, "geometry": { "type": "Point", "coordinates": [ -68.859780287138648, -32.923007516990218 ] } }
+{ "type": "Feature", "properties": { "id": 19, "Nombre": "Petrosur", "Direccion": "Paso de los Andes y Maza" }, "geometry": { "type": "Point", "coordinates": [ -68.859780287138648, -32.923007516990218 ] } },
+{ "type": "Feature", "properties": { "id": 20, "Nombre": "Shell", "Direccion": "Paraguay 1871" }, "geometry": { "type": "Point", "coordinates": [ -68.866287584699847, -32.904985161557249 ] } }
 ]
 }
