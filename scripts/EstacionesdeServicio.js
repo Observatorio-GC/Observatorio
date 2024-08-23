@@ -15,7 +15,7 @@ var EstacionesdeServicio ={
 { "type": "Feature", "properties": { "id": 10, "Nombre": "Civit", "Direccion": "J.V.González y Civit" }, "geometry": { "type": "Point", "coordinates": [ -68.858596394550005, -32.930668604808737 ] } },
 { "type": "Feature", "properties": { "id": 11, "Nombre": "YPF", "Direccion": "Av. San Martín y Chacabuco" }, "geometry": { "type": "Point", "coordinates": [ -68.846595399896231, -32.91738321264706 ] } },
 { "type": "Feature", "properties": { "id": 12, "Nombre": "Shell", "Direccion": "Av. San Martín y Pasteur" }, "geometry": { "type": "Point", "coordinates": [ -68.845381860581767, -32.912787276785146 ] } },
-{ "type": "Feature", "properties": { "id": 13, "Nombre": "Servicio Oil", "Direccion": "Minuzzi 439" }, "geometry": { "type": "Point", "coordinates": [ -68.838497890822367, -32.908962678940838 ] } },
+{ "type": "Feature", "properties": { "id": 13, "Nombre": "Gulf", "Direccion": "Minuzzi 439" }, "geometry": { "type": "Point", "coordinates": [ -68.838497890822367, -32.908962678940838 ] } },
 { "type": "Feature", "properties": { "id": 14, "Nombre": "YPF", "Direccion": "Beltrán y Arizu" }, "geometry": { "type": "Point", "coordinates": [ -68.851589884990133, -32.908289001642054 ] } },
 { "type": "Feature", "properties": { "id": 15, "Nombre": "Delta GNC", "Direccion": "Brasil y Los Alamos" }, "geometry": { "type": "Point", "coordinates": [ -68.839286493731962, -32.904509012766447 ] } },
 { "type": "Feature", "properties": { "id": 16, "Nombre": "YPF", "Direccion": "Perito Moreno y Mansilla" }, "geometry": { "type": "Point", "coordinates": [ -68.847494683915954, -32.940135386013338 ] } },
