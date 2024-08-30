@@ -181,6 +181,8 @@
 	<script type="text/javascript" src="scripts/Curvas.js"></script>
 	<script type="text/javascript" src="scripts/Bicitran.js"></script>
 	<script type="text/javascript" src="scripts/ZonaB.js"></script>
+	<script type="text/javascript" src="scripts/Semaforos.js"></script>
+	<script type="text/javascript" src="scripts/SemaforosDemanda.js"></script>
 </head>
 
 <header>
@@ -588,6 +590,14 @@
 				pointToLayer: crearIconoBici,
 				onEachFeature: agregarPopupfarmacias
 			}),
+			semafaros1 = L.geoJson(Semaforos, {
+				pointToLayer: crearIconoSemaforo,
+				onEachFeature: agregarPopuppuntosemaforos
+			}),
+			semaforos2 = L.geoJson(SemaforosDemanda, {
+				pointToLayer: crearIconoOficina,
+				onEachFeature: agregarPopuppuntosemaforos
+			}), 
 			infoambiente = L.geoJson(InfoAmbiente, {
 				onEachFeature: agregarPopupDepen
 			});
@@ -680,6 +690,8 @@
 				"Paradas Metrotranvía": paradasMetro,
 				"Traza Futura Metrotranvía": metroFuturo,
 				"Paradas Futuras Metrotranvía": paradas,
+				"Semáforos": semafaros1,
+			 	"Semáforos segun Demanda": semaforos2, 
 				"Índice Final de Caminabilidad": traza,
 			},
 			"Infraestructura Ambiental": {
