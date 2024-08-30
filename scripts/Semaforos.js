@@ -161,6 +161,8 @@ var Semaforos ={
 { "type": "Feature", "properties": { "Name": "San Martin Sur y José Ingenieros", "descriptio": null }, "geometry": { "type": "Point", "coordinates": [ -68.850236832769227, -32.93907809563715, 0.0 ] } },
 { "type": "Feature", "properties": { "Name": "San Martín y A. Calle", "descriptio": null }, "geometry": { "type": "Point", "coordinates": [ -68.846064268088838, -32.916182856791899, 0.0 ] } },
 { "type": "Feature", "properties": { "Name": "Sarmiento y Cerro Catedral", "descriptio": null }, "geometry": { "type": "Point", "coordinates": [ -68.832427551442819, -32.94033027187578, 0.0 ] } },
-{ "type": "Feature", "properties": { "Name": "Los viñedos y Alsina (M.T.U.)", "descriptio": null }, "geometry": { "type": "Point", "coordinates": [ -68.826766613559272, -32.932193878721776, 0.0 ] } }
+{ "type": "Feature", "properties": { "Name": "Los viñedos y Alsina (M.T.U.)", "descriptio": null }, "geometry": { "type": "Point", "coordinates": [ -68.826766613559272, -32.932193878721776, 0.0 ] } },
+{ "type": "Feature", "properties": { "Name": "Rodriguez Peña y Venezuela", "descriptio": null }, "geometry": { "type": "Point", "coordinates": [ -68.821929400648358, -32.926728018219613, 0.0 ] } },
+{ "type": "Feature", "properties": { "Name": "Rodriguez Peña y Lateral Acceso Sur", "descriptio": null }, "geometry": { "type": "Point", "coordinates": [ -68.822675415718294, -32.926479387586596, 0.0 ] } }
 ]
 }
