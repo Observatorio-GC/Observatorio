@@ -136,7 +136,6 @@ var Semaforos ={
 { "type": "Feature", "properties": { "Name": "133-Tiburcio Benegas e Italia", "descriptio": null }, "geometry": { "type": "Point", "coordinates": [ -68.8557118, -32.9377561, 0.0 ] } },
 { "type": "Feature", "properties": { "Name": "134-Derqui y Ohiggins", "descriptio": null }, "geometry": { "type": "Point", "coordinates": [ -68.852807659211166, -32.917195909899647, 0.0 ] } },
 { "type": "Feature", "properties": { "Name": "135-Pellegrini y P.P. Segura", "descriptio": null }, "geometry": { "type": "Point", "coordinates": [ -68.8525146, -32.9082215, 0.0 ] } },
-{ "type": "Feature", "properties": { "Name": "136-Pellegrini y Ohiggins", "descriptio": null }, "geometry": { "type": "Point", "coordinates": [ -68.8537458, -32.9083048, 0.0 ] } },
 { "type": "Feature", "properties": { "Name": "137-Pellegrini y Marmol", "descriptio": null }, "geometry": { "type": "Point", "coordinates": [ -68.8570529, -32.9084377, 0.0 ] } },
 { "type": "Feature", "properties": { "Name": "143-San Martín y Brasil", "descriptio": null }, "geometry": { "type": "Point", "coordinates": [ -68.8428868, -32.9040094, 0.0 ] } },
 { "type": "Feature", "properties": { "Name": "146-Brasil y Av. Gobernador Videla", "descriptio": null }, "geometry": { "type": "Point", "coordinates": [ -68.8379355, -32.9045059, 0.0 ] } },
