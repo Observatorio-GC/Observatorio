@@ -97,7 +97,17 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
     iconoEscuela = new iconoParaBar({iconUrl: 'img/escuela.png'});
     iconoHospital = new iconoParaGas({iconUrl: 'img/hospital.png'});
     iconoSemaforo = new iconoParaBar({iconUrl: 'img/semaforo.png'});
+    iconoSemaforo2 = new iconoParaGas({iconUrl: 'img/semaforos.png'});
 
+
+    function crearIconoSemaforo2(feature, latlng) {
+        return L.marker(latlng, {
+            icon: iconoSemaforo2
+        })
+    }
+    var asignarIconoSemaforo2 = {
+        pointToLayer: crearIconoSemaforo2
+    }
 
     function crearIconoSemaforo(feature, latlng) {
         return L.marker(latlng, {
