@@ -15,6 +15,11 @@ function agregarPopupbarrios(feature, layer) {
         layer.bindPopup("<strong>" + feature.properties.Nombre_1 + "</strong><br/>" + feature.properties.Descrip + "</strong><br/>");
     }
 }
+function agregarPopuppuntosemaforos(feature, layer) {
+    if (feature.properties && feature.properties.Name) {
+        layer.bindPopup("<strong>" + feature.properties.Name + "</strong><br/>");
+    }
+}
 function agregarPopuppuntorecepcionpilas(feature, layer) {
     if (feature.properties && feature.properties.Name) {
         layer.bindPopup("<strong>" + feature.properties.Name + "</strong><br/>" + feature.properties.description + "</strong><br/>");

@@ -65,13 +65,13 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
     iconoPilas = new iconoComun({ iconUrl: 'img/pilas_r2.png' }),
     iconoUnivec = new iconoComun({ iconUrl: 'img/univec_r2.png' }),
     iconoSTV = new iconoComun({ iconUrl: 'img/pegman_3.png' }),
-    iconoVerde2 = new iconoComun({ iconUrl: 'img/verde2_r2.png' });
-     iconositios = new iconoComun({ iconUrl: 'img/sitios.png' });
-    iconoedi = new iconoComun({ iconUrl: 'img/edificios.png' });
-    iconoPersi = new iconoComun({ iconUrl: 'img/persianas_r2.png' });
-    iconoMast = new iconoComun({ iconUrl: 'img/mastil_r2.png' });
-    iconoMastp = new iconoComun({ iconUrl: 'img/banderita_r2.png' });
-    iconoWifi = new iconoComun({ iconUrl: 'img/wIfI_r2.png' });
+    iconoVerde2 = new iconoComun({ iconUrl: 'img/verde2_r2.png' }),
+     iconositios = new iconoComun({ iconUrl: 'img/sitios.png' }),
+    iconoedi = new iconoComun({ iconUrl: 'img/edificios.png' }),
+    iconoPersi = new iconoComun({ iconUrl: 'img/persianas_r2.png' }),
+    iconoMast = new iconoComun({ iconUrl: 'img/mastil_r2.png' }),
+    iconoMastp = new iconoComun({ iconUrl: 'img/banderita_r2.png' }),
+    iconoWifi = new iconoComun({ iconUrl: 'img/wIfI_r2.png' }),
     iconoPanel = new iconoComun({ iconUrl: 'img/paneles_3.png' });
     iconoComercio = new iconoComun({ iconUrl: 'img/Comercio.png' });
     iconoCulto = new iconoComun({ iconUrl: 'img/Culto.png' });
@@ -96,7 +96,17 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
     iconoRapipago = new iconoParaGas({iconUrl: 'img/rapipago.png'});
     iconoEscuela = new iconoParaBar({iconUrl: 'img/escuela.png'});
     iconoHospital = new iconoParaGas({iconUrl: 'img/hospital.png'});
+    iconoSemaforo = new iconoParaBar({iconUrl: 'img/semaforo.png'});
 
+
+    function crearIconoSemaforo(feature, latlng) {
+        return L.marker(latlng, {
+            icon: iconoSemaforo
+        })
+    }
+    var asignarIconoSemaforo = {
+        pointToLayer: crearIconoSemaforo
+    }
 
     function crearIconoHospital(feature, latlng) {
         return L.marker(latlng, {
