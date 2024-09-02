@@ -104,7 +104,6 @@
 	<!-- GEOJSON -->
 	<script type="text/javascript" src="scripts/Edificios.js"></script>
 	<script type="text/javascript" src="scripts/Puntoswifi.js"></script>
-	<script type="text/javascript" src="scripts/Persianas.js"></script>
 	<script type="text/javascript" src="scripts/Barrios.js"></script>
 	<script type="text/javascript" src="scripts/SitiosyConjuntosEdilicios.js"></script>
 	<script type="text/javascript" src="scripts/TramosyCarriles.js"></script>
@@ -138,8 +137,6 @@
 	<script type="text/javascript" src="scripts/Solmaforos.js"></script>
 	<script type="text/javascript" src="scripts/EstacionesdeServicio.js"></script>
 	<script type="text/javascript" src="scripts/Estaciones.js"></script>
-	<script type="text/javascript" src="scripts/ZonaNatural.js"></script>
-	<script type="text/javascript" src="scripts/ZonaUrbana.js"></script>
 	<script type="text/javascript" src="scripts/LimiteUrbano.js"></script>
 	<script type="text/javascript" src="scripts/DistritosDepartamentales.js"></script>
 	<script type="text/javascript" src="scripts/PlantaRecicladora.js"></script>
@@ -178,9 +175,9 @@
 	<script type="text/javascript" src="scripts/Paradas.js"></script>
 	<script type="text/javascript" src="scripts/LOC.js"></script>
 	<script type="text/javascript" src="scripts/ZonaA.js"></script>
+	<script type="text/javascript" src="scripts/ZonaB.js"></script>
 	<script type="text/javascript" src="scripts/Curvas.js"></script>
 	<script type="text/javascript" src="scripts/Bicitran.js"></script>
-	<script type="text/javascript" src="scripts/ZonaB.js"></script>
 	<script type="text/javascript" src="scripts/Semaforos.js"></script>
 	<script type="text/javascript" src="scripts/SemaforosDemanda.js"></script>
 </head>
@@ -293,10 +290,6 @@
 			puntoswifi = L.geoJson(Puntoswifi, {
 				pointToLayer: crearIconoWifi,
 				onEachFeature: agregarPopuppuntorecepcionpilas
-			}),
-			persianas = L.geoJson(Persianas, {
-				pointToLayer: crearIconoPersi,
-				onEachFeature: agregarPopuppersianas
 			}),
 			cicloDami = L.geoJson(CicloviasProyectadasDami, {
 				onEachFeature: agregarPopupciclovias
@@ -413,18 +406,6 @@
 			meteo = L.geoJson(Estaciones, {
 				pointToLayer: crearIconoEstacion,
 				onEachFeature: agregarPopupPV
-			}),
-			zonatu = L.geoJson(ZonaNatural, {
-				onEachFeature: agregarPopupPiedemonte
-			}).setStyle({
-				color: "#e31a1c",
-				fillOpacity: 0.75
-			}),
-			zonaurb = L.geoJson(ZonaUrbana, {
-				onEachFeature: agregarPopupPiedemonte
-			}).setStyle({
-				color: "#e2e21a",
-				fillOpacity: 0.75
 			}),
 			limiurb = L.geoJson(LimiteUrbano, {
 				onEachFeature: agregarPopupfarmacias
