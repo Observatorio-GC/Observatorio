@@ -162,6 +162,8 @@ var Semaforos ={
 { "type": "Feature", "properties": { "Name": "Sarmiento y Cerro Catedral", "descriptio": null }, "geometry": { "type": "Point", "coordinates": [ -68.832427551442819, -32.94033027187578, 0.0 ] } },
 { "type": "Feature", "properties": { "Name": "Los viñedos y Alsina (M.T.U.)", "descriptio": null }, "geometry": { "type": "Point", "coordinates": [ -68.826766613559272, -32.932193878721776, 0.0 ] } },
 { "type": "Feature", "properties": { "Name": "Rodriguez Peña y Venezuela", "descriptio": null }, "geometry": { "type": "Point", "coordinates": [ -68.821929400648358, -32.926728018219613, 0.0 ] } },
-{ "type": "Feature", "properties": { "Name": "Rodriguez Peña y Lateral Acceso Sur", "descriptio": null }, "geometry": { "type": "Point", "coordinates": [ -68.822675415718294, -32.926479387586596, 0.0 ] } }
+{ "type": "Feature", "properties": { "Name": "Rodriguez Peña y Lateral Acceso Sur", "descriptio": null }, "geometry": { "type": "Point", "coordinates": [ -68.822675415718294, -32.926479387586596, 0.0 ] } },
+{ "type": "Feature", "properties": { "Name": "Av. Las Tipas y Paraguay", "descriptio": null }, "geometry": { "type": "Point", "coordinates": [ -68.866964575090634, -32.904896507645887, 0.0 ] } },
+{ "type": "Feature", "properties": { "Name": "Av. Las Tipas y Montes de Oca", "descriptio": null }, "geometry": { "type": "Point", "coordinates": [ -68.867238845336928, -32.903878708331916, 0.0 ] } }
 ]
 }
