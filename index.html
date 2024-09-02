@@ -180,6 +180,8 @@
 	<script type="text/javascript" src="scripts/Bicitran.js"></script>
 	<script type="text/javascript" src="scripts/Semaforos.js"></script>
 	<script type="text/javascript" src="scripts/SemaforosDemanda.js"></script>
+	<script type="text/javascript" src="scripts/Universidades.js"></script>
+	<script type="text/javascript" src="scripts/Biblioteca.js"></script>
 </head>
 
 <header>
@@ -551,6 +553,14 @@
 				pointToLayer: crearIconoOficina,
 				onEachFeature: agregarPopupbarrios
 			}),
+			universidades = L.geoJson(Universidades, {
+				pointToLayer: crearIconoEnseñanza,
+				onEachFeature: agregarPopupfarmacias
+			}),
+			biblio = L.geoJson(Biblioteca, {
+				pointToLayer: crearIconoBiblio,
+				onEachFeature: agregarPopupfarmacias
+			}),
 			loc = L.geoJson(LOC, {
 				onEachFeature: agregarPopupfarmacias
 			}).setStyle({
@@ -648,6 +658,7 @@
 				"Red Distribuidora de Agua Potable (AYSAM)": redesagua,
 			},
 			"Equipamiento Social": {
+				"Bibliotecas":biblio,
 				"Centros de Jubilados": jubilados,
 				"Centros de Salud": centrosdesalud,
 				"Clínicas Privadas": clinicaspriv,
@@ -662,6 +673,7 @@
 				"Puntos de Wifi": puntoswifi,
 				"Residencias de Adultos Mayores": residenciasad,
 				"Uniones Vecinales": union,
+				"Universidades": universidades,
 			},
 			"Movilidad": {
 				"Ciclovías Existentes": cicloviasexist,
