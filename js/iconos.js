@@ -49,7 +49,6 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
     iconoGris = new iconoComun({ iconUrl: 'img/marker-icon-2x-grey.png' }),
     iconoVioleta = new iconoComun({ iconUrl: 'img/marker-icon-2x-violet.png' }),
     iconoAmarillo = new iconoComun({ iconUrl: 'img/marker-icon-2x-yellow.png' }),
-    iconoAntena = new iconoComun({ iconUrl: 'img/ante_r2.png' }),
     iconoBiblio = new iconoComun({ iconUrl: 'img/biblio_r2.png' }),
     iconoEscul = new iconoComun({ iconUrl: 'img/escultura_3.png' }),
     iconoCentrosalud = new iconoComun({ iconUrl: 'img/centrosalud_r2.png' }),
@@ -66,20 +65,14 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
     iconoUnivec = new iconoComun({ iconUrl: 'img/univec_r2.png' }),
     iconoSTV = new iconoComun({ iconUrl: 'img/pegman_3.png' }),
     iconoVerde2 = new iconoComun({ iconUrl: 'img/verde2_r2.png' }),
-     iconositios = new iconoComun({ iconUrl: 'img/sitios.png' }),
+    iconositios = new iconoComun({ iconUrl: 'img/sitios.png' }),
     iconoedi = new iconoComun({ iconUrl: 'img/edificios.png' }),
-    iconoPersi = new iconoComun({ iconUrl: 'img/persianas_r2.png' }),
-    iconoMast = new iconoComun({ iconUrl: 'img/mastil_r2.png' }),
-    iconoMastp = new iconoComun({ iconUrl: 'img/banderita_r2.png' }),
     iconoWifi = new iconoComun({ iconUrl: 'img/wIfI_r2.png' }),
     iconoPanel = new iconoComun({ iconUrl: 'img/paneles_3.png' });
-    iconoComercio = new iconoComun({ iconUrl: 'img/Comercio.png' });
     iconoCulto = new iconoComun({ iconUrl: 'img/Culto.png' });
-    iconoCultura = new iconoComun({ iconUrl: 'img/Cultura.png' });
     iconoEsparcimiento = new iconoComun({ iconUrl: 'img/Esparcimiento.png' });
     iconoEnseñanza = new iconoComun({ iconUrl: 'img/Enseñanza.png' });
     iconoOficina = new iconoComun({ iconUrl: 'img/Oficina.png' });
-    iconoServicios = new iconoComun({ iconUrl: 'img/Servicios.png' });
     iconoPlanta = new iconoComun({ iconUrl: 'img/planta.png' });
     iconoTren = new iconoParaTren({ iconUrl: 'img/tren.png' });
     iconoGas = new iconoParaGas({iconUrl: 'img/gasolinera.png'});
@@ -100,6 +93,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
     iconoSemaforo2 = new iconoParaGas({iconUrl: 'img/semaforos.png'});
 
 
+    //Semaforos - Escuelas//
     function crearIconoSemaforo2(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoSemaforo2
@@ -109,6 +103,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoSemaforo2
     }
 
+    //Semaforos//
     function crearIconoSemaforo(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoSemaforo
@@ -118,6 +113,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoSemaforo
     }
 
+    //Hospitales//
     function crearIconoHospital(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoHospital
@@ -127,6 +123,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoHospital
     }
 
+    //Escuelas//
     function crearIconoEscuela(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoEscuela
@@ -136,6 +133,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoEscuela
     }
 
+    //Rapipago//
     function crearIconoRapipago(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoRapipago
@@ -145,6 +143,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoRapipago
     }
 
+    //Estaciones Meteorologicas//
     function crearIconoEstacion(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoEstacion
@@ -154,15 +153,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoEstacion
     }
 
-    function crearIconoEstacion(feature, latlng) {
-        return L.marker(latlng, {
-            icon: iconoEstacion
-        })
-    }
-    var asignarIconoEstacion = {
-        pointToLayer: crearIconoEstacion
-    }
-
+   //Heladerias//
     function crearIconoHelado(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoHelado
@@ -172,6 +163,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoHelado
     }
 
+    //Bodegas//
     function crearIconoVino(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoVino
@@ -181,6 +173,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoVino
     }
 
+    //Uniones Vecinales//
     function crearIconoVecino(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoVecino
@@ -190,6 +183,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoVecino
     }
 
+    //Bicitran//
     function crearIconoBici(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoBici
@@ -199,6 +193,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoBici
     }
 
+    //Bar//
     function crearIconoBar(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoBar
@@ -208,6 +203,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoBar
     }
 
+    //Hospedajes//
     function crearIconoHotel(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoHotel
@@ -217,6 +213,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoHotel
     }
 
+    //Restaurantes//
     function crearIconoResto(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoResto
@@ -226,6 +223,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoResto
     }
 
+    //Cajeros automáticos//
     function crearIconoAtm(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoAtm
@@ -235,6 +233,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoAtm
     }
 
+    //Café//
     function crearIconoCafe(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoCafe
@@ -244,6 +243,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoCafe
     }
 
+    //Estaciones de servicio//
     function crearIconoGas(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoGas
@@ -253,6 +253,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoGas
     }
 
+    //Paradas Metro//
     function crearIconoTren(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoTren
@@ -262,33 +263,8 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoTren
     }
 
-    function crearIconoComercio(feature, latlng) {
-        return L.marker(latlng, {
-            icon: iconoComercio
-        })
-    }
-    var asignarIconoComercio = {
-        pointToLayer: crearIconoComercio
-    }
 
-    function crearIconoCulto(feature, latlng) {
-        return L.marker(latlng, {
-            icon: iconoCulto
-        })
-    }
-    var asignarIconoCulto = {
-        pointToLayer: crearIconoCulto
-    }
-
-    function crearIconoCultura(feature, latlng) {
-        return L.marker(latlng, {
-            icon: iconoCultura
-        })
-    }
-    var asignarIconoCultura = {
-        pointToLayer: crearIconoCultura
-    }
-
+   //ResidenciasAdultosMayores//
     function crearIconoEsparcimiento(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoEsparcimiento
@@ -298,15 +274,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoEsparcimiento
     }
 
-    function crearIconoEnseñanza(feature, latlng) {
-        return L.marker(latlng, {
-            icon: iconoEnseñanza
-        })
-    }
-    var asignarIconoEnseñanza = {
-        pointToLayer: crearIconoEnseñanza
-    }
-
+    //Oficinas//
     function crearIconoOficina(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoOficina
@@ -316,15 +284,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoOficina
     }
 
-    function crearIconoServicios(feature, latlng) {
-        return L.marker(latlng, {
-            icon: iconoServicios
-        })
-    }
-    var asignarIconoServicios = {
-        pointToLayer: crearIconoServicios
-    }
-
+    //Diques - Patrimonio//
     function crearIconoPlanta(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoPlanta
@@ -335,15 +295,6 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
     }
 
 
-    function crearIconoComercio(feature, latlng) {
-        return L.marker(latlng, {
-            icon: iconoComercio
-        })
-    }
-    var asignarIconoComercio = {
-        pointToLayer: crearIconoComercio
-    }
-
     function crearIconoCulto(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoCulto
@@ -353,62 +304,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoCulto
     }
 
-    function crearIconoCultura(feature, latlng) {
-        return L.marker(latlng, {
-            icon: iconoCultura
-        })
-    }
-    var asignarIconoCultura = {
-        pointToLayer: crearIconoCultura
-    }
-
-    function crearIconoAsistencia(feature, latlng) {
-        return L.marker(latlng, {
-            icon: iconoAsistencia
-        })
-    }
-    var asignarIconoAsistencia = {
-        pointToLayer: crearIconoAsistencia
-    }
-
-    function crearIconoEsparcimiento(feature, latlng) {
-        return L.marker(latlng, {
-            icon: iconoEsparcimiento
-        })
-    }
-    var asignarIconoEsparcimiento = {
-        pointToLayer: crearIconoEsparcimiento
-    }
-
-    function crearIconoEnseñanza(feature, latlng) {
-        return L.marker(latlng, {
-            icon: iconoEnseñanza
-        })
-    }
-    var asignarIconoEnseñanza = {
-        pointToLayer: crearIconoEnseñanza
-    }
-
-    function crearIconoOficina(feature, latlng) {
-        return L.marker(latlng, {
-            icon: iconoOficina
-        })
-    }
-    var asignarIconoOficina = {
-        pointToLayer: crearIconoOficina
-    }
-
-    function crearIconoServicios(feature, latlng) {
-        return L.marker(latlng, {
-            icon: iconoServicios
-        })
-    }
-    var asignarIconoServicios = {
-        pointToLayer: crearIconoServicios
-    }
-
-
-
+    //Puntos Verdes//
     function crearIconoVerde(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoVerde
@@ -481,15 +377,6 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoVioleta
     }
 
-    function crearIconoWifi(feature, latlng) {
-        return L.marker(latlng, {
-            icon: iconoWifi
-        })
-    }
-    var asignarIconoWifi = {
-        pointToLayer: crearIconoWifi
-    }
-
     function crearIconoAmarillo(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoAmarillo
@@ -499,15 +386,17 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoAmarillo
     }
 
-    function crearIconoAntena(feature, latlng) {
+    //Wifi//
+    function crearIconoWifi(feature, latlng) {
         return L.marker(latlng, {
-            icon: iconoAntena
+            icon: iconoWifi
         })
     }
-    var asignarIconoAntena = {
-        pointToLayer: crearIconoAntena
+    var asignarIconoWifi = {
+        pointToLayer: crearIconoWifi
     }
 
+    //Bibliotecas//
     function crearIconoBiblio(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoBiblio
@@ -517,6 +406,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoBiblio
     }
 
+    //Centros de Salud//
     function crearIconoCentrosalud(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoCentrosalud
@@ -526,6 +416,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoCentrosalud
     }
 
+    //Esculturas//
     function crearIconoEscul(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoEscul
@@ -535,6 +426,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoEscul
     }
 
+    //Clinicas Privadas//
     function crearIconoClinicaprivada(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoClinicaprivada
@@ -544,6 +436,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoClinicaprivada
     }
 
+    //Dependencias municipales//
     function crearIconoDependmuni(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoDependmuni
@@ -553,6 +446,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoDependmuni
     }
 
+    //Escuelas//
     function crearIconoEstabeducat(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoEstabeducat
@@ -562,6 +456,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoEstabeducat
     }
 
+    //Farmacias//
     function crearIconoFarmacias(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoFarmacias
@@ -571,6 +466,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoFarmacias
     }
 
+    //Hospitales//
     function crearIconoHospitales(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoHospitales
@@ -580,6 +476,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoHospitales
     }
 
+    //Puntos recepción pilas//
     function crearIconoPilas(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoPilas
@@ -589,6 +486,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoPilas
     }
 
+    //Seguridad//
     function crearIconoSeguridad(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoSeguridad
@@ -598,6 +496,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoSeguridad
     }
 
+    //Jardines Municipales//
     function crearIconoJardmatern(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoJardmatern
@@ -607,6 +506,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoJardmatern
     }
 
+    //Polideportivos//
     function crearIconoPoli(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoPoli
@@ -616,6 +516,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoPoli
     }
 
+    //Sitios y conjuntos edilicios//
     function crearIconositios(feature, latlng) {
         return L.marker(latlng, {
             icon: iconositios
@@ -625,6 +526,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconositios
     }
 
+    //Edificios Históricos//
     function crearIconoedi(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoedi
@@ -634,15 +536,17 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoedi
     }
 
-    function crearIconoUnivec(feature, latlng) {
+    //Universidades//
+    function crearIconoEnseñanza(feature, latlng) {
         return L.marker(latlng, {
-            icon: iconoUnivec
+            icon: iconoEnseñanza
         })
     }
-    var asignarIconoUnivec = {
-        pointToLayer: crearIconoUnivec
+    var asignarIconoEnseñanza = {
+        pointToLayer: crearIconoEnseñanza
     }
 
+    //Street View//
     function crearIconoSTV(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoSTV
@@ -652,6 +556,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoSTV
     }
 
+    //Puntos Verdes//
     function crearIconoVerde2(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoVerde2
@@ -661,6 +566,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoVerde2
     }
 
+    //Solmaforos//
     function crearIconoSema_r2(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoSema_r2
@@ -670,33 +576,7 @@ var iconoVerde = new iconoComun({ iconUrl: 'img/marker-icon-2x-green.png' }),
         pointToLayer: crearIconoSema_r2
     }
 
-    function crearIconoPersi(feature, latlng) {
-        return L.marker(latlng, {
-            icon: iconoPersi
-        })
-    }
-    var asignarIconoPersi = {
-        pointToLayer: crearIconoPersi
-    }
-
-    function crearIconoMast(feature, latlng) {
-        return L.marker(latlng, {
-            icon: iconoMast
-        })
-    }
-    var asignarIconoMast = {
-        pointToLayer: crearIconoMast
-    }
-
-    function crearIconoMastp(feature, latlng) {
-        return L.marker(latlng, {
-            icon: iconoMastp
-        })
-    }
-    var asignarIconoMastp = {
-        pointToLayer: crearIconoMastp
-    }
-
+    //Paneles solares//
     function crearIconoPanel(feature, latlng) {
         return L.marker(latlng, {
             icon: iconoPanel
