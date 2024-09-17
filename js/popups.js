@@ -52,7 +52,7 @@ function agregarPopuppatrimoniales(feature, layer) {
 }
 function agregarPopupespaciosverdes(feature, layer) {
     if (feature.properties && feature.properties.NOMBRE) {
-        layer.bindPopup("<strong>" + feature.properties.Descriptio + "</strong><br/>" + feature.properties.NOMBRE);
+        layer.bindPopup("<strong>" + feature.properties.Descriptio + "</strong><br/>" + feature.properties.NOMBRE + "</strong><br/>" + feature.properties.Ordenanza);
     }
 }
 function agregarPopupfarmacias(feature, layer) {
