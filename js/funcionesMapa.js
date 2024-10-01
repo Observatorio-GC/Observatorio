@@ -26,44 +26,6 @@ L.streetView1({ position: 'topleft' }).addTo(map);
         manualMode: false}).addTo(map);
     
 
-/* CARGA ARCHIVOS */
-/* (function (window) {
-    
-    function initMap() {
-    var control;
-    var L = window.L;
-
-    var style = {
-     color: 'red',
-     opacity: 1.0,
-     fillOpacity: 1.0,
-     weight: 2,
-     clickable: false
-    };
-
-L.Control.FileLayerLoad.LABEL = '<img class="icon" src="js/nube.png" alt="file icon"/>';
-control = L.Control.fileLayerLoad({
-    fitBounds: true,
-    layerOptions: {
-        style: style,
-        pointToLayer: function (data, latlng) {
-            return L.circleMarker(
-                latlng,
-                { style: style }
-            );
-        }
-    }
-});
-control.addTo(map);
-control.loader.on('data:loaded', function (e) {
-    var layer = e.layer;
-    console.log(layer);
-});}
-
-window.addEventListener('load', function () {
- initMap();
- });}(window)); */
-
 /* COORDENADAS CLICK MOUSE */
   var c = new L.Control.Coordinates();
 c.addTo(map);
@@ -122,9 +84,12 @@ function onOverlayAdd(e) {
     } else if (e.name == "Ciclovías en Ejecución") {
         idlayer = "cicloEjec"
     } else if (e.name == "Índice Final de Caminabilidad") {
-        idlayer = "traza";
+        idlayer = "traza"
+    } else if (e.name == "Espacios Verdes") {
+      idlayer = "espverdes"
+    } else if (e.name == "Barrios Consolidados") {
+      idlayer = "BarriosConsolidados";
     }
-    
     document.getElementById("ref_" + idlayer).style.display = 'block';
 }
 
@@ -138,6 +103,10 @@ function onOverlayRemove(e) {
         idlayer = "cicloEjec"
     } else if (e.name == "Índice Final de Caminabilidad") {
         idlayer = "traza";
+    } else if (e.name == "Espacios Verdes") {
+      idlayer = "espverdes"
+    } else if (e.name == "Barrios Consolidados") {
+      idlayer = "BarriosConsolidados";
     }
 
     document.getElementById("ref_" + idlayer).style.display = 'none';
