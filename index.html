@@ -182,6 +182,7 @@
 	<script type="text/javascript" src="scripts/SemaforosDemanda.js"></script>
 	<script type="text/javascript" src="scripts/Universidades.js"></script>
 	<script type="text/javascript" src="scripts/Biblioteca.js"></script>
+	<script type="text/javascript" src="scripts/DuctosGas.js"></script>
 </head>
 
 <header>
@@ -590,6 +591,11 @@
 			semaforos2 = L.geoJson(SemaforosDemanda, {
 				pointToLayer: crearIconoSemaforo2,
 				onEachFeature: agregarPopupPaneles
+			}),
+			ductosgas = L.geoJson(DuctosGas, {
+				onEachFeature: agregarPopupductosgas
+			}).setStyle({
+				color: "orange"
 			}), 
 			infoambiente = L.geoJson(InfoAmbiente, {
 				onEachFeature: agregarPopupDepen
@@ -652,6 +658,7 @@
 				"Barrios Consolidados": BarriosConsolidados,
 				"Barrios Populares": barriospopulares,
 				"Cajeros": caja,
+				"Ductos de Distribución de Gas": ductosgas,
 				"Estaciones de Servicio": estacion,
 				"Líneas de Distribución de Energía": lineasd,
 				"Líneas de Transporte de Energía": lineast,
