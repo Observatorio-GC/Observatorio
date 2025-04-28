@@ -65,6 +65,11 @@ function agregarPopupfarmaciasgc(feature, layer) {
         layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong><br/>" + feature.properties.Direccion + "</strong><br/>" + feature.properties.Telefono + "</strong><br/>" + feature.properties.Distrito);
     }
 }
+function agregarPopupductosgas(feature, layer) {
+    if (feature.properties && feature.properties.Nombre) {
+        layer.bindPopup("<strong>" + feature.properties.Nombre + "</strong><br/>" + "Tramo: <strong>" + feature.properties.Tramo + "</strong><br/>" + "Tipo: <strong>" + feature.properties.Tipo + "</strong><br/>" + "Encargado: <strong>" + feature.properties.Encargado);
+    }
+}
 function agregarPopupres(feature, layer) {
     if (feature.properties && feature.properties.UBICACION) {
         layer.bindPopup("<strong>" + feature.properties.UBICACION + "</strong>");
