@@ -62,6 +62,207 @@
 	<link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css" />
 	<script src="https://unpkg.com/esri-leaflet-geocoder"></script>
 
+	<!-- Isidora Font Family - Official Municipality Typography -->
+	<style>
+		@font-face {
+			font-family: 'Isidora';
+			src: url('fonts/IsidoraThin.otf') format('opentype');
+			font-weight: 300;
+			font-style: normal;
+		}
+		@font-face {
+			font-family: 'Isidora';
+			src: url('fonts/IsidoraRegular.otf') format('opentype');
+			font-weight: 400;
+			font-style: normal;
+		}
+		@font-face {
+			font-family: 'Isidora';
+			src: url('fonts/IsidoraSemiBold.otf') format('opentype');
+			font-weight: 600;
+			font-style: normal;
+		}
+		@font-face {
+			font-family: 'Isidora';
+			src: url('fonts/IsidoraRegularIt.otf') format('opentype');
+			font-weight: 400;
+			font-style: italic;
+		}
+		@font-face {
+			font-family: 'Isidora';
+			src: url('fonts/IsidoraSemiBoldIt.otf') format('opentype');
+			font-weight: 600;
+			font-style: italic;
+		}
+
+		/* Branding - Official Godoy Cruz Municipality Colors */
+		header {
+			background: linear-gradient(90deg, #9e6bab 0%, #da0c81 100%);
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		}
+
+		body {
+			font-family: 'Isidora', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			margin: 0;
+			padding: 0;
+		}
+
+		/* Apply Isidora to all text elements */
+		input, button, select, textarea, label, div, span, p, h1, h2, h3, h4, h5, h6 {
+			font-family: 'Isidora', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		}
+
+		/* Header Logo Container - Desktop Only */
+		#header-logo-pc {
+			display: none;
+			align-items: center;
+			justify-content: center;
+			height: 45px;
+			max-width: 120px;
+			position: absolute;
+			right: 20px;
+			top: 7px;
+		}
+
+		#header-logo-pc img {
+			height: 45px;
+			max-width: 120px;
+			object-fit: contain;
+		}
+
+		/* Utility Buttons - Street View & Urban Indicators */
+		.utilidades-btn {
+			background-color: #da0c81;
+			color: white;
+			border: none;
+			padding: 10px 15px;
+			border-radius: 5px;
+			cursor: pointer;
+			box-shadow: 0 2px 4px rgba(218, 12, 129, 0.3);
+			font-weight: 600;
+			font-family: 'Isidora', sans-serif;
+			transition: all 0.3s ease;
+		}
+
+		.utilidades-btn:hover {
+			background-color: #C20668;
+			box-shadow: 0 4px 8px rgba(218, 12, 129, 0.5);
+		}
+
+		.utilidades-btn:active {
+			background-color: #C20668;
+		}
+
+		/* Leaflet Popup - Force Isidora Font */
+		.leaflet-popup-content {
+			font-family: 'Isidora', sans-serif !important;
+		}
+
+		.leaflet-control {
+			font-family: 'Isidora', sans-serif !important;
+		}
+
+		/* Responsive Titles */
+		#title-mobile {
+			display: block;
+		}
+
+		#title-desktop {
+			display: none;
+		}
+
+		/* Mobile Layout (≤768px) */
+		@media (max-width: 768px) {
+			#utilidades-buttons {
+				top: 120px !important;
+				bottom: auto !important;
+			}
+
+			#title-mobile {
+				display: block;
+			}
+
+			#title-desktop {
+				display: none;
+			}
+
+			#header-logo-pc {
+				display: none !important;
+			}
+
+			/* Search inputs stacked */
+			#searchContainer {
+				flex-direction: column;
+				width: 90%;
+			}
+
+			#searchContainer input {
+				width: 100%;
+				margin: 5px 0;
+			}
+		}
+
+		/* Tablet Layout (769-1024px) */
+		@media (min-width: 769px) and (max-width: 1024px) {
+			#utilidades-buttons {
+				top: 120px !important;
+				bottom: auto !important;
+			}
+
+			#title-mobile {
+				display: block;
+			}
+
+			#title-desktop {
+				display: none;
+			}
+
+			#header-logo-pc {
+				display: none !important;
+			}
+
+			#searchContainer {
+				flex-direction: column;
+				width: 90%;
+			}
+
+			#searchContainer input {
+				width: 100%;
+				margin: 5px 0;
+			}
+		}
+
+		/* Desktop Layout (>1025px) */
+		@media (min-width: 1026px) {
+			#utilidades-buttons {
+				top: auto !important;
+				bottom: 20px !important;
+			}
+
+			#title-mobile {
+				display: none;
+			}
+
+			#title-desktop {
+				display: block;
+			}
+
+			#header-logo-pc {
+				display: flex !important;
+			}
+
+			#searchContainer {
+				flex-direction: row;
+				width: auto;
+			}
+
+			#searchContainer input {
+				width: auto;
+				margin: 0 5px;
+			}
+		}
+	</style>
+
 	<!-- CSS -->
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/Leaflet.PolylineMeasure.css">
@@ -173,7 +374,15 @@
 </head>
 
 <header>
-	<h1>Observatorio Territorial de Godoy Cruz</h1>
+	<!-- Responsive Titles -->
+	<h1 id="title-desktop">Observatorio Territorial</h1>
+	<h1 id="title-mobile">Observatorio Territorial de Godoy Cruz</h1>
+	
+	<!-- Municipality Logo - Desktop Only -->
+	<div id="header-logo-pc">
+		<img src="img/gc_logo.png" alt="Godoy Cruz Municipality Logo">
+	</div>
+	
 	<div id="map"></div>
 	<div id="referencias">
 		<div class="icono_referencia" id="ref_cicloDami">Ciclovias Proyectadas:</br>7,00 Km.</div> </b>
