@@ -1,93 +1,70 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-	<meta charset=utf-8 />
+	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<meta name="description"
-		content="Visor del Observatorio Territorial Godoy Cruz, el cual permite la visualización de información geográfica del municipio. Oficina de Planificación Urbana. Mapa de Godoy Cruz.">
-	<meta name="keywords"
-		content="Mapa de Godoy Cruz, Mendoza, Godoy Cruz, Barrios de Godoy Cruz, Distritos, Visor, Observatorio Territorial">
+	<meta name="description" content="Visor del Observatorio Territorial Godoy Cruz, el cual permite la visualización de información geográfica del municipio. Oficina de Planificación Urbana. Mapa de Godoy Cruz.">
+	<meta name="keywords" content="Mapa de Godoy Cruz, Mendoza, Godoy Cruz, Barrios de Godoy Cruz, Distritos, Visor, Observatorio Territorial">
 	<meta name="author" content="Ignacio Diaz">
 	<meta name="copyright" content="Observatorio Territorial Godoy Cruz">
 	<meta name="google-site-verification" content="R5WTMjjt_seNpewDlSVO7I1yKfRtCr6Zb6GUEDB9QLU" />
 	<title>Observatorio Territorial Godoy Cruz</title>
+	<link rel="icon" type="image/x-icon" href="img/favicon1.ico">
 
 	<!-- Google Tag Manager -->
 	<script>(function (w, d, s, l, i) {
-			w[l] = w[l] || []; w[l].push({
-				'gtm.start':
-					new Date().getTime(), event: 'gtm.js'
-			}); var f = d.getElementsByTagName(s)[0],
-				j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-					'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-		})(window, document, 'script', 'dataLayer', 'GTM-N5LCFRBW');</script>
+		w[l] = w[l] || []; w[l].push({
+			'gtm.start': new Date().getTime(), event: 'gtm.js'
+		}); var f = d.getElementsByTagName(s)[0],
+			j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+				'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+	})(window, document, 'script', 'dataLayer', 'GTM-N5LCFRBW');</script>
 	<!-- End Google Tag Manager -->
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-33KRTS12JB"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
-
-		function gtag() {
-			dataLayer.push(arguments);
-		}
+		function gtag() { dataLayer.push(arguments); }
 		gtag('js', new Date());
-
 		gtag('config', 'G-33KRTS12JB');
 	</script>
 
-	<!-- Google tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-LDEXV7ENK0">
-	</script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag() { dataLayer.push(arguments); }
-		gtag('js', new Date());
-
-		gtag('config', 'G-LDEXV7ENK0');
-	</script>
-
-	<!-- Icono -->
-	<link rel="icon" href="./img/favicon1.ico">
-
-	<!-- Load Leaflet from CDN-->
+	<!-- Leaflet CSS -->
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet-measure-control@0.1.8/lib/leaflet-measure-control.css" />
+	<link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css" />
 
-	<!-- Load Esri Leaflet from CDN -->
-	<script src="https://unpkg.com/esri-leaflet"></script>
+	<!-- Leaflet MarkerCluster CSS -->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+	<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
 
-	<!-- Esri Leaflet Geocoder -->
-	<link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css" />
-	<script src="https://unpkg.com/esri-leaflet-geocoder"></script>
+	<!-- Esri Leaflet Geocoder CSS -->
+	<link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@3.1.3/dist/esri-leaflet-geocoder.css" />
 
-	<!-- Isidora Font Family - Official Municipality Typography -->
 	<style>
-		@font-face {
-			font-family: 'Isidora';
-			src: url('fonts/IsidoraThin.otf') format('opentype');
-			font-weight: 300;
-			font-style: normal;
-		}
+		/* Importar fuente Isidora oficial de la Municipalidad */
 		@font-face {
 			font-family: 'Isidora';
 			src: url('fonts/IsidoraRegular.otf') format('opentype');
 			font-weight: 400;
 			font-style: normal;
 		}
-		@font-face {
-			font-family: 'Isidora';
-			src: url('fonts/IsidoraSemiBold.otf') format('opentype');
-			font-weight: 600;
-			font-style: normal;
-		}
+
 		@font-face {
 			font-family: 'Isidora';
 			src: url('fonts/IsidoraRegularIt.otf') format('opentype');
 			font-weight: 400;
 			font-style: italic;
 		}
+
+		@font-face {
+			font-family: 'Isidora';
+			src: url('fonts/IsidoraSemiBold.otf') format('opentype');
+			font-weight: 600;
+			font-style: normal;
+		}
+
 		@font-face {
 			font-family: 'Isidora';
 			src: url('fonts/IsidoraSemiBoldIt.otf') format('opentype');
@@ -95,859 +72,1647 @@
 			font-style: italic;
 		}
 
-		/* Branding - Official Godoy Cruz Municipality Colors */
-		header {
-			background: linear-gradient(90deg, #9e6bab 0%, #da0c81 100%);
-			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		@font-face {
+			font-family: 'Isidora';
+			src: url('fonts/IsidoraThin.otf') format('opentype');
+			font-weight: 300;
+			font-style: normal;
+		}
+
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
 		}
 
 		body {
 			font-family: 'Isidora', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-			margin: 0;
-			padding: 0;
+			height: 100vh;
+			display: flex;
+			flex-direction: column;
+			overflow: hidden;
 		}
 
-		/* Apply Isidora to all text elements */
+		/* Asegurar que todos los elementos de formulario usen Isidora */
 		input, button, select, textarea, label, div, span, p, h1, h2, h3, h4, h5, h6 {
 			font-family: 'Isidora', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 		}
 
-		/* Header Logo Container - Desktop Only */
-		#header-logo-pc {
-			display: none;
+		/* Map Container */
+		#map {
+			flex: 1;
+			width: 100%;
+			height: 100%;
+			position: relative;
+			z-index: 1;
+		}
+
+		header {
+			background: linear-gradient(90deg, #9e6bab 0%, #da0c81 100%);
+			color: white;
+			padding: 10px 15px;
+			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+			z-index: 100;
+			flex-shrink: 0;
+			display: flex;
 			align-items: center;
 			justify-content: center;
-			height: 45px;
-			max-width: 120px;
-			position: absolute;
-			right: 20px;
-			top: 7px;
+			gap: 15px;
+			position: relative;
 		}
 
-		#header-logo-pc img {
-			height: 45px;
-			max-width: 120px;
-			object-fit: contain;
-		}
-
-		/* Utility Buttons - Street View & Urban Indicators */
-		.utilidades-btn {
-			background-color: #da0c81;
-			color: white;
-			border: none;
-			padding: 10px 15px;
-			border-radius: 5px;
-			cursor: pointer;
-			box-shadow: 0 2px 4px rgba(218, 12, 129, 0.3);
+		header h1 {
+			font-size: 26px;
 			font-weight: 600;
-			font-family: 'Isidora', sans-serif;
-			transition: all 0.3s ease;
+			margin: 0;
+			white-space: normal;
+			word-wrap: break-word;
+			flex-shrink: 1;
+			position: absolute;
+			left: 15px;
+			right: 280px;
 		}
 
-		.utilidades-btn:hover {
-			background-color: #C20668;
-			box-shadow: 0 4px 8px rgba(218, 12, 129, 0.5);
-		}
-
-		.utilidades-btn:active {
-			background-color: #C20668;
-		}
-
-		/* Leaflet Popup - Force Isidora Font */
-		.leaflet-popup-content {
-			font-family: 'Isidora', sans-serif !important;
-		}
-
-		.leaflet-control {
-			font-family: 'Isidora', sans-serif !important;
-		}
-
-		/* Responsive Titles */
-		#title-mobile {
-			display: block;
-		}
-
+		/* Título Desktop (PC) - Solo en resoluciones mayores a 1024px */
 		#title-desktop {
 			display: none;
 		}
 
-		/* Mobile Layout (≤768px) */
-		@media (max-width: 768px) {
-			#utilidades-buttons {
-				top: 120px !important;
-				bottom: auto !important;
-			}
-
-			#title-mobile {
-				display: block;
-			}
-
-			#title-desktop {
-				display: none;
-			}
-
-			#header-logo-pc {
-				display: none !important;
-			}
-
-			/* Search inputs stacked */
-			#searchContainer {
-				flex-direction: column;
-				width: 90%;
-			}
-
-			#searchContainer input {
-				width: 100%;
-				margin: 5px 0;
-			}
+		/* Título Mobile - Visible por defecto */
+		#title-mobile {
+			display: block;
 		}
 
-		/* Tablet Layout (769-1024px) */
+		/* Logo Header PC - Solo en desktop */
+		#header-logo-pc {
+			position: absolute;
+			right: 20px;
+			top: 50%;
+			transform: translateY(-50%);
+			z-index: 200;
+			padding: 4px 8px;
+			border-radius: 6px;
+			min-width: 80px;
+			min-height: 50px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			visibility: hidden;
+			opacity: 0;
+			transition: visibility 0.3s, opacity 0.3s;
+		}
+
+		#header-logo-pc img {
+			height: 45px;
+			width: auto;
+			max-width: 120px;
+			display: block;
+			object-fit: contain;
+		}
+
+		/* Global Search Container - INSIDE HEADER */
+		#global-search-container {
+			position: relative !important;
+			top: auto !important;
+			left: auto !important;
+			transform: none !important;
+			width: 520px !important;
+			background: transparent !important;
+			border-radius: 0 !important;
+			box-shadow: none !important;
+			padding: 0 !important;
+			z-index: 1001 !important;
+			border: none !important;
+			flex: 0 0 auto;
+			display: flex;
+			flex-direction: column;
+			gap: 0;
+			margin: 0;
+		}
+
+		#global-search-container > div:first-child {
+			display: flex;
+			gap: 8px;
+			margin-bottom: 0 !important;
+			align-items: center;
+		}
+
+		#global-search-input {
+			flex: 1;
+			padding: 9px 12px;
+			border: 1px solid rgba(255, 255, 255, 0.3);
+			border-radius: 5px;
+			font-size: 13px;
+			font-weight: 500;
+			background: rgba(255, 255, 255, 0.95);
+			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+			box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+			color: #333;
+		}
+
+		#global-search-input:focus {
+			outline: none;
+			border-color: rgba(255, 255, 255, 0.8);
+			box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+			background: white;
+		}
+
+		#global-search-input::placeholder {
+			color: #999;
+		}
+
+		#search-category-filter {
+			padding: 9px 10px;
+			border: 1px solid rgba(255, 255, 255, 0.3);
+			border-radius: 5px;
+			background: rgba(255, 255, 255, 0.95);
+			font-size: 11px;
+			font-weight: 600;
+			cursor: pointer;
+			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+			box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+			color: #333;
+		}
+
+		#search-category-filter:hover {
+			background: white;
+			border-color: rgba(255, 255, 255, 0.5);
+			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+		}
+
+		#search-category-filter:focus {
+			outline: none;
+			border-color: rgba(255, 255, 255, 0.8);
+			box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+			background: white;
+		}
+
+		#search-results {
+			max-height: 0;
+			overflow: hidden;
+			border-top: 0;
+			position: absolute;
+			top: 100%;
+			left: 0;
+			width: 100%;
+			background: white;
+			border-radius: 0 0 5px 5px;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+			z-index: 1000;
+			transition: max-height 0.3s ease;
+		}
+
+		#search-results.active {
+			max-height: 300px;
+			border-top: 1px solid #f0f0f0;
+			overflow-y: auto;
+		}
+
+		/* Deshabilitado: Causaba que se abra al hacer focus en otros elementos (ej. dropdown) */
+		/* #global-search-container:focus-within #search-results {
+			max-height: 300px;
+			border-top: 1px solid #f0f0f0;
+		} */
+
+		.search-result-item {
+			padding: 10px 12px;
+			border-bottom: 1px solid #f0f0f0;
+			cursor: pointer;
+			transition: all 0.15s ease;
+			background: white;
+			color: #333;
+		}
+
+		.search-result-item:hover {
+			background: #f0f4ff;
+			padding-left: 14px;
+			border-left: 3px solid #667eea;
+		}
+
+		.search-result-item strong {
+			display: block;
+			font-size: 13px;
+			color: #333;
+			margin-bottom: 2px;
+			font-weight: 600;
+		}
+
+		.search-result-item small {
+			display: block;
+			font-size: 11px;
+			color: #888;
+		}
+
+		/* Utilidades Buttons */
+		#utilidades-buttons {
+			position: absolute;
+			top: 75px;
+			left: 50px;
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+			z-index: 300;
+		}
+
+		.utilidades-btn {
+			background: #da0c81;
+			color: white;
+			border: none;
+			padding: 9px 14px;
+			border-radius: 5px;
+			font-size: 12px;
+			font-weight: 600;
+			cursor: pointer;
+			box-shadow: 0 3px 10px rgba(218, 12, 129, 0.3);
+			transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+			white-space: nowrap;
+			display: flex;
+			align-items: center;
+			gap: 5px;
+		}
+
+		.utilidades-btn:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 5px 15px rgba(218, 12, 129, 0.4);
+		}
+
+		.utilidades-btn:active {
+			transform: translateY(0);
+			box-shadow: 0 2px 8px rgba(218, 12, 129, 0.3);
+		}
+
+		/* Street View Mode Indicator */
+		#streetview-mode-indicator {
+			position: absolute;
+			bottom: 20px;
+			right: 20px;
+			background: #ffd700;
+			color: #333;
+			padding: 15px;
+			border-radius: 6px;
+			font-size: 12px;
+			font-weight: 600;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+			display: none;
+			z-index: 300;
+			line-height: 1.5;
+		}
+
+		/* Leaflet Popups - Usar fuente Isidora */
+		.leaflet-popup-content {
+			font-family: 'Isidora', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+			font-size: 12px;
+		}
+
+		.leaflet-popup-content strong,
+		.leaflet-popup-content b {
+			font-weight: 600;
+			font-family: 'Isidora', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		}
+
+		/* Leaflet Controls */
+		.leaflet-control {
+			font-family: 'Isidora', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		}
+
+		#streetview-mode-indicator.active {
+			display: block;
+		}
+
+		/* Referencias */
+		#referencias {
+			position: absolute;
+			bottom: 150px;
+			left: 20px;
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+			z-index: 200;
+		}
+
+		.icono_referencia {
+			background: white;
+			padding: 10px 12px;
+			border-left: 4px solid #667eea;
+			border-radius: 4px;
+			font-size: 12px;
+			font-weight: 600;
+			box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+			line-height: 1.4;
+			display: none;
+		}
+
+		.icono_referencia.active {
+			display: block;
+		}
+
+		/* Logo Observatorio */
+		#logo-observatorio {
+			position: fixed;
+			top: 65px;
+			right: 20px;
+			z-index: 200;
+			background: white;
+			padding: 6px;
+			border-radius: 6px;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+		}
+
+		#logo-observatorio a {
+			display: inline-block;
+			text-decoration: none;
+		}
+
+		#logo-observatorio img {
+			height: 50px;
+			width: 225px;
+			cursor: pointer;
+			transition: opacity 0.3s ease;
+			display: block;
+		}
+
+		#logo-observatorio img:hover {
+			opacity: 0.9;
+		}
+
+		/* Leaflet customizations */
+		.leaflet-control {
+			border-radius: 4px;
+		}
+
+		.leaflet-control-layers {
+			background-color: white;
+			max-width: 200px;
+			max-height: 300px;
+			overflow-y: auto;
+			box-shadow: none !important;
+		}
+
+		.leaflet-control-layers-expanded {
+			max-width: 200px;
+			max-height: 300px;
+			box-shadow: none !important;
+		}
+
+		.leaflet-control-zoom {
+			border-radius: 4px;
+			box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+		}
+
+		.leaflet-popup-content {
+			font-size: 13px;
+			color: #333;
+		}
+
+		.leaflet-popup-content p {
+			margin: 8px 0;
+		}
+
+		/* Hide Leaflet scale control */
+		.leaflet-control-scale {
+			display: none !important;
+		}
+
+		/* Position Draw Control in top-left */
+		.leaflet-top.leaflet-left {
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+		}
+
+		.leaflet-top.leaflet-left .leaflet-draw-control {
+			order: 3;
+		}
+
+		/* Layer Panel */
+		#layer-panel {
+			position: absolute;
+			top: 140px;
+			right: 20px;
+			width: 340px;
+			background: white;
+			border-radius: 8px;
+			box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+			z-index: 300;
+			display: flex;
+			flex-direction: column;
+			max-height: 70vh;
+			overflow: hidden;
+		}
+
+		/* Hidden by default on mobile */
+		#layer-panel.mobile-hidden {
+			display: none !important;
+		}
+
+		/* Layer panel toggle button for mobile */
+		#layer-panel-toggle-btn {
+			display: none;
+			position: fixed;
+			bottom: 20px;
+			right: 20px;
+			width: 56px;
+			height: 56px;
+			border-radius: 50%;
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			color: white;
+			border: none;
+			font-size: 24px;
+			cursor: pointer;
+			box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+			z-index: 250;
+			transition: all 0.3s ease;
+			align-items: center;
+			justify-content: center;
+		}
+
+		#layer-panel-toggle-btn:hover {
+			transform: scale(1.1);
+			box-shadow: 0 6px 16px rgba(102, 126, 234, 0.6);
+		}
+
+		#layer-panel-toggle-btn:active {
+			transform: scale(0.95);
+		}
+
+		.layer-panel-header {
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			color: white;
+			padding: 12px 15px;
+			border-radius: 8px 8px 0 0;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 10px;
+			flex-wrap: wrap;
+			flex-shrink: 0;
+		}
+
+		.layer-panel-header h3 {
+			margin: 0;
+			font-size: 14px;
+			font-weight: 600;
+		}
+
+		.layer-panel-tabs {
+			display: flex;
+			gap: 0;
+			border-bottom: 1px solid #e0e0e0;
+		}
+
+		.layer-panel-tabs button {
+			flex: 1;
+			background: #f8f8f8;
+			border: none;
+			color: #333;
+			padding: 10px 12px;
+			font-size: 12px;
+			font-weight: 600;
+			cursor: pointer;
+			border-bottom: 3px solid transparent;
+			transition: all 0.3s ease;
+		}
+
+		.layer-panel-tabs button.active {
+			background: #667eea;
+			color: white;
+			border-bottom-color: #667eea;
+		}
+
+		.layer-panel-tabs button:hover {
+			opacity: 0.9;
+		}
+
+		.layer-panel-content {
+			flex: 1;
+			overflow-y: auto;
+			padding: 12px;
+			display: flex;
+			flex-direction: column;
+		}
+
+		.layer-panel-content div {
+			width: 100%;
+		}
+
+		#available-layers {
+			border: none !important;
+			border-radius: 0 !important;
+			padding: 0 !important;
+			background: transparent !important;
+			min-height: auto !important;
+			display: flex;
+			flex-direction: column;
+			gap: 8px;
+		}
+
+		#available-layers {
+			border: none !important;
+			border-radius: 0 !important;
+			padding: 0 !important;
+			background: transparent !important;
+			min-height: auto !important;
+			display: flex !important;
+			flex-direction: column !important;
+			gap: 8px !important;
+		}
+
+		.layer-item {
+			background: #f9f9f9;
+			border: 1px solid #e8e8e8;
+			border-radius: 6px;
+			padding: 8px 10px;
+			display: flex !important;
+			flex-direction: row !important;
+			align-items: center !important;
+			gap: 8px !important;
+			transition: all 0.2s ease;
+			margin-bottom: 0;
+		}
+
+		.layer-item:hover {
+			background: #f5f5f5;
+			box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+			border-color: #d0d0d0;
+		}
+
+		.layer-item > div:first-child {
+			display: flex !important;
+			flex-direction: row !important;
+			align-items: center !important;
+			gap: 8px !important;
+			flex: 1 !important;
+		}
+
+		.layer-item .layer-name {
+			display: inline-block;
+			font-size: 12px;
+			color: #333;
+			font-weight: 600;
+			word-break: break-word;
+		}
+
+		.layer-item > div:first-child > span {
+			font-size: 12px;
+			color: #333;
+			font-weight: 600;
+		}
+
+		.layer-item > div:first-child > div {
+			display: flex !important;
+			flex-direction: row !important;
+			gap: 6px !important;
+			flex-shrink: 0 !important;
+			margin-left: auto !important;
+		}
+
+		.layer-item button {
+			padding: 5px 8px !important;
+			border: none !important;
+			border-radius: 4px !important;
+			cursor: pointer !important;
+			font-size: 13px !important;
+			width: 32px !important;
+			height: 32px !important;
+			display: flex !important;
+			align-items: center !important;
+			justify-content: center !important;
+			transition: all 0.2s ease !important;
+			flex-shrink: 0 !important;
+		}
+
+		.layer-item button:hover {
+			transform: translateY(-1px);
+			box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		}
+
+		.layer-item .download-layer {
+			background: #4CAF50 !important;
+			color: white !important;
+		}
+
+		.layer-item .download-layer:hover {
+			background: #45a049 !important;
+		}
+
+		.layer-item .toggle-visibility {
+			background: #667eea !important;
+			color: white !important;
+		}
+
+		.layer-item .toggle-visibility:hover {
+			background: #5568d3 !important;
+		}
+
+		.layer-item .delete-layer {
+			background: #e74c3c !important;
+			color: white !important;
+		}
+
+		.layer-item .delete-layer:hover {
+			background: #c0392b !important;
+		}
+
+		.layer-item > div:last-child {
+			font-size: 11px !important;
+			color: #999 !important;
+			flex-shrink: 0 !important;
+		}
+
+		.layer-panel-close {
+			background: none;
+			border: none;
+			color: white;
+			font-size: 20px;
+			cursor: pointer;
+			padding: 0;
+			width: 30px;
+			height: 30px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			transition: all 0.3s ease;
+		}
+
+		.layer-panel-close:hover {
+			transform: rotate(90deg);
+			opacity: 0.7;
+		}
+
+		.layer-panel-content {
+			padding: 15px;
+			overflow-y: auto;
+			flex: 1;
+		}
+
+		.layer-search {
+			margin-bottom: 15px;
+		}
+
+		.layer-search input {
+			width: 100%;
+			padding: 8px 12px;
+			border: 1px solid #ddd;
+			border-radius: 6px;
+			font-size: 13px;
+		}
+
+		.layer-search input:focus {
+			outline: none;
+			border-color: #667eea;
+			box-shadow: 0 0 6px rgba(102, 126, 234, 0.2);
+		}
+
+		.layer-category {
+			margin-bottom: 20px;
+		}
+
+		.layer-category-title {
+			font-size: 13px;
+			font-weight: 700;
+			color: #333;
+			margin-bottom: 10px;
+			padding-bottom: 8px;
+			border-bottom: 2px solid #f0f0f0;
+		}
+
+		.layer-item {
+			padding: 10px 12px;
+			background: #f9f9f9;
+			border: 1px solid #eee;
+			border-radius: 6px;
+			margin-bottom: 8px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 10px;
+			transition: all 0.2s ease;
+			font-size: 13px;
+		}
+
+		.layer-item:hover {
+			background: #f0f4ff;
+			border-color: #667eea;
+		}
+
+		.layer-item input[type="checkbox"] {
+			cursor: pointer;
+			width: 18px;
+			height: 18px;
+		}
+
+		.layer-item-name {
+			flex: 1;
+			cursor: pointer;
+			user-select: none;
+		}
+
+		.layer-item-controls {
+			display: flex;
+			gap: 5px;
+		}
+
+		.layer-item-btn {
+			background: none;
+			border: none;
+			cursor: pointer;
+			font-size: 16px;
+			padding: 4px 6px;
+			transition: all 0.2s ease;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.layer-item-btn:hover {
+			transform: scale(1.2);
+		}
+
+		.layer-item-btn.delete:hover {
+			color: #f56565;
+		}
+
+		.layer-item-btn.download:hover {
+			color: #667eea;
+		}
+
+		/* Download Modal */
+		#download-modal {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.5);
+			display: none;
+			align-items: center;
+			justify-content: center;
+			z-index: 1000;
+		}
+
+		#download-modal.active {
+			display: flex;
+		}
+
+		.download-modal-content {
+			background: white;
+			border-radius: 8px;
+			padding: 20px;
+			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+			max-width: 400px;
+			width: 90%;
+		}
+
+		.download-modal-header {
+			font-size: 16px;
+			font-weight: 700;
+			color: #333;
+			margin-bottom: 15px;
+		}
+
+		.download-option {
+			padding: 12px 15px;
+			border: 1px solid #ddd;
+			border-radius: 6px;
+			margin-bottom: 10px;
+			cursor: pointer;
+			transition: all 0.2s ease;
+			font-size: 14px;
+			font-weight: 500;
+		}
+
+		.download-option:hover {
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			color: white;
+			border-color: #667eea;
+		}
+
+		/* ===== RESPONSIVE DESIGN ===== */
+
+		/* Tablets: 769px to 1024px - Title above search, other elements normal */
 		@media (min-width: 769px) and (max-width: 1024px) {
+			header {
+				flex-direction: column;
+				gap: 8px;
+				padding: 8px 10px;
+				min-height: auto;
+			}
+
+			header h1 {
+				font-size: 18px;
+				position: static;
+				margin: 0;
+				text-align: center;
+				width: 100%;
+			}
+
+			/* Search container */
+			#global-search-container {
+				width: 70% !important;
+				flex-direction: column;
+				gap: 8px;
+				margin: 0 auto;
+			}
+
+			#global-search-container > div:first-child {
+				flex-direction: column;
+				gap: 6px;
+				width: 100%;
+				align-items: center;
+			}
+
+			#global-search-input {
+				font-size: 12px;
+				padding: 8px 10px;
+				width: 100%;
+			}
+
+			#search-category-filter {
+				font-size: 10px;
+				padding: 8px 8px;
+				width: 100%;
+			}
+
+			#search-results.active {
+				max-height: 200px;
+			}
+
+			/* Push down elements to not overlap header */
 			#utilidades-buttons {
-				top: 120px !important;
+				top: 130px !important;
+			}
+
+			#logo-observatorio {
+				top: 130px !important;
+			}
+
+			#layer-panel {
 				bottom: auto !important;
+				top: 250px !important;
 			}
 
-			#title-mobile {
-				display: block;
+			.leaflet-top.leaflet-left {
+				top: 150px !important;
 			}
 
-			#title-desktop {
-				display: none;
+			.leaflet-top.leaflet-right {
+				top: 130px !important;
 			}
 
 			#header-logo-pc {
 				display: none !important;
 			}
 
-			#searchContainer {
-				flex-direction: column;
-				width: 90%;
-			}
-
-			#searchContainer input {
-				width: 100%;
-				margin: 5px 0;
-			}
-		}
-
-		/* Desktop Layout (>1025px) */
-		@media (min-width: 1026px) {
-			#utilidades-buttons {
-				top: auto !important;
-				bottom: 20px !important;
+			#title-desktop {
+				display: none !important;
 			}
 
 			#title-mobile {
-				display: none;
+				display: block !important;
+			}
+		}
+
+		/* Mobile: 768px and below */
+		@media (max-width: 768px) {
+			/* Header adjustments */
+			header {
+				flex-direction: column;
+				gap: 8px;
+				padding: 8px 10px;
+				min-height: auto;
 			}
 
-			#title-desktop {
-				display: block;
+			header h1 {
+				font-size: 16px;
+				position: static;
+				margin: 0;
+				text-align: center;
+				width: 100%;
 			}
 
-			#header-logo-pc {
+			/* Search container */
+			#global-search-container {
+				width: 100% !important;
+				order: 2;
+			}
+
+			#global-search-container > div:first-child {
+				flex-direction: column;
+				gap: 6px;
+			}
+
+			#global-search-input {
+				font-size: 12px;
+				padding: 8px 10px;
+			}
+
+			#search-category-filter {
+				font-size: 10px;
+				padding: 8px 8px;
+				width: 100%;
+			}
+
+			#search-results.active {
+				max-height: 200px;
+			}
+
+			/* Layer Panel - Hidden on mobile, shown as modal when opened */
+			#layer-panel {
+				display: none !important;
+				position: fixed;
+				width: 90vw;
+				max-width: 500px;
+				height: 50vh;
+				bottom: 80px;
+				left: 50%;
+				right: auto;
+				top: auto;
+				transform: translateX(-50%);
+				border-radius: 12px;
+				z-index: 999;
+				box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+			}
+
+			#layer-panel.mobile-visible {
 				display: flex !important;
 			}
 
-			#searchContainer {
-				flex-direction: row;
-				width: auto;
+			/* Show toggle button on tablet */
+			#layer-panel-toggle-btn {
+				display: flex;
 			}
 
-			#searchContainer input {
-				width: auto;
-				margin: 0 5px;
+			.layer-panel-header {
+				border-radius: 12px 12px 0 0;
+			}
+
+			.layer-panel-header h3 {
+				font-size: 13px;
+			}
+
+			.layer-panel-tabs button {
+				font-size: 11px;
+				padding: 8px 10px;
+			}
+
+			.layer-item {
+				padding: 8px 8px;
+				font-size: 12px;
+				gap: 6px;
+				flex-wrap: nowrap;
+				word-break: break-word;
+			}
+
+			.layer-item .layer-name {
+				white-space: normal;
+				word-break: break-word;
+				max-width: 100%;
+				flex-shrink: 1;
+			}
+
+			.layer-item button {
+				width: 28px;
+				height: 28px;
+				flex-shrink: 0;
+			}
+
+			.layer-item {
+				padding: 8px 8px;
+				font-size: 12px;
+				gap: 6px;
+			}
+
+			.layer-item button {
+				width: 28px;
+				height: 28px;
+			}
+
+			/* Utilidades Buttons */
+			#utilidades-buttons {
+				position: fixed;
+				top: 120px;
+				left: 15px;
+				right: auto;
+				bottom: auto;
+				flex-direction: column;
+				gap: 6px;
+				flex-wrap: wrap;
+				justify-content: flex-start;
+			}
+
+			.utilidades-btn {
+				padding: 6px 10px;
+				font-size: 11px;
+				flex: 0 1 auto;
+			}
+
+			#header-logo-pc {
+				display: none !important;
+				visibility: hidden !important;
+				opacity: 0 !important;
+			}
+
+			#title-desktop {
+				display: none !important;
+			}
+
+			#title-mobile {
+				display: block !important;
+			}
+
+			/* Referencias */
+			#referencias {
+				position: fixed;
+				bottom: 110px;
+				left: 10px;
+				right: auto;
+				flex-direction: column;
+				gap: 6px;
+				display: none;
+			}
+
+			.icono_referencia {
+				padding: 8px 10px;
+				font-size: 11px;
+				min-width: 150px;
+			}
+
+			/* Logo - Moved to top right */
+			#logo-observatorio {
+				position: fixed;
+				top: 60px;
+				right: 10px;
+				left: auto;
+				bottom: auto;
+				z-index: 200;
+				background: white;
+				padding: 5px;
+				border-radius: 6px;
+				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+			}
+
+			#logo-observatorio img {
+				height: 35px;
+				width: 150px;
+				display: block;
+			}
+
+			/* Leaflet controls */
+			.leaflet-top.leaflet-left {
+				top: 130px;
+				left: 10px;
+			}
+
+			.leaflet-top.leaflet-right {
+				top: 90px;
+				right: 10px;
+			}
+
+			.leaflet-bottom.leaflet-right {
+				bottom: 10px;
+				right: 10px;
+			}
+
+			.leaflet-control-layers {
+				max-width: 150px;
+				max-height: 250px;
+			}
+
+			.leaflet-control-layers-expanded {
+				max-width: 150px;
+				max-height: 250px;
+			}
+
+			/* Street view indicator */
+			#streetview-mode-indicator {
+				bottom: 15px;
+				right: 15px;
+				font-size: 11px;
+				padding: 10px;
+			}
+
+			/* Download modal */
+			.download-modal-content {
+				width: 85%;
+				max-width: 280px;
+			}
+
+			.download-option {
+				font-size: 13px;
+				padding: 10px 12px;
+			}
+		}
+
+		/* Mobile: 480px and below */
+		@media (max-width: 480px) {
+			header {
+				padding: 6px 8px;
+			}
+
+			header h1 {
+				font-size: 14px;
+			}
+
+			#global-search-container {
+				width: 100% !important;
+			}
+
+			#global-search-input {
+				font-size: 11px;
+				padding: 6px 8px;
+			}
+
+			#search-category-filter {
+				font-size: 9px;
+				padding: 6px 6px;
+			}
+
+			#search-results.active {
+				max-height: 150px;
+				font-size: 11px;
+			}
+
+			.search-result-item {
+				padding: 8px 10px;
+			}
+
+			.search-result-item strong {
+				font-size: 12px;
+			}
+
+			.search-result-item small {
+				font-size: 10px;
+			}
+
+			/* Layer Panel - Hidden modal on mobile */
+			#layer-panel {
+				display: none !important;
+				position: fixed;
+				width: 90vw;
+				max-width: 480px;
+				height: 45vh;
+				bottom: 75px;
+				left: 50%;
+				right: auto;
+				top: auto;
+				transform: translateX(-50%);
+				border-radius: 12px;
+				z-index: 999;
+				box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+			}
+
+			#layer-panel.mobile-visible {
+				display: flex !important;
+			}
+
+			/* Show toggle button on mobile */
+			#layer-panel-toggle-btn {
+				display: flex;
+			}
+
+			.layer-panel-header {
+				padding: 10px 12px;
+				flex-wrap: wrap;
+				border-radius: 12px 12px 0 0;
+				position: relative;
+			}
+
+			.layer-panel-header::before {
+				content: '';
+				position: absolute;
+				top: 6px;
+				left: 50%;
+				transform: translateX(-50%);
+				width: 35px;
+				height: 4px;
+				background: rgba(255, 255, 255, 0.4);
+				border-radius: 2px;
+			}
+
+			.layer-panel-close {
+				width: 28px;
+				height: 28px;
+				font-size: 18px;
+			}
+
+			.layer-panel-tabs button {
+				font-size: 10px;
+				padding: 6px 8px;
+			}
+
+			.layer-panel-content {
+				padding: 10px;
+			}
+
+			.layer-item {
+				padding: 6px 8px;
+				font-size: 11px;
+				flex-direction: row;
+				align-items: center;
+				flex-wrap: nowrap;
+				word-break: break-word;
+			}
+
+
+			.layer-search input {
+				font-size: 12px;
+				padding: 6px 10px;
+			}
+
+			.layer-category-title {
+				font-size: 12px;
+				margin-bottom: 8px;
+				padding-bottom: 6px;
+			}
+
+			/* Utilidades Buttons */
+			#utilidades-buttons {
+				top: 120px;
+				left: 15px;
+				right: auto;
+				bottom: auto;
+				gap: 4px;
+				flex-direction: column;
+			}
+
+			.utilidades-btn {
+				padding: 5px 8px;
+				font-size: 10px;
+			}
+
+			#header-logo-pc {
+				display: none !important;
+				visibility: hidden !important;
+				opacity: 0 !important;
+			}
+
+			#title-desktop {
+				display: none !important;
+			}
+
+			#title-mobile {
+				display: block !important;
+			}
+
+			/* Referencias */
+			#referencias {
+				bottom: 100px;
+				left: 8px;
+				gap: 4px;
+				display: none;
+			}
+
+			.icono_referencia {
+				padding: 6px 8px;
+				font-size: 10px;
+				min-width: 120px;
+				line-height: 1.3;
+			}
+
+			/* Logo - Top right corner */
+			#logo-observatorio {
+				position: fixed;
+				top: 130px;
+				right: 10px;
+				left: auto;
+				bottom: auto;
+				background: white;
+				padding: 4px;
+				border-radius: 6px;
+				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+			}
+
+			/* Logo */
+			#logo-observatorio img {
+				height: 30px;
+				width: 130px;
+				display: block;
+			}
+
+			/* Leaflet controls */
+			.leaflet-top.leaflet-left {
+				top: 110px;
+				left: 8px;
+				gap: 8px;
+			}
+
+			.leaflet-control-zoom-in,
+			.leaflet-control-zoom-out {
+				font-size: 14px;
+				width: 32px;
+				height: 32px;
+				line-height: 32px;
+			}
+
+			.leaflet-measure-control button {
+				font-size: 12px;
+				padding: 4px 6px;
+			}
+
+			/* Street view indicator */
+			#streetview-mode-indicator {
+				bottom: 10px;
+				right: 10px;
+				font-size: 10px;
+				padding: 8px;
+				line-height: 1.3;
+			}
+
+			/* Download modal */
+			.download-modal-content {
+				width: 90%;
+				max-width: 260px;
+				padding: 15px;
+			}
+
+			.download-modal-header {
+				font-size: 14px;
+				margin-bottom: 12px;
+			}
+
+			.download-option {
+				font-size: 12px;
+				padding: 8px 10px;
+				margin-bottom: 8px;
+			}
+
+			/* Map popups */
+			.leaflet-popup-content {
+				font-size: 12px;
+			}
+
+			.leaflet-popup-content p {
+				margin: 6px 0;
+			}
+		}
+
+		/* Extra small devices: 360px and below */
+		@media (max-width: 360px) {
+			/* Layer Panel - Hidden modal optimization */
+			#layer-panel {
+				max-height: 40vh;
+				width: 95%;
+			}
+
+			#layer-panel-toggle-btn {
+				width: 52px;
+				height: 52px;
+				font-size: 22px;
+				bottom: 15px;
+				right: 15px;
+			}
+
+			.layer-panel-header::before {
+				width: 30px;
+			}
+
+			header h1 {
+				font-size: 12px;
+			}
+
+			#global-search-input {
+				font-size: 10px;
+				padding: 5px 6px;
+			}
+
+			#search-category-filter {
+				font-size: 8px;
+				padding: 5px 4px;
+			}
+
+			.layer-item {
+				font-size: 10px;
+				padding: 5px 6px;
+			}
+
+			.utilidades-btn {
+				font-size: 9px;
+				padding: 4px 6px;
+			}
+
+			.icono_referencia {
+				font-size: 9px;
+				padding: 5px 6px;
+				min-width: 100px;
+			}
+
+			#logo-observatorio {
+				top: 125px !important;
+				width: 60px;
+				height: 60px;
+				padding: 3px;
+			}
+
+			#logo-observatorio img {
+				height: 28px;
+				width: 120px;
+			}
+
+			.leaflet-control-zoom-in,
+			.leaflet-control-zoom-out {
+				font-size: 12px;
+				width: 30px;
+				height: 30px;
+				line-height: 30px;
+			}
+		}
+
+		/* Desktop: 1025px and above */
+		@media (min-width: 1025px) {
+			/* Mostrar título corto en desktop */
+			#title-desktop {
+				display: block !important;
+			}
+
+			/* Ocultar título completo en desktop */
+			#title-mobile {
+				display: none !important;
+			}
+
+			/* Mostrar logo en desktop */
+			#header-logo-pc {
+				visibility: visible !important;
+				opacity: 1 !important;
+			}
+
+			header h1 {
+				right: 320px;
 			}
 		}
 	</style>
-
-	<!-- CSS -->
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/Leaflet.PolylineMeasure.css">
-	<link rel="stylesheet" href="css/Leaflet.StreetViewButtons.css">
-	<link rel="stylesheet" href="css/Leaflet.StreetView1Buttons.css">
-	<link rel="stylesheet" href="css/leaflet.groupedlayercontrol.min.css">
-	<link rel="stylesheet" href="css/Control.Coordinates.css">
-	<link rel="stylesheet" href="css/L.Control.MousePosition.css">
-	
-	<!-- SCRIPTS -->
-	<script src="scripts/Leaflet.PolylineMeasure.js"></script>
-	<script src="scripts/StreetViewButtons.js"></script>
-	<script src="scripts/StreetView1Buttons.js"></script>
-	<script src="scripts/leaflet.pattern.js"></script>
-	<script src="scripts/leaflet-tilelayer-wmts.js"></script>
-	<script src="scripts/leaflet.groupedlayercontrol.min.js"></script>
-	<script src="scripts/leaflet.browser.print.js"></script>
-	<script src="scripts/leaflet.filelayer.js"></script>
-	<script src="scripts/Control.Coordinates.js"></script>
-	<script src="scripts/L.Control.MousePosition.js"></script>
-	<script src="scripts/jquery-3.7.1.js"></script>
-	<script src="scripts/jquery-3.7.1.min.map"></script>
-	<script src="js/popups.js"></script>
-	<script src="js/iconos.js"></script>
-
-	
-	<!-- GEOJSON -->
-	<script type="text/javascript" src="scripts/Edificios.js"></script>
-	<script type="text/javascript" src="scripts/Puntoswifi.js"></script>
-	<script type="text/javascript" src="scripts/Barrios.js"></script>
-	<script type="text/javascript" src="scripts/SitiosyConjuntosEdilicios.js"></script>
-	<script type="text/javascript" src="scripts/TramosyCarriles.js"></script>
-	<script type="text/javascript" src="scripts/Esculturas.js"></script>
-	<script type="text/javascript" src="scripts/Centrosdesalud.js"></script>
-	<script type="text/javascript" src="scripts/godoycruz.js"></script>
-	<script type="text/javascript" src="scripts/CicloviasExistentes.js"></script>
-	<script type="text/javascript" src="scripts/ClinicasPrivadas.js"></script>
-	<script type="text/javascript" src="scripts/Hospital.js"></script>
-	<script type="text/javascript" src="scripts/Escuelas.js"></script>
-	<script type="text/javascript" src="scripts/Farmacias.js"></script>
-	<script type="text/javascript" src="scripts/ResidenciasAdultosMayores.js"></script>
-	<script type="text/javascript" src="scripts/JardinesMunicipales.js"></script>
-	<script type="text/javascript" src="scripts/Polideportivos.js"></script>
-	<script type="text/javascript" src="scripts/Seguridad.js"></script>
-	<script type="text/javascript" src="scripts/Reservorios.js"></script>
-	<script type="text/javascript" src="scripts/BarriosPopulares.js"></script>
-	<script type="text/javascript" src="scripts/Zonificacion.js"></script>
-	<script type="text/javascript" src="scripts/BarriosConsolidados.js"></script>
-	<script type="text/javascript" src="scripts/RedesdeAguas.js"></script>
-	<script type="text/javascript" src="scripts/SistemaCloacal.js"></script>
-	<script type="text/javascript" src="scripts/LineasD.js"></script>
-	<script type="text/javascript" src="scripts/LineaMunicipal.js"></script>
-	<script type="text/javascript" src="scripts/Cuencashidrograficas.js"></script>
-	<script type="text/javascript" src="scripts/LineasT.js"></script>
-	<script type="text/javascript" src="scripts/CanalesColectoresHijuelas.js"></script>
-	<script type="text/javascript" src="scripts/PuntosRecepcionPilas.js"></script>
-	<script type="text/javascript" src="scripts/PuntosVerdes.js"></script>
-	<script type="text/javascript" src="scripts/EspaciosVerdes.js"></script>
-	<script type="text/javascript" src="scripts/DependenciasMunicipales.js"></script>
-	<script type="text/javascript" src="scripts/Solmaforos.js"></script>
-	<script type="text/javascript" src="scripts/EstacionesdeServicio.js"></script>
-	<script type="text/javascript" src="scripts/Estaciones.js"></script>
-	<script type="text/javascript" src="scripts/LimiteUrbano.js"></script>
-	<script type="text/javascript" src="scripts/DistritosDepartamentales.js"></script>
-	<script type="text/javascript" src="scripts/PlantaRecicladora.js"></script>
-	<script type="text/javascript" src="scripts/Bancos.js"></script>
-	<script type="text/javascript" src="scripts/Cajeros.js"></script>
-	<script type="text/javascript" src="scripts/Pagofacil.js"></script>
-	<script type="text/javascript" src="scripts/Bodegas.js"></script>
-	<script type="text/javascript" src="scripts/Informador.js"></script>
-	<script type="text/javascript" src="scripts/Fallas.js"></script>
-	<script type="text/javascript" src="scripts/Inundacion.js"></script>
-	<script type="text/javascript" src="scripts/Suelo.js"></script>
-	<script type="text/javascript" src="scripts/RedHidrica.js"></script>
-	<script type="text/javascript" src="scripts/PanelesSolares.js"></script>
-	<script type="text/javascript" src="scripts/InfoAmbiente.js"></script>
-	<script type="text/javascript" src="scripts/Ciclovias Proyectadas (DAMI II).js"></script>
-	<script type="text/javascript" src="scripts/Metrotranvia.js"></script>
-	<script type="text/javascript" src="scripts/ParadasMetrotranvia.js"></script>
-	<script type="text/javascript" src="scripts/GranjaSolar.js"></script>
-	<script type="text/javascript" src="scripts/SenderoGeologico.js"></script>
-	<script type="text/javascript" src="scripts/cafe.js"></script>
-	<script type="text/javascript" src="scripts/Hospedajes.js"></script>
-	<script type="text/javascript" src="scripts/Heladerias.js"></script>
-	<script type="text/javascript" src="scripts/Bares.js"></script>
-	<script type="text/javascript" src="scripts/Restaurantes.js"></script>
-	<script type="text/javascript" src="scripts/Incubadora.js"></script>
-	<script type="text/javascript" src="scripts/UnionesVecinales.js"></script>
-	<script type="text/javascript" src="scripts/VasoInundacionMaure.js"></script>
-	<script type="text/javascript" src="scripts/SubcuencasMaure.js"></script>
-	<script type="text/javascript" src="scripts/Puestos.js"></script>
-	<script type="text/javascript" src="scripts/Diques.js"></script>
-	<script type="text/javascript" src="scripts/Canales.js"></script>
-	<script type="text/javascript" src="scripts/APIyS.js"></script>
-	<script type="text/javascript" src="scripts/Traza.js"></script>
-	<script type="text/javascript" src="scripts/CentrosJubilados.js"></script>
-	<script type="text/javascript" src="scripts/MetroFuturo.js"></script>
-	<script type="text/javascript" src="scripts/Paradas.js"></script>
-	<script type="text/javascript" src="scripts/LOC.js"></script>
-	<script type="text/javascript" src="scripts/ZonaA.js"></script>
-	<script type="text/javascript" src="scripts/ZonaB.js"></script>
-	<script type="text/javascript" src="scripts/Curvas.js"></script>
-	<script type="text/javascript" src="scripts/Bicitran.js"></script>
-	<script type="text/javascript" src="scripts/Semaforos.js"></script>
-	<script type="text/javascript" src="scripts/SemaforosDemanda.js"></script>
-	<script type="text/javascript" src="scripts/Universidades.js"></script>
-	<script type="text/javascript" src="scripts/Biblioteca.js"></script>
-	<script type="text/javascript" src="scripts/DuctosGas.js"></script>
 </head>
 
-<header>
-	<!-- Responsive Titles -->
-	<h1 id="title-desktop">Observatorio Territorial</h1>
-	<h1 id="title-mobile">Observatorio Territorial de Godoy Cruz</h1>
-	
-	<!-- Municipality Logo - Desktop Only -->
-	<div id="header-logo-pc">
-		<img src="img/gc_logo.png" alt="Godoy Cruz Municipality Logo">
-	</div>
-	
-	<div id="map"></div>
-	<div id="referencias">
-		<div class="icono_referencia" id="ref_cicloDami">Ciclovias Proyectadas:</br>7,00 Km.</div> </b>
-		<div class="icono_referencia" id="ref_cicloviasexist">Ciclovias Existentes:</br>70,00 Km.</div> </b>
-		<div class="icono_referencia" id="ref_espverdes">Espacios Verdes:</br>238</div> </b>
-		<div class="icono_referencia" id="ref_BarriosConsolidados">Barrios Consolidados:</br>266</div> </b>
-
-		<div id="caminar">
-			<div class="icono_referencia" id="ref_traza">
-				<p class="titulo"> Índice Final de Caminabilidad
-				<p class="optimo">Óptimo</p>
-				<p class="bueno">Bueno</p>
-				<p class="regular">Regular</p>
-				<p class="malo">Malo</p>
-				</p>
-			</div>
-		</div>
-	</div>
-
-	<!-- PAGINA OBSERVATORIO -->
-	<div><abbr title="Conozca el proyecto Piedemonte"><a
-				href="https://sites.google.com/view/observatorio-territorial/piedemonte?authuser=0" target="_blank"><img
-					src="img/favicon2.png" height="57px" width="245px" aling=right class="logoobserv"></abbr></div>
-
-</header>
-
 <body>
-
 	<!-- Google Tag Manager (noscript) -->
-	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N5LCFRBW" height="0" width="0"
-			style="display:none;visibility:hidden"></iframe></noscript>
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N5LCFRBW" height="0" width="0" class="hidden"></iframe></noscript>
 	<!-- End Google Tag Manager (noscript) -->
 
-	<!-- FUNCIONES LEAFLET -->
-	<script>
-		/* ARGENMAP */
-		var mapabase_argenmap = new L.TileLayer.WMTS('https://wms.ign.gob.ar/geoserver/capabaseargenmap/gwc/service/wmts?', {
-			layer: 'capabaseargenmap',
-			style: "normal",
-			tilematrixSet: "EPSG:3857",
-			format: "image/png",
-			attribution: " <a href='https://www.ign.gob.ar/AreaServicios/Argenmap/IntroduccionV2'> IGN - Argenmap v2 </a> | <a href='https://www.godoycruz.gob.ar/'>Secretaría de Ambiente, Obras y Servicios Públicos - Godoy Cruz</a> | <a href='https://github.com/mylen/leaflet.TileLayer.WMTS'>GitHub</a>&copy "
-		});
+	<!-- Header -->
+	<header>
+		<h1 id="title-desktop">Observatorio Territorial</h1>
+		<h1 id="title-mobile">Observatorio Territorial de Godoy Cruz</h1>
+		<!-- Búsqueda Global -->
+		<div id="global-search-container" style="position: relative; top: auto; left: auto; transform: none; width: 350px; margin: 0;">
+			<div>
+				<input 
+					type="text" 
+					id="global-search-input" 
+					placeholder="🔍 Buscar en mapa (nombre, dirección)"
+					autocomplete="off"
+				/>
+				<select id="search-category-filter">
+					<option value="">📂 Todas las capas</option>
+					<option value="Movilidad">🚗 Movilidad</option>
+					<option value="Infraestructura Ambiental">🌳 Infraestructura Ambiental</option>
+					<option value="Sistema Jurídico-Administrativo">⚖️ Sistema Jurídico-Administrativo</option>
+					<option value="Infraestructura Urbana y de Servicio">🏙️ Infraestructura Urbana y de Servicio</option>
+					<option value="Equipamiento Social">🏥 Equipamiento Social</option>
+					<option value="Patrimonio y Cultura">🏛️ Patrimonio y Cultura</option>
+					<option value="Turismo">🎭 Turismo</option>
+					<option value="Gestión del Riesgo">⚠️ Gestión del Riesgo</option>
+				</select>
+			</div>
+			<div id="search-results"></div>
+		</div>
+		<!-- Logo PC (solo desktop) -->
+		<div id="header-logo-pc">
+			<img src="img/gc_logo.png" alt="Logo Godoy Cruz" title="Municipalidad de Godoy Cruz">
+		</div>
+	</header>
 
-		/* BASE LAYERS */
-		var esriUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-			esriAttrib = "Powered by <a href='https://www.esri.com/en-us/home'> &copyESRI </a> | <a href='https://www.godoycruz.gob.ar/'>Secretaría de Ambiente, Obras y Servicios Públicos - Godoy Cruz</a>",
-			mapabase_esri = L.tileLayer(esriUrl, {
-				maxZoom: 20,
-				attribution: esriAttrib
-			});
+	<!-- Mapa -->
+	<div id="map"></div>
 
-		var osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-			osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-			mapabase_osm = L.tileLayer(osmUrl, {
-				maxZoom: 20,
-				attribution: osmAttrib
-			});
+	<!-- Botones de Utilidades -->
+	<div id="utilidades-buttons">
+		<button id="btn-streetview" class="utilidades-btn" title="Enlace externo a Street View">
+			🌍 Enlace Street View
+		</button>
+		<button id="btn-indicadores" class="utilidades-btn" title="Mapa de Indicadores Urbanos">
+			📊 Mapa Indicadores
+		</button>
+	</div>
 
-		var otUrl = 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
-			otAttrib =
-				'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
-			mapabase_ot = L.tileLayer(otUrl, {
-				maxZoom: 20,
-				attribution: otAttrib
-			});
+	<!-- Indicador de Modo Street View -->
+	<div id="streetview-mode-indicator">
+		🎯 Modo Street View Activo<br>
+		Haz clic en el mapa para seleccionar posición
+	</div>
 
-		var googleSatelite = 'http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}',
-			googleSateliteAttrib =
-				"Powered by &copyGoogle",
-			mapabase_googleSatelite = L.tileLayer(googleSatelite, {
-				maxZoom: 20,
-				attribution: googleSateliteAttrib
-			});
+	<!-- Referencias (opcional) -->
+	<div id="referencias">
+		<div class="icono_referencia" id="ref_cicloDami">Ciclovias Proyectadas:<br>7,00 Km.</div>
+		<div class="icono_referencia" id="ref_cicloviasexist">Ciclovias Existentes:<br>70,00 Km.</div>
+		<div class="icono_referencia" id="ref_espverdes">Espacios Verdes:<br>238</div>
+		<div class="icono_referencia" id="ref_BarriosConsolidados">Barrios Consolidados:<br>266</div>
+	</div>
 
-		/* OVERLAYS Y GRUPOS */
-		var plazagc = L.marker([-32.92524, -68.84439]).bindPopup('Plaza GC.').openPopup(),
-			centrosdesalud = L.geoJson(centrosdesalud, {
-				pointToLayer: crearIconoHospitales,
-				onEachFeature: agregarPopupSalud
-			}),
-			edificios = L.geoJson(Edificios, {
-				pointToLayer: crearIconoedi,
-				onEachFeature: agregarPopuppatrimoniales
-			}),
-			SyCE = L.geoJson(SitiosyConjuntosEdilicios, {
-				pointToLayer: crearIconositios,
-				onEachFeature: agregarPopuppatrimoniales
-			}),
-			TyC = L.geoJson(TramosyCarriles, {
-				onEachFeature: agregarPopuppatrimoniales
-			}).setStyle({
-				color: "#C35918"
-			}),
-			barrios = L.geoJson(Barrios, {
-				onEachFeature: agregarPopuppatrimoniales
-			}).setStyle({
-				color: "#E86211",
-				fillOpacity: 0.75
-			}),
-			escultura = L.geoJson(Esculturas, {
-				pointToLayer: crearIconoEscul,
-				onEachFeature: agregarPopupesculturas
-			}),
-			godoycruz = L.geoJson(godoycruz),
-			puntoswifi = L.geoJson(Puntoswifi, {
-				pointToLayer: crearIconoWifi,
-				onEachFeature: agregarPopuppuntorecepcionpilas
-			}),
-			cicloDami = L.geoJson(CicloviasProyectadasDami, {
-				onEachFeature: agregarPopupciclovias
-			}).setStyle({
-				color: "orange"
-			}),
-			cicloviasexist = L.geoJson(CicloviasExistentes, {
-				onEachFeature: agregarPopupciclovias
-			}).setStyle({
-				color: "red"
-			}),
-			lineasd = L.geoJson(LineasD, {
-				onEachFeature: agregarPopuplineas
-			}).setStyle({
-				color: "orange"
-			}),
-			lineasmun = L.geoJson(LineaMunicipal, {
-				onEachFeature: agregarPopuplineasMu
-			}).setStyle({
-				color: "orange"
-			}),
-			lineast = L.geoJson(LineasT, {
-				onEachFeature: agregarPopuplineas
-			}).setStyle({
-				color: "red"
-			}),
-			CanalesColectoresHijuelas = L.geoJson(CanalesColectoresHijuelas, {
-				onEachFeature: agregarPopuppuntorecepcionpilas
-			}).setStyle({
-				color: "#1a6eeb"
-			}),
-			clinicaspriv = L.geoJson(ClinicasPrivadas, {
-				pointToLayer: crearIconoClinicaprivada,
-				onEachFeature: agregarPopupSalud
-			}),
-			hospital = L.geoJson(Hospital, {
-				pointToLayer: crearIconoHospital,
-				onEachFeature: agregarPopupHospital
-			}),
-			escuelas = L.geoJson(Escuelas, {
-				pointToLayer: crearIconoEscuela,
-				onEachFeature: agregarPopupescuelas
-			}),
-			farmacias = L.geoJson(Farmacias, {
-				pointToLayer: crearIconoFarmacias,
-				onEachFeature: agregarPopupfarmaciasgc
-			}),
-			polideportivos = L.geoJson(Polideportivos, {
-				pointToLayer: crearIconoPoli,
-				onEachFeature: agregarPopupSalud
-			}),
-			jardinesmuni = L.geoJson(JardinesMunicipales, {
-				pointToLayer: crearIconoJardmatern,
-				onEachFeature: agregarPopupjardinesmuni
-			}),
-			seguridad = L.geoJson(Seguridad, {
-				pointToLayer: crearIconoSeguridad,
-				onEachFeature: agregarPopupSalud
-			}),
-			residenciasad = L.geoJson(ResidenciasAdultosMayores, {
-				pointToLayer: crearIconoEsparcimiento,
-				onEachFeature: agregarPopupSalud
-			}),
-			barriospopulares = L.geoJson(BarriosPopulares, {
-				onEachFeature: agregarPopupbarrios
-			}).setStyle({
-				color: "#f2d119",
-				fillOpacity: 0.75
-			}),
-			reservorios = L.geoJson(Reservorios, {
-				onEachFeature: agregarPopupres
-			}).setStyle({
-				color: "#729b6f",
-				fillOpacity: 0.75
-			}),
-			zonificacion = L.geoJson(Zonificacion, {
-				onEachFeature: agregarPopupzoni
-			}),
-			BarriosConsolidados = L.geoJson(BarriosConsolidados, {
-				onEachFeature: agregarPopupBarriosConsolidados
-			}),
-			redesagua = L.geoJson(RedesdeAguas, {
-				onEachFeature: agregarPopupredes
-			}),
-			espverdes = L.geoJson(EspaciosVerdes, {
-				onEachFeature: agregarPopupespaciosverdes
-			}).setStyle({
-				color: "#4daf4a",
-				fillOpacity: 0.75
-			}),
-			cuencas = L.geoJson(Cuencashidrograficas, {
-				onEachFeature: agregarPopupcuencas
-			}),
-			puntospilas = L.geoJson(PuntosRecepcionPilas, {
-				pointToLayer: crearIconoPilas,
-				onEachFeature: agregarPopuppuntorecepcionpilas
-			}),
-			depen = L.geoJson(DependenciasMunicipales, {
-				pointToLayer: crearIconoDependmuni,
-				onEachFeature: agregarPopupSalud
-			}),
-			punt = L.geoJson(PuntosVerdes, {
-				pointToLayer: crearIconoVerde2,
-				onEachFeature: agregarPopupPuntos
-			}),
-			solma = L.geoJson(Solmaforos, {
-				pointToLayer: crearIconoSema_r2,
-				onEachFeature: agregarPopupfarmacias
-			}),
-			estacion = L.geoJson(EstacionesdeServicio, {
-				pointToLayer: crearIconoGas,
-				onEachFeature: agregarPopupPV
-			}),
-			meteo = L.geoJson(Estaciones, {
-				pointToLayer: crearIconoEstacion,
-				onEachFeature: agregarPopupPV
-			}),
-			limiurb = L.geoJson(LimiteUrbano, {
-				onEachFeature: agregarPopupfarmacias
-			}).setStyle({
-				color: "red"
-			}),
-			Depa = L.geoJson(DistritosDepartamentales, {
-				onEachFeature: agregarPopupDistritosDepartamentales
-			}),
-			recic = L.geoJson(PlantaRecicladora, {
-				pointToLayer: crearIconoVerde,
-				onEachFeature: agregarPopupres
-			}),
-			bank = L.geoJson(Bancos, {
-				pointToLayer: crearIconoedi,
-				onEachFeature: agregarPopupSalud
-			}),
-			caja = L.geoJson(Cajeros, {
-				pointToLayer: crearIconoAtm,
-				onEachFeature: agregarPopupbarrios
-			}),
-			cobro = L.geoJson(Pagofacil, {
-				pointToLayer: crearIconoRapipago,
-				onEachFeature: agregarPopupbarrios
-			}),
-			bode = L.geoJson(Bodegas, {
-				pointToLayer: crearIconoVino,
-				onEachFeature: agregarPopupturismo
-			}),
-			informador = L.geoJson(Informador, {
-				pointToLayer: crearIconoOficina,
-				onEachFeature: agregarPopupturismo
-			}),
-			fall = L.geoJson(Fallas, {
-				onEachFeature: agregarPopupfallas
-			}).setStyle({
-				color: "orange"
-			}),
-			inundacion = L.geoJson(Inundacion, {
-				onEachFeature: agregarPopupbarrios
-			}),
-			suelo = L.geoJson(Suelo, {
-				onEachFeature: agregarPopupBarriosConsolidados
-			}),
-			hidrico = L.geoJson(RedHidrica, {
-				onEachFeature: agregarPopupBarriosConsolidados
-			}).setStyle({
-				color: "#15c8f0"
-			}),
-			paneles = L.geoJson(PanelesSolares, {
-				pointToLayer: crearIconoPanel,
-				onEachFeature: agregarPopupPaneles
-			}),
-			metro = L.geoJson(Metrotranvia, {
-				onEachFeature: agregarPopupfarmacias
-			}),
-			metroFuturo = L.geoJson(MetroFuturo, {
-				onEachFeature: agregarPopupfarmacias
-			}),
-			paradasMetro = L.geoJson(ParadasMetro, {
-				pointToLayer: crearIconoTren,
-				onEachFeature: agregarPopupbarrios
-			}),
-			paradas = L.geoJson(Paradas, {
-				pointToLayer: crearIconoTren,
-				onEachFeature: agregarPopupfarmacias
-			}),
-			granjaSolar = L.geoJson(GranjaSolar, {
-				onEachFeature: agregarPopupbarrios
-			}).setStyle({
-				color: "#e37e12",
-				fillOpacity: 0.75
-			}),
-			sistcloacal = L.geoJson(SistemaCloacal, {
-				onEachFeature: agregarPopupredes
-			}),
-			sendGeo = L.geoJson(SenderoGeologico, {
-				onEachFeature: agregarPopupfarmacias
-			}),
-			bar = L.geoJson(Bares, {
-				pointToLayer: crearIconoBar,
-				onEachFeature: agregarPopupGastronomia
-			}),
-			resto = L.geoJson(Restaurantes, {
-				pointToLayer: crearIconoResto,
-				onEachFeature: agregarPopupGastronomia
-			}),
-			cafe = L.geoJson(cafe, {
-				pointToLayer: crearIconoCafe,
-				onEachFeature: agregarPopupGastronomia
-			}),
-			hela = L.geoJson(Heladerias, {
-				pointToLayer: crearIconoHelado,
-				onEachFeature: agregarPopupGastronomia2
-			}),
-			hospe = L.geoJson(Hospedajes, {
-				pointToLayer: crearIconoHotel,
-				onEachFeature: agregarPopupGastronomia2
-			}),
-			incu = L.geoJson(Incubadora, {
-				pointToLayer: crearIconoOficina,
-				onEachFeature: agregarPopupBarriosConsolidados
-			}),
-			union = L.geoJson(UnionesVecinales, {
-				pointToLayer: crearIconoVecino,
-				onEachFeature: agregarPopupPV
-			}),
-			maure = L.geoJson(VasoInundacionMaure, {
-				onEachFeature: agregarPopupfarmacias
-			}).setStyle({
-				color: "#f16e31",
-				fillOpacity: 0.75
-			}),
-			subcuencas = L.geoJson(SubcuencasMaure, {
-				onEachFeature: agregarPopupfarmacias
-			}).setStyle({
-				color: "#a3f1f0",
-				fillOpacity: 0.50
-			}),
-			puestos = L.geoJson(Puestos, {
-				pointToLayer: crearIconoRojo,
-				onEachFeature: agregarPopupfarmacias
-			}),
-			diques = L.geoJson(Diques, {
-				pointToLayer: crearIconoPlanta,
-				onEachFeature: agregarPopuppatrimoniales
-			}),
-			canales = L.geoJson(Canales, {
-				onEachFeature: agregarPopuppatrimoniales
-			}).setStyle({
-				color: "blue"
-			}),
-			apys = L.geoJson(APIyS, {
-				onEachFeature: agregarPopupespaciosverdes
-			}).setStyle({
-				color: "#0af606",
-				fillOpacity: 0.20
-			}),
-			traza = L.geoJson(Traza, {
-				onEachFeature: agregarPopupCaminabilidad
-			}),
-			jubilados = L.geoJson(CentrosJubilados, {
-				pointToLayer: crearIconoOficina,
-				onEachFeature: agregarPopupbarrios
-			}),
-			universidades = L.geoJson(Universidades, {
-				pointToLayer: crearIconoEnseñanza,
-				onEachFeature: agregarPopupfarmacias
-			}),
-			biblio = L.geoJson(Biblioteca, {
-				pointToLayer: crearIconoBiblio,
-				onEachFeature: agregarPopupfarmacias
-			}),
-			loc = L.geoJson(LOC, {
-				onEachFeature: agregarPopupfarmacias
-			}).setStyle({
-				color: "#0fb4bf"
-			}),
-			zonaA = L.geoJson(ZonaA, {
-				onEachFeature: agregarPopupDepen
-			}),
-			zonaB = L.geoJson(ZonaB, {
-				onEachFeature: agregarPopupZonaB
-			}),
-			curvas = L.geoJson(Curvas, {
-				onEachFeature: agregarPopupBarriosConsolidados
-			}).setStyle({
-				color: "#b6ab05"
-			}),
-			bicitran = L.geoJson(Bicitran, {
-				pointToLayer: crearIconoBici,
-				onEachFeature: agregarPopupfarmacias
-			}),
-			semafaros1 = L.geoJson(Semaforos, {
-				pointToLayer: crearIconoSemaforo,
-				onEachFeature: agregarPopuppuntosemaforos
-			}),
-			semaforos2 = L.geoJson(SemaforosDemanda, {
-				pointToLayer: crearIconoSemaforo2,
-				onEachFeature: agregarPopupPaneles
-			}),
-			ductosgas = L.geoJson(DuctosGas, {
-				onEachFeature: agregarPopupductosgas
-			}).setStyle({
-				color: "orange"
-			}), 
-			infoambiente = L.geoJson(InfoAmbiente, {
-				onEachFeature: agregarPopupDepen
-			});
+	<!-- Logo Observatorio (opcional) -->
+	<div id="logo-observatorio">
+		<a href="https://sites.google.com/view/observatorio-territorial/piedemonte?authuser=0" target="_blank" title="Conozca el proyecto Piedemonte">
+			<img src="img/favicon2.gif" height="57px" width="245px" alt="Logo Observatorio">
+		</a>
+	</div>
 
-		/* CREACIÓN DEL MAPA CON BASE LAYERS Y OVERLAYS */
-		var map = L.map('map', {
-			dragging: !L.Browser.mobile, tap: !L.Browser.mobile,
-			layers: [mapabase_googleSatelite, godoycruz]
-		}).setView([-32.9337, -68.8978], 13);
+	<!-- Leaflet & Plugins JS -->
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+	<script src="https://unpkg.com/leaflet-measure-control@0.1.8/lib/leaflet-measure-control.umd.js"></script>
+	<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+	<script src="https://unpkg.com/esri-leaflet@3.0.10/dist/esri-leaflet.js"></script>
+	<script src="https://unpkg.com/esri-leaflet-geocoder@3.1.3/dist/esri-leaflet-geocoder.js"></script>
 
-		var marker = L.marker(map.getCenter(), {
-			icon: iconoSTV
-		}).bindPopup(
-			'Mover éste marcador y clickear el boton "Enlace externo de Street View", ubicado a la izquierda del mapa')
-			.addTo(map);
-		map.on('move', function () {
-			marker.setLatLng(map.getCenter());
-		});
+	<!-- GeoJSON Data Files - Capas Predefinidas -->
+	<script src="scripts/Barrios.js"></script>
+	<script src="scripts/BarriosConsolidados.js"></script>
+	<script src="scripts/BarriosPopulares.js"></script>
+	<script src="scripts/CicloviasExistentes.js"></script>
+	<script src="scripts/Ciclovias Proyectadas (DAMI II).js"></script>
+	<script src="scripts/Centrosdesalud.js"></script>
+	<script src="scripts/EspaciosVerdes.js"></script>
+	<script src="scripts/Escuelas.js"></script>
+	<script src="scripts/Farmacias.js"></script>
+	<script src="scripts/Hospital.js"></script>
+	<script src="scripts/DistritosDepartamentales.js"></script>
+	<script src="scripts/Edificios.js"></script>
+	<script src="scripts/Esculturas.js"></script>
+	<script src="scripts/TramosyCarriles.js"></script>
+	<script src="scripts/SitiosyConjuntosEdilicios.js"></script>
+	<script src="scripts/Polideportivos.js"></script>
+	<script src="scripts/JardinesMunicipales.js"></script>
+	<script src="scripts/Seguridad.js"></script>
+	<script src="scripts/ResidenciasAdultosMayores.js"></script>
+	<script src="scripts/Zonificacion.js"></script>
+	<script src="scripts/RedesdeAguas.js"></script>
+	<script src="scripts/Cuencashidrograficas.js"></script>
+	<script src="scripts/Reservorios.js"></script>
+	<script src="scripts/PuntosRecepcionPilas.js"></script>
+	<script src="scripts/DependenciasMunicipales.js"></script>
+	<script src="scripts/PuntosVerdes.js"></script>
+	<script src="scripts/Solmaforos.js"></script>
+	<script src="scripts/EstacionesdeServicio.js"></script>
+	<script src="scripts/Estaciones.js"></script>
+	<script src="scripts/LimiteUrbano.js"></script>
+	<script src="scripts/PlantaRecicladora.js"></script>
+	<script src="scripts/Bancos.js"></script>
+	<script src="scripts/Cajeros.js"></script>
+	<script src="scripts/Pagofacil.js"></script>
+	<script src="scripts/Bodegas.js"></script>
+	<script src="scripts/Informador.js"></script>
+	<script src="scripts/Fallas.js"></script>
+	<script src="scripts/Inundacion.js"></script>
+	<script src="scripts/Suelo.js"></script>
+	<script src="scripts/RedHidrica.js"></script>
+	<script src="scripts/PanelesSolares.js"></script>
+	<script src="scripts/Metrotranvia.js"></script>
+	<script src="scripts/ParadasMetrotranvia.js"></script>
+	<script src="scripts/MetroFuturo.js"></script>
+	<script src="scripts/Paradas.js"></script>
+	<script src="scripts/SemaforosDemanda.js"></script>
+	<script src="scripts/Semaforos.js"></script>
+	<script src="scripts/Bicitran.js"></script>
+	<script src="scripts/SenderoGeologico.js"></script>
+	<script src="scripts/Bares.js"></script>
+	<script src="scripts/Restaurantes.js"></script>
+	<script src="scripts/cafe.js"></script>
+	<script src="scripts/Heladerias.js"></script>
+	<script src="scripts/Hospedajes.js"></script>
+	<script src="scripts/Incubadora.js"></script>
+	<script src="scripts/UnionesVecinales.js"></script>
+	<script src="scripts/VasoInundacionMaure.js"></script>
+	<script src="scripts/SubcuencasMaure.js"></script>
+	<script src="scripts/Puestos.js"></script>
+	<script src="scripts/Diques.js"></script>
+	<script src="scripts/Canales.js"></script>
+	<script src="scripts/APIyS.js"></script>
+	<script src="scripts/Traza.js"></script>
+	<script src="scripts/CentrosJubilados.js"></script>
+	<script src="scripts/Universidades.js"></script>
+	<script src="scripts/Biblioteca.js"></script>
+	<script src="scripts/DuctosGas.js"></script>
+	<script src="scripts/ClinicasPrivadas.js"></script>
+	<script src="scripts/Puntoswifi.js"></script>
+	<script src="scripts/godoycruz.js"></script>
+	<script src="scripts/CanalesColectoresHijuelas.js"></script>
+	<script src="scripts/LineasD.js"></script>
+	<script src="scripts/LineaMunicipal.js"></script>
+	<script src="scripts/LineasT.js"></script>
+	<script src="scripts/ZonaA.js"></script>
+	<script src="scripts/ZonaB.js"></script>
+	<script src="scripts/Curvas.js"></script>
+	<script src="scripts/GranjaSolar.js"></script>
+	<script src="scripts/SistemaCloacal.js"></script>
+	<script src="scripts/LOC.js"></script>
+	<script src="scripts/InfoAmbiente.js"></script>
+	<script src="scripts/Puntos pet friendly.js"></script>
 
-		/* FUNCIONES DE ESTILO DE OVERLAYS */
-		estiloDistritosDepartamentales();
-		estilozoni();
-		estilored();
-		estilocloacas();
-		estilocuencas();
-		estiloinundacion();
-		estilosuelo();
-		estilometro();
-		estilometroF();
-		estilosendero();
-		estilocaminabilidad();
-		estilozonaA();
-		estilozonaB();
+	<!-- OLD LIBRARIES (Leaflet extensions) - DESHABILITADOS (archivos no encontrados) -->
+	<!-- <script src="leaflet/leaflet.groupedlayercontrol.min.js"></script> -->
+	<!-- <script src="leaflet/Control.Coordinates.js"></script> -->
+	<!-- <script src="leaflet/L.Control.MousePosition.js"></script> -->
+	<script src="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.js"></script>
 
-		/* CREACIÓN DEL LAYERS CONTROL */
-		var baseMaps = {
-			"OpenStreetMap": mapabase_osm,
-			"Argenmap": mapabase_argenmap,
-			"Google Satelital": mapabase_googleSatelite,
-			"ESRI Satelital": mapabase_esri,
-		};
-
-		var groupedOverlays = {
-			"Street View": {
-				"Marcador": marker,
-			},
-			"Sistema Juridíco-Administrativo": {
-				"Distritos": Depa,
-				"Límite Urbano": limiurb,
-				"Línea Municipal y de Edificación ": lineasmun,
-				"Zonificación": zonificacion,
-				"Área de Planificación Integrada y Sostenible del Piedemonte": apys,
-				"Zona A (Ley 9.414)": zonaA,
-				"Zona B (Ley 9.414)": zonaB,
-				"Límite Óptimo Concertado (Ley 9.414)": loc,
-			},
-			"Infraestructura Urbana y de Servicio": {
-				"Bancos": bank,
-				"Barrios Consolidados": BarriosConsolidados,
-				"Barrios Populares": barriospopulares,
-				"Cajeros": caja,
-				"Ductos de Distribución de Gas": ductosgas,
-				"Estaciones de Servicio": estacion,
-				"Líneas de Distribución de Energía": lineasd,
-				"Líneas de Transporte de Energía": lineast,
-				"Pago Facil - Rapipago": cobro,
-				"Red Colectora Cloacal (AYSAM)": sistcloacal,
-				"Red Distribuidora de Agua Potable (AYSAM)": redesagua,
-			},
-			"Equipamiento Social": {
-				"Bibliotecas":biblio,
-				"Centros de Jubilados": jubilados,
-				"Centros de Salud": centrosdesalud,
-				"Clínicas Privadas": clinicaspriv,
-				"Dependencias Municipales": depen,
-				"Establecimientos Educativos": escuelas,
-				"Jardines Municipales": jardinesmuni,
-				"Farmacias": farmacias,
-				"Hospitales": hospital,
-				"Incubadora de Empresas y Escuela de Oficios": incu,
-				"Instituciones de Seguridad": seguridad,
-				"Polideportivos": polideportivos,
-				"Puntos de Wifi": puntoswifi,
-				"Residencias de Adultos Mayores": residenciasad,
-				"Uniones Vecinales": union,
-				"Universidades": universidades,
-			},
-			"Movilidad": {
-				"Ciclovías Existentes": cicloviasexist,
-				"Ciclovías Proyectadas": cicloDami,
-				"Estaciones BiciTran": bicitran,
-				"Metrotranvía": metro,
-				"Paradas Metrotranvía": paradasMetro,
-				"Traza Futura Metrotranvía": metroFuturo,
-				"Paradas Futuras Metrotranvía": paradas,
-				"Semáforos": semafaros1,
-			 	"Semáforos según Demanda": semaforos2, 
-				"Índice Final de Caminabilidad": traza,
-			},
-			"Infraestructura Ambiental": {
-				"Espacios Verdes": espverdes,
-				"Estaciones Meteorológicas": meteo,
-				"Granja Solar": granjaSolar,
-				"Inventario de Gases": infoambiente,
-				"Paneles Solares": paneles,
-				"Planta de Clasificación de Residuos": recic,
-				"Puntos de Recepción de Pilas": puntospilas,
-				"Puntos Verdes": punt,
-				"Solmáforos": solma,
-			},
-			"Patrimonio y Cultura": {
-				"Barrios Historicos": barrios,
-				"Canales": canales,
-				"Edificios": edificios,
-				"Esculturas": escultura,
-				"Diques y Planta Potabilizadora": diques,
-				"Sitios y Conjuntos Edilicios": SyCE,
-				"Tramos y Carriles": TyC,
-			},
-			"Turismo": {
-				"Puestos": puestos,
-				"Sendero Turístico - Geológico": sendGeo,
-				"Bares y Comidas": bar,
-				"Bodegas": bode,
-				"Casas de Té y Café": cafe,
-				"Heladerías": hela,
-				"Hospedajes": hospe,
-				"Informador Turístico": informador,
-				"Restaurantes": resto,
-			},
-			"Gestión del Riesgo": {
-				"Amenaza de Inundación": inundacion,
-				"Canales Colectores Hijuelas": CanalesColectoresHijuelas,
-				"Cuencas Hidrográficas": cuencas,
-				"Curvas de Nivel": curvas,
-				"Fallas Geológicas": fall,
-				"Red Hídrica": hidrico,
-				"Reservorios urbanos": reservorios,
-				"Subcuencas Maure": subcuencas,
-				"Suelo": suelo,
-				"Vaso Inundación Maure": maure,
-			},
-		};
-		var opciones_groupedlayers = {
-			groupCheckboxes: false
-		};
-
-		L.control.mousePosition().addTo(map);
-	</script>
-
-	<script src="js/funcionesMapa.js"></script>
+	<!-- Application Script -->
+	<script src="js/app.js"></script>
 </body>
 
 </html>
-
-
-
-

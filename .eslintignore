@@ -1,0 +1,5 @@
+src/modules/data-loader.js
+src/modules/popup-manager.js
+src/modules/search-service.js
+src/modules/controls-manager.js
+src/modules/ui-manager.js
