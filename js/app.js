@@ -596,7 +596,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		'Hospedajes': 'img/hotel.png',
 		'Incubadora': 'img/Oficina.png',
 		'UnionesVecinales': 'img/univec_r2.png',
-		'petfriendly': 'img/Logo petfriendly.png',
+		'petfriendly': 'img/petfriendly.png',
 		'Puestos': 'img/marker-icon-2x-red.png',
 		'Diques': 'img/planta.png',
 		'CentrosJubilados': 'img/Oficina.png',
