@@ -54,24 +54,46 @@ const geojsonToKml = (geojson, name = 'layer') => {
 		geojson.features.forEach(feature => {
 			const props = feature.properties || {};
 			const name = props.Nombre || props.Nombre_1 || props.name || props.NAME || 'Feature';
-			const desc = Object.entries(props).map(([k, v]) => `${k}: ${v}`).join('<br/>');
+			const desc = Object.entries(props).filter(([k, v]) => v !== null && v !== undefined && v !== '').map(([k, v]) => `${k}: ${v}`).join('<br/>');
 			
 			kml += `<Placemark>
-<name>${name}</name>
-<description>${desc}</description>`;
+<name>${name}</name>`;
+			if (desc) kml += `<description>${desc}</description>`;
 
 			if (feature.geometry) {
 				const geom = feature.geometry;
 				if (geom.type === 'Point') {
 					kml += `<Point><coordinates>${geom.coordinates[0]},${geom.coordinates[1]},0</coordinates></Point>`;
+				} else if (geom.type === 'MultiPoint') {
+					kml += '<MultiGeometry>';
+					geom.coordinates.forEach(coord => {
+						kml += `<Point><coordinates>${coord[0]},${coord[1]},0</coordinates></Point>`;
+					});
+					kml += '</MultiGeometry>';
 				} else if (geom.type === 'LineString') {
 					kml += `<LineString><coordinates>`;
 					geom.coordinates.forEach(coord => kml += `${coord[0]},${coord[1]},0 `);
 					kml += `</coordinates></LineString>`;
+				} else if (geom.type === 'MultiLineString') {
+					kml += '<MultiGeometry>';
+					geom.coordinates.forEach(lineCoords => {
+						kml += `<LineString><coordinates>`;
+						lineCoords.forEach(coord => kml += `${coord[0]},${coord[1]},0 `);
+						kml += `</coordinates></LineString>`;
+					});
+					kml += '</MultiGeometry>';
 				} else if (geom.type === 'Polygon') {
 					kml += `<Polygon><outerBoundaryIs><LinearRing><coordinates>`;
 					geom.coordinates[0].forEach(coord => kml += `${coord[0]},${coord[1]},0 `);
 					kml += `</coordinates></LinearRing></outerBoundaryIs></Polygon>`;
+				} else if (geom.type === 'MultiPolygon') {
+					kml += '<MultiGeometry>';
+					geom.coordinates.forEach(polygonCoords => {
+						kml += `<Polygon><outerBoundaryIs><LinearRing><coordinates>`;
+						polygonCoords[0].forEach(coord => kml += `${coord[0]},${coord[1]},0 `);
+						kml += `</coordinates></LinearRing></outerBoundaryIs></Polygon>`;
+					});
+					kml += '</MultiGeometry>';
 				}
 			}
 			kml += `</Placemark>`;
@@ -161,9 +183,20 @@ const showDownloadMenu = (varName, displayName) => {
 			try {
 				const { default: JSZip } = await import('jszip');
 				const kml = geojsonToKml(geoJsonData, displayName);
+				
+				if (!kml || kml.length === 0) {
+					throw new Error('KML vacío generado');
+				}
+				
 				const zip = new JSZip();
 				zip.file('doc.kml', kml);
+				
 				const blob = await zip.generateAsync({ type: 'blob' });
+				
+				if (!blob || blob.size === 0) {
+					throw new Error('Blob KMZ vacío generado');
+				}
+				
 				const url = URL.createObjectURL(blob);
 				const link = document.createElement('a');
 				link.href = url;
@@ -171,13 +204,29 @@ const showDownloadMenu = (varName, displayName) => {
 				document.body.appendChild(link);
 				link.click();
 				document.body.removeChild(link);
-				URL.revokeObjectURL(url);
-				console.log(`? Descargado: ${displayName}.kmz`);
+				
+				// Esperar un poco antes de revocar la URL
+				setTimeout(() => URL.revokeObjectURL(url), 100);
+				
+				console.log(`✅ Descargado: ${displayName}.kmz (${blob.size} bytes)`);
 				menu.remove();
 				window.downloadMenuOpen = false;
 			} catch (err) {
-				console.error('? Error comprimiendo KMZ:', err);
-				alert('Error al comprimir KMZ. Descarga KML en su lugar.');
+				console.error('❌ Error al comprimir KMZ:', err);
+				console.log('🔄 Descargando como KML en su lugar...');
+				
+				// Fallback: descargar como KML
+				try {
+					const kml = geojsonToKml(geoJsonData, displayName);
+					downloadFile(kml, `${displayName}.kml`, 'application/vnd.google-earth.kml+xml');
+					console.log(`✅ Descargado alternativo: ${displayName}.kml`);
+					alert('KMZ no disponible. Se descargó como KML en su lugar.');
+				} catch (fallbackErr) {
+					console.error('❌ Error incluso al descargar KML:', fallbackErr);
+					alert('Error al generar archivo. Intenta descargar como GeoJSON.');
+				}
+				menu.remove();
+				window.downloadMenuOpen = false;
 			}
 		};
 
