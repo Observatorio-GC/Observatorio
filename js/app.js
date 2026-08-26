@@ -1169,15 +1169,15 @@ document.addEventListener('DOMContentLoaded', function() {
 					// Iconos que usan la configuración estándar [25, 41]
 					const standardIconLayers = [
 						'Biblioteca', 'Esculturas', 'centrodesalud', 'Centrosdesalud', 'ClinicasPrivadas',
-						'DependenciasMunicipales', 'Escuelas', 'Farmacias', 'Hospital',
+						'DependenciasMunicipales', 'Farmacias',
 						'Seguridad', 'JardinesMunicipales', 'Polideportivos', 'Semaforos',
 						'PuntosRecepcionPilas', 'Universidades', 'Puntoswifi', 'PanelesSolares',
 						'PuntosVerdes', 'SitiosyConjuntosEdilicios', 'Edificios', 'ResidenciasAdultosMayores',
-						'CentrosJubilados', 'Diques', 'PlantaRecicladora', 'Bancos', 'UnionesVecinales', 'petfriendly'
+						'CentrosJubilados', 'Diques', 'PlantaRecicladora', 'Bancos', 'UnionesVecinales', 'petfriendly', 'Incubadora', 'Solmaforos', 'Informador', 'Puestos'
 					];
 					
 					// Iconos más pequeños
-					const smallIconLayers = ['Cajeros', 'Farmacias', 'Bares', 'cafe', 'Heladerias', 'Pagofacil', 'Puntoswifi', 'Bodegas', 'ParadasMetro', 'Paradas'];
+					const smallIconLayers = ['Cajeros', 'Farmacias', 'Bares', 'cafe', 'Heladerias', 'Pagofacil', 'Puntoswifi', 'Bodegas', 'ParadasMetro', 'Paradas', 'Escuelas', 'Hospital'];
 					
 					let iconSize = [39, 42];      // Tamaño por defecto
 					let iconAnchor = [12, 41];
