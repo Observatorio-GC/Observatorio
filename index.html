@@ -1384,24 +1384,39 @@
 				flex-direction: column;
 				gap: 8px;
 				padding: 6px 8px;
+				min-height: auto;
 			}
 
 			header h1 {
 				font-size: 15px;
+				position: static;
+				margin: 0;
+				text-align: center;
+				width: 100%;
 			}
 
 			#global-search-container {
 				width: 100% !important;
+				order: 2;
+				position: relative;
+			}
+
+			#global-search-container > div:first-child {
+				flex-direction: column;
+				gap: 6px;
+				width: 100%;
 			}
 
 			#global-search-input {
 				font-size: 11px;
 				padding: 6px 8px;
+				width: 100%;
 			}
 
 			#search-category-filter {
 				font-size: 9px;
 				padding: 6px 6px;
+				width: 100%;
 			}
 
 			/* Posicionar resultados de búsqueda FLOTANTE - MÁXIMA PRIORIDAD */
@@ -1413,6 +1428,7 @@
 				width: calc(100% - 16px);
 				max-width: none;
 				z-index: 5000;
+				bottom: auto;
 				pointer-events: auto;
 			}
 
@@ -1420,6 +1436,7 @@
 				max-height: 200px;
 				font-size: 11px;
 				border-top: 1px solid #f0f0f0;
+				overflow-y: auto;
 				z-index: 5000;
 			}
 
@@ -1437,6 +1454,7 @@
 
 			/* Botones - POSICIÓN CORRECTA para 413-480px (iPhone) */
 			#utilidades-buttons {
+				position: fixed;
 				top: 350px !important;
 				left: 15px;
 				right: auto;
@@ -1445,6 +1463,12 @@
 				flex-direction: column;
 				z-index: 200;
 				pointer-events: auto;
+			}
+
+			.utilidades-btn {
+				padding: 6px 10px;
+				font-size: 10px;
+				flex: 0 1 auto;
 			}
 
 			/* Leaflet controls - CERCA de los botones */
@@ -1464,8 +1488,75 @@
 			#logo-observatorio {
 				display: none !important;
 				visibility: hidden !important;
+				opacity: 0 !important;
 				z-index: 100;
 				pointer-events: none;
+			}
+
+			/* Layer Panel - Hidden modal on mobile */
+			#layer-panel {
+				display: none !important;
+				position: fixed;
+				width: 90vw;
+				max-width: 380px;
+				height: 50vh;
+				bottom: 80px;
+				left: 50%;
+				right: auto;
+				top: auto;
+				transform: translateX(-50%);
+				border-radius: 12px;
+				z-index: 999;
+				box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+			}
+
+			#layer-panel.mobile-visible {
+				display: flex !important;
+			}
+
+			/* Show toggle button on mobile */
+			#layer-panel-toggle-btn {
+				display: flex;
+			}
+
+			.layer-panel-header {
+				padding: 10px 12px;
+				flex-wrap: wrap;
+				border-radius: 12px 12px 0 0;
+				position: relative;
+			}
+
+			#header-logo-pc {
+				display: none !important;
+				visibility: hidden !important;
+				opacity: 0 !important;
+			}
+
+			#title-desktop {
+				display: none !important;
+			}
+
+			#title-mobile {
+				display: block !important;
+			}
+
+			/* Street view indicator */
+			#streetview-mode-indicator {
+				bottom: 15px;
+				right: 15px;
+				font-size: 10px;
+				padding: 8px;
+			}
+
+			/* Download modal */
+			.download-modal-content {
+				width: 90%;
+				max-width: 300px;
+			}
+
+			.download-option {
+				font-size: 12px;
+				padding: 10px 12px;
 			}
 
 			/* Layer Panel - Hidden modal on mobile */
