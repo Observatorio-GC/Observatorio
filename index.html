@@ -266,6 +266,7 @@
 			max-height: 300px;
 			border-top: 1px solid #f0f0f0;
 			overflow-y: auto;
+			z-index: 5000;
 		}
 
 		/* Deshabilitado: Causaba que se abra al hacer focus en otros elementos (ej. dropdown) */
@@ -1137,13 +1138,11 @@
 				min-width: 150px;
 			}
 
-			/* Logo - Moved to top right */
+			/* Logo - OCULTAR EN MÓVILES */
 			#logo-observatorio {
-				position: fixed;
-				top: 60px;
-				right: 10px;
-				left: auto;
-				bottom: auto;
+				display: none !important;
+				visibility: hidden !important;
+				opacity: 0 !important;
 				z-index: 200;
 				background: white;
 				padding: 5px;
@@ -1203,14 +1202,192 @@
 			}
 		}
 
-		/* Mobile: 480px and below */
-		@media (max-width: 480px) {
+		/* Mobile: 412px (Motorola Edge 60 Pro viewport) */
+		@media (max-width: 412px) {
 			header {
-				padding: 6px 8px;
+				flex-direction: column;
+				gap: 8px;
+				padding: 8px 10px;
+				min-height: auto;
 			}
 
 			header h1 {
 				font-size: 14px;
+				position: static;
+				margin: 0;
+				text-align: center;
+				width: 100%;
+			}
+
+			/* Search container */
+			#global-search-container {
+				width: 100% !important;
+				order: 2;
+				position: relative;
+			}
+
+			#global-search-container > div:first-child {
+				flex-direction: column;
+				gap: 6px;
+				width: 100%;
+			}
+
+			#global-search-input {
+				font-size: 12px;
+				padding: 8px 10px;
+				width: 100%;
+			}
+
+			#search-category-filter {
+				font-size: 10px;
+				padding: 8px 8px;
+				width: 100%;
+			}
+
+			/* Posicionar resultados de búsqueda FLOTANTE - MÁXIMA PRIORIDAD */
+			#search-results {
+				position: fixed;
+				top: 100px;
+				left: 10px;
+				right: 10px;
+				width: calc(100% - 20px);
+				max-width: none;
+				z-index: 5000;
+				bottom: auto;
+				pointer-events: auto;
+			}
+
+			#search-results.active {
+				max-height: 220px;
+				border-top: 1px solid #f0f0f0;
+				overflow-y: auto;
+				z-index: 5000;
+			}
+
+			/* Botones - POSICIÓN CORRECTA para 412px */
+			#utilidades-buttons {
+				top: 320px !important;
+				left: 10px !important;
+				right: auto !important;
+				z-index: 200;
+				pointer-events: auto;
+			}
+
+			/* Leaflet controls - CERCA de los botones */
+			.leaflet-top.leaflet-left {
+				top: 345px !important;
+				left: 10px !important;
+				z-index: 400;
+			}
+
+			.leaflet-top.leaflet-right {
+				top: 90px;
+				right: 10px;
+				z-index: 400;
+			}
+
+			/* OCULTAR LOGO EN MÓVILES */
+			#logo-observatorio {
+				display: none !important;
+				visibility: hidden !important;
+				z-index: 100;
+				pointer-events: none;
+			}
+
+			/* Layer Panel - Hidden modal on mobile */
+			#layer-panel {
+				display: none !important;
+				position: fixed;
+				width: 90vw;
+				max-width: 380px;
+				height: 50vh;
+				bottom: 80px;
+				left: 50%;
+				right: auto;
+				top: auto;
+				transform: translateX(-50%);
+				border-radius: 12px;
+				z-index: 999;
+				box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+			}
+
+			#layer-panel.mobile-visible {
+				display: flex !important;
+			}
+
+			/* Show toggle button on mobile */
+			#layer-panel-toggle-btn {
+				display: flex;
+			}
+
+			.layer-panel-header {
+				padding: 10px 12px;
+				flex-wrap: wrap;
+				border-radius: 12px 12px 0 0;
+				position: relative;
+			}
+
+			.utilidades-btn {
+				padding: 6px 10px;
+				font-size: 10px;
+				flex: 0 1 auto;
+			}
+
+			#header-logo-pc {
+				display: none !important;
+			}
+
+			#title-desktop {
+				display: none !important;
+			}
+
+			#title-mobile {
+				display: block !important;
+			}
+
+			.search-result-item {
+				padding: 8px 10px;
+				font-size: 11px;
+			}
+
+			.search-result-item strong {
+				font-size: 11px;
+			}
+
+			.search-result-item small {
+				font-size: 10px;
+			}
+
+			/* Street view indicator */
+			#streetview-mode-indicator {
+				bottom: 15px;
+				right: 15px;
+				font-size: 10px;
+				padding: 8px;
+			}
+
+			/* Download modal */
+			.download-modal-content {
+				width: 90%;
+				max-width: 300px;
+			}
+
+			.download-option {
+				font-size: 12px;
+				padding: 10px 12px;
+			}
+		}
+
+		/* Mobile: 413px to 480px (iPhone Pro Max 440px, dispositivos medianos) */
+		@media (min-width: 413px) and (max-width: 480px) {
+			header {
+				flex-direction: column;
+				gap: 8px;
+				padding: 6px 8px;
+			}
+
+			header h1 {
+				font-size: 15px;
 			}
 
 			#global-search-container {
@@ -1227,9 +1404,23 @@
 				padding: 6px 6px;
 			}
 
+			/* Posicionar resultados de búsqueda FLOTANTE - MÁXIMA PRIORIDAD */
+			#search-results {
+				position: fixed;
+				top: 105px;
+				left: 8px;
+				right: 8px;
+				width: calc(100% - 16px);
+				max-width: none;
+				z-index: 5000;
+				pointer-events: auto;
+			}
+
 			#search-results.active {
-				max-height: 150px;
+				max-height: 200px;
 				font-size: 11px;
+				border-top: 1px solid #f0f0f0;
+				z-index: 5000;
 			}
 
 			.search-result-item {
@@ -1242,6 +1433,39 @@
 
 			.search-result-item small {
 				font-size: 10px;
+			}
+
+			/* Botones - POSICIÓN CORRECTA para 413-480px (iPhone) */
+			#utilidades-buttons {
+				top: 350px !important;
+				left: 15px;
+				right: auto;
+				bottom: auto;
+				gap: 4px;
+				flex-direction: column;
+				z-index: 200;
+				pointer-events: auto;
+			}
+
+			/* Leaflet controls - CERCA de los botones */
+			.leaflet-top.leaflet-left {
+				top: 375px !important;
+				left: 15px !important;
+				z-index: 400;
+			}
+
+			.leaflet-top.leaflet-right {
+				top: 90px;
+				right: 10px;
+				z-index: 400;
+			}
+
+			/* OCULTAR LOGO EN MÓVILES */
+			#logo-observatorio {
+				display: none !important;
+				visibility: hidden !important;
+				z-index: 100;
+				pointer-events: none;
 			}
 
 			/* Layer Panel - Hidden modal on mobile */
@@ -1313,7 +1537,6 @@
 				word-break: break-word;
 			}
 
-
 			.layer-search input {
 				font-size: 12px;
 				padding: 6px 10px;
@@ -1327,7 +1550,6 @@
 
 			/* Utilidades Buttons */
 			#utilidades-buttons {
-				top: 120px;
 				left: 15px;
 				right: auto;
 				bottom: auto;
