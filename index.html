@@ -1202,7 +1202,7 @@
 			}
 		}
 
-		/* Mobile: ≤900px (Motorola Edge 60 Pro ~773px, tablets pequeños, teléfonos grandes) */
+		/* Mobile + large phones: ≤900px */
 		@media (max-width: 900px) {
 			header {
 				flex-direction: column;
@@ -1219,7 +1219,6 @@
 				width: 100%;
 			}
 
-			/* Search container */
 			#global-search-container {
 				width: 100% !important;
 				order: 2;
@@ -1244,10 +1243,9 @@
 				width: 100%;
 			}
 
-			/* Posicionar resultados de búsqueda FLOTANTE - MÁXIMA PRIORIDAD */
 			#search-results {
 				position: fixed;
-				top: 100px;
+				top: 92px;
 				left: 10px;
 				right: 10px;
 				width: calc(100% - 20px);
@@ -1264,39 +1262,36 @@
 				z-index: 5000;
 			}
 
-			/* Botones - POSICIÓN CORRECTA para 412px */
 			#utilidades-buttons {
 				position: fixed;
-				top: 320px !important;
-				left: 10px !important;
+				top: 120px !important;
+				left: 12px !important;
 				right: auto !important;
 				bottom: auto !important;
-				z-index: 200;
+				z-index: 300;
 				pointer-events: auto;
 				flex-direction: column;
-				gap: 6px;
+				gap: 7px;
 			}
 
 			.utilidades-btn {
-				padding: 6px 10px;
+				padding: 7px 10px;
 				font-size: 10px;
 				flex: 0 1 auto;
 			}
 
-			/* Leaflet controls - CERCA de los botones */
 			.leaflet-top.leaflet-left {
-				top: 345px !important;
-				left: 10px !important;
+				top: 170px !important;
+				left: 12px !important;
 				z-index: 400;
 			}
 
 			.leaflet-top.leaflet-right {
-				top: 90px;
+				top: 84px;
 				right: 10px;
 				z-index: 400;
 			}
 
-			/* OCULTAR LOGO EN MÓVILES */
 			#logo-observatorio {
 				display: none !important;
 				visibility: hidden !important;
@@ -1305,7 +1300,6 @@
 				pointer-events: none;
 			}
 
-			/* Layer Panel - Hidden modal on mobile */
 			#layer-panel {
 				display: none !important;
 				position: fixed;
@@ -1326,9 +1320,12 @@
 				display: flex !important;
 			}
 
-			/* Show toggle button on mobile */
 			#layer-panel-toggle-btn {
 				display: flex;
+				top: 190px;
+				bottom: auto;
+				right: 18px;
+				z-index: 1002;
 			}
 
 			.layer-panel-header {
@@ -1365,7 +1362,6 @@
 				font-size: 10px;
 			}
 
-			/* Street view indicator */
 			#streetview-mode-indicator {
 				bottom: 15px;
 				right: 15px;
@@ -1373,7 +1369,6 @@
 				padding: 8px;
 			}
 
-			/* Download modal */
 			.download-modal-content {
 				width: 90%;
 				max-width: 300px;
