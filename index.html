@@ -1266,11 +1266,21 @@
 
 			/* Botones - POSICIÓN CORRECTA para 412px */
 			#utilidades-buttons {
+				position: fixed;
 				top: 320px !important;
 				left: 10px !important;
 				right: auto !important;
+				bottom: auto !important;
 				z-index: 200;
 				pointer-events: auto;
+				flex-direction: column;
+				gap: 6px;
+			}
+
+			.utilidades-btn {
+				padding: 6px 10px;
+				font-size: 10px;
+				flex: 0 1 auto;
 			}
 
 			/* Leaflet controls - CERCA de los botones */
@@ -1290,6 +1300,7 @@
 			#logo-observatorio {
 				display: none !important;
 				visibility: hidden !important;
+				opacity: 0 !important;
 				z-index: 100;
 				pointer-events: none;
 			}
@@ -1327,14 +1338,10 @@
 				position: relative;
 			}
 
-			.utilidades-btn {
-				padding: 6px 10px;
-				font-size: 10px;
-				flex: 0 1 auto;
-			}
-
 			#header-logo-pc {
 				display: none !important;
+				visibility: hidden !important;
+				opacity: 0 !important;
 			}
 
 			#title-desktop {
