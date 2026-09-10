@@ -3,6 +3,8 @@
  * Inicializa el mapa con panel avanzado y capas organizadas por categoría
  */
 
+import { initAddressSearcher } from './geocoder.js';
+
 console.log('%c app.js CARGADO', 'color: green; font-weight: bold; font-size: 14px;');
 
 // Verificar que Leaflet está disponible
@@ -384,6 +386,13 @@ document.addEventListener('DOMContentLoaded', function() {
 		layers: [baseMaps["Google Satelital"]]
 	}).setView([-32.9337, -68.8978], 13);
 
+	// Inicializar buscador de direcciones
+	try {
+		initAddressSearcher(map);
+	} catch (err) {
+		console.warn('⚠️ Error inicializando buscador de direcciones:', err);
+	}
+
 	// LIMPIAR MEMORY PERIODICAMENTE Y MONITOREO
 	let layerCountWarning = false;
 	let memoryMonitorInterval = setInterval(() => {
@@ -746,7 +755,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	document.body.insertAdjacentHTML('beforeend', panelHTML);
 
 	// AGREGAR BOTÓN TOGGLE PARA MÓVILES
-	const toggleButtonHTML = `<button id="layer-panel-toggle-btn" style="display:none;position:fixed;bottom:20px;right:20px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);color:white;border:none;font-size:24px;cursor:pointer;box-shadow:0 4px 12px rgba(102, 126, 234, 0.4);z-index:1002;transition:all 0.3s ease;align-items:center;justify-content:center;">👁️</button>`;
+	const toggleButtonHTML = `<button id="layer-panel-toggle-btn" type="button" aria-label="Abrir panel de capas" title="Abrir panel de capas" style="display:none;position:fixed;bottom:20px;right:20px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);color:white;border:none;font-size:24px;cursor:pointer;box-shadow:0 4px 12px rgba(102, 126, 234, 0.4);z-index:1002;transition:all 0.3s ease;align-items:center;justify-content:center;"><span class="layers-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span></button>`;
 	document.body.insertAdjacentHTML('beforeend', toggleButtonHTML);
 
 	// DETECTAR SI ES MÓVIL Y CONFIGURAR PANEL
@@ -1984,6 +1993,5 @@ document.addEventListener('DOMContentLoaded', function() {
 		console.warn('👁️ Elementos de búsqueda no encontrados en el HTML');
 	}
 });
-
 
 
