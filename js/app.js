@@ -4,6 +4,7 @@
  */
 
 import { initAddressSearcher } from './geocoder.js';
+import { initMeasurement } from './measurement.js';
 
 console.log('%c app.js CARGADO', 'color: green; font-weight: bold; font-size: 14px;');
 
@@ -475,30 +476,270 @@ document.addEventListener('DOMContentLoaded', function() {
 			const drawControl = new L.Control.Draw({
 				position: 'topleft',
 				draw: {
-					polygon: true,
-					polyline: true,
-					rectangle: true,
-					circle: true,
-					marker: false
+					polygon: {
+						title: 'Medir un área',
+						allowIntersection: false,
+						drawError: {
+							color: '#b00b00',
+							timeout: 1000
+						},
+						shapeOptions: {
+							color: '#dc2626',
+							weight: 2,
+							opacity: 0.8,
+							fillOpacity: 0.3,
+							dashArray: '5, 5'
+						},
+						showArea: false
+					},
+					polyline: {
+						title: 'Medir una línea',
+						metric: true,
+						shapeOptions: {
+							color: '#2563eb',
+							weight: 3,
+							opacity: 0.8,
+							dashArray: '5, 5',
+							lineCap: 'round',
+							lineJoin: 'round'
+						}
+					},
+					rectangle: false,
+					circle: false,
+					marker: false,
+					circlemarker: false
 				},
 				edit: {
 					featureGroup: drawnItems,
-					remove: true
+					remove: true,
+					edit: {
+						selectedPathOptions: {
+							dashArray: '10, 10',
+							weight: 2,
+							opacity: 0.8,
+							color: '#667eea',
+							fillColor: '#667eea',
+							fillOpacity: 0.1
+						}
+					}
 				}
 			});
+
+			// Configurar textos en español
+			L.drawLocal = {
+				draw: {
+					toolbar: {
+						actions: {
+							title: 'Cancelar dibujo',
+							text: 'Cancelar'
+						},
+						buttons: {
+							polyline: 'Medir una línea',
+							polygon: 'Medir un área',
+							rectangle: 'Dibuja un rectángulo',
+							circle: 'Dibuja un círculo',
+							marker: 'Marca un punto'
+						},
+						finish: {
+							title: 'Terminar dibujo',
+							text: 'Terminar'
+						},
+						undo: {
+							title: 'Eliminar el último punto dibujado',
+							text: 'Eliminar último punto'
+						},
+						redo: {
+							title: 'Rehacer el último punto eliminado',
+							text: 'Rehacer'
+						}
+					},
+					handlers: {
+						circle: {
+							tooltip: {
+								start: 'Haz clic y arrastra para dibujar el círculo.',
+								end: 'Suelta el ratón para finalizar el círculo.'
+							},
+							radius: 'Radio'
+						},
+						circlemarker: {
+							tooltip: {
+								start: 'Haz clic en el mapa para situar el círculo.'
+							}
+						},
+						marker: {
+							tooltip: {
+								start: 'Haz clic en el mapa para situar el marcador.'
+							}
+						},
+						polygon: {
+							tooltip: {
+								start: 'Haz clic para empezar a dibujar.',
+								cont: 'Haz clic para continuar dibujando.',
+								end: 'Haz clic en el primer punto para cerrar el polígono.'
+							}
+						},
+						polyline: {
+							error: '<strong>Error:</strong> Los bordes de la forma no pueden cruzarse.',
+							tooltip: {
+								start: 'Haz clic para empezar a dibujar la línea.',
+								cont: 'Haz clic para continuar dibujando la línea.',
+								end: 'Haz clic en el último punto para finalizar la línea.'
+							}
+						},
+						rectangle: {
+							tooltip: {
+								start: 'Haz clic y arrastra para dibujar el rectángulo.'
+							}
+						},
+						simpleshape: {
+							tooltip: {
+								end: 'Suelta el ratón para finalizar el dibujo.'
+							}
+						}
+					}
+				},
+				edit: {
+					toolbar: {
+						actions: {
+							clearAll: {
+								title: 'Eliminar todos los elementos dibujados',
+								text: 'Eliminar todo'
+							},
+							save: {
+								title: 'Guardar cambios',
+								text: 'Guardar'
+							},
+							cancel: {
+								title: 'Cancelar edición, descartando todos los cambios',
+								text: 'Cancelar'
+							},
+							clearAllConfirm: '¿Estás seguro de que quieres eliminar todos los elementos dibujados?'
+						},
+						buttons: {
+							edit: 'Editar elementos',
+							editDisabled: 'No hay elementos para editar',
+							remove: 'Eliminar elementos',
+							removeDisabled: 'No hay elementos para eliminar'
+						}
+					},
+					handlers: {
+						edit: {
+							tooltip: {
+								text: 'Arrastra para mover, haz clic en un vértice para editar, o pasa el ratón sobre el ícono de borrar para eliminar.',
+								subtext: 'Haz clic en "Guardar" cuando termines.'
+							}
+						},
+						remove: {
+							tooltip: {
+								text: 'Haz clic en un elemento para eliminarlo'
+							}
+						}
+					}
+				}
+			};
+
 			map.addControl(drawControl);
 
-			map.on('draw:created', function(e) {
-				const layer = e.layer;
-				drawnItems.addLayer(layer);
+			// Initialize enhanced measurement module
+			initMeasurement(map, drawnItems);
+
+			// Monitorear AGRESIVAMENTE la conversión de vértices
+			let lastCheck = 0;
+			const checkInterval = setInterval(() => {
+				const now = Date.now();
+				if (now - lastCheck < 50) return; // Evitar checks muy frecuentes
+				lastCheck = now;
+
+				let converted = false;
+
+				// Buscar y reemplazar todos los rect.leaflet-draw-vertex
+				document.querySelectorAll('svg rect.leaflet-draw-vertex').forEach(rect => {
+					try {
+						// Verificar si ya fue convertido
+						if (rect.hasAttribute('data-converted')) return;
+						
+						const parent = rect.parentNode;
+						const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+						circle.setAttribute('class', rect.getAttribute('class'));
+						circle.setAttribute('cx', '0');
+						circle.setAttribute('cy', '0');
+						circle.setAttribute('r', '6');
+						circle.setAttribute('fill', '#667eea');
+						circle.setAttribute('stroke', 'white');
+						circle.setAttribute('stroke-width', '2.5');
+						circle.setAttribute('opacity', '0.95');
+						circle.setAttribute('style', 'filter: drop-shadow(0 2px 4px rgba(102, 126, 234, 0.4)); pointer-events: auto; cursor: move;');
+						circle.setAttribute('data-converted', 'true');
+						parent.replaceChild(circle, rect);
+						converted = true;
+					} catch (e) {
+						console.error('Error converting vertex:', e);
+					}
+				});
+
+				// Buscar y reemplazar vertex-middle
+				document.querySelectorAll('svg rect.leaflet-draw-vertex-middle').forEach(rect => {
+					try {
+						if (rect.hasAttribute('data-converted')) return;
+						
+						const parent = rect.parentNode;
+						const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+						circle.setAttribute('class', rect.getAttribute('class'));
+						circle.setAttribute('cx', '0');
+						circle.setAttribute('cy', '0');
+						circle.setAttribute('r', '4');
+						circle.setAttribute('fill', '#2563eb');
+						circle.setAttribute('stroke', 'white');
+						circle.setAttribute('stroke-width', '2');
+						circle.setAttribute('opacity', '0.7');
+						circle.setAttribute('data-converted', 'true');
+						parent.replaceChild(circle, rect);
+						converted = true;
+					} catch (e) {
+						console.error('Error converting middle vertex:', e);
+					}
+				});
+
+				// Buscar y reemplazar vertex-last
+				document.querySelectorAll('svg rect.leaflet-draw-vertex-last').forEach(rect => {
+					try {
+						if (rect.hasAttribute('data-converted')) return;
+						
+						const parent = rect.parentNode;
+						const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+						circle.setAttribute('class', rect.getAttribute('class'));
+						circle.setAttribute('cx', '0');
+						circle.setAttribute('cy', '0');
+						circle.setAttribute('r', '6');
+						circle.setAttribute('fill', '#dc2626');
+						circle.setAttribute('stroke', 'white');
+						circle.setAttribute('stroke-width', '2.5');
+						circle.setAttribute('opacity', '0.95');
+						circle.setAttribute('style', 'filter: drop-shadow(0 2px 4px rgba(220, 38, 38, 0.4)); pointer-events: auto; cursor: move;');
+						circle.setAttribute('data-converted', 'true');
+						parent.replaceChild(circle, rect);
+						converted = true;
+					} catch (e) {
+						console.error('Error converting last vertex:', e);
+					}
+				});
+
+				if (converted) {
+					console.log('✨ Vértices convertidos a círculos');
+				}
+			}, 100);
+
+			// Limpiar intervalo cuando se desactiva el control
+			map.on('draw:drawstop', () => {
+				// No limpiar, mantener monitoreando
 			});
 
-			console.log('? Herramienta de medida (Draw) agregada');
+			console.log('✅ Herramienta de medida agregada');
 		} catch (e) {
-			console.warn(' Error al cargar herramienta Draw:', e);
+			console.warn('⚠️ Error al cargar herramienta Draw:', e);
 		}
 	} else {
-		console.warn(' L.Draw no disponible');
+		console.warn('⚠️ L.Draw no disponible');
 	}
 
 	// CAPAS
