@@ -34,6 +34,8 @@
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 	<link rel="stylesheet" href="https://unpkg.com/leaflet-measure-control@0.1.8/lib/leaflet-measure-control.css" />
 	<link rel="stylesheet" href="https://unpkg.com/leaflet-draw@1.0.4/dist/leaflet.draw.css" />
+	<link rel="stylesheet" href="css/maplibre-gl.css" />
+	<link rel="stylesheet" href="css/ciudad-3d.css" />
 
 	<!-- Leaflet MarkerCluster CSS -->
 	<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
@@ -311,7 +313,7 @@
 		#utilidades-buttons {
 			position: absolute;
 			top: 75px;
-			left: 50px;
+			left: 68px;
 			display: flex;
 			flex-direction: column;
 			gap: 8px;
@@ -472,6 +474,34 @@
 			margin: 8px 0;
 		}
 
+		.address-popup {
+			max-width: 200px;
+			font-size: 12px;
+			overflow-wrap: anywhere;
+		}
+
+		.address-popup-coordinates {
+			margin-top: 5px;
+			color: #777;
+		}
+
+		.address-popup-remove {
+			margin-top: 10px;
+			padding: 7px 10px;
+			border: 1px solid #da0c81;
+			border-radius: 5px;
+			color: #a60961;
+			background: white;
+			font-size: 12px;
+			font-weight: 600;
+			cursor: pointer;
+		}
+
+		.address-popup-remove:hover,
+		.address-popup-remove:focus-visible {
+			background: #fff3f9;
+		}
+
 		/* Hide Leaflet scale control */
 		.leaflet-control-scale {
 			display: none !important;
@@ -488,78 +518,70 @@
 			order: 3;
 		}
 
+		.streetview-toggle {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 34px;
+			height: 34px;
+			padding: 0;
+			border: 0;
+			border-radius: 4px;
+			background: white;
+			box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+			cursor: pointer;
+		}
+
+		.streetview-toggle.active {
+			background: #da0c81;
+		}
+
+		.streetview-toggle:focus-visible {
+			outline: 2px solid #a60961;
+			outline-offset: 2px;
+		}
+
 		/* Layer Panel */
 		#layer-panel {
-			position: absolute;
-			top: 140px;
+			position: fixed;
+			bottom: 30px;
 			right: 20px;
-			width: 340px;
+			width: 360px;
+			max-width: calc(100% - 40px);
 			background: white;
+			border: 1px solid #ddd;
 			border-radius: 8px;
-			box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-			z-index: 300;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+			z-index: 999;
 			display: flex;
 			flex-direction: column;
-			max-height: 70vh;
+			max-height: min(600px, calc(100vh - 100px));
 			overflow: hidden;
 		}
 
-		/* Hidden by default on mobile */
-		#layer-panel.mobile-hidden {
+		#layer-panel[hidden],
+		#layer-panel-toggle-btn[hidden] {
 			display: none !important;
 		}
 
-		/* Layer panel toggle button for mobile */
 		#layer-panel-toggle-btn {
-			display: none;
+			display: flex;
 			position: fixed;
-			bottom: 20px;
+			bottom: 30px;
 			right: 20px;
-			width: 56px;
-			height: 56px;
-			border-radius: 50%;
-			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			padding: 11px 18px;
+			border-radius: 6px;
+			background: #667eea;
 			color: white;
 			border: none;
-			font-size: 24px;
+			font-size: 13px;
+			font-weight: 600;
 			cursor: pointer;
-			box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-			z-index: 250;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+			z-index: 1002;
 			transition: all 0.3s ease;
 			align-items: center;
 			justify-content: center;
-		}
-
-		.layers-toggle-icon {
-			position: relative;
-			display: inline-flex;
-			width: 24px;
-			height: 24px;
-			align-items: center;
-			justify-content: center;
-		}
-
-		.layers-toggle-icon span {
-			position: absolute;
-			display: block;
-			width: 18px;
-			height: 4px;
-			border-radius: 999px;
-			background: currentColor;
-			box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-		}
-
-		.layers-toggle-icon span:nth-child(1) {
-			transform: translateY(-6px) scaleX(0.82);
-			opacity: 0.8;
-		}
-
-		.layers-toggle-icon span:nth-child(2) {
-			transform: translateY(0);
-		}
-
-		.layers-toggle-icon span:nth-child(3) {
-			transform: translateY(6px) scaleX(1.12);
 		}
 
 		#layer-panel-toggle-btn:hover {
@@ -982,11 +1004,6 @@
 				top: 130px !important;
 			}
 
-			#layer-panel {
-				bottom: auto !important;
-				top: 250px !important;
-			}
-
 			.leaflet-top.leaflet-left {
 				top: 150px !important;
 			}
@@ -1050,32 +1067,6 @@
 
 			#search-results.active {
 				max-height: 200px;
-			}
-
-			/* Layer Panel - Hidden on mobile, shown as modal when opened */
-			#layer-panel {
-				display: none !important;
-				position: fixed;
-				width: 90vw;
-				max-width: 500px;
-				height: 50vh;
-				bottom: 80px;
-				left: 50%;
-				right: auto;
-				top: auto;
-				transform: translateX(-50%);
-				border-radius: 12px;
-				z-index: 999;
-				box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
-			}
-
-			#layer-panel.mobile-visible {
-				display: flex !important;
-			}
-
-			/* Show toggle button on tablet */
-			#layer-panel-toggle-btn {
-				display: flex;
 			}
 
 			.layer-panel-header {
@@ -1335,34 +1326,6 @@
 				pointer-events: none;
 			}
 
-			#layer-panel {
-				display: none !important;
-				position: fixed;
-				width: 90vw;
-				max-width: 380px;
-				height: 50vh;
-				bottom: 80px;
-				left: 50%;
-				right: auto;
-				top: auto;
-				transform: translateX(-50%);
-				border-radius: 12px;
-				z-index: 999;
-				box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
-			}
-
-			#layer-panel.mobile-visible {
-				display: flex !important;
-			}
-
-			#layer-panel-toggle-btn {
-				display: flex;
-				top: auto;
-				bottom: 18px;
-				right: 18px;
-				z-index: 1002;
-			}
-
 			.layer-panel-header {
 				padding: 10px 12px;
 				flex-wrap: wrap;
@@ -1417,20 +1380,6 @@
 
 		/* Extra small devices: 360px and below */
 		@media (max-width: 360px) {
-			/* Layer Panel - Hidden modal optimization */
-			#layer-panel {
-				max-height: 40vh;
-				width: 95%;
-			}
-
-			#layer-panel-toggle-btn {
-				width: 52px;
-				height: 52px;
-				font-size: 22px;
-				bottom: 15px;
-				right: 15px;
-			}
-
 			.layer-panel-header::before {
 				width: 30px;
 			}
@@ -1486,6 +1435,61 @@
 			}
 		}
 
+		@media (max-width: 600px) {
+			#layer-panel,
+			#layer-panel-toggle-btn {
+				right: 10px;
+				bottom: 28px;
+			}
+
+			#layer-panel {
+				max-width: calc(100% - 20px);
+				max-height: min(600px, calc(100vh - 180px));
+			}
+		}
+
+		/* Mobile map controls follow the urban indicators viewer. */
+		@media (max-width: 768px) {
+			#utilidades-buttons {
+				top: auto !important;
+				bottom: 20px !important;
+			}
+
+			#utilidades-buttons .utilidades-btn {
+				padding: 9px 14px;
+				font-size: 12px;
+			}
+
+			#streetview-mode-indicator {
+				bottom: 105px;
+			}
+
+			.leaflet-top.leaflet-left {
+				top: 0 !important;
+				left: 0 !important;
+				gap: 0;
+				align-items: flex-start;
+			}
+
+			.leaflet-top.leaflet-left .leaflet-control-zoom { order: 0; }
+			.leaflet-top.leaflet-left .leaflet-control-layers { order: 1; }
+			.leaflet-top.leaflet-left .leaflet-draw { order: 2; }
+			.leaflet-top.leaflet-left .streetview-control { order: 3; }
+			.streetview-control {
+				border: 2px solid rgba(0, 0, 0, 0.2);
+				background-clip: padding-box;
+				border-radius: 4px;
+			}
+
+			.streetview-toggle {
+				width: 30px;
+				height: 30px;
+				border-radius: 2px;
+				box-shadow: none;
+			}
+
+		}
+
 		/* Desktop: 1025px and above */
 		@media (min-width: 1025px) {
 			/* Mostrar título corto en desktop */
@@ -1509,7 +1513,7 @@
 			}
 		}
 
-		/* Address Search Styles - Desktop (PC) */
+		/* Address Search */
 		#address-search-container {
 			position: relative;
 			display: inline-block;
@@ -1525,39 +1529,39 @@
 
 		#address-search-input {
 			width: 100%;
-			padding: 8px 12px;
-			border: 1px solid #ccc;
-			border-radius: 4px;
+			padding: 10px 12px;
+			border: 1px solid #e4d7e0;
+			border-radius: 8px;
 			font-size: 13px;
 			font-family: 'Isidora', Arial, sans-serif;
 			outline: none;
-			transition: border-color 0.3s ease;
+			color: #333;
+			background: #fff;
+			transition: border-color 0.2s ease, box-shadow 0.2s ease;
 			box-sizing: border-box;
 		}
 
 		#address-search-input:focus {
-			border-color: #667eea;
-			box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+			border-color: #da0c81;
+			box-shadow: 0 0 0 3px rgba(218, 12, 129, 0.12);
 		}
 
 		#address-search-suggestions {
 			position: absolute;
-			top: calc(100% + 2px);
-			left: 0;
-			width: 350px;
-			min-width: 280px;
+			top: calc(100% + 8px);
+			right: 0;
+			width: min(350px, calc(100vw - 20px));
 			background: white;
-			border: 1px solid #ddd;
-			border-top: 1px solid #ddd;
-			border-radius: 0 0 4px 4px;
-			max-height: 400px;
+			border: 1px solid #eee5eb;
+			border-radius: 10px;
+			max-height: min(350px, 50vh);
 			overflow-y: auto;
 			z-index: 5101;
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+			box-shadow: 0 8px 24px rgba(55, 24, 43, 0.18);
 			visibility: hidden;
 			opacity: 0;
-			transform: translateY(-10px);
-			transition: all 0.2s ease;
+			transform: translateY(-4px);
+			transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
 			pointer-events: none;
 		}
 
@@ -1569,23 +1573,28 @@
 		}
 
 		.address-suggestion-item {
-			padding: 12px 12px;
+			padding: 12px 14px;
 			cursor: pointer;
-			border-bottom: 1px solid #f0f0f0;
+			border-bottom: 1px solid #f3edf1;
 			transition: background-color 0.2s ease;
 			white-space: normal;
-			word-wrap: break-word;
-			overflow-wrap: break-word;
+			overflow-wrap: anywhere;
 			color: #333;
 			font-size: 13px;
-			line-height: 1.4;
-			min-height: 40px;
+			line-height: 1.45;
 			display: flex;
-			align-items: center;
+			align-items: flex-start;
+			gap: 10px;
+		}
+
+		.address-suggestion-item::before {
+			content: '📍';
+			flex: 0 0 auto;
+			font-size: 14px;
 		}
 
 		.address-suggestion-item:hover {
-			background-color: #f5f5f5;
+			background-color: #fff3f9;
 		}
 
 		.address-suggestion-item:last-child {
@@ -1599,118 +1608,76 @@
 				max-width: 300px;
 			}
 
-			#address-search-suggestions {
-				width: 300px;
-				min-width: 240px;
-				max-height: 350px;
-			}
-
-			.address-suggestion-item {
-				padding: 10px 10px;
-				font-size: 12px;
-			}
 		}
 
-		/* Mobile: address search repositioned to top-right */
 		@media (max-width: 900px) {
 			header {
 				z-index: 5200;
 			}
 
 			#address-search-container {
-				width: auto;
-				max-width: calc(100vw - 16px);
+				position: absolute;
+				top: calc(100% + 10px);
+				right: 10px;
 				min-width: auto;
 				margin: 0;
 				padding: 0;
-				position: fixed;
-				top: 126px;
-				right: 10px;
 				z-index: 5100;
-				background: transparent;
-				display: flex;
-				flex-direction: column;
-				align-items: flex-end;
 			}
 
 			#address-search-toggle {
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				width: 34px;
-				height: 34px;
-				border: 1px solid #d9d9d9;
-				border-radius: 8px;
+				width: 38px;
+				height: 38px;
+				border: 1px solid #eadfe6;
+				border-radius: 10px;
 				background: #fff;
 				color: #da0c81;
 				cursor: pointer;
-				box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+				box-shadow: 0 4px 12px rgba(55, 24, 43, 0.18);
 				font-size: 16px;
 				line-height: 1;
 			}
 
-			#address-search-container:not(.expanded) #address-search-input,
-			#address-search-container:not(.expanded) #address-search-suggestions {
+			#address-search-container:not(.expanded) #address-search-panel {
 				display: none;
 			}
 
-			#address-search-container.expanded {
-				width: 280px;
+			#address-search-panel {
+				position: absolute;
+				top: calc(100% + 8px);
+				right: 0;
+				display: flex;
+				flex-direction: column;
+				width: min(340px, calc(100vw - 20px));
+				padding: 10px;
+				border: 1px solid #eee5eb;
+				border-radius: 12px;
+				background: #fff;
+				box-shadow: 0 8px 24px rgba(55, 24, 43, 0.2);
 			}
 
 			#address-search-input {
-				width: 100%;
-				font-size: 12px;
-				padding: 8px 10px;
-				border-radius: 4px;
-				margin-top: 6px;
-				background: #fff;
+				flex: 0 0 auto;
+				font-size: 16px;
 			}
 
 			#address-search-suggestions {
 				position: static;
 				width: 100%;
-				max-width: 100%;
+				min-height: 0;
 				max-height: 300px;
-				min-width: auto;
+				border: 0;
+				border-radius: 0;
+				box-shadow: none;
+				display: none;
+			}
+
+			#address-search-suggestions.active {
+				display: block;
 				margin-top: 6px;
-			}
-
-			.address-suggestion-item {
-				padding: 10px 12px;
-				font-size: 12px;
-				min-height: 38px;
-			}
-		}
-
-		/* Small Mobile: phones up to 480px */
-		@media (max-width: 480px) {
-			#address-search-container {
-				width: auto;
-				max-width: calc(100vw - 16px);
-				top: 122px;
-				right: 8px;
-			}
-
-			#address-search-container.expanded {
-				width: calc(100vw - 16px);
-			}
-
-			#address-search-input {
-				font-size: 11px;
-				padding: 7px 8px;
-			}
-
-			#address-search-suggestions {
-				width: 100%;
-				max-width: 100%;
-				max-height: 250px;
-			}
-
-			.address-suggestion-item {
-				padding: 8px 10px;
-				font-size: 11px;
-				min-height: 36px;
 			}
 		}
 
@@ -1896,14 +1863,17 @@
 		</div>
 		<!-- Búsqueda de Direcciones -->
 		<div id="address-search-container">
-			<button type="button" id="address-search-toggle" aria-label="Buscar dirección" title="Buscar dirección">🔍</button>
-			<input 
-				type="text" 
-				id="address-search-input" 
-				placeholder="📍 Buscar dirección"
-				autocomplete="off"
-			/>
-			<div id="address-search-suggestions"></div>
+			<button type="button" id="address-search-toggle" aria-label="Buscar dirección" title="Buscar dirección" aria-controls="address-search-panel" aria-expanded="false">🔍</button>
+			<div id="address-search-panel">
+				<input
+					type="text"
+					id="address-search-input"
+					aria-label="Buscar dirección"
+					placeholder="Buscar dirección..."
+					autocomplete="off"
+				/>
+				<div id="address-search-suggestions"></div>
+			</div>
 		</div>
 		<!-- Logo PC (solo desktop) -->
 		<div id="header-logo-pc">
@@ -1913,11 +1883,26 @@
 
 	<!-- Mapa -->
 	<div id="map"></div>
+	<section id="ciudad-3d" aria-label="Vista 3D de edificaciones existentes" hidden>
+		<div id="ciudad-3d-map"></div>
+		<div class="ciudad-3d-controls">
+			<button id="ciudad-3d-close" type="button">Volver al mapa 2D</button>
+			<label for="ciudad-3d-base">Mapa base</label>
+			<select id="ciudad-3d-base">
+				<option>OpenStreetMap</option>
+				<option>Google Satelital</option>
+				<option>ESRI Satelital</option>
+			</select>
+			<p id="ciudad-3d-status" role="status" aria-live="polite"></p>
+			<p>Para inclinar o girar, arrastrá con el botón derecho o usá dos dedos.</p>
+			<p>Para girar con la brújula, mantené apretado el botón izquierdo sobre ella y arrastrá.</p>
+		</div>
+	</section>
 
 	<!-- Botones de Utilidades -->
 	<div id="utilidades-buttons">
-		<button id="btn-streetview" class="utilidades-btn" title="Enlace externo a Street View">
-			🌍 Enlace Street View
+		<button id="btn-ciudad-3d" class="utilidades-btn" type="button" title="Ver edificaciones existentes en 3D" aria-label="Ver edificaciones existentes en 3D" aria-pressed="false">
+			🏙️ Vista 3D
 		</button>
 		<button id="btn-indicadores" class="utilidades-btn" title="Mapa de Indicadores Urbanos">
 			📊 Mapa Indicadores

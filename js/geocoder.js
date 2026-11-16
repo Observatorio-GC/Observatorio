@@ -22,6 +22,7 @@ export function initAddressSearcher(map) {
 	const searchSuggestions = document.getElementById('address-search-suggestions');
 	const searchContainer = document.getElementById('address-search-container');
 	const searchToggle = document.getElementById('address-search-toggle');
+	const searchPanel = document.getElementById('address-search-panel');
 
 	if (!searchInput) {
 		console.error('No se encontro #address-search-input');
@@ -33,16 +34,32 @@ export function initAddressSearcher(map) {
 	let autocompleteTimeout;
 	const NOMINATIM_URL = 'https://nominatim.openstreetmap.org';
 	const isMobileSearch = () => window.matchMedia('(max-width: 900px)').matches;
+	const resizeMobilePanel = () => {
+		if (isMobileSearch() && searchContainer.classList.contains('expanded')) {
+			const availableHeight = window.innerHeight - searchPanel.getBoundingClientRect().top - 10;
+			searchPanel.style.maxHeight = `${Math.max(0, availableHeight)}px`;
+		} else {
+			searchPanel.style.maxHeight = '';
+			if (!isMobileSearch()) {
+				searchContainer.classList.remove('expanded');
+				searchToggle.setAttribute('aria-expanded', 'false');
+			}
+		}
+	};
 	const closeMobileSearch = () => {
 		if (isMobileSearch()) {
 			searchContainer.classList.remove('expanded');
 		}
+		searchToggle.setAttribute('aria-expanded', 'false');
 		searchSuggestions.classList.remove('active');
 	};
 	const openMobileSearch = () => {
 		searchContainer.classList.add('expanded');
+		searchToggle.setAttribute('aria-expanded', 'true');
+		resizeMobilePanel();
 		searchInput.focus();
 	};
+	window.addEventListener('resize', resizeMobilePanel);
 
 	if (searchToggle) {
 		searchToggle.addEventListener('click', (e) => {
@@ -207,15 +224,25 @@ function navigateToLocation(result, map, input, suggestionsDiv) {
 		})
 	}).addTo(map);
 
-	// Popup con informacion
-	const popupContent = `
-		<div style="font-size: 12px; max-width: 200px;">
-			<b>${name}</b><br>
-			<small style="color: #999;">Lat: ${lat.toFixed(6)}<br>Lng: ${lng.toFixed(6)}</small>
-		</div>
-	`;
+	const marker = geocoderMarker;
+	const popupContent = document.createElement('div');
+	popupContent.className = 'address-popup';
+	const title = document.createElement('strong');
+	title.textContent = name;
+	const coordinates = document.createElement('div');
+	coordinates.className = 'address-popup-coordinates';
+	coordinates.textContent = `Lat: ${lat.toFixed(6)} · Lng: ${lng.toFixed(6)}`;
+	const removeButton = document.createElement('button');
+	removeButton.type = 'button';
+	removeButton.className = 'address-popup-remove';
+	removeButton.textContent = 'Quitar marcador';
+	removeButton.addEventListener('click', () => {
+		map.removeLayer(marker);
+		if (geocoderMarker === marker) geocoderMarker = null;
+	});
+	popupContent.append(title, coordinates, removeButton);
 
-	geocoderMarker.bindPopup(popupContent).openPopup();
+	marker.bindPopup(popupContent).openPopup();
 
 	// Centrar y zoom
 	map.setView([lat, lng], 17);
@@ -228,6 +255,7 @@ function navigateToLocation(result, map, input, suggestionsDiv) {
 	if (searchContainer) {
 		searchContainer.classList.remove('expanded');
 	}
+	document.getElementById('address-search-toggle').setAttribute('aria-expanded', 'false');
 
 	console.log('Ubicacion navegada exitosamente');
 }

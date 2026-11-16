@@ -5,6 +5,7 @@
 
 import { initAddressSearcher } from './geocoder.js';
 import { initMeasurement } from './measurement.js';
+import { initCity3D } from './ciudad-3d.js';
 
 console.log('%c app.js CARGADO', 'color: green; font-weight: bold; font-size: 14px;');
 
@@ -386,6 +387,28 @@ document.addEventListener('DOMContentLoaded', function() {
 	const map = L.map('map', {
 		layers: [baseMaps["Google Satelital"]]
 	}).setView([-32.9337, -68.8978], 13);
+
+	const StreetViewControl = L.Control.extend({
+		options: { position: 'topleft' },
+		onAdd() {
+			const control = L.DomUtil.create('div', 'leaflet-control streetview-control');
+			const button = L.DomUtil.create('button', 'streetview-toggle', control);
+			button.id = 'btn-streetview';
+			button.type = 'button';
+			button.title = 'Street View';
+			button.setAttribute('aria-label', 'Street View');
+			button.setAttribute('aria-pressed', 'false');
+			button.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">' +
+				'<circle cx="12" cy="4.5" r="3.2" fill="#fbbc04" stroke="#b37d00" stroke-width="1"/>' +
+				'<path d="M12 8.5c-3.2 0-5.2 1.6-5.2 3.8v4l2.2.6V22h2.2v-4.8h1.6V22H15v-5.1l2.2-.6v-4c0-2.2-2-3.8-5.2-3.8z" ' +
+				'fill="#fbbc04" stroke="#b37d00" stroke-width="1" stroke-linejoin="round"/></svg>';
+			L.DomEvent.disableClickPropagation(control);
+			return control;
+		}
+	});
+	map.addControl(new StreetViewControl());
+
+	initCity3D(map, baseMaps);
 
 	// Inicializar buscador de direcciones
 	try {
@@ -926,13 +949,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	// PANEL MEJORADO CON CATEGORÍAS
 	const panelHTML = `
-	<div id="layer-panel" class="mobile-hidden" style="position:fixed;bottom:20px;right:20px;z-index:999;background:white;padding:0;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,0.25);width:360px;font-family:sans-serif;border:1px solid #ddd;max-height:600px;overflow-y:auto;display:flex;flex-direction:column;">
+	<div id="layer-panel" hidden>
 		<!-- Header con tabs y botón cerrar -->
 		<div style="display:flex;gap:0;border-bottom:1px solid #ddd;background:#f8f8f8;border-radius:8px 8px 0 0;align-items:center;">
 			<button class="panel-tab" data-tab="add" style="flex:1;padding:12px;background:#667eea;color:white;border:none;cursor:pointer;font-weight:bold;font-size:12px;border-radius:8px 0 0 0;">➕ Agregar</button>
 			<button class="panel-tab" data-tab="list" style="flex:1;padding:12px;background:#f0f0f0;color:#333;border:none;cursor:pointer;font-weight:bold;font-size:12px;">📍 Capas</button>
 			<button class="panel-tab" data-tab="style" style="flex:1;padding:12px;background:#f0f0f0;color:#333;border:none;cursor:pointer;font-weight:bold;font-size:12px;border-radius:0 8px 0 0;">🎨 Estilos</button>
-			<button id="layer-panel-close" style="padding:8px 12px;background:none;color:#666;border:none;cursor:pointer;font-size:20px;font-weight:bold;padding-right:12px;">X</button>
+			<button id="layer-panel-close" type="button" aria-label="Cerrar panel de capas" style="padding:8px 12px;background:none;color:#666;border:none;cursor:pointer;font-size:20px;font-weight:bold;padding-right:12px;">X</button>
 		</div>
 
 		<!-- TAB: AGREGAR CAPAS -->
@@ -995,55 +1018,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	document.body.insertAdjacentHTML('beforeend', panelHTML);
 
-	// AGREGAR BOTÓN TOGGLE PARA MÓVILES
-	const toggleButtonHTML = `<button id="layer-panel-toggle-btn" type="button" aria-label="Abrir panel de capas" title="Abrir panel de capas" style="display:none;position:fixed;bottom:20px;right:20px;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);color:white;border:none;font-size:24px;cursor:pointer;box-shadow:0 4px 12px rgba(102, 126, 234, 0.4);z-index:1002;transition:all 0.3s ease;align-items:center;justify-content:center;"><span class="layers-toggle-icon" aria-hidden="true"><span></span><span></span><span></span></span></button>`;
+	// AGREGAR BOTÓN PARA ABRIR EL PANEL
+	const toggleButtonHTML = `<button id="layer-panel-toggle-btn" type="button" aria-controls="layer-panel" aria-expanded="false">Panel de capas</button>`;
 	document.body.insertAdjacentHTML('beforeend', toggleButtonHTML);
 
-	// DETECTAR SI ES MÓVIL Y CONFIGURAR PANEL
 	const layerPanel = document.getElementById('layer-panel');
 	const layerPanelToggleBtn = document.getElementById('layer-panel-toggle-btn');
 	const layerPanelCloseBtn = document.getElementById('layer-panel-close');
-	const isMobile = () => window.innerWidth <= 768;
-
-	// Función para mostrar/ocultar panel
-	const toggleLayerPanel = () => {
-		layerPanel.classList.toggle('mobile-visible');
-		layerPanel.classList.toggle('mobile-hidden');
+	const compactLayout = window.matchMedia('(max-width: 1024px)');
+	const setPanelOpen = (open) => {
+		layerPanel.hidden = !open;
+		layerPanelToggleBtn.hidden = open;
+		layerPanelToggleBtn.setAttribute('aria-expanded', String(open));
 	};
 
-	// Configuración inicial y responsive
-	const updatePanelState = () => {
-		if (isMobile()) {
-			// En móvil: mostrar botón toggle y ocultar panel por defecto
-			layerPanelToggleBtn.style.display = 'flex';
-			layerPanel.classList.add('mobile-hidden');
-			layerPanel.classList.remove('mobile-visible');
-		} else {
-			// En desktop: ocultar botón toggle y mostrar panel
-			layerPanelToggleBtn.style.display = 'none';
-			layerPanel.classList.remove('mobile-hidden');
-			layerPanel.classList.remove('mobile-visible');
-			layerPanel.style.display = 'flex';
-		}
-	};
-
-	// Inicializar estado
+	const updatePanelState = () => setPanelOpen(!compactLayout.matches);
+	compactLayout.addEventListener('change', updatePanelState);
 	updatePanelState();
 
-	// Escuchar cambios de tamaño de ventana
-	window.addEventListener('resize', updatePanelState);
-
-	// Eventos del botón toggle
 	layerPanelToggleBtn.addEventListener('click', () => {
-		toggleLayerPanel();
+		setPanelOpen(true);
+		layerPanelCloseBtn.focus();
 	});
-
-	// Botón cerrar panel en móvil
 	layerPanelCloseBtn.addEventListener('click', () => {
-		if (isMobile()) {
-			layerPanel.classList.add('mobile-hidden');
-			layerPanel.classList.remove('mobile-visible');
-		}
+		setPanelOpen(false);
+		layerPanelToggleBtn.focus();
 	});
 
 	// ELEMENTOS DEL PANEL
@@ -1773,15 +1772,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	btnStreetView.addEventListener('click', () => {
 		streetViewMode = !streetViewMode;
+		btnStreetView.classList.toggle('active', streetViewMode);
+		btnStreetView.setAttribute('aria-pressed', String(streetViewMode));
 		
 		if (streetViewMode) {
 			// Activar modo Street View
-			btnStreetView.style.background = '#C20668';
 			streetViewIndicator.classList.add('active');
 			console.log('👁️ Modo Street View ACTIVADO - Haz clic en el mapa para seleccionar posición');
 		} else {
 			// Desactivar modo Street View
-			btnStreetView.style.background = '#da0c81';
 			streetViewIndicator.classList.remove('active');
 			
 			// Eliminar marcador de Street View si existe

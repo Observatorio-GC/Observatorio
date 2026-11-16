@@ -1,0 +1,52 @@
+#ciudad-3d {
+	position: fixed;
+	inset: 0;
+	z-index: 10000;
+	background: #e8e8e8;
+}
+
+#ciudad-3d[hidden] {
+	display: none;
+}
+
+#ciudad-3d-map {
+	width: 100%;
+	height: 100%;
+}
+
+.ciudad-3d-controls {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	width: min(250px, calc(100vw - 70px));
+	padding: 10px;
+	background: rgba(255, 255, 255, 0.96);
+	border-radius: 6px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+	color: #333;
+	font-size: 12px;
+}
+
+.ciudad-3d-controls button,
+.ciudad-3d-controls select {
+	width: 100%;
+	margin-bottom: 6px;
+	padding: 7px;
+}
+
+.ciudad-3d-controls button {
+	border: 0;
+	border-radius: 4px;
+	background: #da0c81;
+	color: white;
+	cursor: pointer;
+}
+
+.ciudad-3d-controls p {
+	margin: 5px 0;
+}
+
+#ciudad-3d .maplibregl-ctrl-top-left {
+	top: auto;
+	bottom: 55px;
+}
