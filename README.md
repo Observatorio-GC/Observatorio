@@ -15,6 +15,9 @@ La iglesia junto a la Plaza Godoy Cruz se muestra con el modelo detallado
 Al cargarlo, se oculta el volumen del parcelario que ocupa su ubicación.
 El modelo y Three.js se descargan únicamente al abrir Ciudad 3D.
 Al tocar la iglesia se muestra su nombre: Basílica San Vicente Ferrer.
+También se muestran los modelos del CAU, Correo, Escuela Rawson y HCD,
+con sus posiciones y rotaciones de la exportación de QGIS. Al tocarlos se
+identifica cada edificio.
 
 Para regenerar los datos después de actualizar el archivo original, ejecutar
 `node scripts/generar-ciudad-3d.mjs` desde la carpeta del proyecto y publicar

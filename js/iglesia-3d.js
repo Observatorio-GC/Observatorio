@@ -1,4 +1,11 @@
 export const CHURCH_ORIGIN = [-68.84473745276793, -32.926130140639486];
+export const MODELS_3D = [
+	{ id: 'iglesia', name: 'Basílica San Vicente Ferrer', origin: CHURCH_ORIGIN, rotation: [0, 0, 0] },
+	{ id: 'cau', name: 'CAU', origin: [-68.84368392129197, -32.925659076792286], footprint: [-68.84333684305699, -32.925645244908296], rotation: [0, 0, -12] },
+	{ id: 'correo', name: 'Correo', origin: [-68.84345523594854, -32.92536242257812], rotation: [0, 0, -12] },
+	{ id: 'escuela-rawson', name: 'Escuela Rawson', origin: [-68.8426149346755, -32.92573308475877], rotation: [0, -1, -3] },
+	{ id: 'hcd', name: 'HCD', origin: [-68.84326721582934, -32.92508485403507], footprint: [-68.84322273561544, -32.92510434277381], rotation: [0, 0, 0] }
+];
 
 export function containsPoint(geometry, point) {
 	function inRing(ring) {
@@ -24,14 +31,19 @@ export function containsPoint(geometry, point) {
 	return false;
 }
 
-export function createChurchModelLayer(model) {
-	const origin = maplibregl.MercatorCoordinate.fromLngLat(CHURCH_ORIGIN, 0);
+export function coveredByLoadedModel(geometry, modelLayers) {
+	return MODELS_3D.some((model) =>
+		modelLayers.has(model.id) && containsPoint(geometry, model.footprint || model.origin));
+}
+
+export function createChurchModelLayer(model, config = MODELS_3D[0]) {
+	const origin = maplibregl.MercatorCoordinate.fromLngLat(config.origin, 0);
 	const scale = origin.meterInMercatorCoordinateUnits();
 	let camera, scene, renderer, transform, map;
 	let rendered = false;
 
 	return {
-		id: 'church-model',
+		id: `model-${config.id}`,
 		type: 'custom',
 		renderingMode: '3d',
 		onAdd(mapInstance, gl) {
@@ -46,13 +58,15 @@ export function createChurchModelLayer(model) {
 			transform = new THREE.Matrix4()
 				.makeTranslation(origin.x, origin.y, origin.z)
 				.scale(new THREE.Vector3(scale, -scale, scale))
+				.multiply(new THREE.Matrix4().makeRotationFromEuler(new THREE.Euler(
+					...config.rotation.map((degrees) => degrees * Math.PI / 180), 'XYZ')))
 				.multiply(new THREE.Matrix4().makeRotationX(Math.PI / 2));
 			renderer = new THREE.WebGLRenderer({ canvas: map.getCanvas(), context: gl });
 			renderer.autoClear = false;
 		},
 		render(gl, matrix) {
 			camera.projectionMatrix = new THREE.Matrix4().fromArray(matrix).multiply(transform);
-			renderer.resetGLState();
+			renderer.state.reset();
 			renderer.render(scene, camera);
 			rendered = true;
 		},

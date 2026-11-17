@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { initial3DZoom, return2DZoom } from '../js/ciudad-3d.js';
 import { buildTiles, mergeTiles, tileKeysForBounds } from '../js/ciudad-3d-data.js';
-import { CHURCH_ORIGIN, containsPoint, createChurchModelLayer } from '../js/iglesia-3d.js';
+import { CHURCH_ORIGIN, MODELS_3D, containsPoint, coveredByLoadedModel, createChurchModelLayer } from '../js/iglesia-3d.js';
 
 const square = (west, south, east, north, height) => ({
 	type: 'Feature',
@@ -74,6 +74,16 @@ test('el punto de la iglesia coincide con un único edificio del parcelario publ
 	assert.equal(matching.length, 1);
 });
 
+test('cada modelo oculta solamente su edificio cuando se carga correctamente', async () => {
+	const tile = JSON.parse(await readFile(new URL('../data/ciudad-3d/-6885_-3293.json', import.meta.url), 'utf8'));
+	for (const model of MODELS_3D) {
+		const matches = tile.features.filter((feature) => containsPoint(feature.geometry, model.footprint || model.origin));
+		assert.equal(matches.length, 1, model.name);
+		assert.equal(coveredByLoadedModel(matches[0].geometry, new Map()), false, model.name);
+		assert.equal(coveredByLoadedModel(matches[0].geometry, new Map([[model.id, {}]])), true, model.name);
+	}
+});
+
 test('la capa de la iglesia dibuja el modelo en el contexto compartido del mapa', () => {
 	const oldThree = globalThis.THREE;
 	const oldMaplibre = globalThis.maplibregl;
@@ -83,6 +93,7 @@ test('la capa de la iglesia dibuja el modelo en el contexto compartido del mapa'
 		makeTranslation() { return this; }
 		scale() { return this; }
 		makeRotationX() { return this; }
+		makeRotationFromEuler() { return this; }
 		multiply() { return this; }
 		fromArray() { return this; }
 		getInverse() { return this; }
@@ -96,6 +107,7 @@ test('la capa de la iglesia dibuja el modelo en el contexto compartido del mapa'
 		AmbientLight: class {},
 		DirectionalLight: class { constructor() { this.position = { set() {} }; } },
 		Matrix4: Matrix,
+		Euler: class {},
 		Vector3: class {
 			applyMatrix4() { return this; }
 			sub() { return this; }
@@ -103,7 +115,7 @@ test('la capa de la iglesia dibuja el modelo en el contexto compartido del mapa'
 		},
 		Raycaster: class { intersectObject() { return intersections; } },
 		WebGLRenderer: class {
-			resetGLState() { calls.push('reset'); }
+			constructor() { this.state = { reset() { calls.push('reset'); } }; }
 			render() { calls.push('render'); }
 			dispose() { calls.push('dispose'); }
 		}

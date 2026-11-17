@@ -1,6 +1,6 @@
 import { createHeightOutlineLayer } from './contornos-3d.js';
 import { mergeTiles, tileKeysForBounds } from './ciudad-3d-data.js';
-import { CHURCH_ORIGIN, containsPoint, createChurchModelLayer } from './iglesia-3d.js';
+import { MODELS_3D, coveredByLoadedModel, createChurchModelLayer } from './iglesia-3d.js';
 
 const bases = {
 	'OpenStreetMap': {
@@ -42,14 +42,14 @@ export function initCity3D(map, baseMaps) {
 	const baseSelect = document.getElementById('ciudad-3d-base');
 	const closeButton = document.getElementById('ciudad-3d-close');
 	const button = document.getElementById('btn-ciudad-3d');
-	let view, outlines, availableTiles, churchLayer, churchPopup;
+	let view, outlines, availableTiles, modelPopup;
 	const tileCache = new Map();
+	const modelLayers = new Map();
+	const modelErrors = new Set();
 	let ready = false;
 	let active = false;
 	let outlineError = false;
-	let churchLoaded = false;
-	let churchError = false;
-	let churchLoading;
+	let modelsLoading;
 	let generation = 0;
 	let loading;
 	let initial2DZoom;
@@ -61,6 +61,12 @@ export function initCity3D(map, baseMaps) {
 		if (ready) Object.keys(bases).forEach((name) => {
 			view.setLayoutProperty(`base-${name}`, 'visibility', name === baseSelect.value ? 'visible' : 'none');
 		});
+	}
+
+	function modelErrorMessage() {
+		return modelErrors.size
+			? ` No se pudieron cargar estos modelos: ${Array.from(modelErrors).join(', ')}. Volvé a 2D y reintentá.`
+			: '';
 	}
 
 	async function loadTile(key) {
@@ -90,7 +96,7 @@ export function initCity3D(map, baseMaps) {
 			view.getSource('buildings').setData(empty());
 			if (outlines) outlines.setFeatures([]);
 			status.textContent = 'Acercá el mapa para ver las edificaciones.';
-			if (churchError) status.textContent += ' No se pudo cargar el modelo de la iglesia; volvé a 2D y reintentá.';
+			status.textContent += modelErrorMessage();
 			return;
 		}
 		const visibleBounds = [
@@ -103,12 +109,12 @@ export function initCity3D(map, baseMaps) {
 			const tiles = await Promise.all(keys.map(loadTile));
 			if (!active || version !== refreshVersion) return;
 			const features = mergeTiles(tiles, visibleBounds).filter((feature) =>
-				!churchLoaded || !containsPoint(feature.geometry, CHURCH_ORIGIN));
+				!coveredByLoadedModel(feature.geometry, modelLayers));
 			view.getSource('buildings').setData({ type: 'FeatureCollection', features });
 			if (outlines) outlines.setFeatures(features);
 			status.textContent = 'Edificaciones existentes según los datos disponibles. Las construcciones sin altura se muestran planas.';
 			if (outlineError) status.textContent += ' No se pudieron mostrar los contornos.';
-			if (churchError) status.textContent += ' No se pudo cargar el modelo de la iglesia; volvé a 2D y reintentá.';
+			status.textContent += modelErrorMessage();
 			for (const key of tileCache.keys()) {
 				if (tileCache.size <= Math.max(32, keys.length)) break;
 				if (!keys.includes(key)) tileCache.delete(key);
@@ -123,26 +129,34 @@ export function initCity3D(map, baseMaps) {
 		}
 	}
 
-	async function loadChurch() {
-		if (churchLoaded || churchLoading) return churchLoading;
-		churchLoading = (async () => {
+	async function loadModels() {
+		if (modelsLoading) return modelsLoading;
+		modelsLoading = (async () => {
 			if (!window.THREE) await loadScript('js/threejs/three.min.js');
 			if (!window.THREE.GLTFLoader) await loadScript('js/threejs/GLTFLoader.js');
-			const model = await new Promise((resolve, reject) => {
-				new THREE.GLTFLoader().load('data/modelos-3d/iglesia.glb',
-					(gltf) => resolve(gltf.scene), undefined, reject);
-			});
-			churchLayer = createChurchModelLayer(model);
-			view.addLayer(churchLayer, 'selected-building');
-			churchLoaded = true;
-			churchError = false;
-			refresh();
+			await Promise.all(MODELS_3D.filter((config) => !modelLayers.has(config.id)).map(async (config) => {
+				try {
+					const model = await new Promise((resolve, reject) => {
+						new THREE.GLTFLoader().load(`data/modelos-3d/${config.id}.glb`,
+							(gltf) => resolve(gltf.scene), undefined, reject);
+					});
+					const layer = createChurchModelLayer(model, config);
+					view.addLayer(layer, 'selected-building');
+					modelLayers.set(config.id, layer);
+					modelErrors.delete(config.name);
+				} catch (error) {
+					modelErrors.add(config.name);
+					console.error(`No se pudo cargar el modelo 3D de ${config.name}:`, error);
+				}
+				refresh();
+			}));
 		})().catch((error) => {
-			churchError = true;
-			console.error('No se pudo cargar el modelo 3D de la iglesia:', error);
-			if (active) status.textContent = 'No se pudo cargar el modelo de la iglesia; volvé a 2D y reintentá.';
-		}).finally(() => { churchLoading = null; });
-		return churchLoading;
+			MODELS_3D.filter((config) => !modelLayers.has(config.id))
+				.forEach((config) => modelErrors.add(config.name));
+			console.error('No se pudieron cargar las bibliotecas de los modelos 3D:', error);
+			refresh();
+		}).finally(() => { modelsLoading = null; });
+		return modelsLoading;
 	}
 
 	function createView() {
@@ -189,7 +203,7 @@ export function initCity3D(map, baseMaps) {
 			ready = true;
 			selectBase();
 			refresh();
-			loadChurch();
+			loadModels();
 		});
 		view.on('moveend', refresh);
 		view.on('error', (event) => {
@@ -198,13 +212,17 @@ export function initCity3D(map, baseMaps) {
 		});
 		view.on('click', (event) => {
 			if (!ready) return;
-			if (churchLoaded && churchLayer.pick(event.point)) {
+			const clickedModel = MODELS_3D.find((config) => {
+				const layer = modelLayers.get(config.id);
+				return layer && layer.pick(event.point);
+			});
+			if (clickedModel) {
 				view.getSource('selected').setData(empty());
 				if (outlines) outlines.setSelected(null, 0);
-				if (churchPopup) churchPopup.remove();
-				churchPopup = new maplibregl.Popup()
+				if (modelPopup) modelPopup.remove();
+				modelPopup = new maplibregl.Popup()
 					.setLngLat(event.lngLat)
-					.setText('Basílica San Vicente Ferrer')
+					.setText(clickedModel.name)
 					.addTo(view);
 				return;
 			}
@@ -252,7 +270,7 @@ export function initCity3D(map, baseMaps) {
 				view.resize();
 				selectBase();
 				refresh();
-				loadChurch();
+				loadModels();
 			}
 		} catch (error) {
 			console.error('No se pudo iniciar la vista 3D:', error);
@@ -264,7 +282,7 @@ export function initCity3D(map, baseMaps) {
 
 	function close() {
 		active = false;
-		if (churchPopup) churchPopup.remove();
+		if (modelPopup) modelPopup.remove();
 		generation++;
 		refreshVersion++;
 		if (view) {
