@@ -1,7 +1,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 import { initial3DZoom, return2DZoom } from '../js/ciudad-3d.js';
 import { buildTiles, mergeTiles, tileKeysForBounds } from '../js/ciudad-3d-data.js';
+import { CHURCH_ORIGIN, containsPoint, createChurchModelLayer } from '../js/iglesia-3d.js';
 
 const square = (west, south, east, north, height) => ({
 	type: 'Feature',
@@ -51,4 +53,73 @@ test('la vista 3D se acerca para mostrar edificios y respeta un zoom ya cercano'
 test('al volver a 2D conserva el zoom anterior si no se cambió la escala 3D', () => {
 	assert.equal(return2DZoom(16, 16, 13), 13);
 	assert.equal(return2DZoom(17, 16, 13), 18);
+});
+
+test('identifica el edificio que contiene el modelo sin excluir polígonos vecinos o huecos', () => {
+	const [x, y] = CHURCH_ORIGIN;
+	const ring = (radius) => [
+		[x - radius, y - radius], [x + radius, y - radius],
+		[x + radius, y + radius], [x - radius, y + radius], [x - radius, y - radius]
+	];
+	assert.equal(containsPoint({ type: 'Polygon', coordinates: [ring(0.001)] }, CHURCH_ORIGIN), true);
+	assert.equal(containsPoint({ type: 'Polygon', coordinates: [ring(0.001), ring(0.0001)] }, CHURCH_ORIGIN), false);
+	assert.equal(containsPoint({ type: 'MultiPolygon', coordinates: [[ring(0.001)]] }, CHURCH_ORIGIN), true);
+	assert.equal(containsPoint({ type: 'Polygon', coordinates: [ring(0.001)] }, [x + 0.002, y]), false);
+});
+
+test('el punto de la iglesia coincide con un único edificio del parcelario publicado', async () => {
+	const key = tileKeysForBounds([...CHURCH_ORIGIN, ...CHURCH_ORIGIN])[0];
+	const tile = JSON.parse(await readFile(new URL(`../data/ciudad-3d/${key}.json`, import.meta.url), 'utf8'));
+	const matching = tile.features.filter((feature) => containsPoint(feature.geometry, CHURCH_ORIGIN));
+	assert.equal(matching.length, 1);
+});
+
+test('la capa de la iglesia dibuja el modelo en el contexto compartido del mapa', () => {
+	const oldThree = globalThis.THREE;
+	const oldMaplibre = globalThis.maplibregl;
+	const calls = [];
+	let intersections = [];
+	class Matrix {
+		makeTranslation() { return this; }
+		scale() { return this; }
+		makeRotationX() { return this; }
+		multiply() { return this; }
+		fromArray() { return this; }
+		getInverse() { return this; }
+	}
+	globalThis.maplibregl = { MercatorCoordinate: { fromLngLat: () => ({
+		x: 0, y: 0, z: 0, meterInMercatorCoordinateUnits: () => 1
+	}) } };
+	globalThis.THREE = {
+		Camera: class {},
+		Scene: class { add() {} },
+		AmbientLight: class {},
+		DirectionalLight: class { constructor() { this.position = { set() {} }; } },
+		Matrix4: Matrix,
+		Vector3: class {
+			applyMatrix4() { return this; }
+			sub() { return this; }
+			normalize() { return this; }
+		},
+		Raycaster: class { intersectObject() { return intersections; } },
+		WebGLRenderer: class {
+			resetGLState() { calls.push('reset'); }
+			render() { calls.push('render'); }
+			dispose() { calls.push('dispose'); }
+		}
+	};
+	try {
+		const layer = createChurchModelLayer({ updateMatrixWorld() {} });
+		layer.onAdd({ getCanvas: () => ({ clientWidth: 800, clientHeight: 600 }) }, {});
+		assert.equal(layer.pick({ x: 400, y: 300 }), false);
+		layer.render({}, []);
+		assert.equal(layer.pick({ x: 400, y: 300 }), false);
+		intersections = [{}];
+		assert.equal(layer.pick({ x: 400, y: 300 }), true);
+		layer.onRemove();
+		assert.deepEqual(calls, ['reset', 'render', 'dispose']);
+	} finally {
+		if (oldThree === undefined) delete globalThis.THREE; else globalThis.THREE = oldThree;
+		if (oldMaplibre === undefined) delete globalThis.maplibregl; else globalThis.maplibregl = oldMaplibre;
+	}
 });

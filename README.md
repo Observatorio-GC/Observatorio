@@ -10,6 +10,12 @@ La vista se abre en la Plaza Godoy Cruz. Los volúmenes representan `altura_m`
 en metros del archivo `scripts/ciudad3D.js`; las construcciones sin altura se
 muestran planas. Se descargan únicamente las zonas visibles.
 
+La iglesia junto a la Plaza Godoy Cruz se muestra con el modelo detallado
+`data/modelos-3d/iglesia.glb`, ubicado según la escena exportada de QGIS.
+Al cargarlo, se oculta el volumen del parcelario que ocupa su ubicación.
+El modelo y Three.js se descargan únicamente al abrir Ciudad 3D.
+Al tocar la iglesia se muestra su nombre: Basílica San Vicente Ferrer.
+
 Para regenerar los datos después de actualizar el archivo original, ejecutar
 `node scripts/generar-ciudad-3d.mjs` desde la carpeta del proyecto y publicar
 la carpeta `data/ciudad-3d` junto con el visor.
