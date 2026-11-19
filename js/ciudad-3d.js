@@ -1,6 +1,6 @@
 import { createHeightOutlineLayer } from './contornos-3d.js';
 import { mergeTiles, tileKeysForBounds } from './ciudad-3d-data.js';
-import { MODELS_3D, coveredByLoadedModel, createChurchModelLayer } from './iglesia-3d.js';
+import { MODELS_3D, withoutCoveredPolygons, createChurchModelLayer } from './iglesia-3d.js';
 
 const bases = {
 	'OpenStreetMap': {
@@ -42,7 +42,11 @@ export function initCity3D(map, baseMaps) {
 	const baseSelect = document.getElementById('ciudad-3d-base');
 	const closeButton = document.getElementById('ciudad-3d-close');
 	const button = document.getElementById('btn-ciudad-3d');
-	let view, outlines, availableTiles, modelPopup;
+	const infoPanel = document.getElementById('building-info');
+	const infoTitle = document.getElementById('building-info-title');
+	const infoContent = document.getElementById('building-info-content');
+	const infoClose = document.getElementById('building-info-close');
+	let view, outlines, availableTiles;
 	const tileCache = new Map();
 	const modelLayers = new Map();
 	const modelErrors = new Set();
@@ -67,6 +71,30 @@ export function initCity3D(map, baseMaps) {
 		return modelErrors.size
 			? ` No se pudieron cargar estos modelos: ${Array.from(modelErrors).join(', ')}. Volvé a 2D y reintentá.`
 			: '';
+	}
+
+	function showBuildingInfo(model) {
+		infoTitle.textContent = model.name;
+		const description = document.createElement('p');
+		description.textContent = model.description;
+		const list = document.createElement('dl');
+		list.className = 'building-info-list';
+		[
+			['Estatus', model.status],
+			['Inauguración', model.inauguration],
+			['Estilo', model.style],
+			['Ubicación', model.location]
+		].forEach(([label, value]) => {
+			const row = document.createElement('div');
+			const term = document.createElement('dt');
+			const detail = document.createElement('dd');
+			term.textContent = label;
+			detail.textContent = value;
+			row.append(term, detail);
+			list.appendChild(row);
+		});
+		infoContent.replaceChildren(description, list);
+		infoPanel.hidden = false;
 	}
 
 	async function loadTile(key) {
@@ -108,8 +136,8 @@ export function initCity3D(map, baseMaps) {
 		try {
 			const tiles = await Promise.all(keys.map(loadTile));
 			if (!active || version !== refreshVersion) return;
-			const features = mergeTiles(tiles, visibleBounds).filter((feature) =>
-				!coveredByLoadedModel(feature.geometry, modelLayers));
+			const features = mergeTiles(tiles, visibleBounds)
+				.map((feature) => withoutCoveredPolygons(feature, modelLayers)).filter(Boolean);
 			view.getSource('buildings').setData({ type: 'FeatureCollection', features });
 			if (outlines) outlines.setFeatures(features);
 			status.textContent = 'Edificaciones existentes según los datos disponibles. Las construcciones sin altura se muestran planas.';
@@ -219,11 +247,7 @@ export function initCity3D(map, baseMaps) {
 			if (clickedModel) {
 				view.getSource('selected').setData(empty());
 				if (outlines) outlines.setSelected(null, 0);
-				if (modelPopup) modelPopup.remove();
-				modelPopup = new maplibregl.Popup()
-					.setLngLat(event.lngLat)
-					.setText(clickedModel.name)
-					.addTo(view);
+				showBuildingInfo(clickedModel);
 				return;
 			}
 			const [feature] = view.queryRenderedFeatures(event.point, { layers: ['height-buildings', 'flat-buildings'] });
@@ -282,7 +306,7 @@ export function initCity3D(map, baseMaps) {
 
 	function close() {
 		active = false;
-		if (modelPopup) modelPopup.remove();
+		infoPanel.hidden = true;
 		generation++;
 		refreshVersion++;
 		if (view) {
@@ -308,5 +332,6 @@ export function initCity3D(map, baseMaps) {
 		selectBase();
 	});
 	closeButton.addEventListener('click', close);
+	infoClose.addEventListener('click', () => { infoPanel.hidden = true; });
 	button.addEventListener('click', open);
 }

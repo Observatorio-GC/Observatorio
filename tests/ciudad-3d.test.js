@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { initial3DZoom, return2DZoom } from '../js/ciudad-3d.js';
 import { buildTiles, mergeTiles, tileKeysForBounds } from '../js/ciudad-3d-data.js';
-import { CHURCH_ORIGIN, MODELS_3D, containsPoint, coveredByLoadedModel, createChurchModelLayer } from '../js/iglesia-3d.js';
+import { CHURCH_ORIGIN, MODELS_3D, containsPoint, coveredByLoadedModel, createChurchModelLayer, withoutCoveredPolygons } from '../js/iglesia-3d.js';
 
 const square = (west, south, east, north, height) => ({
 	type: 'Feature',
@@ -75,13 +75,33 @@ test('el punto de la iglesia coincide con un único edificio del parcelario publ
 });
 
 test('cada modelo oculta solamente su edificio cuando se carga correctamente', async () => {
-	const tile = JSON.parse(await readFile(new URL('../data/ciudad-3d/-6885_-3293.json', import.meta.url), 'utf8'));
 	for (const model of MODELS_3D) {
-		const matches = tile.features.filter((feature) => containsPoint(feature.geometry, model.footprint || model.origin));
-		assert.equal(matches.length, 1, model.name);
-		assert.equal(coveredByLoadedModel(matches[0].geometry, new Map()), false, model.name);
-		assert.equal(coveredByLoadedModel(matches[0].geometry, new Map([[model.id, {}]])), true, model.name);
+		for (const point of model.footprints || [model.footprint || model.origin]) {
+			const key = tileKeysForBounds([...point, ...point])[0];
+			const tile = JSON.parse(await readFile(new URL(`../data/ciudad-3d/${key}.json`, import.meta.url), 'utf8'));
+			const matches = tile.features.filter((feature) => containsPoint(feature.geometry, point));
+			assert.equal(matches.length, 1, model.name);
+			assert.equal(coveredByLoadedModel(matches[0].geometry, new Map()), false, model.name);
+			assert.equal(coveredByLoadedModel(matches[0].geometry, new Map([[model.id, {}]])), true, model.name);
+		}
 	}
+});
+
+test('oculta las partes superpuestas sin modificar las geometrías originales ni las vecinas', () => {
+	const [x, y] = MODELS_3D.find((model) => model.id === 'iglesia').footprints[0];
+	const covered = square(x - 0.00001, y - 0.00001, x + 0.00001, y + 0.00001, 3).geometry.coordinates;
+	const neighbor = square(x + 0.001, y + 0.001, x + 0.002, y + 0.002, 3).geometry.coordinates;
+	const feature = {
+		type: 'Feature', properties: { height: 3 },
+		bbox: [x - 0.00001, y - 0.00001, x + 0.002, y + 0.002],
+		geometry: { type: 'MultiPolygon', coordinates: [covered, neighbor] }
+	};
+	const loaded = new Map([['iglesia', {}]]);
+	assert.equal(withoutCoveredPolygons(feature, new Map()), feature);
+	const filtered = withoutCoveredPolygons(feature, loaded);
+	assert.deepEqual(filtered.geometry.coordinates, [neighbor]);
+	assert.equal(feature.geometry.coordinates.length, 2);
+	assert.equal(withoutCoveredPolygons({ ...feature, geometry: { type: 'Polygon', coordinates: covered } }, loaded), null);
 });
 
 test('la capa de la iglesia dibuja el modelo en el contexto compartido del mapa', () => {
