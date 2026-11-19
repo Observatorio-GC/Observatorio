@@ -29,7 +29,7 @@ export const MODELS_3D = [
 		status: 'Sede Legislativa Departamental', inauguration: 'Década de 1930 / Remodelaciones institucionales', style: 'Neocolonial / Institucional mendocino', location: 'Rivadavia 448'
 	},
 	{
-		id: 'arizu', name: 'Ex Bodega Arizu', origin: [-68.84358137383434, -32.90939885212684],
+		id: 'arizu', name: 'Ex Bodega Arizu', origin: [-68.8436068820374, -32.90925508925422],
 		footprints: [
 			[-68.84429148141655, -32.91008644397749], [-68.8438154366564, -32.90982283798059],
 			[-68.84342288061615, -32.91007077642853], [-68.84380263593589, -32.90974500142311],
