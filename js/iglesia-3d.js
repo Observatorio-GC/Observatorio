@@ -21,7 +21,7 @@ export const MODELS_3D = [
 	{
 		id: 'escuela-rawson', name: 'Escuela Dr. Guillermo Rawson / Juliana Aguirre', origin: [-68.84276871883068, -32.926061107692355], rotation: [0, 0, -15],
 		description: 'Representante de la arquitectura escolar fundacional de Mendoza, concebida como edificio-monumento para la educación pública.',
-		status: 'Patrimonio Arquitectónico Educativo', inauguration: 'Principios del siglo XX (Plan de Escuelas Monumentales)', style: 'Eclecticismo academicista escolar', location: 'Eje Lavalle / Av. San Martín'
+		status: 'Patrimonio Arquitectónico Educativo', inauguration: 'Principios del siglo XX (Plan de Escuelas Monumentales)', style: 'Eclecticismo academicista escolar', location: 'Azopardo 76'
 	},
 	{
 		id: 'hcd', name: 'Honorable Concejo Deliberante (HCD)', origin: [-68.84326721582934, -32.92508485403507], footprint: [-68.84322273561544, -32.92510434277381], rotation: [0, 0, 0],
