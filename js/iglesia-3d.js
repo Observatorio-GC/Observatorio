@@ -10,13 +10,13 @@ export const MODELS_3D = [
 		id: 'cau', name: 'Centro de Atención Unificada (CAU)', origin: [-68.84367725297659, -32.925660547826126],
 		footprints: [[-68.8430856551298, -32.9260918349403], [-68.84367474785769, -32.92568145276998]], rotation: [0, 0, -15],
 		description: 'Atención ciudadana y gestión administrativa municipal.',
-		status: 'Patrimonio Cívico Municipal', inauguration: 'Mediados del siglo XX', style: 'Modernismo institucional', location: 'Rivadavia 448, frente a Plaza Departamental'
+		status: 'Patrimonio Cívico Municipal', inauguration: 'Mediados del siglo XX', style: 'Modernismo institucional', location: 'Perito Moreno 72'
 	},
 	{
 		id: 'correo', name: 'Edificio Correo Argentino', origin: [-68.84358102209616, -32.92545370951709],
 		footprints: [[-68.84367163188519, -32.925452021220835], [-68.8433555406588, -32.925379814224996]], rotation: [0, 0, -12],
 		description: 'Pieza clave del conjunto cívico que consolida el borde institucional de la plaza con sobriedad formal y escala urbana.',
-		status: 'Patrimonio Arquitectónico Institucional', inauguration: 'Década de 1940', style: 'Racionalismo institucional', location: 'Rivadavia y Colón (esquina frente a Plaza Departamental)'
+		status: 'Patrimonio Arquitectónico Institucional', inauguration: 'Década de 1940', style: 'Racionalismo institucional', location: 'Perito Moreno 50'
 	},
 	{
 		id: 'escuela-rawson', name: 'Escuela Dr. Guillermo Rawson / Juliana Aguirre', origin: [-68.84276871883068, -32.926061107692355], rotation: [0, 0, -15],
@@ -26,7 +26,7 @@ export const MODELS_3D = [
 	{
 		id: 'hcd', name: 'Honorable Concejo Deliberante (HCD)', origin: [-68.84326721582934, -32.92508485403507], footprint: [-68.84322273561544, -32.92510434277381], rotation: [0, 0, 0],
 		description: 'Recinto deliberativo donde se sancionan las ordenanzas del departamento; articula el frente cívico sobre calle Perito Moreno.',
-		status: 'Sede Legislativa Departamental', inauguration: 'Década de 1930 / Remodelaciones institucionales', style: 'Neocolonial / Institucional mendocino', location: 'Perito Moreno 72'
+		status: 'Sede Legislativa Departamental', inauguration: 'Década de 1930 / Remodelaciones institucionales', style: 'Neocolonial / Institucional mendocino', location: 'Rivadavia 448'
 	},
 	{
 		id: 'arizu', name: 'Ex Bodega Arizu', origin: [-68.84358137383434, -32.90939885212684],
