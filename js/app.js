@@ -373,7 +373,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			attribution: '&copy; OpenStreetMap',
 			maxZoom: 19
 		}),
-		"Google Satelital": L.tileLayer('http://mt0.google.com/vt/lyrs=s&hl=en&x={x}&y={y}&z={z}', {
+		"Google Satelital": L.tileLayer('https://mt0.google.com/vt/lyrs=s&hl=en&x={x}&y={y}&z={z}', {
 			attribution: 'Google',
 			maxZoom: 20
 		}),
