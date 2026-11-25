@@ -77,6 +77,23 @@ export const MODELS_3D = [
 		footprint: [-68.84531940508435, -32.92492414153182], rotation: [0, 0, -2],
 		description: 'Principal escenario cultural de Godoy Cruz; mantiene intacta su emblemática marquesina, foyer y sala histórica.',
 		status: 'Bien del Patrimonio Cultural Municipal', inauguration: '1946', style: 'Art Déco', location: 'Colón 27'
+	},
+	{
+		id: 'edificio-municipal', name: 'Edificio municipal',
+		origin: [-68.84285257055153, -32.9251578092094], rotation: [0, 0, 165],
+		footprints: [[-68.84283242696515, -32.92509886360323], [-68.84288282431521, -32.925287517082694]]
+	},
+	{
+		id: 'edificios-frente-plaza-1', name: 'Edificios frente a la plaza 1', showInfo: false,
+		origin: [-68.8439801075273, -32.9245179128744], rotation: [0, 0, -11],
+		footprints: [
+			[-68.84370206062454, -32.924605299385405], [-68.8441183144889, -32.92453030944645],
+			[-68.84327629731555, -32.92472293394613], [-68.84433542265585, -32.9243865457604],
+			[-68.8437249685237, -32.9244788902273], [-68.84357003776121, -32.92457714714495],
+			[-68.84310328803889, -32.92471305757985], [-68.84302780360997, -32.9247526992378],
+			[-68.84390556401189, -32.9244294303652], [-68.84425608581017, -32.9245051977458],
+			[-68.84457030070173, -32.924398752954346]
+		]
 	}
 ];
 

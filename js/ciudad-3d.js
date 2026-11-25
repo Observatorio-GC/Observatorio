@@ -75,8 +75,12 @@ export function initCity3D(map, baseMaps) {
 
 	function showBuildingInfo(model) {
 		infoTitle.textContent = model.name;
-		const description = document.createElement('p');
-		description.textContent = model.description;
+		infoContent.replaceChildren();
+		if (model.description) {
+			const description = document.createElement('p');
+			description.textContent = model.description;
+			infoContent.appendChild(description);
+		}
 		const list = document.createElement('dl');
 		list.className = 'building-info-list';
 		[
@@ -84,7 +88,7 @@ export function initCity3D(map, baseMaps) {
 			['Inauguración', model.inauguration],
 			['Estilo', model.style],
 			['Ubicación', model.location]
-		].forEach(([label, value]) => {
+		].filter(([, value]) => value).forEach(([label, value]) => {
 			const row = document.createElement('div');
 			const term = document.createElement('dt');
 			const detail = document.createElement('dd');
@@ -93,7 +97,8 @@ export function initCity3D(map, baseMaps) {
 			row.append(term, detail);
 			list.appendChild(row);
 		});
-		infoContent.replaceChildren(description, list);
+		if (list.childElementCount) infoContent.appendChild(list);
+		infoContent.hidden = !infoContent.childElementCount;
 		infoPanel.hidden = false;
 	}
 
@@ -247,7 +252,8 @@ export function initCity3D(map, baseMaps) {
 			if (clickedModel) {
 				view.getSource('selected').setData(empty());
 				if (outlines) outlines.setSelected(null, 0);
-				showBuildingInfo(clickedModel);
+				if (clickedModel.showInfo === false) infoPanel.hidden = true;
+				else showBuildingInfo(clickedModel);
 				return;
 			}
 			const [feature] = view.queryRenderedFeatures(event.point, { layers: ['height-buildings', 'flat-buildings'] });
