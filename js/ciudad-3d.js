@@ -1,6 +1,6 @@
 import { createHeightOutlineLayer } from './contornos-3d.js';
 import { mergeTiles, tileKeysForBounds } from './ciudad-3d-data.js';
-import { MODELS_3D, withoutCoveredPolygons, createChurchModelLayer } from './iglesia-3d.js';
+import { MODELS_3D, withoutCoveredPolygons, createChurchModelLayer, disposeModel, modelIntersectsBounds } from './iglesia-3d.js';
 
 const bases = {
 	'OpenStreetMap': {
@@ -50,10 +50,12 @@ export function initCity3D(map, baseMaps) {
 	const tileCache = new Map();
 	const modelLayers = new Map();
 	const modelErrors = new Set();
+	let pendingModels = new Map();
 	let ready = false;
 	let active = false;
 	let outlineError = false;
 	let modelsLoading;
+	let modelRefreshTimer;
 	let generation = 0;
 	let loading;
 	let initial2DZoom;
@@ -113,7 +115,7 @@ export function initCity3D(map, baseMaps) {
 				}
 				return data;
 			}).catch((error) => {
-				tileCache.delete(key);
+				if (tileCache.get(key) === request) tileCache.delete(key);
 				throw error;
 			});
 			tileCache.set(key, request);
@@ -149,7 +151,7 @@ export function initCity3D(map, baseMaps) {
 			if (outlineError) status.textContent += ' No se pudieron mostrar los contornos.';
 			status.textContent += modelErrorMessage();
 			for (const key of tileCache.keys()) {
-				if (tileCache.size <= Math.max(32, keys.length)) break;
+				if (tileCache.size <= Math.max(16, keys.length)) break;
 				if (!keys.includes(key)) tileCache.delete(key);
 			}
 		} catch (error) {
@@ -162,37 +164,65 @@ export function initCity3D(map, baseMaps) {
 		}
 	}
 
+	function scheduleModelRefresh(current) {
+		clearTimeout(modelRefreshTimer);
+		modelRefreshTimer = setTimeout(() => {
+			modelRefreshTimer = null;
+			if (active && current === generation) refresh();
+		}, 150);
+	}
+
 	async function loadModels() {
-		if (modelsLoading) return modelsLoading;
-		modelsLoading = (async () => {
+		if (!active || !ready || !view) return;
+		const current = generation;
+		const targetView = view;
+		const bounds = targetView.getBounds();
+		const visibleBounds = [
+			bounds.getWest() - 0.001, bounds.getSouth() - 0.001,
+			bounds.getEast() + 0.001, bounds.getNorth() + 0.001
+		];
+		const wanted = MODELS_3D.filter((config) => modelIntersectsBounds(config, visibleBounds) &&
+			!modelLayers.has(config.id) && !pendingModels.has(config.id) && !modelErrors.has(config.name));
+		if (!wanted.length) return;
+		if (!modelsLoading) modelsLoading = (async () => {
 			if (!window.THREE) await loadScript('js/threejs/three.min.js');
 			if (!window.THREE.GLTFLoader) await loadScript('js/threejs/GLTFLoader.js');
-			await Promise.all(MODELS_3D.filter((config) => !modelLayers.has(config.id)).map(async (config) => {
+		})().finally(() => { modelsLoading = null; });
+		const requests = pendingModels;
+		await Promise.all(wanted.map(async (config) => {
+			const job = (async () => {
+				let model;
 				try {
-					const model = await new Promise((resolve, reject) => {
+					await modelsLoading;
+					if (!active || current !== generation) return;
+					model = await new Promise((resolve, reject) => {
 						new THREE.GLTFLoader().load(`data/modelos-3d/${config.id}.glb`,
 							(gltf) => resolve(gltf.scene), undefined, reject);
 					});
+					if (!active || current !== generation) {
+						disposeModel(model);
+						return;
+					}
 					const layer = createChurchModelLayer(model, config);
-					view.addLayer(layer, 'selected-building');
+					targetView.addLayer(layer, 'selected-building');
 					modelLayers.set(config.id, layer);
 					modelErrors.delete(config.name);
+					scheduleModelRefresh(current);
 				} catch (error) {
+					if (model) disposeModel(model);
+					if (!active || current !== generation) return;
 					modelErrors.add(config.name);
 					console.error(`No se pudo cargar el modelo 3D de ${config.name}:`, error);
+					scheduleModelRefresh(current);
 				}
-				refresh();
-			}));
-		})().catch((error) => {
-			MODELS_3D.filter((config) => !modelLayers.has(config.id))
-				.forEach((config) => modelErrors.add(config.name));
-			console.error('No se pudieron cargar las bibliotecas de los modelos 3D:', error);
-			refresh();
-		}).finally(() => { modelsLoading = null; });
-		return modelsLoading;
+			})();
+			requests.set(config.id, job);
+			try { await job; } finally { requests.delete(config.id); }
+		}));
 	}
 
 	function createView() {
+		const current = generation;
 		const style = { version: 8, sources: {}, layers: [] };
 		Object.entries(bases).forEach(([name, base]) => {
 			style.sources[name] = { type: 'raster', tiles: [base.url], tileSize: 256,
@@ -215,7 +245,7 @@ export function initCity3D(map, baseMaps) {
 		);
 		view = new maplibregl.Map({
 			container: 'ciudad-3d-map', style, center: CITY_CENTER,
-			zoom: opened3DZoom, pitch: 60, maxPitch: 80, maxZoom: 22,
+			zoom: opened3DZoom, pitch: 60, maxPitch: 80, maxZoom: 22, maxTileCacheSize: 32,
 			attributionControl: false, locale: {
 				'NavigationControl.ZoomIn': 'Acercar',
 				'NavigationControl.ZoomOut': 'Alejar',
@@ -225,6 +255,7 @@ export function initCity3D(map, baseMaps) {
 		view.addControl(new maplibregl.NavigationControl({ visualizePitch: false }), 'top-left');
 		view.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-right');
 		view.on('load', () => {
+			if (!active || current !== generation) return;
 			try {
 				outlines = createHeightOutlineLayer(view.getCenter());
 				view.addLayer(outlines, 'selected-building');
@@ -238,7 +269,10 @@ export function initCity3D(map, baseMaps) {
 			refresh();
 			loadModels();
 		});
-		view.on('moveend', refresh);
+		view.on('moveend', () => {
+			refresh();
+			loadModels();
+		});
 		view.on('error', (event) => {
 			console.error('Error en la vista 3D:', event.error);
 			status.textContent = 'No se pudo cargar parte de la vista 3D. Revisá la conexión.';
@@ -268,9 +302,7 @@ export function initCity3D(map, baseMaps) {
 		initial2DZoom = map.getZoom();
 		initial2DCenter = map.getCenter();
 		opened3DZoom = initial3DZoom(initial2DZoom);
-		Object.keys(baseMaps).forEach((name) => {
-			if (map.hasLayer(baseMaps[name])) baseSelect.value = name;
-		});
+		baseSelect.value = 'OpenStreetMap';
 		container.hidden = false;
 		map.getContainer().setAttribute('inert', '');
 		button.setAttribute('aria-pressed', 'true');
@@ -315,6 +347,8 @@ export function initCity3D(map, baseMaps) {
 		infoPanel.hidden = true;
 		generation++;
 		refreshVersion++;
+		clearTimeout(modelRefreshTimer);
+		modelRefreshTimer = null;
 		if (view) {
 			const center = view.getCenter();
 			view.stop();
@@ -322,7 +356,18 @@ export function initCity3D(map, baseMaps) {
 			const unchanged = Math.abs(center.lat - CITY_CENTER[1]) < 0.000001 &&
 				Math.abs(center.lng - CITY_CENTER[0]) < 0.000001;
 			map.setView(unchanged ? initial2DCenter : [center.lat, center.lng], zoom, { animate: false });
+			modelLayers.forEach((layer) => view.removeLayer(layer.id));
+			if (outlines) view.removeLayer(outlines.id);
+			view.remove();
+			view = null;
 		}
+		ready = false;
+		outlines = null;
+		outlineError = false;
+		modelLayers.clear();
+		modelErrors.clear();
+		pendingModels = new Map();
+		tileCache.clear();
 		container.hidden = true;
 		map.getContainer().removeAttribute('inert');
 		button.setAttribute('aria-pressed', 'false');

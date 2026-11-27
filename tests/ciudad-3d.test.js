@@ -1,9 +1,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { initial3DZoom, return2DZoom } from '../js/ciudad-3d.js';
+import { initCity3D, initial3DZoom, return2DZoom } from '../js/ciudad-3d.js';
 import { buildTiles, mergeTiles, tileKeysForBounds } from '../js/ciudad-3d-data.js';
-import { CHURCH_ORIGIN, MODELS_3D, containsPoint, coveredByLoadedModel, createChurchModelLayer, withoutCoveredPolygons } from '../js/iglesia-3d.js';
+import { CHURCH_ORIGIN, MODELS_3D, containsPoint, coveredByLoadedModel, createChurchModelLayer, disposeModel, modelIntersectsBounds, withoutCoveredPolygons } from '../js/iglesia-3d.js';
 
 const square = (west, south, east, north, height) => ({
 	type: 'Feature',
@@ -104,6 +104,126 @@ test('oculta las partes superpuestas sin modificar las geometrías originales ni
 	assert.equal(withoutCoveredPolygons({ ...feature, geometry: { type: 'Polygon', coordinates: covered } }, loaded), null);
 });
 
+test('carga modelos por zona considerando sus huellas, incluso cuando el origen queda fuera', () => {
+	const arizu = MODELS_3D.find((model) => model.id === 'arizu');
+	assert.equal(modelIntersectsBounds(arizu, [-68.844, -32.9102, -68.8439, -32.9101]), true);
+	assert.equal(modelIntersectsBounds(arizu, [-68.845, -32.927, -68.843, -32.925]), false);
+	const model = { origin: [0, 0], footprints: [[2, 2]] };
+	assert.equal(modelIntersectsBounds(model, [0.9, 0.9, 1.1, 1.1]), true);
+});
+
+test('libera geometrías, materiales y texturas compartidas una sola vez', () => {
+	const calls = [];
+	const texture = { isTexture: true, dispose: () => calls.push('texture') };
+	const material = { map: texture, normalMap: texture, dispose: () => calls.push('material') };
+	const geometry = { dispose: () => calls.push('geometry') };
+	disposeModel({ traverse(callback) {
+		callback({ geometry, material });
+		callback({ geometry, material: [material, material] });
+	} });
+	assert.deepEqual(calls, ['material', 'texture', 'geometry']);
+});
+
+test('cerrar y reabrir descarta y libera los modelos que terminan de cargar tarde', async (t) => {
+	const previous = {
+		window: globalThis.window, document: globalThis.document, fetch: globalThis.fetch,
+		THREE: globalThis.THREE, maplibregl: globalThis.maplibregl
+	};
+	t.after(() => {
+		Object.entries(previous).forEach(([key, value]) => {
+			if (value === undefined) delete globalThis[key]; else globalThis[key] = value;
+		});
+	});
+	const elements = new Map();
+	function element(id) {
+		if (!elements.has(id)) elements.set(id, {
+			hidden: true, value: '', listeners: {},
+			addEventListener(name, callback) { this.listeners[name] = callback; },
+			setAttribute() {}, removeAttribute() {}, focus() {}
+		});
+		return elements.get(id);
+	}
+	globalThis.document = { getElementById: element };
+	globalThis.fetch = async () => ({ ok: true, json: async () => ({ tiles: [] }) });
+	const requests = [];
+	const three = { GLTFLoader: class {
+		load(url, success, progress, failure) { requests.push({ url, success, failure }); }
+	} };
+	globalThis.window = { THREE: three, maplibregl: {} };
+	globalThis.THREE = three;
+	const views = [];
+	let center = CHURCH_ORIGIN;
+	class FakeView {
+		constructor() { this.handlers = {}; this.layers = new Map(); views.push(this); }
+		addControl() {}
+		on(name, handler) { this.handlers[name] = handler; }
+		getBounds() { return {
+			getWest: () => center[0], getEast: () => center[0],
+			getSouth: () => center[1], getNorth: () => center[1]
+		}; }
+		getCenter() { return { lng: -68.844306, lat: -32.925132 }; }
+		getZoom() { return 16; }
+		getSource() { return { setData() {} }; }
+		setLayoutProperty() {}
+		addLayer(layer) { this.layers.set(layer.id, layer); }
+		removeLayer(id) {
+			const layer = this.layers.get(id);
+			if (id.startsWith('model-')) layer.onRemove();
+			this.layers.delete(id);
+		}
+		stop() {}
+		remove() { this.removed = true; }
+	}
+	globalThis.maplibregl = {
+		Map: FakeView, NavigationControl: class {}, AttributionControl: class {},
+		MercatorCoordinate: { fromLngLat: () => ({ x: 0, y: 0, z: 0,
+			meterInMercatorCoordinateUnits: () => 1 }) }
+	};
+	const map = {
+		getZoom: () => 13, getCenter: () => ({ lat: 0, lng: 0 }),
+		getContainer: () => element('map'), setView() {}, invalidateSize() {}
+	};
+	initCity3D(map, {});
+	const open = element('btn-ciudad-3d').listeners.click;
+	const close = element('ciudad-3d-close').listeners.click;
+	await open();
+	assert.equal(element('ciudad-3d-base').value, 'OpenStreetMap');
+	views[0].handlers.load();
+	await new Promise(setImmediate);
+	const oldChurch = requests.find((request) => request.url.endsWith('/iglesia.glb'));
+	assert.ok(oldChurch);
+	assert.equal(requests.some((request) => request.url.endsWith('/arizu.glb')), false);
+	views[0].handlers.moveend();
+	assert.equal(requests.filter((request) => request.url.endsWith('/iglesia.glb')).length, 1);
+	center = MODELS_3D.find((model) => model.id === 'arizu').origin;
+	views[0].handlers.moveend();
+	await new Promise(setImmediate);
+	assert.equal(requests.some((request) => request.url.endsWith('/arizu.glb')), true);
+	center = CHURCH_ORIGIN;
+	close();
+	assert.equal(views[0].removed, true);
+	await open();
+	views[1].handlers.load();
+	await new Promise(setImmediate);
+	const newChurch = requests.filter((request) => request.url.endsWith('/iglesia.glb'))[1];
+	assert.ok(newChurch);
+	let oldDisposed = 0;
+	oldChurch.success({ scene: { traverse(callback) {
+		callback({ geometry: { dispose() { oldDisposed++; } } });
+	} } });
+	await new Promise(setImmediate);
+	assert.equal(oldDisposed, 1);
+	assert.equal(views[1].layers.has('model-iglesia'), false);
+	let newDisposed = 0;
+	newChurch.success({ scene: { traverse(callback) {
+		callback({ geometry: { dispose() { newDisposed++; } } });
+	} } });
+	await new Promise(setImmediate);
+	assert.equal(views[1].layers.has('model-iglesia'), true);
+	close();
+	assert.equal(newDisposed, 1);
+});
+
 test('la capa de la iglesia dibuja el modelo en el contexto compartido del mapa', () => {
 	const oldThree = globalThis.THREE;
 	const oldMaplibre = globalThis.maplibregl;
@@ -141,7 +261,7 @@ test('la capa de la iglesia dibuja el modelo en el contexto compartido del mapa'
 		}
 	};
 	try {
-		const layer = createChurchModelLayer({ updateMatrixWorld() {} });
+		const layer = createChurchModelLayer({ updateMatrixWorld() {}, traverse() {} });
 		layer.onAdd({ getCanvas: () => ({ clientWidth: 800, clientHeight: 600 }) }, {});
 		assert.equal(layer.pick({ x: 400, y: 300 }), false);
 		layer.render({}, []);

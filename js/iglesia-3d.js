@@ -140,6 +140,33 @@ export function withoutCoveredPolygons(feature, modelLayers) {
 	return { ...feature, geometry: { ...feature.geometry, coordinates: polygons } };
 }
 
+export function modelIntersectsBounds(model, bounds) {
+	const points = [model.origin, ...(model.footprints || (model.footprint ? [model.footprint] : []))];
+	const lngs = points.map((point) => point[0]);
+	const lats = points.map((point) => point[1]);
+	return Math.min(...lngs) <= bounds[2] && Math.max(...lngs) >= bounds[0] &&
+		Math.min(...lats) <= bounds[3] && Math.max(...lats) >= bounds[1];
+}
+
+export function disposeModel(model) {
+	const geometries = new Set();
+	const materials = new Set();
+	const textures = new Set();
+	model.traverse((object) => {
+		if (object.geometry) geometries.add(object.geometry);
+		const items = Array.isArray(object.material) ? object.material : [object.material];
+		items.filter(Boolean).forEach((material) => materials.add(material));
+	});
+	materials.forEach((material) => {
+		Object.values(material).forEach((value) => {
+			if (value && value.isTexture) textures.add(value);
+		});
+		material.dispose();
+	});
+	textures.forEach((texture) => texture.dispose());
+	geometries.forEach((geometry) => geometry.dispose());
+}
+
 export function createChurchModelLayer(model, config = MODELS_3D[0]) {
 	const origin = maplibregl.MercatorCoordinate.fromLngLat(config.origin, 0);
 	const scale = origin.meterInMercatorCoordinateUnits();
@@ -188,6 +215,7 @@ export function createChurchModelLayer(model, config = MODELS_3D[0]) {
 		},
 		onRemove() {
 			if (renderer) renderer.dispose();
+			disposeModel(model);
 		}
 	};
 }
